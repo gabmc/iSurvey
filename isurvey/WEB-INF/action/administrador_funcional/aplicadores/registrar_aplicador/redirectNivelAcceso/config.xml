@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<config>
+
+	<summary>
+		Leer registro y retornar javascript 
+	</summary>
+
+	<log>false</log>
+
+        <clear-session id="confirm" />
+        <clear-session id="userlogin" />
+        <clear-session id="lname" />
+        <clear-session id="fname" />
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator >true</validator>
+                <transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="usuario.sql" source="sql" scope="transaction" />
+	</transaction>
+
+  
+        <output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>script.js</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/javascript; charset=iso-8859-1</content-type>
+		<expiration>0</expiration>
+		<print mode="form" recordset="usuario.sql" />
+	</output>
+
+</config>

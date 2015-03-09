@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config nodb="true">
+
+	<summary>
+		Generar reporte generico PDF
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="query-participante.sql" source="session" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.PDFGenericReport</classname>
+	</output>
+
+	<pdf-title>CRUD Participante</pdf-title>
+	<pdf-logo url='/images/logo-dinamica.png' scale='100' />
+
+	<pdf-report pageSize="letter" rotate="false">
+		<table recordset='query-participante.sql' width='100' spacingBefore='40'>
+			<col name='nombre_lista_participantes_pl0' title='Lista a la que pertenecerá' width='8' align='center' />
+			<col name='nombre_participante' title='Nombre' width='8' align='left' />
+			<col name='apellido_participante' title='Apellido' width='8' align='left' />
+			<col name='cedula_participante' title='Cédula' width='8' align='left' />
+			<col name='email_participante' title='e-mail' width='8' align='left' />
+			<col name='cargo' title='Cargo' width='8' align='left' />
+			<col name='supervisor' title='Supervisor' width='8' align='left' />
+			<col name='fecha_nacimiento' title='Fecha de Nacimiento' width='8' align='center' format='dd-MM-yyyy' />
+			<col name='fecha_ingreso' title='Fecha de Ingreso' width='8' align='center' format='dd-MM-yyyy' />
+			<col name='sexo' title='Sexo' width='8' align='left' />
+			<col name='tipo_nomina' title='Tipo Nómina' width='8' align='left' />
+			<col name='funcion' title='Función' width='8' align='left' />
+		</table>
+
+	</pdf-report>
+</config>

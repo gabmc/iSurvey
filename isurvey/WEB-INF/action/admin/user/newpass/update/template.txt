@@ -1,0 +1,27 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>iSurvey</title>
+</head>
+
+<body>
+
+<center>
+
+<br>
+
+		<div class="alert" style="width:45%">
+		<br>
+		La contraseña del usuario fue cambiada.
+		<br><br>
+		<button onclick="window.location='${ses:return.url}'">
+		Continuar
+		</button>
+		<br><br>
+		</div>
+
+</center>
+
+</body>
+</html>

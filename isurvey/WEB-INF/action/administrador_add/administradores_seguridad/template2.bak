@@ -1,0 +1,159 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+	<title>iSurvey</title>
+	
+	<script language="javascript" src="${def:context}/action/script">
+	</script>
+	
+</head>
+
+<body>
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+<center>
+		
+		<!--START FORM-->
+		<form name="form1" onsubmit="return valid()" action="${def:context}${def:actionroot}/${req:form.action}" method="POST">
+		
+		<table class="formgrid" width="70%">
+		
+			<!--layout-->
+			<col width="40%"> <!--labels-->
+			<col width="60%">
+
+
+			<!--section header-->
+			<tr>
+				<th colspan="2">
+				<span style="float:left">
+					${req:form.mode}	
+				</span>
+				<span id="status" style="float:right;margin-right:5px;display:none">
+					<img src="${def:context}/images/progress.gif">
+				</span>
+				</th>
+			</tr>
+
+		
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--fields-->
+			<tr style="display:${req:display}">
+				<td class="formlabel required">Login</td>
+				<td>
+					<input name="userlogin" type="text" size="20" maxlength="25" value="${fld:userlogin}" onchange="document.form1.control.value=''">
+					[<a href="#" onclick="javascript:testLogin()" title="Haga CLICK para verificar contra LDAP">Verificar</a>]
+					<br>
+					<div id="validator"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="formlabel">Apellido</td>
+				<td><input name="lname" type="text" size="25" maxlength="25" value="${fld:lname}"></td>
+			</tr>
+			<tr>
+				<td class="formlabel">Nombre</td>
+				<td><input name="fname" type="text" size="25" maxlength="25" value="${fld:fname}"></td>
+			</tr>
+			<tr>
+				<td class="formlabel">E-mail</td>
+				<td><input name="email" type="text" size="30" maxlength="80" value="${fld:email}"></td>
+			</tr>
+			<tr>
+				<td valign="top" class="formlabel required">Roles de Usuario </td>
+				<td>
+					<role-list>
+					<input name="role_id" type="checkbox" value="${fld:role_id}"> ${fld:app_alias}/${fld:description}<br>
+					</role-list>
+				</td>
+			</tr>
+		
+			<tr>
+				<td class="formlabel">Idioma predeterminado</td>
+				<td>
+					<select name="locale">
+						<option value="es">Español</option>
+						<option value="en">Inglés</option>
+					</select>
+				</td>
+			</tr>			
+				
+			<input name="control" type="hidden" value="${fld:is_ldap}">
+							
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--buttons-->
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="Guardar">
+					<input type="button" value="Cancelar" onClick="window.location='${ses:return.url}'">				
+				</td>
+			</tr>
+		</table>
+		
+		<input type="hidden" name="user_id" value="${fld:user_id}">
+		<input type="hidden" name="dn" value="">
+						
+		</form>
+
+		<script language="javascript">
+			
+		document.form1.elements[0].focus();
+
+		</script>
+		<!--END FORM-->
+
+</center>
+
+<script language="javascript">
+	
+	//validar el userlogin contra el LDAP y retorna los datos basicos del usuario
+	function testLogin()
+	{
+		var id = document.form1.userlogin.value;
+		if (id=="") {
+			alert("Por favor ingrese un Login.");
+			document.form1.userlogin.focus();
+			return true;
+		}
+	
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+				uri="${def:actionroot}/ldaptest?userlogin=" + id, 
+				divResponse="validator", 
+				divProgress="status", 
+				formName=null, 
+				afterResponseFn=null, 
+				onErrorFn=null);	
+	}
+		
+	//validar los controles del formulario antes de proceder hacer el POST
+	function valid()
+	{
+		var id = document.form1.control.value;
+		
+		if (id=="") {
+			alert("Por favor verifique el Login contra LDAP.");
+			document.form1.userlogin.focus();
+			return false;
+		}
+		
+		return true; 
+	
+	}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+	
+	<title>ImportExcel</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	Lote de Archivos
+</div>
+<br>
+
+<center>
+
+<!--panel de respuesta AJAX #1-->
+<div id="responseLote" style="display:none;width:100%">
+</div>
+
+<!--panel de respuesta AJAX #2-->
+<div id="response" style="display:none;width:100%;">
+</div>
+
+<!--indicador de progreso-->
+<br>
+<div id="status" class="alert" style="text-align:left; display:none;color:gray;width:150px;font-weight:bold;font-family:Arial">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+	//inicializacion de la pagina cuando carga
+	onload = function()
+	{ 
+		search();
+	} 
+	
+	//retorna al estado previo que corresponde
+	//al estado actual de la pagina, cada llamada Ajax
+	//se encarga de definir cual es la funcion de goBack() que aplica
+	function goBack() 
+	{
+		_goBackFn()			
+	}
+	
+	//mostrar grid de lotes
+	function showGrid()
+	{
+		document.getElementById("responseLote").style.display="";
+		document.getElementById("response").style.display="none";
+	}
+
+	//ejecutar consulta
+	function search()
+	{
+		//esconder grid principal
+		document.getElementById("responseLote").style.display="none";
+
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri="${def:actionroot}/search", 
+						divResponse="responseLote", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+	//ejecutar consulta
+	function searchRegistro(id)
+	{
+		//definir funcion goBack()
+		_goBackFn = showGrid;			
+		
+		//esconder grid principal
+		document.getElementById("responseLote").style.display="none";
+		
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri="${def:actionroot}/registro/search?id=" + id, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=showGrid);
+	}
+
+	//define la url en donde se mostrara el resultado de consulta
+	function viewPage()
+	{
+		var url = "${def:actionroot}/registro/view";
+		//llama a la funcion para ir a la pagina indicada 
+		gotoPage(url);
+	}	
+	
+	//redireccionar a la vista del formulario
+	function goBackForm()
+	{
+		window.location='${def:context}/action/demo/importexcel/form';
+	}
+	
+	//invoca la generacion de un PDF en un popup
+	function openPDF()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/registro/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+</script>
+
+</center>
+
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<html>
+
+    <head>
+
+        <link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+
+        <!--biblioteca generica JS/Dinamica-->
+        <script type="text/javascript" src="${def:context}/action/script">
+        </script>
+
+        <title>Cuenta de usuario</title>
+    </head>
+
+    <body>
+
+        <!--banner-->
+        <div class="banner">
+            <div style="float: left;">Crear Cuenta de Aplicador</div>
+	${inc:/action/progress}
+        </div>
+
+        <br>
+        <!--colocar el formulario a la derecha del browser-->
+        <div  align="center" >
+
+            <!--formulario addnew/edit-->
+      <div id="form"  align="center">
+      <form name="form1" action="${def:context}${def:actionroot}/insert" method="POST">
+
+                    <table class="formgrid" width="450px">
+
+                        <!--ancho de la columna de etiquetas-->
+                        <col width="18%">
+                        <col width="20%">
+
+                        <!--titulo-->
+	<tr>
+            <th colspan="2"><span id="formTitle"> A&ntilde;adir registro </span></th>
+	</tr>
+
+                        <!--separador-->
+                        <tr height="10px">
+                            <td colspan="2"></td>
+                        </tr>
+
+                        <!--campos-->
+                        <tr>
+                            <td class="formlabel">Nombre</td>
+                            <td><input id="fname" name="fname"  type="text" size="30" maxlength="25" value="${fld:fname}"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="formlabel">Apellido</td>
+                            <td><input  id="lname" name="lname" type="text" size="30" maxlength="25" value="${fld:lname}"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="formlabel">E-mail</td>
+                            <td><input id="email" name="email"  type="text" size="30" maxlength="80" value="${fld:email}"></td>
+                        </tr>
+                        <tr>
+                            <td class="formlabel required">Login</td>
+                            <td><input id="userlogin" name="userlogin"  type="text" size="30" maxlength="25" value="${fld:userlogin}">                            </td></tr>
+
+                        <tr >
+                            <td class="formlabel required">Contrase&ntilde;a</td>
+                            <td><input id="passwd" name="passwd"  type="password" size="30" maxlength="15"></td>
+                        </tr>
+                        <tr>
+                            <td class="formlabel required">Confirme contrase&ntilde;a </td>
+                            <td><input id="confirm" name="confirm"  type="password" size="30" maxlength="15"></td>
+                        </tr>                     
+
+                        <!--separador-->
+
+
+                        <!--botones-->
+                       <tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="Guardar">
+					<input type="button" value="Cancelar" onClick="window.location='${def:context}/action/security/home/welcome'" >				</td>
+			</tr>
+                        <!--separador-->
+                        <tr height="5px">
+                            <td colspan="2"></td>
+                        </tr>
+                    </table>
+
+                    
+
+                   <input type="hidden" name="user_id" value="${fld:user_id}">
+                   <input type="hidden" name="role_id" id="role_id" value="503">
+		</form>
+
+            </div>
+        </div>
+
+        <!--colocar la respuesta a la izquierda del browser-->
+        <div style="float: left; padding-left: 50px">
+            <!--panel de respuesta AJAX para el grid paginado-->
+            <div id="response" style="display: none; width: 100%"></div>
+        </div>
+
+<!--panel de respuesta AJAX para el grid paginado-->
+<div id="response" style="display: none; width: 100%" align="center"></div>
+ </body>
+
+ <script type="text/javascript">
+
+	//inicializa cuando se carga la pagina
+	onload = function()
+	{
+		addNew(); //prepara formulario para ingresar nuevo registro
+		search(); //mostrar registros en vista paginada
+
+	}
+
+        function search()
+	{
+		var url = "${def:actionroot}/search";
+
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?currentpage=" + currentPage;
+
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET",
+						uri= url,
+						divResponse="response",
+						divProgress="status",
+						formName=null,
+						afterResponseFn=null,
+						onErrorFn=null);
+	}
+        
+        function addNew()
+	{
+		clearForm("form1");
+		document.getElementById("formTitle").innerHTML = "A&ntilde;adir registro";
+		document.getElementById("grabar").disabled=false;
+		setFocusOnForm("form1");
+	}
+</script>
+</html>

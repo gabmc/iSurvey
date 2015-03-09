@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Página principal - ver todos los registro y el formulario para insertar
+	</summary>
+	
+	<log>false</log>
+
+	<transaction>
+		<classname>domain.menu.MenuView</classname>
+		<validator>true</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="appinfo.sql" source="sql" scope="session" />
+		<recordset id="roles.sql" source="sql" scope="transaction" />
+		<recordset id="menu-padre.sql" source="sql" scope="session" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>template.txt</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+		<print mode="table" recordset="query.sql" tag="rows" alternate-colors="true"/>
+		<print mode="table" recordset="roles.sql" tag="role-list" />
+		<print mode="table" recordset="menu-padre.sql" tag="valid" />
+		<print mode="form" recordset="_request" />
+	</output>
+
+</config>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Usuario- Insertar nuevo registro
+	</summary>
+	
+	<log>false</log>
+	
+	<set-request-attribute id="form.action" value="insert"/>
+	<set-request-attribute id="form.mode" value="Agregar Usuario"/>
+	<set-request-attribute id="display" value=""/>
+	
+	<transaction>
+		<classname>domain.utils.SessionAttribute</classname>
+		<validator>true</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="roles.sql" source="sql" scope="transaction" />
+	</transaction>
+	
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>/WEB-INF${def:actionroot}/template.htm</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<print mode="table" recordset="roles.sql" tag="role-list" />
+		<print mode="clear" />
+	</output>
+
+</config>

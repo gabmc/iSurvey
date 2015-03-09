@@ -1,0 +1,4 @@
+select
+	id_int_participante_lista_participantes
+from
+	int_participante_lista_participantes

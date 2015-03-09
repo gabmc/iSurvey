@@ -1,0 +1,163 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+	
+	<title>Detectar actions sin seguridad</title>
+	
+</head>
+
+<body>
+
+<div class="banner">
+	Detectar actions sin seguridad
+</div>
+<br>
+
+<center>
+
+<div class="alert" style="width:50%;color:black; font-weight:normal; text-align:center">
+
+Solo puede procesar aplicaciones que son administradas a través de este Admin.
+
+</div>
+
+<br>
+
+<div id="form">		
+	<form name="form1" onsubmit="return search()">
+	
+		<table class="formgrid" width="300px">
+		
+			<!--ancho de la columna de etiquetas-->
+			<col width="30%">
+			<col width="60%">
+		
+			<!--titulo-->
+			<tr>
+				<th colspan="2">
+					<span id="formTitle">
+						Búsqueda
+					</span>
+				</th>
+			</tr>
+				
+			<!--separador-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--campos-->
+			<tr>
+				<td class="formlabel">
+					Aplicación
+				</td>
+				<td>
+					<select name="path_alias">
+							<option value="">[Seleccione]</option>
+						<rows>
+							<option value="${fld:path-app},${fld:alias-app}">${fld:name-app}</option>
+						</rows>
+					</select>
+				</td>
+			</tr>
+				
+							
+			<!--separador-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--botones-->
+			<tr>
+				<td colspan="2" align="center">
+					<input id="buscar" type="submit" value="Buscar" class="button">
+				</td>
+			</tr>
+			
+			<!--separador-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<br><br>
+<!--panel de respuesta AJAX #2 insert/update-->
+<div id="response" style="display:none;width:100%">
+</div>
+
+<!--indicador de progreso-->
+<br>
+<div id="status" class="alert" style="text-align:left; display:none;color:gray;width:150px;font-weight:bold;font-family:Arial">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+
+</center>
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+		//apuntador a funcion para retornar dependiendo de donde este
+		var _goBackFn = null;
+	
+		//mostrar filtro de busqueda
+		function showFilter()
+		{
+			document.getElementById("form").style.display="";
+			document.getElementById("response").style.display='none';	
+			document.getElementById("buscar").style.display='';		
+		}
+
+		//ejecutar consulta
+		function search()
+		{
+
+			//definir funcion goBack()
+			_goBackFn = showFilter;
+			
+			document.getElementById("buscar").style.display="none";
+
+			//llamada Ajax...
+			return ajaxCall(	httpMethod="POST", 
+								uri="${def:actionroot}/search", 
+								divResponse="response", 
+								divProgress="status", 
+								formName="form1", 
+								afterResponseFn=null, 
+								onErrorFn=showFilter);
+		
+		}
+	
+	
+		//retorna al estado previo que corresponde
+		//al estado actual de la pagina, cada llamada Ajax
+		//se encarga de definir cual es la funcion de goBack() que aplica
+		function goBack() 
+		{
+			_goBackFn()			
+		}
+	
+		//invoca la generacion de un PDF en un popup
+		function openPDF()
+		{
+			var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+			var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+			var w = window.open(url, "pdf", features);
+		}
+		
+		//invoca la generacion de un txt en un popup
+		function openTXT()
+		{
+			var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+			var url = "${def:context}${def:actionroot}/sql?random=" + Math.random();
+			var w = window.open(url, "txt", features);
+		}
+</script>	
+</body>
+</html>

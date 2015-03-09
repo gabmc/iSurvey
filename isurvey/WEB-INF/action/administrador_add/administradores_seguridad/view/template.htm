@@ -1,0 +1,132 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+<title>iSurvey</title>
+</head>
+
+<body>
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+<center>
+[<a href="javascript:openPDF()">Exportar a PDF</a>]
+
+<br><br>
+</center>
+
+<!--start of navigation controls-->
+${inc:/action/paging-ctls}
+<!--end of navigation controls-->
+
+<center>
+
+<!--START GRID-->
+<table class="table table-bordered" width="80%" cellspacing="1">
+	
+	<tr>
+	<th colspan="4"></th>
+	<th width="20%">Login de Usuario</th>
+	<th width="20%">Apellido</th>
+	<th width="15%">Nombre</th>
+	<th width="40%">Email</th>
+	<th width="10%">Tipo</th>
+	</tr>
+	
+	<rows>
+	<tr>
+		<td align="center" ${fld:_rowStyle}>
+			<img class="tool" src="${def:context}/images/table/edit.png" title="Editar registro"
+				onclick="onEdit(${fld:user_id})">
+		</td>
+		<td align="center" ${fld:_rowStyle}>
+			<img class="tool" src="${def:context}/images/table/delete.png" title="Eliminar registro"
+				onclick="onDelete(${fld:user_id})">
+		</td>
+		<td align="center" ${fld:_rowStyle}>
+			<img class="tool" src="${def:context}/images/table/block.png" title="Bloquear usuario"
+				onclick="onBlock(${fld:user_id})">
+		</td>
+		<td align="center" ${fld:_rowStyle}>
+			<img class="tool" src="${def:context}/images/table/encrypted.png" title="Reestablecer contraseña de usuario"
+				onclick="onResetPwd(${fld:user_id})">
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:userlogin}
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:lname}
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:fname}
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:email}
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:tipo}
+		</td>
+	</tr>
+	</rows>
+	
+</table>
+<!--END GRID-->
+
+	<br>
+
+	<input type="button"
+	onclick="window.location='${def:context}${def:actionroot}/filter'"
+	value="Buscar nuevamente">
+
+</center>
+
+<script language="javascript">
+
+	function onDelete(id, rowNum)
+	{
+		if (window.confirm("Eliminar registro?")==true)
+		{
+			var returnURL = "${def:context}${def:actionroot}/view?pagenumber=" + currentPage
+			var url = "${def:context}${def:actionroot}/delete?id=" + id + "&return.url=" + returnURL;
+			window.location=url;
+		}
+	}
+	
+	function onEdit(id)
+	{
+		var returnURL = "${def:context}${def:actionroot}/filter"
+		var url = "${def:context}${def:actionroot}/editrediret?id=" + id + "&return.url=" + returnURL;
+		window.location=url;
+	}
+
+	function onBlock(id)
+	{
+		if (window.confirm("Bloquear este usuario?")==true)
+		{
+			var returnURL = "${def:context}${def:actionroot}/view?pagenumber=" + currentPage
+			var url="${def:context}${def:actionroot}/disable?id=" + id + "&return.url=" + returnURL;
+			window.location=url;
+		}
+	}
+	
+	function onResetPwd(id)
+	{
+		var returnURL = "${def:context}${def:actionroot}/view?pagenumber=" + currentPage
+		var url="${def:context}${def:actionroot}/newpass/form?id=" + id + "&return.url=" + returnURL;
+		window.location=url;
+	}	
+	
+	function openPDF()
+	{	
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+	
+</script>
+
+</body>
+
+</html>

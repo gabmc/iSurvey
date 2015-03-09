@@ -1,0 +1,24 @@
+insert into ${schema}s_user 
+(
+	user_id,
+	userlogin,
+	lname,
+	fname,
+	email,
+	enabled,
+	locale,
+	is_ldap,
+	dn
+)
+values 
+(
+	${seq:nextval@${schema}seq_user},
+	${fld:userlogin},
+	${fld:lname},
+	${fld:fname},
+	${fld:email},
+	1,
+	${fld:locale},
+	1,
+	${fld:dn}
+)

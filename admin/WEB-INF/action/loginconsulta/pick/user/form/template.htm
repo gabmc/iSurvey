@@ -1,0 +1,87 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+	
+	<!--codigo de soporte del template-->
+	<script type="text/javascript">
+	
+		//inicializacion de la pagina cuando carga
+		onload = function()
+		{ 
+			search();
+		} 
+	
+		//ejecutar consulta
+		function search()
+		{
+			//esconder grid principal
+			document.getElementById("response").style.display="none";
+	
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/search", 
+							divResponse="response", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=null);
+		}
+	
+		//define la url en donde se mostrara el resultado de consulta
+		function viewPage()
+		{
+			var url = "${def:actionroot}/view";
+			//llama a la funcion para ir a la pagina indicada 
+			gotoPage(url);
+		}
+		
+		var currStyle="";
+	
+		function rowOn(obj) {
+			currStyle = obj.className;
+			obj.className="hilite";
+		}
+		
+		function rowOff(obj) {
+			obj.className=currStyle
+		}
+		
+		function closePickList()
+		{
+			parent.pickClose();
+		}	
+		
+		function selectItem(id)
+		{
+			var descripcion = document.getElementById(id);
+			parent.pickSelect(id, descripcion.innerHTML);
+			closePickList();
+		}	
+	</script>
+
+</head>
+
+<body  class="pickListBody">
+
+
+<!--panel de respuesta AJAX #1-->
+<div id="response" style="display:none;width:100%">
+</div>
+
+<center>
+<!--indicador de progreso-->
+<br>
+<div id="status" class="alert" style="text-align:left; display:none;color:gray;width:150px;font-weight:bold;font-family:Arial">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+</center>
+
+</body>
+
+</html>

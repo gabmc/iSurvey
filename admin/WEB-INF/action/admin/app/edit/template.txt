@@ -1,0 +1,85 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>Administrador de Seguridad</title>
+</head>
+
+<body onload="document.forms[0].elements[0].focus();">
+
+<!--COMMON HEADER-->
+${inc:${def:actionroot}/header}
+
+<center>
+
+<!--FORM-->
+<form action="${def:context}${def:actionroot}/update" method="POST">
+
+<table class="formgrid" width="50%">
+
+	<!--column layout-->
+	<col width="30%">
+	<col width="70%">
+
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			Editar Registro
+		</th>
+	</tr>
+
+	<!--form fields-->
+	
+	<tr>
+		<td class="formlabel required">Alias</td>
+		<td>
+			<input name="app_alias" value="${fld:app_alias}" type="text" size="15" maxlength="20" >
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formlabel required">Descripción</td>
+		<td>
+			<input name="description" value="${fld:description}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formlabel">Política de Contraseña</td>
+		<td>
+			<select name="pwd_policy">
+				<option value="-1">La contraseña nunca vence</option>
+				<option value="15">Cambiar contraseña después de 15 días</option>
+				<option value="30">Cambiar contraseña después de 30 días</option>
+				<option value="60">Cambiar contraseña después de 60 días</option>
+				<option value="90">Cambiar contraseña después de 90 días</option>
+			</select>
+		</td>
+	</tr>	
+
+</table>
+
+</table>
+
+<input type="hidden" name="app_id" value="${fld:app_id}">
+
+<!--form buttons-->
+<br>
+<table width="50%">
+<tr>
+	<td>
+	</td>
+	<td align="center">
+		<input type="submit" value="Guardar" class="button">
+		<input type="button" value="Cancelar" class="button" onclick="javascript:history.back();">
+	</td>
+</tr>
+</table>
+
+</form>
+<!--END FORM-->
+
+</center>
+
+</body>
+</html>

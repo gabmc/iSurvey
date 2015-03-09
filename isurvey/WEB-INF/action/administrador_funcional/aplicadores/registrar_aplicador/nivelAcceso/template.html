@@ -1,0 +1,147 @@
+<html>
+
+    <head>
+
+        <link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+
+        <!--biblioteca generica JS/Dinamica-->
+        <script type="text/javascript" src="${def:context}/action/script">
+        </script>
+
+        <title>Cuenta de usuario</title>
+    </head>
+
+    <body>
+
+        <!--banner-->
+        <div class="banner">
+            <div  style="float: left;color: #666666"><strong>Cuenta de usuario</strong></div>
+	${inc:/action/progress}
+        </div>
+
+        <br>
+ <div style="position: relative; float: right;"><img alt="i1"   src="${def:context}/images/Client1.png"></div>
+        <div  align="left" style="margin-left:17%" >
+
+
+            <div id="form" >
+
+                <table width="512"  style="font-family:Verdana; font-size: 12px;" >
+
+                    <!--ancho de la columna de etiquetas-->
+                    <col width="8%">
+                    <col width="20%">
+
+                    <!--titulo-->
+                    <tr>
+                        <td colspan="2" height="45"><div align="center" style="font-size:14px"><strong>Nivel de Acceso</strong><br>
+                            </div></td>
+                    </tr>
+                    <!--separador-->
+                    <tr height="10px">
+                        <td colspan="2"></td>
+                    </tr>
+                </table>
+
+
+                <!--panel de respuesta AJAX para el grid paginado-->
+                <div  align="center">
+                    <div id="response2" style="display: none; width: 100%"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!--codigo de soporte del template-->
+        <script language="javascript">
+
+
+            onload = function()
+            {
+                mostrar("${ses:userid}","${ses:fname}","${ses:empresaid}"); //llamada para agregar permiso de visualización
+
+            }
+
+
+            //Expandir= "abrir" llamada a action de unidades y cambiar imagen down por up
+            //Contraer= "cerrar" llamada ocultar div de unidades  y cambiar imagen up por down
+            function contraerExpandir(id,name,userid) {
+                if (name == "abrir")
+                {
+                    unidades(id,userid);
+                    document.getElementById("responseunidad_"+id).style.display='block';
+                    document.getElementById("up_"+id).style.display='block';
+                    document.getElementById("down_"+id).style.display='none';
+                    document.getElementById("areac_"+id).disabled=true;
+                    document.getElementById("areac_"+id).checked=false;
+
+                }else{
+                    document.getElementById("responseunidad_"+id).style.display='none';
+                    document.getElementById("responseunidad_"+id).innerHTML="";
+                    document.getElementById("up_"+id).style.display='none';
+                    document.getElementById("down_"+id).style.display='block';
+                    document.getElementById("areac_"+id).disabled=false;
+                }
+            }
+
+            //action de llamada de ÁREAS correspondientes a una  empresa
+
+
+
+
+            function mostrar(id,nombre,eid)
+            {
+              // clearErrorMessages();
+             //  alert("/action/mod_administrador_add/cuenta/nivel_acceso/areas?userid="+id+"&fname="+nombre+"&empresaid="+eid);
+                return ajaxCall(	httpMethod="POST",
+                uri="/action/mod_administrador_add/cuenta/nivel_acceso/areas?userid="+id+"&fname="+nombre+"&empresaid="+eid,
+                divResponse="response2",
+                divProgress="status",
+                formName=null,
+                afterResponseFn=null,
+                onErrorFn=null);
+            }
+
+            //action de llamada de UNIDADES correspondientes a un área asociada
+            function unidades (id,userid) {
+                var url ="/action/mod_administrador_add/cuenta/nivel_acceso/unidades?id=" + id+"&userid="+userid;
+                ajaxCall(httpMethod="GET",
+                uri=url,
+                divResponse="responseunidad_"+id,
+                divProgress="status",
+                formName=null,
+                afterResponseFn=null,
+                onErrorFn=null);
+            }
+
+            //action para insert de registros en "usuario_area" y "usuario_unidad"
+            function agregarPermiso(id){
+                var url ="/action/mod_administrador_add/cuenta/nivel_acceso/permiso?user_id="+id;
+                ajaxCall(httpMethod="POST",
+                uri=url,
+                divResponse=null,
+                divProgress="status",
+                formName="form2",
+                afterResponseFn=null,
+                onErrorFn=null);
+                return false;
+            }
+
+
+
+            //retorna al estado previo que corresponde
+            //al estado actual de la pagina, cada llamada Ajax
+            //se encarga de definir cual es la funcion de goBack() que aplica
+            function goBack()
+            {
+                _goBackFn()
+            }
+
+
+
+        </script>
+        <!--END FORM-->
+    </body>
+</html>

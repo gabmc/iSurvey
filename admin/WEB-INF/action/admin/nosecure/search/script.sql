@@ -1,0 +1,1 @@
+INSERT INTO ${schema}s_service(path, description, app_id) VALUES ('${fld:path}','${fld:summary}',${fld:app_id});

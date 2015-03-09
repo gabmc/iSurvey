@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Generar reporte PDF
+	</summary>
+	
+	<log>false</log>
+
+	<pdf-title>Histograma de operaciones</pdf-title>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="viewchart.filter" source="session" scope="transaction" />		
+	</transaction>
+
+	<output>
+		<classname>domain.histograma.PDFReport</classname>
+	</output>
+
+</config>

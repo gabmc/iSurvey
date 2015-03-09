@@ -1,0 +1,165 @@
+<html>
+
+<head>
+
+<script language="javascript">
+
+	function reloadCalendar()
+	{
+		var date2='${req:date.lbound}';
+		var date3='${req:date.ubound}';
+		var y = document.getElementById("year").value;
+		var m = document.getElementById("month").value;
+		var date = "1" + "-" + m + "-" + y;
+		url = "${def:context}${req:dinamica.action.path}?id=${req:parent.ElementID}&date=" + date;
+		url = url + "&date.lbound=" + date2;
+		url = url + "&date.ubound=" + date3;
+		window.location = url;
+	}
+	
+	var currStyle="";
+
+	function rowOn(obj) {
+		currStyle = obj.className;
+		
+		if (currStyle=="calDisabled"){
+		}
+		else{
+			if (currStyle=="calEmptyCell"){
+			}
+			else{
+				obj.className="calDay2";
+			}
+		}
+	}
+	
+	function rowOff(obj) {
+		obj.className=currStyle
+	}
+	
+	</script>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<style>
+TABLE.calendar {
+	background-color: #C5C5E3;
+}
+
+TH.calendar {
+	color: black;
+	background-color: #FFFF99;
+	font-family: Arial;
+	font-size: 8pt;
+	padding: 1px;
+}
+
+TD.calEmptyCell {
+	color: black;
+	background-color: white;
+	font-family: Arial;
+	font-size: 8pt;
+	padding: 1px;
+}
+
+TD.calCurDay {
+	color: blue;
+	font-weight: bold;
+	background-color: #CCFFFF;
+	font-family: Arial;
+	font-size: 8pt;
+	padding: 1px;
+	cursor: pointer;
+}
+
+TD.calDay {
+	color: black;
+	background-color: white;
+	font-family: Arial;
+	font-size: 8pt;
+	padding: 1px;
+	cursor: pointer;
+}
+
+TD.calDisabled {
+	color: red;
+	background-color: white;
+	font-family: Arial;
+	font-size: 8pt;
+	padding: 1px;
+	text-decoration: line-through;
+}
+
+TD.calDay2 {
+	background-color: #CCCCCC;
+	font-size: 8pt;
+	font-family: Arial;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.calendarHeader {
+	background-color: #E3E4FA;
+	color: black;
+	font-family: Arial;
+	font-size: 9pt;
+	padding: 1px;
+}
+</style>
+
+</head>
+
+<body>
+
+<center><!--start calendar header-->
+<table class="calendarHeader" style="width: 240px;" cellspacing="0">
+	<tr>
+		<td width="95%"><select name="month" id="month"
+			onchange="reloadCalendar()">
+			<option value="1">Enero</option>
+			<option value="2">Febrero</option>
+			<option value="3">Marzo</option>
+			<option value="4">Abril</option>
+			<option value="5">Mayo</option>
+			<option value="6">Junio</option>
+			<option value="7">Julio</option>
+			<option value="8">Agosto</option>
+			<option value="9">Septiembre</option>
+			<option value="10">Octubre</option>
+			<option value="11">Noviembre</option>
+			<option value="12">Diciembre</option>
+		</select> &nbsp; <select name="year" id="year" onchange="reloadCalendar()">
+			<years>
+			<option value="${fld:year}">${fld:year}</option>
+			</years>
+		</select></td>
+		<td align="right" style="padding-right: 4px"><img
+			style="cursor: pointer" src="${def:context}/images/close.gif"
+			title="Cerrar" onclick="parent.closeBox('${req:parent.ElementID}')">
+		</td>
+	</tr>
+</table>
+<!--end calendar header--> 
+
+<!--calendar table-->
+<table class="calendar" style="width: 240px; height: 130px"
+	cellspacing="1">
+	<tr>
+		<th class="calendar">Dom</th>
+		<th class="calendar">Lun</th>
+		<th class="calendar">Mar</th>
+		<th class="calendar">Mie</th>
+		<th class="calendar">Jue</th>
+		<th class="calendar">Vie</th>
+		<th class="calendar">Sab</th>
+	</tr>
+
+	<!--calendar body-->
+	${inc:${req:dinamica.action.path}/hgrid}
+
+</table>
+
+</center>
+
+</body>
+</html>

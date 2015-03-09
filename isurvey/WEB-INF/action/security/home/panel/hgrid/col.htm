@@ -1,0 +1,16 @@
+<td align="center" onmouseover="rowOn(this)" onmouseout="rowOff(this)" onclick="window.location='${def:context}${fld:path}'">
+
+<!--indicador de progreso de carga del chart-->
+<div id="image_${fld:service_id}_wait" class="alert" style="margin-top: 5px; color: gray; width: 100px; font-weight: normal; font-family: Arial">
+	<img src="${def:context}/images/progress.gif"> Cargando...
+</div>
+
+<img id="image_${fld:service_id}" style="display: none;" class="tool" src="${def:context}${fld:icon_path}" border="0"
+	onload="displayImage('image_${fld:service_id}')"
+	title="Ir a ${fld:description}">
+
+<br>
+
+${fld:description}
+
+</td>

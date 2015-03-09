@@ -1,0 +1,120 @@
+<!--FORM-->
+<form name="form1" action="${def:context}${def:actionroot}/search" method="POST">
+
+<table class="formgrid" width="70%">
+
+	<!--layout-->
+	<col width="40%"> <!--labels-->
+	<col width="60%"> 
+
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			Filtro de B&uacute;squeda
+		</th>
+	</tr>
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+			
+	<!--form fields-->
+	
+	<tr>
+		<td class="formlabel">El Login del usuario comienza con: </td>
+		<td>
+		<input name="userlogin"  value="${fld:userlogin}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
+
+	<tr>
+		<td class="formlabel">El Apellido comienza con: </td>
+		<td>
+		<input name="lname"  value="${fld:lname}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
+
+	<tr>
+		<td class="formlabel">El Nombre comienza con: </td>
+		<td>
+		<input name="fname"  value="${fld:fname}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formlabel">El Usuario esta en el Rol: </td>
+		<td>
+                    <input type="hidden" name="role_id" value="507">
+		
+		</td>
+	</tr>
+
+	
+	<tr>
+		<td></td>
+		<td>
+
+		<br>
+		Ordenado por:<br>
+
+		<select name="orderby" size="1">
+		  <option value="userlogin">Login del Usuario</option>
+		  <option value="fname">Nombre</option>
+		  <option value="lname">Apellido</option>
+		</select>
+
+		<select name="sortmode" size="1">
+		  <option value="ASC">[Aa..Zz]</option>
+		  <option value="DESC">[Zz..Aa]</option>
+		</select>
+		
+		<br><br>
+
+		Tama&ntilde;o de la p&aacute;gina para los resultados:<br>
+
+		<select name="pagesize" size="1">
+		  <option value="">[Default]</option>
+		  <option value="10">10 registros por p�gina</option>
+		  <option value="20">20 registros por p�gina</option>
+		  <option value="50">50 registros por p�gina</option>
+		</select>
+		
+		</td>
+	</tr>	
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+	
+	<tr>
+		<td align="center" colspan="2">
+			<input type="submit" value="Buscar">
+			<input type="button" value="Limpiar Filtro" onclick="clearForm('form1')">
+			<input type="button" value="Agregar Usuario" onclick="onAddNew()">
+		</td>
+	</tr>
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+</table>
+
+</form>
+
+<script language="javascript">
+
+	document.form1.elements[0].focus();
+	
+	function onAddNew()
+	{
+		var returnURL = "${def:context}${def:actionroot}/filter";
+		var url = "${def:context}${def:actionroot}/addnew?return.url=" + returnURL;
+		window.location=url;
+	}	
+</script>
+<!--END FORM-->
+

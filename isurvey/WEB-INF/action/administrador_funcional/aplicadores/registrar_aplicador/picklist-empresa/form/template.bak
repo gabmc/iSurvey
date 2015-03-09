@@ -1,0 +1,123 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+
+<title>PickList de Selección Simple</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner" style="height: 15px; margin-bottom: 0px; font-weight: normal">
+	<div style="float: left">Seleccionar un registro</div>
+	<div style="float: right">
+		<img src="${def:context}/images/close.gif" class="button" onclick="parent.pickClose()" title="Cerrar">
+	</div>
+</div>
+
+
+<center>
+
+<!--formulario de filtro-->
+<div id="form">
+<form name="form1" onsubmit="return search()" style="margin-top: 0px; margin-bottom: 0px;">
+
+<table width="100%" class="formgrid" style="border-left: none; border-right: none">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="35%">
+
+	<!--campos-->
+	<tr>
+		<td class="formlabel" style="vertical-align: middle">Nombre comienza por:</td>
+		<td>
+			<input name="name" type="text" size="15" value="" maxlength="35"> <input type="submit" value="Buscar" class="button" style="font-size: 9pt">
+		</td>
+	</tr>
+
+</table>
+
+</form>
+</div>
+
+<!--indicador de progreso-->
+<div id="status" class="alert" style="display: none; color: gray; width: 60%; font-weight: normal; font-family: Arial; margin-top: 10px">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+
+<!--panel de respuesta AJAX-->
+<div id="response" style="display: none; width: 100%; margin-top: 7px">
+</div>
+
+</center>
+
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+		var currstyle = "";
+
+		//inicializacion de la pagina cuando carga
+		onload = function()
+		{ 
+			document.form1.elements[0].focus();
+		} 
+	
+		//mostrar filtro de busqueda
+		function showFilter()
+		{
+			document.form1.elements[0].focus();			
+		}
+
+		//ejecutar consulta
+		function search()
+		{
+
+			//llamada Ajax...
+			return ajaxCall(	httpMethod="POST", 
+								uri="${def:actionroot}/search", 
+								divResponse="response", 
+								divProgress="status", 
+								formName="form1", 
+								afterResponseFn=showFilter, 
+								onErrorFn=showFilter);
+		
+		}
+	
+		//leer una pagina del grid
+		function viewPage()
+		{
+			var url = "${def:actionroot}/view";
+			gotoPage(url);
+		}
+
+		//resaltar row del grid
+		function rowOn(obj) {
+			currStyle = obj.className;
+			obj.className="hilite";
+		}
+		
+		//restaurar color normal del row del grid
+		function rowOff(obj) {
+			obj.className=currStyle
+		}
+		
+		//retornar el item seleccionado a la pagina que llamo al picklist
+		function selectItem(id) {
+			var description = document.getElementById(id).innerHTML;
+			parent.pickSelect(id, description);
+			parent.pickClose();
+		}
+		
+</script>
+
+
+</html>

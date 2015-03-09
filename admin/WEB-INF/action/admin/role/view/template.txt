@@ -1,0 +1,163 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>Administrador de Seguridad</title>
+</head>
+
+<body>
+
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+<center>
+
+[<a href="javascript:openPDF()">Exportar a PDF Roles de Usuarios</a>]
+[<a href="javascript:openPDF3()">Exportar a PDF Servicios sin Rol</a>]
+
+<br><br>
+<!--FORM-->
+<form action="${def:context}${def:actionroot}/insert" method="POST">
+
+<table class="formgrid" width="50%">
+
+	<!--column layout-->
+	<col width="30%">
+	<col width="70%">
+
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			Nueva Entrada
+		</th>
+	</tr>
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--form fields-->
+	<tr>
+		<td class="formlabel">Aplicación</td>
+		<td>
+		<select name="app_id" size="1">
+		<combo-items>
+			<option value="${fld:app_id}">
+			${fld:description}
+			</option>
+		</combo-items>
+		</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formlabel required">Nombre del Rol</td>
+		<td><input name="rolename" type="text" size="25" maxlength="30" ></td>
+	</tr>
+	
+	<tr>
+		<td class="formlabel">Descripción</td>
+		<td><input name="description" type="text" size="25" maxlength="80" ></td>
+	</tr>
+	
+
+</table>
+
+
+<!--form buttons-->
+<br>
+<table width="50%">
+<tr>
+	<td>
+	</td>
+	<td align="center">
+		<input type="submit" value="Guardar" class="button">
+		<input type="reset" value="Limpiar" class="button">
+	</td>
+</tr>
+</table>
+
+</form>
+<!--END FORM-->
+
+
+<!--TABLE VIEW-->
+
+<!--grid-->
+<table class="grid" width="80%" cellspacing="1">
+	
+	<tr>
+	<th colspan="4"></th>
+	<th>Aplicación</th>
+	<th>Rol</th>
+	<th>Descripción</th>
+	</tr>
+	
+	<rows>
+	<tr>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="javascript:onDelete(${fld:role_id});" title="Eliminar rol">
+		ELIMINAR
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="${def:context}${def:actionroot}/edit?id=${fld:role_id}"  title="Editar rol">
+		EDITAR
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="${def:context}${def:actionroot}/auth/view?id=${fld:role_id}&app_id=${fld:app_id}"  title="Defiir autorizaciones del rol">
+		PERMISOS
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="javascript:openPDF2(${fld:role_id})"  title="Generar PDF de los Servicios del Rol">
+		SERVICIOS DEL ROL
+		</a>
+	</td>
+	<td ${fld:_rowStyle}>${fld:appname}</td>
+	<td ${fld:_rowStyle}>${fld:rolename}</td>
+	<td ${fld:_rowStyle}>${fld:description}</td>
+	</tr>
+	</rows>
+	
+</table>
+
+<!--grid script-->
+<script language="javascript">
+function onDelete(id)
+{
+	if (window.confirm("Emilinar registro?")==true)
+	{
+		window.location="${def:context}${def:actionroot}/delete?id=" + id
+	}
+}
+function openPDF()
+{
+	var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+	var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+	var w = window.open(url, null, features);
+}
+function openPDF2(id)
+{
+	var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+	var url = "${def:context}${def:actionroot}/pdfeje?role_id=" + id + "&random=" + Math.random();
+	var w = window.open(url, id, features);
+}
+function openPDF3()
+{
+	var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+	var url = "${def:context}${def:actionroot}/pdfsinasocia?random=" + Math.random();
+	var w = window.open(url, null, features);
+}
+</script>
+
+<!--END TABLE VIEW-->
+
+</center>
+
+</body>
+</html>

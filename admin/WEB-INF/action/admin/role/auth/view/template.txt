@@ -1,0 +1,97 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>Administrador de Seguridad</title>
+</head>
+
+<body>
+
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+
+
+<!--FORM-->
+<form name="form1" action="${def:context}${def:actionroot}/save" method="POST">
+
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[<a href="javascript:checkAll(document.form1.service_id)">Seleccionar todos los Actions</a>]
+
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[<a href="javascript:uncheckAll(document.form1.service_id)">Omitir todos los Actions</a>]
+
+<center>
+
+<br>
+
+<table class="grid" width="85%" cellspacing="1" >
+
+	<!--column layout-->
+	<col width="30%">
+	<col width="70%">
+
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			Autorizaciones - ${fld:rolename} (${fld:description}) 
+		</th>
+	</tr>
+
+	<!--form fields-->
+	<rows>
+	<tr>
+		<td ${fld:_rowStyle}>
+			<input name="service_id" type="checkbox" value="${fld:service_id}"> ${fld:path}
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:description}
+		</td>
+	</tr>	
+	</rows>
+</table>
+
+
+<!--form buttons-->
+<br>
+<table width="50%" cellspacing="1">
+<tr>
+	<td>
+	</td>
+	<td align="center">
+		<input type="submit" value="Guardar" class="button">
+		<input type="button" value="Cancelar" class="button" onclick="window.location='${def:context}/action/admin/role/view'">
+	</td>
+</tr>
+</table>
+
+<input type="hidden" name="role_id" value="${fld:role_id}">
+
+</form>
+<!--END FORM-->
+<script language="javascript">
+
+	function checkAll(field)
+	{
+		for (i = 0; i < field.length; i++)
+   		field[i].checked = true ;
+	}
+	
+	function uncheckAll(field)
+	{
+		for (i = 0; i < field.length; i++)
+   		field[i].checked = false ;
+	}
+
+</script> 
+</center>
+
+</body>
+</html>

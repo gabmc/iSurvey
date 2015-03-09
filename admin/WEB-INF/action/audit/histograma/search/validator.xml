@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator id="viewchart.filter">
+
+	<parameter id="fdesde" type="date" required="true" label="Fecha desde"/>
+	<parameter id="fhasta" type="date" required="true" label="Fecha hasta"/>
+	<parameter id="operation" type="varchar" required="true" label="Operación"/>
+	<parameter id="area" type="varchar" required="true" label="Area"/>
+	<parameter id="contexto" type="varchar" required="true" label="Aplicación Web"/>
+	
+	<custom-validator
+		classname="dinamica.validators.DateRangeValidator"
+		on-error-label="[Fecha desde] no puede ser mayor que [Fecha hasta]."
+		date1="fdesde" date2="fhasta" />
+		
+</validator>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator >
+
+    <parameter id="userlogin" type="varchar" required="true" label="Login" maxlen="25" regexp="\w{5,}?" regexp-error-label="Use solo letras y números, sin espacios (al menos 5 caracteres)." />
+    <parameter id="confirm" type="varchar" required="true" label="Confirmar Contraseña" maxlen="15" />
+    <parameter id="lname" type="varchar" required="false" label="Apellido" maxlen="25" />
+    <parameter id="fname" type="varchar" required="false" label="Nombre" maxlen="25" />
+    <parameter id="email" type="varchar" required="false" label="E-mail"
+		maxlen="150" regexp="^([\w-]+\.)*?[\w-]+@[\w-]+\.([\w-]+\.)*?[\w]+$"
+		regexp-error-label="Formato incorrecto, use xxxx@xxxxxx.xxx" />
+
+</validator>

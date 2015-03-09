@@ -1,0 +1,77 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>Adminisitrador de Seguridad</title>
+</head>
+
+<body onload="document.forms[0].elements[0].focus();">
+
+<center>
+
+<!--FORM-->
+<form action="${def:context}${def:actionroot}/update" method="POST">
+
+<table class="formgrid" width="45%">
+
+	<!--layout-->
+	<col width="40%"> <!--labels-->
+	<col width="60%">
+			
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			${lbl:s_form_title}
+		</th>
+	</tr>
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--form fields-->
+	<tr>
+		<td class="formlabel">Nombre de Usuario: </td>
+		<td>${fld:fname} ${fld:lname}</td>
+	</tr>	
+
+	<tr>
+		<td class="formlabel">Email: </td>
+		<td>${fld:email}</td>
+	</tr>	
+	
+	<tr>
+		<td class="formlabel required">${lbl:s_fld_newpassword} </td>
+		<td><input name="passwd" type="password" size="20" maxlength="15" ></td>
+	</tr>
+
+	<tr>
+		<td class="formlabel required">${lbl:s_fld_confirm} </td>
+		<td><input name="confirm" type="password" size="20" maxlength="15" ></td>
+	</tr>
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+	
+	<!--buttons-->
+	<tr>
+		<td align="center" colspan="2">
+			<input type="submit" value="${lbl:s_save}">
+			<input type="button" onclick="window.location='${ses:return.url}'" value="Cancelar">
+		</td>
+	</tr>
+
+</table>
+
+<input type="hidden" name="userlogin" value="${fld:userlogin}">
+
+</form>
+<!--END FORM-->
+
+</center>
+
+</body>
+</html>

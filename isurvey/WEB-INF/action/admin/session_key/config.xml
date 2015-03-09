@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		prueba get_sSessionKey
+	</summary>
+
+	<log>false</log>
+	<clear-session id="detail-rango.sql"/>
+
+	<transaction>
+		<classname>rpc.Conexion</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>template.html</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<print mode="table" recordset="sessionKey" tag="rows" alternate-colors="true" />
+	</output>
+
+</config>

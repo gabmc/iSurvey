@@ -1,0 +1,293 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>Importar o Exportar Datos de Participantes</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Importar o Exportar Datos de Participantes</div>
+	${req:progress}
+</div>
+
+<br>
+
+<!--formulario addnew/edit-->
+<div id="form" align="center">
+
+<table class="grid" width="250px">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="50%">
+	<col width="50%">
+
+	<!--titulo-->
+	<tr>
+            <th colspan="2"> Elegir la opci&oacute;n a ejecutar </th>
+	</tr>
+
+	<!--campos-->
+		<tr>
+                    <td align="center">
+                        <input id="importar" type="button" value="Importar" class="button" onclick="importar()">
+                    </td>
+		<td align="center">
+			<input id="exportar" type="button" value="Exportar" class="button" onclick="exportar()">
+		</td>
+	</tr>
+</table>
+
+</div>
+
+<br>
+
+
+<!--panel de respuesta AJAX para el grid paginado-->
+<div id="response" style="display: none; width: 100%" align="center"></div>
+
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+	//inicializa cuando se carga la pagina
+	onload = function()
+	{
+		addNew(); //prepara formulario para ingresar nuevo registro 
+		search(); //mostrar registros en vista paginada
+		document.form1.fecha_nacimiento.onkeypress = keypressDate;
+		document.form1.fecha_ingreso.onkeypress = keypressDate;
+
+	}
+
+	function pickIdListaImp(){
+		var url = "${def:context}/action/administrador_funcional/participantes/agregar_participante_a_lista/picklist_listaparticipantes/form";
+		pickOpen ('id_lista_participantes_name','id_lista_participantes',url,'450','335');
+	}
+
+	function pickIdListaExp(){
+		var url = "${def:context}/action/administrador_funcional/participantes/agregar_participante_a_lista/picklist_listaparticipantes/form";
+		pickOpen ('id_lista_participantes_name','id_lista_participantes',url,'450','335');
+	}
+
+	//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
+	function search()
+	{
+		var url = "${def:actionroot}/search";
+		
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?currentpage=" + currentPage;
+
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+
+
+	//traer la pagina N del grid
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		gotoPage(url);
+	}	
+
+	//grabar el formulario
+	function save()
+	{
+		//determina si es un insert o un update
+		if (document.form1.id.value=="")
+			return insert();
+		else
+			return update();
+	}
+
+	//grabar registro nuevo en BD
+	function insert()
+	{
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/insert", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	    	
+	}
+
+        function importar()
+	{
+			clearErrorMessages();
+                        var url = "${def:actionroot}/importexcel/form";
+			//llamada Ajax...
+                        ajaxCall(httpMethod="GET",
+                                                        uri= url,
+                                                        divResponse="response",
+                                                        divProgress="status",
+                                                        formName=null,
+                                                        afterResponseFn=null,
+                                                        onErrorFn=null);
+	}
+
+        //invoca la generacion de un Excel en un popup
+	function exportar()
+	{
+			clearErrorMessages();
+                        var url = "${def:actionroot}/exportar";
+			//llamada Ajax...
+                        ajaxCall(httpMethod="GET",
+                                                        uri= url,
+                                                        divResponse="response",
+                                                        divProgress="status",
+                                                        formName=null,
+                                                        afterResponseFn=null,
+                                                        onErrorFn=null);
+	}
+
+        function exportar_excel()
+	{
+                var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/exportar_excel?random=" + Math.random()+
+                    "&id_lista_participantes="+document.getElementById("id_lista_participantes").value;
+		var w = window.open(url, null, features);
+	}
+
+	//restaurar el formulario en caso de error
+	function retryAddnewOrEdit() {
+		document.getElementById("grabar").disabled=false;
+		setFocusOnForm("form1");		
+	}
+
+	//editar registro en formulario
+	function edit(id)
+	{
+			clearErrorMessages();
+
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/edit?id=" + id , 
+							divResponse=null, 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=null);	
+	}
+	
+	//actualizar registro en BD
+	function update()
+	{		
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/update", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	
+	}
+
+         function importar2()
+        {
+          
+            var uri = "${def:context}${def:actionroot}/importar";
+            openDialog("dialog", uri, 600, 550);
+         
+        }
+
+        	function upload()
+	{
+		if (document.form1.file.value=="") {
+			alert("Por favor indique el archivo a ser cargado.");
+			document.form1.file.focus();
+			return false;
+		}
+
+		document.form1.submit.disabled = true;
+		document.getElementById("status").style.display="";
+		return true;
+	}
+
+
+	//funcion de callback del iframe cuando se carga bien el documento
+	function uploadOK(total)
+	{
+
+                document.getElementById("status").style.display="none";
+		document.form1.file.value="";
+		document.form1.submit.disabled = false;
+		alert("Se cargaron exitosamente " + total + " registros.");
+		document.form1.file.focus();
+	}
+
+	//funcion de callback del iframe cuando no carga correctamente el documento
+	function uploadError(msg)
+	{
+		document.getElementById("status").style.display="none";
+		document.form1.submit.disabled = false;
+		alert(msg);
+	}
+
+	//retorna al estado previo que corresponde
+	//al estado actual de la pagina, cada llamada Ajax
+	//se encarga de definir cual es la funcion de goBack() que aplica
+	function goBack()
+	{
+		_goBackFn()
+	}
+
+	//mostrar filtro de busqueda
+	function showFilter()
+	{
+		document.getElementById("form").style.display="";
+		document.getElementById("responseError").style.display='none';
+		document.form1.submit.disabled = false;
+		document.form1.file.focus();
+	}
+
+	//ejecutar consulta de errores del archivo Excel
+	function uploadErrorGrid(msg)
+	{
+		//esconder el DIV de progreso para mostrar el alert del error
+		document.getElementById("status").style.display="none";
+		alert(msg);
+
+		//definir funcion goBack()
+		_goBackFn = showFilter;
+
+		//esconder filtro de busqueda
+		//document.getElementById("form").style.display="none";
+
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET",
+						uri="${def:actionroot}/importexcel/errorgrid",
+						divResponse="responseError",
+						divProgress="status",
+						formName=null,
+						afterResponseFn=null,
+						onErrorFn=null);
+	}
+</script>
+
+</html>

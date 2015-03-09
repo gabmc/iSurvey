@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+
+	<parameter id="service_id" type="integer" required="true" label="Servicio a invocar" maxlen="10" />
+	<parameter id="position" type="integer" required="true" label="Orden" maxlen="10" />
+
+</validator>
+

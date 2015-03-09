@@ -1,0 +1,142 @@
+<html>
+
+    <head>
+
+        <link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+        <!--biblioteca generica JS/Dinamica-->
+        <script type="text/javascript" src="${def:context}/action/script">
+        </script>
+
+        <title>Cuenta de usuario</title>
+    </head>
+
+    <body>
+
+        <!--banner-->
+        <div class="banner">
+            <div  style="float: left;color: #666666"><strong>Cuenta de usuario</strong></div>
+	${inc:/action/progress}
+        </div>
+
+        <br>
+<div style="position: relative; float: right;"></div>
+        <!--colocar el formulario a la derecha del browser-->
+        <div  align="center" >
+
+            <!--formulario addnew/edit-->
+      <div id="form"  align="center">
+      <form name="form1" action="${def:context}${def:actionroot}/insert" method="POST">
+
+                    <table width="512"  style="font-family:Verdana; font-size: 12px;" >
+
+                        <!--ancho de la columna de etiquetas-->
+                        <col width="18%">
+                        <col width="20%">
+
+                        <!--titulo-->
+                        <tr>
+                            <td colspan="2" height="45"><div align="center" style="font-size:14px"><strong>Crear cuenta de aplicador</strong><br>
+                                </div></td>
+                        </tr>
+
+                        <!--separador-->
+                        <tr height="10px">
+                            <td colspan="2"></td>
+                        </tr>
+
+
+                        <tr  >
+                            <td height="60" colspan="2" ><div align="justify"> A continuaci&oacute;n, llene los campos de informaci&oacute;n de la cuenta de usuario a crear</div></td>
+                        </tr>
+
+                        <!--campos-->
+
+                        <tr  >
+                            <td height="30" colspan="2"><strong>Informaci&oacute;n de usuario </strong></td>
+                        </tr>
+
+                        <tr>
+                            <td class="formlabel" height="30" >Nombre</td>
+                            <td><input id="fname" name="fname"  type="text" size="30" maxlength="25" value="${fld:fname}"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="formlabel" height="30" >Apellido</td>
+                            <td><input  id="lname" name="lname" type="text" size="30" maxlength="25" value="${fld:lname}"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="formlabel" height="30">E-mail</td>
+                            <td><input id="email" name="email"  type="text" size="30" maxlength="80" value="${fld:email}"></td>
+                        </tr>
+
+                        <tr>
+                            <td   colspan="2" ><hr align="left" width="488" color=" #F1F06B"></td>
+                        </tr>
+                        <tr>
+                            <td  height="30" colspan="2"><strong>Cuenta de acceso </strong></td>
+                        </tr>
+                        <tr>
+                            <td class="formlabel required" height="30" >Login</td>
+                            <td><input id="userlogin" name="userlogin"  type="text" size="30" maxlength="25" value="${fld:userlogin}">                            </td></tr>
+
+                        <tr >
+                            <td class="formlabel required" height="30" >Contrase�a</td>
+                            <td><input id="passwd" name="passwd"  type="password" size="30" maxlength="15"></td>
+                        </tr>
+                        <tr>
+                            <td class="formlabel required" height="30" >Confirme contrase�a </td>
+                            <td><input id="confirm" name="confirm"  type="password" size="30" maxlength="15"></td>
+                        </tr>                     
+
+                        <!--separador-->
+                        <tr>
+                            <td   colspan="2" ><hr align="left" width="488" color=" #F1F06B"></td>
+                        </tr>
+
+                        <!--botones-->
+                       <tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="Guardar">
+					<input type="button" value="Cancelar" onClick="window.location='${def:context}/action/security/home/welcome'" >				</td>
+			</tr>
+                        <!--separador-->
+                        <tr height="5px">
+                            <td colspan="2"></td>
+                        </tr>
+                    </table>
+
+                    
+
+                   <input type="hidden" name="user_id" value="${fld:user_id}">
+                   <input type="hidden" name="role_id" id="role_id" value="503">
+		</form>
+
+            </div>
+        </div>
+
+        <!--colocar la respuesta a la izquierda del browser-->
+        <div style="float: left; padding-left: 50px">
+            <!--panel de respuesta AJAX para el grid paginado-->
+            <div id="response" style="display: none; width: 100%"></div>
+        </div>
+
+   
+
+    <!--codigo de soporte del template-->
+  <script language="javascript">
+
+		document.form1.elements[0].focus();
+
+     //desplegar picklist de seleccion simple
+        function pickEmpresa(){
+            var url = "${def:context}${def:actionroot}/picklist-empresa/form";
+            pickOpen ('empresaname','empresaid',url,'450','235');
+        }
+
+     
+		</script>
+		<!--END FORM-->
+ </body>
+</html>

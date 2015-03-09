@@ -1,0 +1,47 @@
+<!--data grid-->
+<table class="grid" width="700px">
+
+	<!--toolbar-->
+	<tr>
+		<th colspan="7">
+			<!--título del grid--> 
+			<span style="float: left;">Contenido de la tabla </span>
+			<!--panel de control de navegacion--> 
+			<span style="float: right;">${req:controls}</span> 
+			<!--indicador de progreso-->
+			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
+			<!--toolbar del grid-->
+			<span style="float: left; margin-left: 40px">
+				<img src="${def:context}/images/reload.gif" onclick="search()" title="Recargar data" class="tool">
+				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/excel.gif" onclick="openExcel()" title="Exportar a Excel" class="tool">
+			</span>
+		</th>
+	</tr>
+
+	<!--encabezados-->
+	<tr>
+		<th colspan="2"></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre_sector_pl0','query-empresa.sql')" title="Haga CLICK para ordenar por esta columna">Sector Empresarial</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre_empresa','query-empresa.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('telefono','query-empresa.sql')" title="Haga CLICK para ordenar por esta columna">Teléfono</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('tipo','query-empresa.sql')" title="Haga CLICK para ordenar por esta columna">Tipo</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('rif','query-empresa.sql')" title="Haga CLICK para ordenar por esta columna">RIF</a></th>
+
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_empresa}')" title="Eliminar"></td>
+		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_empresa}')" class="tool" title="Editar"></td>
+		<td>${fld:nombre_sector_pl0}</td>
+		<td align="left">${fld:nombre_empresa}</td>
+		<td align="left">${fld:telefono}</td>
+		<td align="left">${fld:tipo}</td>
+		<td align="left">${fld:rif}</td>
+
+	</tr>
+	</rows>
+
+</table>

@@ -1,0 +1,44 @@
+<!--data grid-->
+<table class="grid" width="95%">
+
+	<!--toolbar-->
+	<tr>
+		<th colspan="6">
+			<!--título del grid--> 
+			<span style="float: left;">Contenido de la tabla </span>
+			<!--panel de control de navegacion--> 
+			<span style="float: right;">${req:controls}</span> 
+			<!--indicador de progreso-->
+			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
+			<!--toolbar del grid-->
+			<span style="float: left; margin-left: 40px">
+				<img src="${def:context}/images/reload.gif" onclick="search()" title="Recargar data" class="tool">
+				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/excel.gif" onclick="openExcel()" title="Exportar a Excel" class="tool">
+				<img src="${def:context}/images/search.gif" onclick="openPanel()" title="Visualizar Panel" class="tool">
+			</span>
+		</th>
+	</tr>
+
+	<!--encabezados-->
+	<tr>
+		<th colspan="2"></th>
+		<th width="25%"><a href="javascript:onclick=sortBy('path','query-spanel.sql')" title="Haga CLICK para ordenar por esta columna">Action</a></th>
+		<th width="15%"><a href="javascript:onclick=sortBy('icon_path','query-spanel.sql')" title="Haga CLICK para ordenar por esta columna">Imagen</a></th>
+		<th width="25%"><a href="javascript:onclick=sortBy('description','query-spanel.sql')" title="Haga CLICK para ordenar por esta columna">Descripción</a></th>
+		<th width="5%"><a href="javascript:onclick=sortBy('orden','query-spanel.sql')" title="Haga CLICK para ordenar por esta columna">Orden</a></th>
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:panel_id}')" title="Eliminar"></td>
+		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:panel_id}')" class="tool" title="Editar"></td>
+		<td align="left">${fld:path}</td>
+		<td align="left">${fld:icon_path}</td>
+		<td align="left">${fld:description}</td>
+		<td align="center">${fld:orden}</td>
+	</tr>
+	</rows>
+
+</table>

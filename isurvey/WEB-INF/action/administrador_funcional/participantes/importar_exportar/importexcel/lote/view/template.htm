@@ -1,0 +1,69 @@
+<!--comandos-->
+[<a href="javascript:goBackForm()">Retornar</a>]
+
+<br><br>
+<!--data grid-->
+<table class="grid" width="800px">
+	
+	<!--encabezados-->
+	<tr>
+		<th colspan="6">
+			<span style="float:left">
+				Lote de archivos cargados
+			</span>
+	
+			<span id="grid-progress" style="float:right;margin-right:20px;display:none">
+				<img src="${def:context}/images/progress.gif">
+			</span>
+
+		</th>
+	</tr>
+	<tr>
+		<th>
+		</th>
+		<th>
+			Usuario
+		</th>
+		<th>
+			Fecha de carga
+		</th>
+		<th>
+			Hora de carga
+		</th>
+		<th>
+			Nombre del archivo
+		</th>
+		<th>
+			Total registros
+		</th>
+	</tr>
+	
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center" width="3%">
+			<img src="${def:context}/images/search.gif" class="tool"
+					onclick="searchRegistro('${fld:lote_excel_id}')"
+					title="Ver los registros de este lote" >
+		</td>
+		<td align="center" width="10%">
+			${fld:userlogin}
+		</td>
+		<td align="center" width="15%">
+			${fld:fecha@dd-MM-yyyy}
+		</td>
+		<td align="center" width="15%">
+			${fld:hora}
+		</td>
+		<td align="center" width="30%">
+			${fld:nombre_archivo}
+		</td>
+		<td align="right" width="20%">
+			${fld:total_registros} 
+		</td>
+	</tr>
+	</rows>
+		
+</table>
+
+

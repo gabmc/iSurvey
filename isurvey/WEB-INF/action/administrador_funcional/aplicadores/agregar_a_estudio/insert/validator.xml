@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror='/action/error/validation/ajax'>
+	<parameter id='id_usuario' type='integer' required='false' label='Aplicador' maxlen='10'/>
+	<parameter id='id_estudio_name' type='varchar' required='false' label='Estudio'/>
+	<parameter id='id_estudio' type='integer' required='false' label='Estudio' maxlen='10'/>
+</validator>

@@ -1,0 +1,33 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>iSurvey</title>
+</head>
+
+<body>
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+<center>
+
+<br>
+
+<div class="message" style="width:50%;text-align:center;color:blue">
+
+<br>
+El registro ha sido guardado.
+<br><br>
+	<input type="button" class="button"
+	onclick="window.location='${def:context}${def:actionroot}/view'"
+	value="Regresar">
+<br><br>
+
+</div>
+
+</center>
+
+</body>
+</html>

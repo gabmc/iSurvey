@@ -1,0 +1,222 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	Seguimiento de Usuarios
+</div>
+<br>
+
+<center>
+
+<!--formulario de filtro-->
+<div id="form">
+<form name="form1" onsubmit="return search()">
+
+	<table class="formgrid" width="410px">
+	
+		<!--ancho de la columna de etiquetas-->
+		<col width="30%">
+		<col width="70%">
+	
+		<!--titulo-->
+		<tr>
+			<th colspan="2">
+				Filtro de búsqueda
+			</th>
+		</tr>
+	
+		<!--separador-->
+		<tr height="10px">
+			<td></td>
+		</tr>
+		
+		<!--campos-->
+		<tr>
+			<td class="formlabel">
+				Usuario
+			</td>
+			<td>
+				<!--picklist-->
+				<input id="user_id" name="user_id" type="hidden" value="">
+				<input type="text" id="usuario" name="usuario" size="35">
+				<img src="${def:context}/images/search.gif" class="tool2"
+					onclick="pickUsuarioSearch()"
+					title="Desplegar listado de usuarios" >
+				<img src="${def:context}/images/clear.gif"
+					onclick="document.form1.user_id.value='';document.form1.usuario.value=''" class="tool2"
+					title="Borrar valor seleccionado" >					
+			</td>
+		</tr>
+			
+		<tr>
+			<td class="formlabel">
+				Fecha desde
+			</td>
+			<td>
+				<input id="fdesde" name="fdesde" type="text" size="10" value="" maxlength="10">
+				<img class="tool2" src="${def:context}/images/calendar.gif" 
+					title="Desplegar calendario.."
+					onclick="calendarOpen('fdesde')"> DD-MM-AAAA
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="formlabel">
+				Fecha hasta
+			</td>
+			<td>
+				<input id="fhasta" name="fhasta" type="text" size="10" value="" maxlength="10">
+				<img class="tool2" src="${def:context}/images/calendar.gif" 
+					title="Desplegar calendario.."
+					onclick="calendarOpen('fhasta', 'fdesde')"> DD-MM-AAAA
+			</td>
+		</tr>	
+
+		<!--separador-->
+		<tr height="10px">
+			<td colspan="2"></td>
+		</tr>
+	
+		<!--botones-->
+		<tr>
+			<td align="center" colspan="2">
+				<input type="submit" value="Buscar" class="button">
+				<input type="button" value="Limpiar" class="button" onclick="clearForm('form1')">
+			</td>
+		</tr>		
+	
+		<!--separador-->
+		<tr height="10px">
+			<td></td>
+		</tr>
+		
+	</table>
+
+</form>
+</div>
+
+<br>
+
+<!--panel de respuesta AJAX #1-->
+<div id="response" style="display:none;width:100%">
+</div>
+
+<!--panel de respuesta AJAX #2-->
+<div id="detail" style="display:none;width:100%">
+</div>
+
+<!--indicador de progreso-->
+<br>
+<div id="status" class="alert" style="text-align:left; display:none;color:gray;width:150px;font-weight:bold;font-family:Arial">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+	
+	//inicializacion de la pagina cuando carga
+	onload = function()
+	{ 
+		document.form1.usuario.focus();
+		document.form1.fdesde.onkeypress = keypressDate;
+		document.form1.fhasta.onkeypress = keypressDate;
+		document.form1.usuario.onkeypress = keypressPicklist;
+	} 
+
+	function keypressPicklist(e) 
+	{ 
+		var keyCode = e ? e.which : window.event.keyCode;
+		var elem = e ? e.target : window.event.srcElement;
+		if (keyCode==13){
+			if (elem.id == "usuario")
+				pickUsuarioSearch();
+			return false;
+		}
+		return true;
+	}
+	
+	function pickUsuarioSearch(){
+		
+		var usuario = document.getElementById("usuario").value;
+		var url = "${def:context}${def:actionroot}/pick/user/form?name=" + usuario;
+		pickOpen ('usuario','user_id',url,'500','190');	
+	}
+	
+	//mostrar filtro de busqueda
+	function showFilter()
+	{
+		document.getElementById("form").style.display="";
+		document.getElementById("response").style.display='none';
+		document.form1.usuario.focus();			
+	}
+		
+	//ejecutar consulta
+	function search()
+	{			
+			//definir funcion goBack()
+			_goBackFn = showFilter;
+
+			//esconder filtro de busqueda
+			document.getElementById("form").style.display="none";
+	
+			//llamada Ajax...
+			return ajaxCall(	httpMethod="POST", 
+								uri="${def:actionroot}/search", 
+								divResponse="response", 
+								divProgress="status", 
+								formName="form1", 
+								afterResponseFn=null, 
+								onErrorFn=showFilter);
+
+	}
+
+	//define la url en donde se mostrara el resultado de consulta
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		//llama a la funcion para ir a la pagina indicada 
+		gotoPage(url);
+	}		
+	
+	//retorna al estado previo que corresponde
+	//al estado actual de la pagina, cada llamada Ajax
+	//se encarga de definir cual es la funcion de goBack() que aplica
+	function goBack() 
+	{
+		_goBackFn()			
+	}
+	
+	//invoca la generacion de un PDF en un popup
+	function openPDF()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//invoca la generacion de un Excel en un popup
+	function openExcel()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+</script>
+
+</center>
+
+</body>
+
+</html>

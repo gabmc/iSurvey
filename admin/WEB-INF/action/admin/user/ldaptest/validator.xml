@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+	<parameter id="userlogin" type="varchar" required="true" label="Login del usuario LDAP"/>
+</validator>

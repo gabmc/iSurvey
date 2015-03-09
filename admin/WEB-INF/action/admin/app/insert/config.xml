@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Insertar un registro
+	</summary>
+	
+	<log>false</log>
+	
+	<set-request-attribute id="help.msg" value="Ayuda en línea para la página INSERTAR..." />
+	
+	<!--soporte de auditoria-->
+	<audit>
+		<!--de donde saca los datos, por defecto es "_request"-->
+		<recordset></recordset>
+		<!--que campos extrae para el registro descriptivo-->
+		<cols>	
+			<colname>app_alias</colname>		
+			<colname>description</colname>
+		</cols>
+		<table>s_application</table>
+		<oper>AÑADIR</oper>
+		<area>Aplicaciones</area>
+		<!--
+			query para obtener el ID generado o nombre de 
+			la columna que contiene el pkey, si es query, 
+			el alias del campo debe ser "id"
+		-->
+		<pkey params="insert.sql">select ${fld:insert.sql.lastid} as id</pkey>
+	</audit>
+	
+	<transaction>
+		<classname>dinamica.audit.AuditableTransactionIdentity</classname>
+		<validator>true</validator>
+		<transaction>true</transaction>
+		<jdbc-log>false</jdbc-log>
+	</transaction>
+
+	<query>insert.sql</query>
+	<query params="insert.sql">insert_role.sql</query>
+	<query params="insert.sql">insert_menu.sql</query>
+	<query params="insert_menu.sql;insert_role.sql">insert_menu_role.sql</query>
+	<query params="insert.sql">insert_service_1.sql</query>
+	<query params="insert.sql">insert_service_2.sql</query>
+	<query params="insert.sql">insert_service_3.sql</query>
+	<query params="insert.sql">insert_service_4.sql</query>
+	<query params="insert_menu.sql;insert_service_4.sql">insert_menu_item_1.sql</query>
+	<query params="insert.sql">insert_service_5.sql</query>
+	<query params="insert.sql">insert_service_6.sql</query>
+	<query params="insert.sql">insert_service_7.sql</query>
+	<query params="insert.sql">insert_service_8.sql</query>
+	<query params="insert.sql">insert_service_9.sql</query>
+	<query params="insert.sql">insert_service_10.sql</query>
+	<query params="insert_menu.sql;insert_service_10.sql">insert_menu_item_2.sql</query>
+	<query params="insert.sql">insert_service_11.sql</query>
+	<query params="insert.sql">insert_service_12.sql</query>
+	<query params="insert_menu.sql;insert_service_12.sql">insert_menu_item_3.sql</query>
+	<query params="insert.sql">insert_service_13.sql</query>
+	<query params="insert.sql">insert_service_14.sql</query>
+	<query params="insert.sql">insert_service_15.sql</query>
+	<query params="insert.sql">insert_service_16.sql</query>
+	<query params="insert.sql">insert_service_17.sql</query>
+	<query params="insert.sql">insert_service_18.sql</query>
+	<query params="insert.sql">insert_service_19.sql</query>
+	<query params="insert.sql;insert_role.sql">insert_service_role.sql</query>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>template.txt</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+	</output>
+
+</config>

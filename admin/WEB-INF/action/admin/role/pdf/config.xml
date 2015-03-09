@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+
+<config>
+
+	<summary>
+		PDF Report - Roles de Usuarios
+	</summary>
+	
+	<log>false</log>
+	
+	<!--specific elements for master/detail PDF domain.reports-->
+	<pdf-title>Roles de Usuarios</pdf-title>
+	<query-master>group-master.sql</query-master>
+	<query-detail>group-detail.sql</query-detail>
+		
+	<transaction>
+		<classname>dinamica.MasterDetailReader</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+	</transaction>
+	
+	<output>
+		<classname>domain.reports.role.PDFReportRole</classname>
+	</output>
+
+</config>

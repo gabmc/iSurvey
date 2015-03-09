@@ -1,0 +1,259 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	Consulta de Login fallidos
+</div>
+<br>
+
+<center>
+
+<!--formulario de filtro-->
+<div id="form">
+<form name="form1" onsubmit="return search()">
+
+	<table class="formgrid" width="500px">
+	
+		<!--ancho de la columna de etiquetas-->
+		<col width="30%">
+		<col width="70%">
+	
+		<!--titulo-->
+		<tr>
+			<th colspan="2">
+				Filtro de búsqueda
+			</th>
+		</tr>
+	
+		<!--separador-->
+		<tr height="10px">
+			<td></td>
+		</tr>
+		
+		<!--campos-->
+		<tr>
+			<td class="formlabel">
+				Login
+			</td>
+			<td>
+				<input id="userlogin" name="userlogin" type="text" size="20" value="" maxlength="25">
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="formlabel">
+				IP remota comienza por
+			</td>
+			<td>
+				<input id="ip" name="ip" type="text" size="20" value="" maxlength="25">
+			</td>
+		</tr>
+		
+		<!--combobox dinamico-->
+		<tr>
+			<td class="formlabel">
+				Aplicación
+			</td>
+			<td>
+				<select name="contexto" style="width:200px">
+					<option value="">[Cualquiera]</option>
+					<rows3>
+						<option value="${fld:app_alias}">${fld:description}</option>
+					</rows3>
+				</select>
+			</td>
+		</tr>
+			
+		<tr>
+			<td class="formlabel">
+				Fecha desde
+			</td>
+			<td>
+				<input id="fdesde" name="fdesde" type="text" size="10" value="" maxlength="10">
+				<img class="tool2" src="${def:context}/images/calendar.gif" 
+					title="Desplegar calendario.."
+					onclick="calendarOpen('fdesde')"> DD-MM-AAAA
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="formlabel">
+				Fecha hasta
+			</td>
+			<td>
+				<input id="fhasta" name="fhasta" type="text" size="10" value="" maxlength="10">
+				<img class="tool2" src="${def:context}/images/calendar.gif" 
+					title="Desplegar calendario.."
+					onclick="calendarOpen('fhasta', 'fdesde')"> DD-MM-AAAA
+			</td>
+		</tr>	
+		
+		
+		<!--separador-->
+		<tr height="10px">
+			<td colspan="2"></td>
+		</tr>
+	
+		<!--botones-->
+		<tr>
+			<td align="center" colspan="2">
+				<input type="submit" value="Buscar" class="button">
+				<input type="button" value="Limpiar" class="button" onclick="clearForm('form1')">
+			</td>
+		</tr>		
+	
+		<!--separador-->
+		<tr height="10px">
+			<td></td>
+		</tr>
+		
+	</table>
+
+</form>
+</div>
+
+<br>
+
+<!--panel de respuesta AJAX #1-->
+<div id="response" style="display:none;width:100%">
+</div>
+
+<!--panel de respuesta AJAX #2-->
+<div id="detail" style="display:none;width:100%">
+</div>
+
+<!--indicador de progreso-->
+<br>
+<div id="status" class="alert" style="text-align:left; display:none;color:gray;width:150px;font-weight:bold;font-family:Arial">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+	//inicializacion de la pagina cuando carga
+	onload = function()
+	{ 
+		document.form1.userlogin.focus();
+		document.form1.fdesde.onkeypress = keypressDate;
+		document.form1.fhasta.onkeypress = keypressDate;
+	} 
+
+	//mostrar filtro de busqueda
+	function showFilter()
+	{
+		document.getElementById("form").style.display="";
+		document.getElementById("response").style.display='none';
+		document.getElementById("detail").style.display='none';
+		document.form1.userlogin.focus();			
+	}
+		
+	//ejecutar consulta
+	function search()
+	{			
+			//definir funcion goBack()
+			_goBackFn = showFilter;
+
+			//esconder filtro de busqueda
+			document.getElementById("form").style.display="none";
+	
+			//llamada Ajax...
+			return ajaxCall(	httpMethod="POST", 
+								uri="${def:actionroot}/search", 
+								divResponse="response", 
+								divProgress="status", 
+								formName="form1", 
+								afterResponseFn=null, 
+								onErrorFn=showFilter);
+
+	}
+
+	//define la url en donde se mostrara el resultado de consulta
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		//llama a la funcion para ir a la pagina indicada 
+		gotoPage(url);
+	}		
+	
+	//retorna al estado previo que corresponde
+	//al estado actual de la pagina, cada llamada Ajax
+	//se encarga de definir cual es la funcion de goBack() que aplica
+	function goBack() 
+	{
+		_goBackFn()			
+	}
+		
+		
+	//mostrar el detalle de un registro
+	function getDetail(id)
+	{
+    	
+			//definir funcion goBack()
+			_goBackFn = showGrid;			
+		
+			//esconder grid principal
+			document.getElementById("response").style.display="none";
+	
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/detail?id=" + id, 
+							divResponse="detail", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=showGrid);	    	
+    	
+	}
+
+	//mostrar grid principal
+	function showGrid()
+	{
+		document.getElementById("response").style.display="";
+		document.getElementById("detail").style.display="none";
+		
+		//restaura el goBack que corresponde a este estado
+		_goBackFn = showFilter;
+	}
+
+	//invoca la generacion de un PDF en un popup
+	function openPDF()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//invoca la generacion de un Excel en un popup
+	function openExcel()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//invoca la generacion de un Excel en un popup
+	function displayChart(chartID)
+	{
+		document.getElementById(chartID + "_wait").style.display='none';
+		document.getElementById(chartID).style.display='';
+	}			
+</script>
+
+</center>
+
+</body>
+
+</html>

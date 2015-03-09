@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror='/action/error/crud'>
+	<parameter id='nombre_empresa' type='varchar' required='false' label='Empresa' maxlen='30'/>
+	<custom-validator classname="dinamica.validators.SQLPatternTransformer" parameter="nombre_empresa" rule="contains" />
+</validator>

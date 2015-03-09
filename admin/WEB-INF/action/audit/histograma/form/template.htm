@@ -1,0 +1,259 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+	
+	<title>Histograma de operaciones</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	Histograma de operaciones
+</div>
+<br>
+
+
+<center>
+
+<!--formulario de filtro-->
+<div id="form">
+<form name="form1" onsubmit="return search()">
+
+<table width="410px" class="formgrid">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="35%">
+
+	<!--titulo-->
+	<tr>
+		<th colspan="2">
+			Filtro de búsqueda
+		</th>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--campos-->
+	<tr>
+		<td class="formlabel required">
+			Fecha desde:
+		</td>
+		<td>
+			<input id="fdesde" name="fdesde" type="text" size="10" value="" maxlength="10">
+			<img class="tool2" src="${def:context}/images/calendar.gif" 
+				title="Desplegar calendario.."
+				onclick="calendarOpen('fdesde')"> DD-MM-AAAA
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel required">
+			Fecha hasta:
+		</td>
+		<td>
+			<input id="fhasta" name="fhasta" type="text" size="10" value="" maxlength="10">
+			<img class="tool2" src="${def:context}/images/calendar.gif" 
+				title="Desplegar calendario.."
+				onclick="calendarOpen('fhasta', 'fdesde')"> DD-MM-AAAA
+		</td>
+	</tr>
+	
+	<!--combobox dinamico-->
+	<tr>
+		<td class="formlabel required">
+			Aplicación
+		</td>
+		<td>
+			<select name="contexto" style="width:200px">
+				<option value="">[Seleccione]</option>
+				<rows3>
+					<option value="${fld:app_alias}">${fld:description}</option>
+				</rows3>
+			</select>
+		</td>
+	</tr>
+	
+	<!--combobox estatico-->
+	<tr>
+		<td valign="top" class="formlabel required">
+			Area
+		</td>
+		<td valign="top">
+			<select name="area" style="width:200px">
+				<option value="">[Seleccione]</option>
+				<rows>
+				<option value="${fld:area}">${fld:area}</option>
+				</rows>
+			</select>
+		</td>
+	</tr>
+	
+	<!--combobox estatico-->
+	<tr>
+		<td valign="top" class="formlabel required">
+			Operación
+		</td>
+		<td valign="top">
+			<select name="operation" style="width:200px">
+				<option value="">[Seleccione]</option>
+				<rows2>
+				<option value="${fld:oper}">${fld:oper}</option>
+				</rows2>
+			</select>
+		</td>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--botones-->
+	<tr>
+		<td align="center" colspan="2">
+			<input type="submit" value="Buscar" class="button">
+			<input type="button" value="Limpiar" class="button" onclick="clearForm('form1')">
+		</td>
+	</tr>
+	
+	<!--separador-->
+	<tr height="10px">
+		<td></td>
+	</tr>
+
+</table>	
+
+</form>
+</div>
+
+
+<!--indicador de progreso-->
+<div id="status" class="alert" style="display:none;color:gray;width:20%;font-weight:bold;font-family:Arial">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+
+
+<!--panel de respuesta AJAX #1-->
+<div id="response" style="display:none;width:100%">
+</div>
+
+<!--panel de respuesta AJAX #2-->
+<div id="detail" style="display:none;width:100%">
+</div>
+
+</center>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+		//apuntador a funcion para retornar dependiendo de donde este
+		var _goBackFn = null;
+
+		//inicializacion de la pagina cuando carga
+		onload = function()
+		{ 
+			document.form1.fdesde.focus();
+			document.forms[0].fdesde.onkeypress = keypressDate;
+			document.forms[0].fhasta.onkeypress = keypressDate;
+		} 
+	
+		//mostrar filtro de busqueda
+		function showFilter()
+		{
+			document.getElementById("form").style.display="";
+			document.getElementById("response").style.display='none';
+			document.getElementById("detail").style.display='none';
+			document.form1.elements[0].focus();			
+		}
+
+		//ejecutar consulta
+		function search()
+		{
+
+			//definir funcion goBack()
+			_goBackFn = showFilter;
+
+			//esconder filtro de busqueda
+			document.getElementById("form").style.display="none";
+	
+			//llamada Ajax...
+			return ajaxCall(	httpMethod="POST", 
+								uri="${def:actionroot}/search", 
+								divResponse="response", 
+								divProgress="status", 
+								formName="form1", 
+								afterResponseFn=null, 
+								onErrorFn=showFilter);
+		
+		}
+	
+	
+		//retorna al estado previo que corresponde
+		//al estado actual de la pagina, cada llamada Ajax
+		//se encarga de definir cual es la funcion de goBack() que aplica
+		function goBack() 
+		{
+			_goBackFn()			
+		}
+	
+		//invoca la generacion de un PDF en un popup
+		function openPDF()
+		{
+			var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+			var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+			var w = window.open(url, null, features);
+		}
+		
+		//mostrar imagen y esconder su indicador de progreso de carga
+		function displayChart(chartID)
+		{
+			document.getElementById(chartID + "_wait").style.display='none';
+			document.getElementById(chartID).style.display='';
+		}
+	
+		//mostrar detalle de un registro
+		function drillDown(id)
+		{
+		
+			//definir funcion goBack()
+			_goBackFn = showGrid;			
+		
+			//esconder grid principal
+			document.getElementById("response").style.display="none";
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/drilldown?id=" + id, 
+							divResponse="detail", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=showGrid);		
+		
+		}
+		
+		//mostrar grid principal
+		function showGrid()
+		{
+			document.getElementById("response").style.display="";
+			document.getElementById("detail").style.display='none';
+			
+			//restaura el goBack que corresponde a este estado
+			_goBackFn = showFilter;
+		}
+		
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+
+<title>PickList de Selección Simple</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner" style="height: 15px; margin-bottom: 0px; font-weight: normal">
+	<div style="float: left">Seleccionar una imagen</div>
+	<div style="float: right">
+		<img src="${def:context}/images/close.gif" class="button" onclick="parent.pickClose()" title="Cerrar">
+	</div>
+</div>
+
+
+<center>
+
+<!--indicador de progreso-->
+<div id="status" class="alert" style="display: none; color: gray; width: 60%; font-weight: normal; font-family: Arial; margin-top: 10px">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+
+<!--panel de respuesta AJAX-->
+<div id="response" style="display: none; width: 100%;">
+</div>
+
+</center>
+
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+		//inicializacion de la pagina cuando carga
+		onload = function()
+		{ 
+			search();
+		} 
+		
+		//ejecutar consulta
+		function search()
+		{
+			//esconder grid principal
+			document.getElementById("response").style.display="none";
+		
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/search", 
+							divResponse="response", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=null);
+		}
+
+		//mostrar imagen y esconder su indicador de progreso de carga
+		function displayImage(imageID)
+		{
+			document.getElementById(imageID + "_wait").style.display='none';
+			document.getElementById(imageID).style.display='';
+		}
+		
+		//retornar el item seleccionado a la pagina que llamo al picklist
+		function selectItem(id) {
+			parent.pickSelect(id, id);
+			parent.pickClose();
+		}
+		
+</script>
+
+
+</html>

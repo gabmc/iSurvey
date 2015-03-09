@@ -1,0 +1,104 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>Sistema de Seguridad</title>
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+</head>
+
+<body>
+
+<center>
+
+<br>
+
+<!--FORM-->
+<form name="form1" onsubmit="return update()">
+
+<table class="formgrid" width="45%">
+
+	<!--layout-->
+	<col width="40%">
+	<col width="60%">
+			
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			${lbl:s_form_title}
+		</th>
+	</tr>
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--form fields-->
+	<tr>
+		<td class="formlabel required">${lbl:s_fld_newpassword}</td>
+		<td><input name="passwd" id="passwd" type="password" size="20" maxlength="15" ></td>
+	</tr>
+
+	<tr>
+		<td class="formlabel required">${lbl:s_fld_confirm}</td>
+		<td><input name="confirm" id="confirm" type="password" size="20" maxlength="15" ></td>
+	</tr>
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+	
+	<!--buttons-->
+	<tr>
+		<td align="center" colspan="2">
+			<input id="grabar" type="submit" value="${lbl:s_save}">
+		</td>
+	</tr>
+
+</table>
+
+</form>
+<!--END FORM-->
+
+</center>
+
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+	onload = function()
+	{ 
+		setFocusOnForm("form1");
+	} 
+	
+	//actualizar registro en BD
+	function update()
+	{		
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/update", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	
+	}
+
+	//restaurar el formulario en caso de error
+	function retryAddnewOrEdit() {
+		document.getElementById("grabar").disabled=false;
+		setFocusOnForm("form1");		
+	}
+	
+</script>
+
+</html>

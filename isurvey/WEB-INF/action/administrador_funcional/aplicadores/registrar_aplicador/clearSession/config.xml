@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+    Document   : config.xml
+    Created on : 1 de febrero de 2011, 09:44 AM
+    Author     : Kate
+    Description:
+        Purpose of the document follows.
+-->
+
+<config>
+
+	<summary>
+		borrar session de datos de cuenta
+	</summary>
+
+	<log>false</log>
+
+ 	<clear-session id="confirm" />
+        <clear-session id="userlogin" />
+        <clear-session id="lname" />
+        <clear-session id="fname" />
+
+        <transaction>
+		<classname>dinamica.GenericTableManager</classname>
+		<validator>false</validator>
+		<transaction>true</transaction>
+		<jdbc-log>false</jdbc-log>
+	</transaction>
+
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>script.js</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/javascript; charset=iso-8859-1</content-type>
+		<expiration>0</expiration>
+	</output>
+
+</config>

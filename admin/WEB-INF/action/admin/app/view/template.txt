@@ -1,0 +1,172 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>Administrador de Seguridad</title>
+</head>
+
+<body onload="document.forms[0].elements[0].focus();">
+
+
+<!--COMMON HEADER-->
+${inc:${def:actionroot}/header}
+
+<center>
+
+<!--FORM-->
+<form action="${def:context}${def:actionroot}/insert" method="POST">
+
+<table class="formgrid" width="50%" cellspacing="1">
+
+	<!--column layout-->
+	<col width="30%">
+	<col width="70%">
+
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			Agregar nueva aplicación
+		</th>
+	</tr>
+
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+
+	<!--form fields-->
+	
+	<tr>
+		<td class="formlabel required">Alias</td>
+		<td>
+			<input name="app_alias" type="text" size="15" maxlength="20" >
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="formlabel required">Descripción</td>
+		<td>
+			<input name="description" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel ">Política de contraseña</td>
+		<td>
+			<select name="pwd_policy">
+				<option value="-1">La contraseña nunca vence</option>
+				<option value="15">Cambiar contraseña después de 15 días</option>
+				<option value="30">Cambiar contraseña después de 30 días</option>
+				<option value="60">Cambiar contraseña después de 60 días</option>
+				<option value="90">Cambiar contraseña después de 90 días</option>
+			</select>
+		</td>
+	</tr>	
+
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+			
+</table>
+
+<!--form buttons-->
+<br>
+<table width="50%">
+<tr>
+	<td>
+	</td>
+	<td align="center">
+		<input type="submit" value="Guardar" class="button">
+		<input type="reset" value="Limpiar" class="button">
+	</td>
+</tr>
+</table>
+
+</form>
+<!--END FORM-->
+
+
+<!--TABLE VIEW-->
+
+<!--grid-->
+<table class="grid" width="95%" cellspacing="1">
+	
+	<tr>
+	<th width="5%"></th>
+	<th width="5%"></th>
+	<th width="7%"></th>
+	<th width="7%"></th>
+	<th width="7%"></th>
+	<th width="15%"></th>
+	<th width="25%">Alias</th>
+	<th>Descripción</th>
+	</tr>
+	
+	<rows>
+	<tr>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="${def:context}/action/admin/menu/view?app_id=${fld:app_id}">
+		MENU
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="${def:context}/action/admin/panel/form?app_id=${fld:app_id}&alias=${fld:app_alias}">
+		PANEL
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="javascript:onDelete(${fld:app_id});">
+		ELIMINAR
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="${def:context}${def:actionroot}/edit?id=${fld:app_id}">
+		EDITAR
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="javascript:openPDF(${fld:app_id})"  title="Generar PDF">
+		SERVICIOS
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="javascript:openEstructura(${fld:app_id})"  title="Generar Estructura modular">
+		ESTRUCTURA MODULAR
+		</a>
+	</td>
+	<td ${fld:_rowStyle}>${fld:app_alias}</td>
+	<td ${fld:_rowStyle}>${fld:description}</td>
+	</tr>
+	</rows>
+	
+</table>
+
+<!--grid script-->
+<script language="javascript">
+function onDelete(id)
+{
+	if (window.confirm("Eliminar Registro?")==true)
+	{
+		window.location="${def:context}${def:actionroot}/delete?id=" + id
+	}
+}
+function openPDF(id)
+{
+	var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+	var url = "${def:context}${def:actionroot}/pdf?app_id=" + id + "&random=" + Math.random();
+	var w = window.open(url, null, features);
+}
+function openEstructura(id)
+{
+	var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+	var url = "${def:context}${def:actionroot}/modular?app_id=" + id + "&random=" + Math.random();
+	var w = window.open(url, null, features);
+}
+</script>
+
+<!--END TABLE VIEW-->
+
+</center>
+
+</body>
+</html>

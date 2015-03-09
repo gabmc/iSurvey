@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+
+	<parameter id="app_alias" type="varchar" required="true" label="Alias" maxlen="20" />
+	<parameter id="description" type="varchar" required="true" label="Descripción" maxlen="80" />
+	<parameter id="app_id" type="integer" required="true" label="ID" maxlen="20" />
+	<parameter id="pwd_policy" type="integer" required="true" label="Política de contraseña" />
+
+<custom-validator 	
+	classname="dinamica.validators.DuplicatedKeyValidator" 
+	on-error-label="Este Alias ya esta registrado en la base de datos, use otro alias."
+	sql="nodupalias.sql" />
+
+</validator>
+

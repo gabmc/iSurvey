@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/admin">
+
+	<Resource name="jdbc/dinamica" auth="Container" type="javax.sql.DataSource"
+		initialSize="5" maxActive="20" maxIdle="5" maxWait="3000" username="ajvieira"
+		password="E+lISI1O" driverClassName="com.mysql.jdbc.Driver" 
+		url="jdbc:mysql://localhost:3306/ajvieira_isurvey_security" validationQuery="select 1" testOnBorrow="true"/>
+		
+	<Resource name="jdbc/dinamica" auth="Container" type="javax.sql.DataSource"
+		initialSize="5" maxActive="20" maxIdle="5" maxWait="3000" username="ajvieira"
+		password="E+lISI1O" driverClassName="com.mysql.jdbc.Driver" 
+		url="jdbc:mysql://localhost:3306/ajvieira_isurvey_lime" validationQuery="select 1" testOnBorrow="true"/>
+
+</Context>

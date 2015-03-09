@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Usuario - Insertar registro
+	</summary>
+	
+	<log>false</log>
+	
+	<!--soporte de auditoria-->
+	<audit>
+		<!--de donde saca los datos, por defecto es "_request"-->
+		<recordset></recordset>
+		<!--que campos extrae para el registro descriptivo-->
+		<cols>
+			<colname>userlogin</colname>	
+			<colname>lname</colname>		
+			<colname>fname</colname>
+		</cols>
+		<table>s_user</table>
+		<oper>AÑADIR</oper>
+		<area>Usuarios</area>
+		<!--
+			query para obtener el ID generado o nombre de 
+			la columna que contiene el pkey, si es query, 
+			el alias del campo debe ser "id"
+		-->
+		<pkey params="insert.sql">select ${fld:insert.sql.lastid} as id</pkey>
+	</audit>
+	
+	<colname>role_id</colname>
+	<sql-template params="insert.sql">insert-roles.sql</sql-template>
+	
+	<transaction>
+		<classname>domain.admin.InsertMaster</classname>
+		<validator>true</validator>
+		<transaction>true</transaction>
+		<jdbc-log>false</jdbc-log>
+	</transaction>
+
+	<query>insert.sql</query>
+	<query params="insert.sql">insert-passlog.sql</query>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>template.htm</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+	</output>
+
+</config>

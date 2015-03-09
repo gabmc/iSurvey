@@ -1,0 +1,28 @@
+insert into participante
+(
+	id_participante,
+        nombre_participante,
+        apellido_participante,
+        email_participante,
+        cargo,
+        supervisor,
+        fecha_nacimiento,
+        fecha_ingreso,
+        sexo,
+        tipo_nomina,
+        funcion
+)
+values
+(
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?
+)

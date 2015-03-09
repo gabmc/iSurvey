@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+    Document   : config.xml
+    Created on : 31 de enero de 2011, 03:11 PM
+    Author     : Kate
+    Description:
+        Purpose of the document follows.
+-->
+
+<config>
+
+	<summary>
+		enviar por correo datos de cuenta
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator >true</validator>
+		<transaction>true</transaction>
+		<jdbc-log>false</jdbc-log>
+       
+	</transaction>
+
+	 <mail enabled="true">
+		<subject>EXINT - Datos de cuenta de usuario</subject>
+		<mail-to recordset="_request" colname="email" ></mail-to>
+		<body recordset="_request" >body.txt</body>
+         </mail>
+         
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>script.js</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/javascript; charset=iso-8859-1</content-type>
+		<expiration>0</expiration>
+	</output>
+	
+</config>
+

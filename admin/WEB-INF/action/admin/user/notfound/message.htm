@@ -1,0 +1,32 @@
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	<title>Administrador de Seguridad</title>
+</head>
+
+<body>
+
+<!--COMMON HEADER-->
+${inc:${def:actionroot}/header}
+
+<center>
+
+<br>
+
+<div class="alert" style="width:50%">
+
+No se encontraron registros para su criterio de búsqueda.
+
+<br><br>
+
+<input type="button"  
+	onclick="window.location='${def:context}${def:actionroot}/filter'"
+	value="Nueva búsqueda">
+
+</div>
+
+</center>
+
+</body>
+</html>

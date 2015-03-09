@@ -1,0 +1,39 @@
+<!--grid-->
+<table class="grid" width="80%">
+
+	<!--encabezados-->
+	<tr>
+		<th colspan="6">
+			<span style="float: left">Resultados</span>
+			<!--panel de control de navegacion-->
+			<span style="float: right;"> 
+				${req:controls}
+			</span> 
+			<!--indicador de progreso del grid-->
+			<img id="grid-progress" style="float: right; margin-right: 10px; display: none" src="${def:context}/images/progress.gif"> 
+			<!--tools-->
+			<span style="float: left; margin-left: 60px"> 
+				<img src="${def:context}/images/reload.gif" onclick="search()" title="Recargar data" class="tool">
+				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/excel.gif" onclick="openExcel()" title="Exportar a Excel" class="tool">
+			</span>
+		</th>
+	</tr>
+
+	<tr>
+		<th><a href="javascript:onclick=sortBy('login_date')" title="Haga CLICK para ordenar por esta columna">${lbl:s_loginhist_col1}</a></th>
+		<th><a href="javascript:onclick=sortBy('login_time')" title="Haga CLICK para ordenar por esta columna">${lbl:s_loginhist_col2}</a></th>
+		<th><a href="javascript:onclick=sortBy('remote_addr')" title="Haga CLICK para ordenar por esta columna">${lbl:s_loginhist_col3}</a></th>
+		<th><a href="javascript:onclick=sortBy('context')" title="Haga CLICK para ordenar por esta columna">${lbl:s_loginhist_col4}</a></th>
+	</tr>
+
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center">${fld:login_date}</td>
+		<td align="center">${fld:login_time}</td>
+		<td align="center">${fld:remote_addr}</td>
+		<td align="center">${fld:context}</td>
+	</tr>
+	</rows>
+
+</table>

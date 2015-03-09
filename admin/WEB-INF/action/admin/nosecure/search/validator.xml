@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator id="aplication">
+
+	<parameter id="path_alias" type="varchar" required="true" label="Aplicaciones" />
+		
+</validator>

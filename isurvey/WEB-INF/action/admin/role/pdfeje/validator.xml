@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+	<parameter id="role_id" type="integer" required="true" label="ID del Rol" maxlen="10" />
+	
+	<custom-validator
+		classname='dinamica.validators.NoRecordsFound'
+		on-error-label='El Rol no tiene Servicios asociados.'
+		sql='service.sql' />
+
+</validator>
+
