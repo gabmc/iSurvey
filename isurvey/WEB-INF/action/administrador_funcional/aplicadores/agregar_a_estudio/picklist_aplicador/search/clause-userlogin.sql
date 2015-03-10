@@ -1,2 +1,2 @@
  and
- 	upper(security.s_user.userlogin) like upper(${fld:userlogin})
+ 	upper(ajvieira_isurvey_security.s_user.userlogin) like upper(${fld:userlogin})

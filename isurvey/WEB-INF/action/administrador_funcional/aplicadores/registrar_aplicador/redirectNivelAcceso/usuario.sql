@@ -7,7 +7,7 @@ select case
            s_user.userlogin = ${fld:userlogin} and
            s_user.user_id =  s_user_role.user_id and
            s_user_role.role_id= 504 )  is not null
-          then (select user_id from security.s_user where userlogin = ${fld:userlogin})
+          then (select user_id from ajvieira_isurvey_security.s_user where userlogin = ${fld:userlogin})
           when
            (select
 	   role_id
@@ -27,7 +27,7 @@ select case
            s_user.userlogin = ${fld:userlogin} and
            s_user.user_id =  s_user_role.user_id and
            s_user_role.role_id= 504 )  is not null
-          then (select  lname||' '||fname from security.s_user where userlogin = ${fld:userlogin})
+          then (select  lname||' '||fname from ajvieira_isurvey_security.s_user where userlogin = ${fld:userlogin})
           when
            (select
 	   role_id
@@ -47,7 +47,7 @@ select case
            s_user.userlogin = ${fld:userlogin} and
            s_user.user_id =  s_user_role.user_id and
            s_user_role.role_id= 504 )  is not null
-          then (select  id_empresa from security.s_user , usuario_empresa 
+          then (select  id_empresa from ajvieira_isurvey_security.s_user , usuario_empresa 
                                    where s_user.userlogin = ${fld:userlogin} and
                                          s_user.user_id = usuario_empresa.user_id )
           when

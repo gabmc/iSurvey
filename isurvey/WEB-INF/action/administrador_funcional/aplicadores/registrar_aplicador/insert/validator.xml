@@ -30,7 +30,7 @@
 	parameter-name="role_id" />
 
     <custom-validator
-	classname="dinamica.security.PasswordEncryptor" 
+	classname="dinamica.ajvieira_isurvey_security.PasswordEncryptor" 
 	on-error-label="Error generando el hash MD5."/>
 
 </validator>
