@@ -1,0 +1,413 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+	
+	<title>Mantenimiento de Servicios</title>
+	
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	Mantenimiento de Servicios
+</div>
+<br>
+
+<center>
+
+<!--formulario de filtro-->
+<div id="form">
+<form name="form1" onsubmit="return search()">
+
+	<table class="formgrid" width="480px">
+	
+		<!--ancho de la columna de etiquetas-->
+		<col width="40%">
+		<col width="60%">
+	
+		<!--titulo-->
+		<tr>
+			<th colspan="2">
+				Filtro de búsqueda
+			</th>
+		</tr>
+	
+		<!--separador-->
+		<tr height="10px">
+			<td></td>
+		</tr>
+		
+		<!--campos-->
+		<tr>
+			<td class="formlabel">
+				Aplicación:
+			</td>
+			<td>
+				<select name="app_id" size="1">
+				<combo-items>
+					<option value="${fld:app_id}">
+					${fld:description}
+					</option>
+				</combo-items>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="formlabel">
+				Descripción contiene:
+			</td>
+			<td>
+				<input name="description" type="text" size="35" value="" maxlength="150">
+			</td>
+		</tr>
+		<tr>
+			<td class="formlabel">
+				Path comienza por:
+			</td>
+			<td>
+				<input name="path" type="text" size="35" value="" maxlength="150">
+			</td>
+		</tr>
+	
+		<!--botones-->
+		<tr>
+			<td align="center" colspan="2">
+				<input type="submit" value="Buscar" class="button">
+				<input type="button" value="Limpiar" class="button" onclick="clearForm('form1')">
+				<input type="button" value="Añadir registro" class="button" onclick="addNew()">
+			</td>
+		</tr>		
+	
+		<!--separador-->
+		<tr height="10px">
+			<td></td>
+		</tr>
+		
+	</table>
+
+</form>
+</div>
+
+<!--formualario addnew/edit-->
+<div id="editor" style="display:none;width:100%">
+
+<form name="form2" onsubmit="return save()">
+
+	<table class="formgrid" width="500px">
+	
+		<!--ancho de la columna de etiquetas-->
+		<col width="30%">
+		<col width="70%">
+	
+		<!--titulo-->
+		<tr>
+			<th colspan="2">
+				<span id="formTitle">
+					Añadir Servicio
+				</span>
+			</th>
+		</tr>
+		
+		<!--separador-->
+		<tr height="10px">
+			<td></td>
+		</tr>
+		
+		<!--campos-->
+		<tr>
+			<td class="formlabel">
+				Aplicación:
+			</td>
+			<td>
+				<select name="app_id" size="1">
+				<combo-items>
+					<option value="${fld:app_id}">
+					${fld:description}
+					</option>
+				</combo-items>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="formlabel">
+				Descripción:
+			</td>
+			<td>
+				<input name="description" type="text" size="50" value="" maxlength="150">
+			</td>
+		</tr>
+		<tr>
+			<td class="formlabel">
+				Path o Servicio:
+			</td>
+			<td>
+				<input name="path" type="text" size="50" value="" maxlength="150">
+			</td>
+		</tr>
+
+		<!--separador-->
+		<tr height="10px">
+			<td colspan="2"></td>
+		</tr>
+	
+		<!--botones-->
+		<tr>
+			<td align="center" colspan="2">
+				<input type="submit" value="Grabar" class="button">
+				<input type="button" value="Cancelar" class="button" onclick="_goBackFn()">
+				<input id="deleteCommand" type="button" value="Eliminar" class="button" onclick="deleteRecord(service_id.value)">
+			</td>
+		</tr>		
+		
+		<!--separador-->
+		<tr height="10px">
+			<td></td>
+		</tr>
+		
+	</table>
+
+	<input type="hidden" name="service_id" value="">
+
+</form>
+
+</div>
+
+<!--panel de respuesta AJAX #1 insert/update-->
+<div id="response2" style="display:none;width:100%">
+</div>
+
+<!--panel de respuesta AJAX #2-->
+<div id="response" style="display:none;width:100%">
+</div>
+
+<!--indicador de progreso-->
+<br>
+<div id="status" class="alert" style="text-align:left; display:none;color:gray;width:150px;font-weight:bold;font-family:Arial">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+	onload = function()
+	{ 
+		document.form1.description.focus();
+	} 
+
+	//mostrar filtro de busqueda
+	function showFilter()
+	{
+		document.getElementById("editor").style.display='none';
+		document.getElementById("response").style.display='none';
+		document.getElementById("response2").style.display='none';
+		document.getElementById("form").style.display='';
+		document.form1.description.focus();
+	}
+
+	//ejecutar consulta
+	function search()
+	{
+			//definir funcion goBack()
+			_goBackFn = showFilter;
+
+			//esconder filtro de busqueda
+			document.getElementById("form").style.display="none";
+	
+			//llamada Ajax...
+			return ajaxCall(	httpMethod="POST", 
+								uri="${def:actionroot}/search", 
+								divResponse="response", 
+								divProgress="status", 
+								formName="form1", 
+								afterResponseFn=null, 
+								onErrorFn=showFilter);
+
+	}
+	
+	//define la url en donde se mostrara el resultado de consulta
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		//llama a la funcion para ir a la pagina indicada 
+		gotoPage(url);
+	}	
+	
+	//retorna al estado previo que corresponde
+	//al estado actual de la pagina, cada llamada Ajax
+	//se encarga de definir cual es la funcion de goBack() que aplica
+	function goBack() 
+	{
+		_goBackFn()			
+	}
+
+	//saber si es un registro nuevo o una actualizacion
+	function save()
+	{
+		if (document.form2.service_id.value=="")
+			return insert();
+		else
+			return update();
+	}
+
+	//mostrar un registro añadido
+	function insert()
+	{
+			//definir funcion goBack()
+			_goBackFn = addNewBack;			
+		
+			//esconder formulario principal
+			document.getElementById("editor").style.display="none";
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/insert", 
+							divResponse="response2", 
+							divProgress="status", 
+							formName="form2", 
+							afterResponseFn=null, 
+							onErrorFn=addNewBack);	    	
+	}
+
+	//mostrar la actualizacion de un registro
+	function update()
+	{
+			//definir funcion goBack()
+			_goBackFn = addEdit;			
+		
+			//esconder grid principal
+			document.getElementById("editor").style.display="none";
+			document.getElementById("response").style.display="none";
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/update", 
+							divResponse="response2", 
+							divProgress="status", 
+							formName="form2", 
+							afterResponseFn=null, 
+							onErrorFn=addEdit);	
+	}
+	
+	//eliminar un registro
+	function deleteRecord(id)
+	{
+		if (window.confirm("¿Está seguro que desea ELIMINAR este registro?")==false)
+		{
+			return false;
+		}
+		
+			//definir funcion goBack()
+			_goBackFn = addEdit;			
+		
+			//esconder grid principal
+			document.getElementById("editor").style.display="none";
+			document.getElementById("response2").style.display="none";
+	
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/delete?id=" + id, 
+							divResponse="response2", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=addEdit);	
+						
+	}
+
+	//muestra el formulario addnew
+	function addNewBack()
+	{
+		
+		//restaura el goBack que corresponde a este estado
+		_goBackFn = showFilter;
+		
+		document.getElementById("form").style.display='none';
+		document.getElementById("response2").style.display='none';
+		document.getElementById("response").style.display='none';
+		document.getElementById("deleteCommand").style.display='none';
+		document.getElementById("formTitle").innerHTML = "Añadir Servicio";
+		document.getElementById("editor").style.display='';
+		document.form2.description.focus();
+		
+	}
+	
+	//muestra el formulario addnew
+	function addNew()
+	{
+		
+		//restaura el goBack que corresponde a este estado
+		_goBackFn = showFilter;
+		
+		document.getElementById("form").style.display='none';
+		document.getElementById("response2").style.display='none';
+		document.getElementById("response").style.display='none';
+		document.getElementById("deleteCommand").style.display='none';
+		document.getElementById("formTitle").innerHTML = "Añadir Servicio";
+		document.getElementById("editor").style.display='';
+		clearForm("form2");
+		document.form2.description.focus();
+		
+	}
+	
+	//muestra el formulario edit
+	function addEdit()
+	{
+		
+		document.getElementById("form").style.display='none';
+		document.getElementById("response2").style.display='none';
+		document.getElementById("response").style.display='none';
+		document.getElementById("deleteCommand").style.display='';
+		document.getElementById("formTitle").innerHTML = "Editar registro";
+		document.getElementById("editor").style.display='';
+		document.form2.description.focus();
+		
+		//restaura el goBack que corresponde a este estado
+		_goBackFn = showGrid;
+		
+	}
+	
+	//mostrar grid principal
+	function showGrid()
+	{
+		document.getElementById("editor").style.display='none';
+		document.getElementById("response2").style.display='none';
+		document.getElementById("form").style.display='none';
+		document.getElementById("response").style.display='';
+		
+		//restaura el goBack que corresponde a este estado
+		_goBackFn = showFilter;
+	}
+
+	//mostrar el formulario para editar
+	function edit(id)
+	{
+	
+			//definir funcion goBack()
+			_goBackFn = showGrid;			
+		
+			//esconder grid principal
+			document.getElementById("response").style.display="none";
+	
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/edit?id=" + id, 
+							divResponse="response2", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=showGrid);	
+	}
+</script>
+
+</center>
+
+</body>
+
+</html>

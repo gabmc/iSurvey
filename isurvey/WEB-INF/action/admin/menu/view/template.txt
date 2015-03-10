@@ -1,0 +1,174 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>iSurvey</title>
+</head>
+
+<body onload="document.forms[0].elements[0].focus();">
+
+
+<!--COMMON HEADER-->
+${inc:${def:actionroot}/header}
+
+<center>
+
+
+[<a href="javascript:openPDF(${ses:app_id})">Exportar a PDF</a>]
+
+<br><br>
+
+<!--FORM-->
+<form action="${def:context}${def:actionroot}/insert" method="POST">
+
+<table class="formgrid" width="55%" cellspacing="1">
+
+	<!--column layout-->
+	<col width="35%">
+	<col width="65%">
+
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			Insertar un nuevo título de menu
+		</th>
+	</tr>
+
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+
+	<!--form fields-->
+	<tr>
+		<td class="formlabel required">Título de Menu</td>
+		<td><input name="title" type="text" size="25" maxlength="60" ></td>
+	</tr>
+	
+	<tr>
+		<td class="formlabel required">Orden</td>
+		<td><input name="position" type="text" size="5" maxlength="10" ></td>
+	</tr>
+
+	<tr>
+		<td valign="top" class="formlabel required">Roles Autorizados</td>
+		<td>
+			<role-list>
+			<input name="role_id" type="checkbox" value="${fld:role_id}"> ${fld:description}<br>
+			</role-list>
+		</td>
+	</tr>
+	
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+				
+</table>
+
+<input name="master_menu_id" type="hidden" value="${fld:menu_id}">
+
+<!--form buttons-->
+<br>
+<table width="55%">
+<tr>
+	<td>
+	</td>
+	<td align="center">
+		<input type="submit" value="Guardar" class="button">
+		<input type="button" value="Cancelar" class="button" onclick="back()">
+		
+	</td>
+</tr>
+</table>
+
+</form>
+<!--END FORM-->
+
+
+<!--TABLE VIEW-->
+
+<!--grid-->
+<table class="grid" width="60%" cellspacing="1">
+	
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>Orden</th>
+	<th>Título del Menu </th>
+	</tr>
+	
+	<rows>
+	<tr>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="javascript:onDelete(${fld:menu_id},${fld:master_id});">
+		ELIMINAR
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="${def:context}${def:actionroot}/edit?app_id=${ses:app_id}&id=${fld:menu_id}">
+		EDITAR
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="${def:context}/action/admin/menuitem/view?app_id=${ses:app_id}&menu_id=${fld:menu_id}&master_menu_id=${fld:master_id}">
+		ITEMS DE MENU 
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="javascript:onMenuHijo(${fld:menu_id});" title="Crear menu hijo">
+		SUBMENU
+	</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>${fld:position}</td>
+	<td ${fld:_rowStyle}>${fld:title}</td>
+	</tr>
+	</rows>
+	
+</table>
+
+<!--grid script-->
+<script language="javascript">
+function onDelete(id,id2)
+{
+	if (window.confirm("Eliminar Registro?")==true)
+	{
+		if(id2=="0")
+			window.location="${def:context}${def:actionroot}/delete?app_id=${ses:app_id}&id=" + id 
+		else
+			window.location="${def:context}${def:actionroot}/delete?app_id=${fld:app_id}&id=" + id + "&master_menu_id=" + id2;
+	}
+}
+function openPDF(id)
+{
+	var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+	var url = "${def:context}${def:actionroot}/pdf?app_id=" + id + "&random=" + Math.random();
+	var w = window.open(url, null, features);
+}
+function onMenuHijo(id)
+{
+	window.location="${def:context}/action/admin/menu/view?menu_id=" + id + "&app_id=${ses:app_id}";
+}
+function back()
+{
+	
+	if('${fld:menu_id}'=='0' || '${fld:menu_id}'=='')
+		window.location='${def:context}/action/admin/app/view';
+	else {
+		var param = '';
+		<valid>
+			if('${fld:master_id}'!='0')
+				param = '&menu_id=${fld:master_id}';
+		</valid>
+		window.location='${def:context}/action/admin/menu/view?app_id=${ses:app_id}' + param;
+	}
+}
+</script>
+
+<!--END TABLE VIEW-->
+
+</center>
+
+</body>
+</html>

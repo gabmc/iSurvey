@@ -1,0 +1,48 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>iSurvey</title>
+</head>
+
+<body>
+
+<!--COMMON HEADER-->
+${inc:${def:actionroot}/header}
+
+<center>
+
+<br>
+
+<div class="message" style="width:50%;text-align:center;color:blue">
+
+<br>
+El menu Menu ha sido creado.
+
+<br><br>
+
+	<input type="button" class="button"
+	onclick="back()"
+	value="Continuar">
+	
+	<br>
+
+</div>
+
+<script language="javascript">
+
+function back()
+{
+	
+	if('${fld:master_item_id}'=='')
+		window.location='${def:context}${def:actionroot}/view?app_id=${ses:app_id}';
+	else
+		window.location='${def:context}${def:actionroot}/view?menu_id=${fld:master_menu_id}&app_id=${ses:app_id}';
+}
+
+</script>
+
+</center>
+
+</body>
+</html>

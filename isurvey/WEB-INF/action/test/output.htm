@@ -2,7 +2,7 @@
 
 <head>
 <title>Información del Sistema</title>
-<LINK REL="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+<LINK REL="stylesheet" type="text/css" href="${def:context}/default.css" />
 <style>
 .grid TD.label {
 	background-color: #F7F7F7;
@@ -37,9 +37,9 @@
 
 <center>
 
-<h1>Estatus del servicio Tomcat</h1>
+<h1>Estatus del Servlet Container</h1>
 
-<table class="table table-bordered" width="550px" cellspacing="1">
+<table class="grid" width="550px">
 
 	<!--column layout-->
 	<col width="35%">
@@ -47,14 +47,14 @@
 
 	<!--form title-->
 	<tr>
-		<th colspan="2"><span style="float: left"> Información
-		general del proceso Java </span> <span style="float: left; margin-left: 60px">
-		<img src="${def:context}/images/grid-split.gif" class="tool"> <img
-			src="${def:context}/images/print.gif" onclick="openPDF()"
-			title="Exportar a PDF" class="tool"> <img
-			src="${def:context}/images/email.gif" onclick="sendEmail()"
-			title="Enviar por correo" class="tool"> <img
-			src="${def:context}/images/grid-split.gif" class="tool"> </span></th>
+		<th colspan="2"><span style="float: left"> Información general del proceso Java </span> 
+			<span style="float: left; margin-left: 60px">
+			<img src="${def:context}/images/grid-split.gif" class="tool"> 
+			<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+			<img src="${def:context}/images/email.gif" onclick="sendEmail()" title="Enviar por correo" class="tool">
+			<img src="${def:context}/images/grid-split.gif" class="tool">
+			</span>
+		</th>
 	</tr>
 
 	<!--form fields-->
@@ -135,16 +135,15 @@
 <br>
 
 <!--data grid-->
-<table class="table table-bordered" width="800px" cellspacing="1">
+<table class="grid" width="800px">
 
 	<!--encabezados-->
 	<tr>
-		<th colspan="9"><span style="float: left"> Aplicaciones
-		corriendo en este servidor </span></th>
+		<th colspan="7"><span style="float: left">Aplicaciones corriendo en este servidor </span></th>
 	</tr>
 	<tr>
 		<th width="10%">Contexto</th>
-		<th width="15%">Arranque</th>
+		<th width="20%">Arranque</th>
 		<th>Sesiones abiertas</th>
 		<th>Pico de sesiones</th>
 		<th width="20%">Tiempo consumido (ms)</th>
@@ -154,7 +153,7 @@
 
 	<!--data-->
 	<webapp>
-	<tr${fld:_rowStyle}>
+	<tr ${fld:_rowStyle}>
 		<td align="left">${fld:context}</td>
 		<td align="center">${fld:starttime@dd-MM-yyyy HH:mm:ss}</td>
 		<td align="center">${fld:sessions@#,###,###}</td>
@@ -170,14 +169,16 @@
 <br>
 
 <!--data grid-->
-<table class="table table-bordered" width="500px" cellspacing="1">
+<table class="grid" width="500px">
 
 	<!--encabezados-->
 	<tr>
-		<th colspan="2"><span style="float: left"> Database Pools
-		</span></th>
-		<th colspan="3" align="center"><span style="float: center">
-		Conexiones </span></th>
+		<th colspan="2">
+			<span style="float: left"> Database Pools </span>
+		</th>
+		<th colspan="3" align="center">
+			<span style="float: center">Conexiones</span>
+		</th>
 	</tr>
 	<tr>
 		<th>Contexto</th>
@@ -189,7 +190,7 @@
 
 	<!--data-->
 	<pool>
-	<tr${fld:_rowStyle}>
+	<tr ${fld:_rowStyle}>
 		<td align="left">${fld:context}</td>
 		<td align="center">${fld:datasource}</td>
 		<td align="center">${fld:numactive}</td>
@@ -203,12 +204,13 @@
 <br>
 
 <!--data grid-->
-<table class="table table-bordered" width="500px" cellspacing="1">
+<table class="grid" width="500px">
 
 	<!--encabezados-->
 	<tr>
-		<th colspan="5"><span style="float: left"> Threads de
-		Tomcat por estatus </span></th>
+		<th colspan="5">
+			<span style="float: left"> Threads de Tomcat por estatus</span>
+		</th>
 	</tr>
 	<tr>
 		<th width="20%">Runnable</th>
@@ -220,7 +222,7 @@
 
 	<!--data-->
 	<thread>
-	<tr${fld:_rowStyle}>
+	<tr ${fld:_rowStyle}>
 		<td align="center">${fld:runnable}</td>
 		<td align="center">${fld:waiting}</td>
 		<td align="center">${fld:blocked}</td>
@@ -234,16 +236,18 @@
 <br>
 
 <!--data grid-->
-<table class="table table-bordered" width="500px" cellspacing="1">
+<table class="grid" width="500px">
 
 	<!--encabezados-->
 	<tr>
-		<th colspan="5"><span style="float: left"> Thread dump </span></th>
+		<th>
+			<span style="float: left">Thread dump</span>
+		</th>
 	</tr>
 
 	<!--data-->
 	<threaddump>
-	<tr${fld:_rowStyle}>
+	<tr ${fld:_rowStyle}>
 		<td align="left">${fld:name} / ${fld:state}<br>
 		${fld:stacktrace}</td>
 	</tr>

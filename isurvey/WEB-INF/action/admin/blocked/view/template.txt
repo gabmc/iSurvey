@@ -1,0 +1,62 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>iSurvey</title>
+</head>
+
+<body>
+
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+<center>
+
+<!--TABLE VIEW-->
+
+<!--grid-->
+<table class="grid" width="80%" cellspacing="1">
+	
+	<tr>
+	<th></th>
+	<th>Usuario</th>
+	<th>Apellido</th>
+	<th>Nombre</th>
+	<th>E-mail</th>
+	</tr>
+	
+	<rows>
+	<tr>
+	<td align="center">
+		<a href="javascript:onEnable(${fld:user_id});">
+		HABILITAR
+		</a>
+	</td>
+	<td>${fld:userlogin}</td>
+	<td>${fld:lname}</td>
+	<td>${fld:fname}</td>
+	<td>${fld:email}</td>
+	</tr>
+	</rows>
+	
+</table>
+
+<!--grid script-->
+<script language="javascript">
+function onEnable(id)
+{
+	if (window.confirm("Reactivar este Usuario?")==true)
+	{
+		window.location="${def:context}${def:actionroot}/enable?id=" + id
+	}
+}
+</script>
+
+<!--END TABLE VIEW-->
+
+</center>
+
+</body>
+</html>

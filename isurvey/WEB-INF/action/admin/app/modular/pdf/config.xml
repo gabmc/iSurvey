@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Mostrar un reporte de tipo parentchild con tablas anidadas
+	</summary>
+
+	<log>false</log>
+	
+	<pdf-title>Estructura modular</pdf-title>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="app.sql" source="session" scope="transaction"/>
+		<recordset id="master.sql" source="session" scope="transaction"/>
+	</transaction>
+
+	<output>
+		<classname>dinamica.PDFParentChild</classname>
+	</output>
+	
+	<!-- Logo -->
+	<pdf-logo url="/images/logo-dinamica.png" scale="100"/>
+	
+	<!-- PDF declarativo para la generacion del Master/Detail -->
+	<pdf-report recordset="master.sql">
+	
+		<!-- Datos del cliente-->
+		<table recordset="app.sql" width="60" spacingBefore="20" verticalTitle="true" setWidths="10;20" setGrayFill="true">
+			<col name="app_alias" title="Alias" align="left" />
+			<col name="description" title="Descripción" align="left" />
+		</table>
+		
+		<paragraph name="title" captionLeft="" fontFamily="HELVETICA" fontSize="12" fontStyle="BOLD" align="left" spacingBefore="20">
+	
+			<last-table width="100" spacingBefore="20">
+				<col name="description" title="Submódulo" width="40" align="left"/>
+				<col name="path" title="Ruta" width="60" align="left"/>
+			</last-table>
+	
+		</paragraph>
+				
+	</pdf-report>
+
+</config>

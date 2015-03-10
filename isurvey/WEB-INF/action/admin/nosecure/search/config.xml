@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Ejecuta la lógica para determinar que servicios no se
+		encuentra seguros o insertados en BD de seguridad 
+	</summary>
+	
+	<log>false</log>
+
+	<transaction>
+		<classname>domain.service.nosecure.ActionNoSecure</classname>
+		<validator>true</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+	</transaction>
+
+	<on-exit return-code="0" forward-to="${def:actionroot}/redirect"/>
+	<on-exit return-code="1" forward-to="${def:actionroot}/notfound"/>
+	
+	<!--rutas de los actions que no seran comparados contra la BD de seguridad-->
+	<action-descartado action="/action/calendar"/>
+	<action-descartado action="/action/calendar/hgrid"/>
+	<action-descartado action="/action/error"/>
+	<action-descartado action="/action/error/403"/>
+	<action-descartado action="/action/error/crud"/>
+	<action-descartado action="/action/error/general"/>
+	<action-descartado action="/action/error/validation"/>
+	<action-descartado action="/action/error/validation/ajax"/>
+	<action-descartado action="/action/error/validation/alert"/>
+	<action-descartado action="/action/error/validation/dialog"/>
+	<action-descartado action="/action/error/xml"/>
+	<action-descartado action="/action/error/xml/error"/>
+	<action-descartado action="/action/error/xml/invalidparams"/>
+	<action-descartado action="/action/initview"/>
+	<action-descartado action="/action/pagecontrols"/>
+	<action-descartado action="/action/paging-ctls"/>
+	<action-descartado action="/action/progress"/>
+	<action-descartado action="/action/script"/>
+	<action-descartado action="/action/security/forcenewpass"/>
+	<action-descartado action="/action/security/forcenewpass/update"/>
+	<action-descartado action="/action/security/forcenewpass/form"/>
+	<action-descartado action="/action/security/forgotpass/form"/>
+	<action-descartado action="/action/security/forgotpass/generate"/>
+	<action-descartado action="/action/security/getcaptcha"/>
+	<action-descartado action="/action/security/login"/>
+	<action-descartado action="/action/security/loginfailed"/>
+	<action-descartado action="/action/security/loginlocked"/>
+	<action-descartado action="/action/security/autologin"/>
+	<action-descartado action="/action/security/autologin/fail"/>
+	<action-descartado action="/action/test"/>
+	<action-descartado action="/action/test/data"/>
+	<action-descartado action="/action/test/email"/>
+	<action-descartado action="/action/test/pdf"/>
+	<action-descartado action="/action/test/getpid"/>
+	<action-descartado action="/action/test/log"/>
+	<action-descartado action="/action/test/log/download"/>
+
+</config>

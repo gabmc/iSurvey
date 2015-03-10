@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+
+	<parameter id="title" type="varchar" required="true" label="Título del Menu" maxlen="60" />
+	<parameter id="position" type="integer" required="true" label="Orden" maxlen="10" />
+	<parameter id="master_menu_id" type="integer" required="false" label="ID del menu maestro" />
+
+	<custom-validator 	
+	classname="dinamica.validators.ArrayNotEmptyValidator" 
+	on-error-label="Por favor asigne al menos un rol de seguridad a este menu."
+	parameter-name="role_id" />
+	
+</validator>
+

@@ -1,0 +1,121 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>Panel</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Panel</div>
+	${req:progress}
+</div>
+
+<br>
+
+<!--formulario addnew/edit-->
+<div id="form" align="center">
+<form name="form1" onsubmit="return search()">
+
+<table class="formgrid" width="450px">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="30%">
+	<col width="60%">
+
+	<!--titulo-->
+	<tr>
+		<th colspan="2"><span id="formTitle"> Visualizar por Rol </span></th>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--campos-->
+	<tr>
+		<td class="formlabel">Rol</td>
+		<td>
+			<select name="role_id" size="1">
+			<rows>
+				<option value="${fld:role_id}">${fld:description}</option>
+			</rows>
+			</select>
+		</td>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--botones-->
+	<tr>
+		<td align="center" colspan="2">
+			<input id="grabar" type="submit" value="Visualizar" class="button">
+		</td>
+	</tr>
+
+	<!--separador-->
+	<tr height="5px">
+		<td colspan="2"></td>
+	</tr>
+
+</table>
+
+</form>
+</div>
+
+<br>
+
+<!--panel de respuesta AJAX para el grid paginado-->
+<div id="response" style="display: none; width: 100%" align="center"></div>
+
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+	
+	//ejecutar consulta y mostrar grid
+	function search()
+	{
+		//llamada Ajax...
+		return ajaxCall(httpMethod="POST", 
+						uri= "${def:actionroot}/view", 
+						divResponse="response", 
+						divProgress="status", 
+						formName="form1", 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+	
+	//mostrar imagen y esconder su indicador de progreso de carga
+	function displayImage(imageID)
+	{
+		document.getElementById(imageID + "_wait").style.display='none';
+		document.getElementById(imageID).style.display='';
+	}
+	function rowOn(obj) {
+		currStyle = obj.style.backgroundColor;
+		obj.style.cursor="pointer"
+		obj.style.backgroundColor="#E3E4FA"
+	}
+	
+	function rowOff(obj) {
+		obj.style.backgroundColor=currStyle
+	}
+
+</script>
+
+</html>

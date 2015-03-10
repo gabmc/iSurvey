@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+
+<config>
+
+	<summary>
+		PDF Report - Menu de Aplicaciones
+	</summary>
+	
+	<log>false</log>
+	
+	<!--specific elements for master/detail PDF domain.reports-->
+	<pdf-title>Menú de las Aplicaciones</pdf-title>
+	<query-master>group-master.sql</query-master>
+	<query-detail>group-detail.sql</query-detail>
+		
+	<transaction>
+		<classname>dinamica.MasterDetailReader</classname>
+		<validator>true</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+	</transaction>
+	
+	<output>
+		<classname>domain.reports.menu.PDFReportMenu</classname>
+	</output>
+
+</config>

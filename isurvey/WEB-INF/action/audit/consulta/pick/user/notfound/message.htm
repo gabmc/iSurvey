@@ -1,0 +1,41 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+</head>
+
+<body class="pickListBody">
+
+<center>
+
+<br>
+
+<div class="alert" style="width:300px;color:black;font-family:Trebuchet MS;font-size:10pt;">
+	
+	No se encontraron usuarios <br> para su criterio de búsqueda.
+	
+	<br><br>
+	
+	<button	onclick="closePickList()">
+		Cerrar
+	</button>
+</div>
+
+
+</center>
+
+<script language="javascript">
+	
+		function closePickList()
+		{
+			parent.pickClose();
+			parent.document.form4.customerid.value='';
+			parent.document.form4.contactname.value='';
+			parent.document.form4.contactname.focus();
+		}	
+		
+</script>
+</body>
+</html>
+
+

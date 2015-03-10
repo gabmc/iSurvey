@@ -1,0 +1,1 @@
+insert into ${schema}s_service (path, description, app_id) values ('/action/security/loginhistory/search', 'Ejecutar consulta y enrutar dependiendo de que un recordset tenga o no registros', ${fld:insert.sql.lastid});

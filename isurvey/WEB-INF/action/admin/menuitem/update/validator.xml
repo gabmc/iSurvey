@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+	<parameter id="service_id" type="integer" required="true" label="ID de Service"/>
+	<parameter id="description" type="varchar" required="true" label="Item de Menu" maxlen="60" />
+	<parameter id="menu_item_id" type="integer" required="true" label="ID de menu item"/>
+	<parameter id="position" type="integer" required="true" label="ID de position"/>
+</validator>
+

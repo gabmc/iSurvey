@@ -18,7 +18,7 @@ function getHttpObject()
 	return obj;
 }
 
-/*
+/**
 * Invocar servicio Ajax
 * httpMethod: String GET o POST
 * uri: Path del servicio, no incluir el contexto. Ejemplo: /action/xxxx/yyyy
@@ -83,7 +83,7 @@ function ajaxCall(httpMethod, uri, divResponse, divProgress, formName, afterResp
 					else if (http.status == 404)
 						alert("El servicio solicitado no existe.");
 					else if (http.status == 401)
-						alert("El servicio solicitado requiere comunicaciï¿½n vï¿½a SSL.");
+						alert("El servicio solicitado requiere comunicación vía SSL.");
 					else 
 					{
 
@@ -236,10 +236,64 @@ function moveBox(element, box)
 }
 
 /**
+ * Evento que se dispara al cambiar las dimensiones
+ * de la ventana del browser.
+ */
+window.onresize = function()
+{
+	reloadBox();
+};
+
+/**
+ * Ajusta la ubicacion de caja de dialogo como
+ * por ejemplo un picklist cuando se redimensiona
+ * la ventana del browser, tambien ajusta la altura
+ * del lightbox. 
+ */
+function reloadBox()
+{
+	//picklist estandar
+	if(pickControl!=null) {
+		//si esta centrado
+		if(isCenter!=null) {
+			var boxdiv = document.getElementById(pickControl + "_popup");
+			var height = boxdiv.style.height;
+			var width = boxdiv.style.width;
+			boxdiv.style.top = (pageHeight() - parseInt(height)) / 2 + 'px';
+			boxdiv.style.left = (pageWidth() - parseInt(width)) / 2 + 'px';
+		} else {
+			//si no esta centrado
+			var obj = document.getElementById(pickControl);
+			var boxdiv = document.getElementById(pickControl + "_popup");
+			moveBox(obj, boxdiv);
+		}
+	}
+	
+	//caja de dialogo centrada
+	if(dialogID!=null) {
+		var boxdiv = document.getElementById(dialogID + "_popup");
+		var height = boxdiv.style.height;
+		var width = boxdiv.style.width;
+		boxdiv.style.top = (pageHeight() - parseInt(height)) / 2 + 'px';
+		boxdiv.style.left = (pageWidth() - parseInt(width)) / 2 + 'px';
+	}
+	
+	//lightbox para ambos casos
+	var overlay = document.getElementById('_overlay');
+	if (overlay!=null) {
+		 if (document.body.scrollHeight > pageHeight())
+			  overlay.style.height = document.body.scrollHeight + 'px';
+		  else
+			  overlay.style.height = pageHeight() + 'px';
+	}
+		
+}
+
+/**
 * Crear un DIV que contenga un IFRAME
 * y posicionar el DIV con su contenido
 * abajo y alineado a la izquierda del
-* elemento cuyo ID es el valor del parï¿½metro objID
+* elemento cuyo ID es el valor del parámetro objID
 * objID: ID del DIV que sera creado o inyectado el IFRAME
 * width: Ancho en pixeles del DIV
 * height: Altura en pixeles del DIV
@@ -256,19 +310,19 @@ function showBox(objID, width, height, url, centerPage)
 	  if (overlay==null) {
 	  	overlay = document.createElement("div");
 	  	overlay.className = "overlay";
-	  	//si altura del scroll no es 900 asumir el 100%
-	  	if(document.body.scrollHeight < 900)
-	  		overlay.style.height = '100%';
-	  	else
+	  	
+	  	if (document.body.scrollHeight > pageHeight()) 
 	  		overlay.style.height = document.body.scrollHeight + 'px';
+	  	else
+	  		overlay.style.height = pageHeight() + 'px';
+	  	
 	  	overlay.setAttribute("id", "_overlay");
 	  	document.body.appendChild(overlay);
 	  } else {
-		//si altura del scroll no es 900 asumir el 100%
-		if(document.body.scrollHeight < 900)
-			overlay.style.height = '100%';
-		else
-			overlay.style.height = document.body.scrollHeight + 'px';
+		  if (document.body.scrollHeight > pageHeight())
+			  overlay.style.height = document.body.scrollHeight + 'px';
+		  else
+			  overlay.style.height = pageHeight() + 'px';
 	  }
 	  /* ---- */
 
@@ -307,6 +361,16 @@ function showBox(objID, width, height, url, centerPage)
 	    		moveBox(obj, boxdiv);
 	    	
 	    	boxdiv.style.display='block';
+	    	
+	    	//parche 20111029
+	    	if (document.body.scrollWidth > pageWidth()) {
+	    		overlay.style.width = document.body.scrollWidth + 'px';
+	    	}
+  
+	    	if (document.body.scrollHeight > pageHeight()) {
+	    		overlay.style.height = document.body.scrollHeight + 'px';
+	    	}
+	    	
 	    } else
 	    	boxdiv.style.display='none';
 	    	return false;
@@ -366,13 +430,22 @@ function showBox(objID, width, height, url, centerPage)
 	  
 	  boxdiv.style.display = 'block';
 	  
+	  //parche 20111029
+	  if (document.body.scrollWidth > pageWidth()) {
+		  overlay.style.width = document.body.scrollWidth + 'px';
+	  }
+	  
+	  if (document.body.scrollHeight > pageHeight()) {
+		  overlay.style.height = document.body.scrollHeight + 'px';
+	  }
+	  
 	  return false;
 	  
 }	
 
 /**
 * Esconde un DIV + IFRAME abierto con la
-* funciï¿½n showBox()
+* función showBox()
 * objID: ID del DIV que sera ocultado
 */
 function closeBox(objID)
@@ -403,7 +476,7 @@ function isIE() {
 
 /**
 * Retorna TRUE si el valor representa una fecha
-* de lo contrario retorna FALSE. Si el aï¿½o viene con 2 dï¿½gitos
+* de lo contrario retorna FALSE. Si el año viene con 2 dígitos
 * y en menor que 30, se asume el 20XX, de lo contrario 19XX.
 * value: String que representa una fecha con formato dd-mm-yyyy o dd/mm/yyyy
 */
@@ -419,7 +492,7 @@ function isValidDate(value)
 
 /**
 * Retorna un objeto DATE si el valor representa una fecha
-* de lo contrario retorna NULL. Si el aï¿½o viene con 2 dï¿½gitos
+* de lo contrario retorna NULL. Si el año viene con 2 dígitos
 * y es menor que 30, se asume el 20XX, de lo contrario 19XX.
 * value: String que representa una fecha con formato dd-mm-yyyy o dd/mm/yyyy
 */
@@ -469,16 +542,28 @@ function convertDate(value)
 * uboundID: ID del elemento que contiene una fecha mayor que sera usada para
 * no permitir seleccionar fechas mayores en el calendario a la fecha en el elemento objID,
 * permite nulos cuando no se requiere.
+* isMovil: true para mostrar centrado en la pantalla del dispositivo 
+* calUrl: Ruta del action por si se quiere usar un calendario alternativo al default. Ejem: /action/mycal
 */
-function calendarOpen(objID, lboundID, uboundID)
+function calendarOpen(objID, lboundID, uboundID, isMovil, calUrl)
 {
+	pickControl = objID;
+	
 	var d = document.getElementById(objID).value;
 	var url = "${def:context}/action/calendar?id=" + objID + "&date=" + d;
+	
+	if (calUrl!=null)
+		url = "${def:context}" + calUrl + "?id=" + objID + "&date=" + d;
+	
 	if (lboundID != null)
 		url = url + "&date.lbound=" + document.getElementById(lboundID).value;
 	if (uboundID != null)
 		url = url + "&date.ubound=" + document.getElementById(uboundID).value;
-	showBox(objID, 240,154, url);
+	
+	if ( isMovil!=null )
+		showBox(objID, 240,154, url, "true");
+	else
+		showBox(objID, 240,154, url);
 }
 
 /**
@@ -565,7 +650,7 @@ function getFormValues(formName)
 	
 	for ( var i=formElements.length-1; i>=0; --i ) {
 		if (formElements[i].name!=""){ 
-			//aï¿½ade elementos radio y checkbox
+			//añade elementos radio y checkbox
 			if (formElements[i].type=="checkbox" && !formElements[i].checked){
 			//este checkbox si no ha sido seleccionado es ignorado
 			}else{
@@ -573,7 +658,10 @@ function getFormValues(formName)
 				//este radio si no ha sido seleccionado es ignorado
 				}
 				else {
-					returnString = returnString + formElements[i].name + "=" + encodeURI(formElements[i].value) + "&";
+					var value = formElements[i].value;
+					value = encodeURI(value);
+					value = value.replace(new RegExp("&", "g") ,"%26");
+					returnString = returnString + formElements[i].name + "=" + value + "&";
 				}
 			}
 		}
@@ -601,7 +689,7 @@ function setCheckboxValue(radioName,radioValue,formName)
 	}
 	for ( var i=formElements.length-1; i>=0; --i ) {
 		if (formElements[i].name == radioName && (formElements[i].type=="radio" || formElements[i].type=="checkbox") ){ 
-			//aï¿½ade elementos radio y checkbox
+			//añade elementos radio y checkbox
 			if (formElements[i].value==radioValue){
 			formElements[i].checked = true;
 			return;
@@ -678,7 +766,7 @@ function pagePrev()
 		currentPage=currentPage - 1;
 		viewPage();
 	} else
-		alert("Estï¿½ viendo la primera pï¿½gina.");
+		alert("Está viendo la primera página.");
 }
 
 /**
@@ -690,7 +778,7 @@ function pageNext()
 		currentPage=currentPage + 1;
 		viewPage();
 	} else
-		alert("Estï¿½ viendo la ï¿½ltima pï¿½gina.");
+		alert("Está viendo la última página.");
 }
 	
 /**
@@ -746,7 +834,7 @@ function sortBy(colName, recordsetId)
 //variables de control
 var pickControl = null;
 var idControl = null;
-
+var isCenter = null;
 /**
  * Abre un picklist DIV + IFRAME
  * id: ID del elemento donde sera posicionado el picklist, y sera llenado 
@@ -755,8 +843,9 @@ var idControl = null;
  * url: URL en donde se encuentra el action que sera mostrado como picklist 
  * ancho: Ancho del picklist 
  * altura: Altura del piklist
+ * isMovil: true para mostrar centrado en la pantalla del dispositivo
  */
-function pickOpen(id, idCtl, url, ancho, altura)
+function pickOpen(id, idCtl, url, ancho, altura, isMovil)
 {	
 	if (pickControl!=null)
 			pickClose();
@@ -771,8 +860,13 @@ function pickOpen(id, idCtl, url, ancho, altura)
 	pickControl = id;
 	idControl = idCtl;
 	
-	//mostrar popup dhtml
-	showBox(pickControl, ancho, altura, url);
+	if (isMovil != null) {
+		isCenter = 'true';
+		//mostrar popup dhtml
+		showBox(pickControl, ancho, altura, url, 'true');
+	} else
+		//mostrar popup dhtml
+		showBox(pickControl, ancho, altura, url);
 }			
 
 /**
@@ -815,11 +909,11 @@ function getNodeByName(node, name) {
  */
 
 /**
- * Aï¿½adir un item a un listbox
+ * Añadir un item a un listbox
  * elementId: ID del control que representa al ListBox
  * itemId: ID del item
  * itemTitle: Texto del item
- * Notas: no permite aï¿½adir items con ID duplicado
+ * Notas: no permite añadir items con ID duplicado
 */ 
 function listboxAddItem(elementId, itemId, itemTitle) {
 	
@@ -843,7 +937,7 @@ function listboxAddItem(elementId, itemId, itemTitle) {
       }
     } 	
 	
-	//aï¿½adir item
+	//añadir item
 	if (isIE())
 		lbox.add(option);
 	else
@@ -913,6 +1007,34 @@ function listboxGetItemValues(elementId, separator) {
 }
 
 /**
+ * Obtener el texto de los items de un listbox 
+ * elementId: ID del control que representa al ListBox
+ * separator: caracter a utilizar para separar los items
+ * Nota: si el control esta vacio retorna un string vacio
+*/ 
+function listboxGetTextValues(elementId, separator) {
+
+	if (separator==null)
+		separator=";";
+
+	var lbox = document.getElementById(elementId);
+	if (lbox==null) {
+		alert("ERROR (listboxGetTextValues): no existe un elemento con ID: " + elementId);
+		return;
+	}	
+	var ids = "";
+	for (var i=0;i<lbox.length;i++) {
+		var item = lbox.options[i];
+		ids = ids + item.text + separator;
+	}
+	//quitar el ultimo ;
+	if(ids!="")
+		ids = ids.substr(0, ids.length-1);
+	return ids;
+	
+}
+
+/**
  * Llenar el contenido de un objeto, como un DIV por ejemplo.
  * Forma parte del soporte para la validacion de formularios
  * posteados via Ajax, es utilizada
@@ -942,11 +1064,15 @@ function setFormErrorMsg(formElementId,text) {
 	var id = formElementId + "_error";
 	var obj = document.getElementById(id);
 	if (obj==null) {
-		var elem = document.getElementById(formElementId);
-		var div = document.createElement( "div" );
-		div.id = id;
-		div.className = "errormsg";
-		elem.parentNode.appendChild(div);
+		try {
+			var elem = document.getElementById(formElementId);
+			var div = document.createElement( "div" );
+			div.id = id;
+			div.className = "errormsg";
+			elem.parentNode.appendChild(div);
+		} catch (err) {
+			alert("Error en setFormErrorMsg -> Element ID: " + formElementId);
+		}
 	}	
 	setInnerHtml(id, text);	
 }
@@ -978,7 +1104,7 @@ function getElementsByClass(searchClass,node,tag) {
 }
 
 /**
- * Cï¿½digo tomado de:
+ * Código tomado de:
  * http://www.codingforums.com/showthread.php?p=178077#post178077
  * Permite dar formato a un decimal y mostrar un cierto numero de decimales
  * n: Numero de decimales a mostrar
@@ -1003,7 +1129,7 @@ Number.prototype.toDecimals=function(n){
 };
 
 /** 
- * Cï¿½digo tomado de:
+ * Código tomado de:
  * http://www.webdeveloper.com/forum/showthread.php?t=68675
  * Permite obtener tanto el alto como ancho de la pagina HTML que se esta usando
  */

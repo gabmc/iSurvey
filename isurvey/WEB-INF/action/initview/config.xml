@@ -2,10 +2,10 @@
 <config>
 
 	<summary>
-		Script genérico para las grids paginados, inicializa las
-		variables globales de paginacion e invoca via Ajax la carga de la pagina 1 del grid
+		Script genérico para las grids paginados, inicializa las variables
+		globales de paginacion e invoca via Ajax la carga de la pagina 1 del grid
 	</summary>
-
+	
 	<log>false</log>
 
 	<transaction>

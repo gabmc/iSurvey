@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config nodb="true">
+
+	<summary>
+		Generar reporte generico PDF
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="query-spanel.sql" source="session" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.PDFGenericReport</classname>
+	</output>
+
+	<pdf-title>Panel</pdf-title>
+	<pdf-logo url='/images/logo-dinamica.png' scale='100' />
+
+	<pdf-report pageSize="letter" rotate="true">
+		<table recordset='query-spanel.sql' width='100' spacingBefore='40'>
+			<col name='alias' title='Alias'  width='8' align='center'/>
+			<col name='desc_app' title='Aplicación'  width='20' align='left'/>
+			<col name='path' title='Action'  width='25' align='left'/>
+			<col name='icon_path' title='Imagen'  width='20' align='left'/>
+			<col name='description' title='Descripción'  width='25' align='left' />
+			<col name='orden' title='Orden'  width='5' align='center' format='######'  />
+		</table>
+
+	</pdf-report>
+</config>

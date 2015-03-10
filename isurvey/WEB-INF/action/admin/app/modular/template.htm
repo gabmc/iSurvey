@@ -1,0 +1,54 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>iSurvey</title>
+</head>
+<body>
+
+<center>
+<br><br>
+<!--data grid-->
+<table class="grid" width="600px">
+
+	<!--encabezados-->
+	<tr>
+		<th colspan="4">
+			<span style="float: left;">Aplicación </span>
+			<span style="float: left; margin-left: 60px"> 
+				<img src="${def:context}/images/grid-split.gif" class="tool"> 
+				<img src="${def:context}/images/print.gif" onclick="openPDF(${fld:app_id})" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/grid-split.gif" class="tool">
+			</span>
+		</th>
+	</tr>
+	<tr>
+		<th width="30%">Alias</th>
+		<th width="40%">Descripción</th>
+	</tr>
+
+	<tr>
+		<td>${fld:app_alias}</td>
+		<td>${fld:description}</td>
+	</tr>
+</table>
+
+<br>
+<!--grupo master/detail-->
+${group}
+<!--grid script-->
+<script language="javascript">
+function openPDF(id)
+{
+	var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+	var url = "${def:context}${def:actionroot}/modular/pdf?app_id=" + id + "&random=" + Math.random();
+	var w = window.open(url, "PDF", features);
+}
+</script>
+
+<!--END TABLE VIEW-->
+
+</center>
+
+</body>
+</html>

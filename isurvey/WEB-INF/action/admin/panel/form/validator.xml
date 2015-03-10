@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator id="panel.validator">
+	
+	<parameter id='alias' type='varchar' required='true' label='Alias' />
+	<parameter id='app_id' type='integer' required='true' label='ID Aplicación' />
+	<parameter id='image-path' type='varchar' required='false' label='Ruta de imagen' />
+	<parameter id='app' type='varchar' required='false' label='App' />	
+	<custom-validator classname="domain.panel.ImageListValidator" />
+	
+</validator>

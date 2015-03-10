@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='ISO-8859-1'?>
-<validator onerror='/action/error/validation/ajax'>
-	<parameter id='nombre_sector' type='varchar' required='true' label='Nombre' maxlen='30'/>
-	<parameter id='id' type='integer' required='true' label='ID' maxlen='10'/>
-</validator>
-

@@ -1,0 +1,35 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>iSurvey</title>
+<!--end script-->
+
+</head>
+
+<body>
+
+<!--COMMON HEADER-->
+${inc:${def:actionroot}/header}
+
+<center>
+
+<br>
+
+<div class="message" style="width:50%;text-align:center;color:blue">
+
+<br>
+El registro ha sido <b>eliminado</b> de la base de datos.
+
+<br><br>
+<input type="button" class="button" 
+onclick="window.location='${def:context}${def:actionroot}/view'"
+value="Regresar">
+<br>
+
+</div>
+
+</center>
+
+</body>
+</html>

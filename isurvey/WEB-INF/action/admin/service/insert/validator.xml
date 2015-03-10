@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+
+	<parameter id="app_id" type="integer" required="true" label="ID de la Aplicacion" />
+	<parameter id="description" type="varchar" required="true" label="Descripción" maxlen="150"/>
+	<parameter id="path" type="varchar" required="true" label="Path o Servicio" maxlen="150"/>
+
+<custom-validator 	
+	classname="dinamica.validators.DuplicatedKeyValidator" 
+	on-error-label="Este path ya está registrado en la base de datos, use otro path."
+	sql="nodup.sql" />
+	
+</validator>
+
+

@@ -1,0 +1,126 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>iSurvey</title>
+</head>
+
+<body onload="document.forms[0].elements[0].focus();">
+
+
+<!--COMMON HEADER-->
+${inc:${def:actionroot}/header}
+
+<center>
+
+<!--FORM-->
+<form action="${def:context}${def:actionroot}/insert" method="POST">
+
+<table class="formgrid" width="55%">
+
+	<!--column layout-->
+	<col width="35%">
+	<col width="65%">
+
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			Nueva entrada
+		</th>
+	</tr>
+
+	<!--form fields-->
+	<tr>
+		<td class="formlabel">Servicio a invocar</td>
+		<td>
+		<select name="service_id" size="1">
+		<combo-items>
+		<option value="${fld:service_id}">${fld:path}</option>
+		</combo-items>
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Orden</td>
+		<td><input name="position" type="text" size="5" maxlength="10" ></td>
+	</tr>
+	
+</table>
+
+<!--form buttons-->
+<br>
+<table width="55%">
+<tr>
+	<td>
+	</td>
+	<td align="center">
+		<input type="submit" value="Guardar" >
+		<input type="button" value="Cancelar" onclick="back()">		
+	</td>
+</tr>
+</table>
+
+</form>
+<!--END FORM-->
+
+
+<!--TABLE VIEW-->
+
+<!--grid-->
+<table class="grid" width="60%" cellspacing="1">
+	
+	<tr>
+	<th></th>
+	<th>Orden</th>
+	<th>Item de Menu</th>
+	<th></th>
+	</tr>
+	
+	<rows>
+	<tr>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="javascript:onDelete(${fld:menu_item_id});">
+		ELIMINAR
+		</a>
+	</td>
+	<td align="center" ${fld:_rowStyle}>${fld:position}</td>
+	<td ${fld:_rowStyle}>${fld:description}</td>
+	<td align="center" ${fld:_rowStyle}>
+		<a href="javascript:onEditar(${fld:service_id},${fld:menu_item_id});" title="Editar Item">
+		EDITAR
+	</a>
+	</td>
+	</rows>
+	
+</table>
+
+<!--grid script-->
+<script language="javascript">
+function onDelete(id)
+{
+	if (window.confirm("Eliminar Registro?")==true)
+	{
+		window.location="${def:context}${def:actionroot}/delete?app_id=${fld:app_id}&menu_id=${fld:menu_id}&id=" + id
+	}
+}
+function onEditar(id,id2)
+{
+	window.location="${def:context}${def:actionroot}/edit?service_id=" + id + "&menu_item_id=" + id2
+}
+function back()
+{
+	
+	if('${ses:master_menu_id}'!='0')
+		window.location='${def:context}/action/admin/menu/view?menu_id=${ses:master_menu_id}';
+	else
+		window.location='${def:context}/action/admin/menu/view';
+		
+}
+</script>
+
+<!--END TABLE VIEW-->
+
+</center>
+
+</body>
+</html>

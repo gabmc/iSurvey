@@ -1,0 +1,92 @@
+<!--parametros de busqueda-->
+<table width="300px" class="formgrid">
+
+	<!--ancho de columna de etiquetas-->
+	<col width="35%"> 
+
+	<!--titulo-->
+	<tr>
+		<th colspan="2">
+			<span style="float:left" >
+				Filtro de búsqueda
+			</span>
+			
+			<span style="float:left;margin-left:60px">
+				<img src="${def:context}/images/grid-split.gif" class="tool">
+				<img src="${def:context}/images/back.gif" onclick="javascript:goBack()" title="Buscar de nuevo" class="tool">
+				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/grid-split.gif" class="tool">
+			</span>
+		</th>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--campos-->
+	<tr>
+		<td class="formlabel">
+			Fecha desde:
+		</td>
+		<td>
+			${fld:fdesde@dd-MM-yyyy}
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel">
+			Fecha hasta:
+		</td>
+		<td>
+			${fld:fhasta@dd-MM-yyyy}
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel">
+			Aplicación:
+		</td>
+		<td>
+			${fld:contexto}
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel">
+			Operación:
+		</td>
+		<td>
+			${fld:operation}
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel">
+			Area:
+		</td>
+		<td>
+			${fld:area}
+		</td>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+</table>	
+
+<br>
+<br>
+
+<!--indicador de progreso de carga del chart-->
+<div id="chart1_wait" class="alert" style="color:gray;width:20%;font-weight:bold;font-family:Arial">
+	<img src="${def:context}/images/progress.gif"> Generando gráfico...
+</div>
+
+<!--chart-->
+<img 
+	id="chart1" 
+	style="display:none" 
+	src="${def:context}${def:actionroot}/chart?dummy=${def:time}" 
+	border="0" 
+	onload="displayChart('chart1')">
+

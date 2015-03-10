@@ -1,0 +1,72 @@
+<center>
+<!--grid-->
+<table class="grid" width="80%" cellspacing="1">
+	
+		<!--encabezados-->
+	<tr>
+		<th colspan="6">
+			<span style="float:left" >
+				Sesiones
+			</span>
+			
+			<span style="float:right;">
+				<!--panel de control de navegacion-->
+				${inc:/action/pagecontrols}
+			</span>
+			
+			<span id="grid-progress" style="float:right;margin-right:20px;display:none">
+				<img src="${def:context}/images/progress.gif">
+			</span>
+			
+			<span style="float:left;margin-left:60px">
+				<img src="${def:context}/images/grid-split.gif" class="tool">
+				<img src="${def:context}/images/reload.gif" onclick="search()" title="Recargar data" class="tool">
+				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/excel.gif" onclick="openExcel()" title="Exportar a Excel" class="tool">
+				<img src="${def:context}/images/grid-split.gif" class="tool">
+			</span>
+						
+		</th>
+	</tr>
+	
+	<tr>
+		<th>
+			<a href="javascript:onclick=sortBy('login_date')" title="Haga CLICK para ordenar por esta columna">
+				Fecha
+			</a>
+		</th>
+		<th>
+			<a href="javascript:onclick=sortBy('login_time')" title="Haga CLICK para ordenar por esta columna">
+				Hora
+			</a>
+		</th>
+		<th>
+			<a href="javascript:onclick=sortBy('usuario')" title="Haga CLICK para ordenar por esta columna">				
+				Usuario
+			</a>
+		</th>
+		<th>
+			<a href="javascript:onclick=sortBy('context_alias')" title="Haga CLICK para ordenar por esta columna">
+				Aplicación
+			</a>
+		</th>
+		<th>
+			<a href="javascript:onclick=sortBy('remote_addr')" title="Haga CLICK para ordenar por esta columna">
+				Dirección IP
+			</a>
+		</th>
+	</tr>
+	
+	<rows>
+	<tr>
+	<td ${fld:_rowStyle} align="center">${fld:login_date@dd-MM-yyyy}</td>
+	<td ${fld:_rowStyle} align="center">${fld:login_time}</td>
+	<td ${fld:_rowStyle} align="center">${fld:usuario}</td>
+	<td ${fld:_rowStyle} align="center">${fld:context_alias}</td>
+	<td ${fld:_rowStyle} align="center">${fld:remote_addr}</td>
+	</tr>
+	</rows>
+	
+</table>
+
+</center>

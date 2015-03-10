@@ -21,14 +21,10 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
-		<print mode="table" recordset="dbpool" tag="pool"
-			alternate-colors="true" />
-		<print mode="table" recordset="threadpool" tag="thread"
-			alternate-colors="true" />
-		<print mode="table" recordset="webappsinfo" tag="webapp"
-			alternate-colors="true" />
-		<print mode="table" recordset="threaddump" tag="threaddump"
-			alternate-colors="true" />
+		<print mode="table" recordset="dbpool" tag="pool" alternate-colors="true" />
+		<print mode="table" recordset="threadpool" tag="thread" alternate-colors="true" />
+		<print mode="table" recordset="webappsinfo" tag="webapp" alternate-colors="true" />
+		<print mode="table" recordset="threaddump" tag="threaddump" alternate-colors="true" />
 		<print mode="form" recordset="serverinfo" />
 	</output>
 

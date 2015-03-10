@@ -1,6 +1,5 @@
 insert into ${schema}s_user 
 (
-	user_id,
 	userlogin,
 	lname,
 	fname,
@@ -12,7 +11,6 @@ insert into ${schema}s_user
 )
 values 
 (
-	${seq:nextval@${schema}seq_user},
 	${fld:userlogin},
 	${fld:lname},
 	${fld:fname},

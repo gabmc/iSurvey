@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator id="picklist_validator">
+
+	<parameter id="name" type="varchar" required="false" label="Nombre del usuario"/>
+	
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="name"
+		rule="like" 
+		ifnull="%"
+		/>
+		
+</validator>

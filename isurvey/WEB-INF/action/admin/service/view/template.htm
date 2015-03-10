@@ -1,0 +1,64 @@
+<center>
+<!--data grid-->
+<table class="grid" width="900px">
+	
+	<tr>
+		<th colspan="3">
+			<span style="float:left" >
+				Resultados de la búsqueda
+			</span>
+			
+			<span style="float:right;">
+				<!--panel de control de navegacion-->
+				${inc:/action/pagecontrols}
+			</span>
+			
+			<span id="grid-progress" style="float:right;margin-right:20px;display:none">
+				<img src="${def:context}/images/progress.gif">
+			</span>
+			
+			<span style="float:left;margin-left:60px">
+				<img src="${def:context}/images/grid-split.gif" class="tool">
+				<img src="${def:context}/images/back.gif" onclick="javascript:showFilter()" title="Buscar de nuevo" class="tool">
+				<img src="${def:context}/images/grid-split.gif" class="tool">
+			</span>
+		</th>
+	</tr>
+	<tr>
+		<th>
+		</th>
+		<th width="45%">
+			<a href="javascript:onclick=sortBy('description')" title="Haga CLICK para ordenar por esta columna">
+				Descripción del Servico
+			</a>
+		</th>
+		<th width="50%">
+			<a href="javascript:onclick=sortBy('path')" title="Haga CLICK para ordenar por esta columna">
+				Path
+			</a>
+		</th>
+	</tr>
+	
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+
+		<td align="center">
+			<img src="${def:context}/images/edit.gif" style="cursor:pointer" onclick="edit(${fld:service_id})"
+				title="Editar o borrar registro">
+		</td>
+		
+		<td align="left">
+			${fld:description}
+		</td>	
+
+		<td align="left">
+			${fld:path}
+		</td>
+
+	</tr>
+	</rows>
+	
+</table>
+
+</center>

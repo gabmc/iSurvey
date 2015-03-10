@@ -1,0 +1,69 @@
+<script language="javascript">
+	
+	var uri="${req:paging.action.uri}";
+	var firstPage=1;
+	var lastPage=${fld:pagecount};
+	var currentPage=${fld:currentpage};
+	var nextPage=0;
+	var prevPage=0;
+	
+	if (currentPage<lastPage) 
+		nextPage=currentPage + 1;
+	
+	if (currentPage>1) 
+		prevPage=currentPage - 1;
+	
+	function gotoPage(pageNum)
+	{
+		var target="${def:context}" + uri + "?pagenumber=" + pageNum;
+		window.location=target
+	}	
+
+</script>
+
+<center>
+
+${fld:recordcount} registros encontrados.
+<table width="40%" class="formgrid">
+	<tr>
+	<td align="center">
+		<button class="button" id="ctlFirst" onclick="gotoPage(firstPage);"><<</button>
+	</td>
+	<td align="center">
+		<button class="button" id="ctlPrev" onclick="gotoPage(prevPage);">&nbsp;<&nbsp;</button>
+	</td>
+	<td align="center">
+	Página ${fld:currentpage} de ${fld:pagecount}
+	</td>
+	<td align="center">
+		<button class="button" id="ctlNext" onclick="gotoPage(nextPage);">&nbsp;>&nbsp;</button>
+	</td>
+	<td align="center">
+		<button class="button" id="ctlLast" onclick="gotoPage(lastPage);">>></button>
+	</td>
+	</tr>
+</table>
+
+</center>
+
+<br>
+
+<script language="javascript">
+
+	if (prevPage == 0)
+	{
+		var ctlPrev = document.getElementById("ctlPrev");
+		ctlPrev.disabled="true";
+		var ctlFirst = document.getElementById("ctlFirst");
+		ctlFirst.disabled="true";
+	}
+
+	if (nextPage == 0)
+	{
+		var ctlNext = document.getElementById("ctlNext");
+		ctlNext.disabled="true";
+		var ctlLast = document.getElementById("ctlLast");
+		ctlLast.disabled="true";
+	}
+
+</script>

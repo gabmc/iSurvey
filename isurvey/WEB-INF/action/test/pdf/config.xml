@@ -8,7 +8,7 @@
 
 	<log>false</log>
 
-	<pdf-title>Estatus del servicio Tomcat</pdf-title>
+	<pdf-title>Estatus del Servlet Container</pdf-title>
 	<pdf-logo>/images/logo-dinamica.png</pdf-logo>
 
 	<transaction>

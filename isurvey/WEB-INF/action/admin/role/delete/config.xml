@@ -8,7 +8,7 @@
 	<log>false</log>
 
 	<set-request-attribute id="help.msg" value="Ayuda en línea pára la página ELIMINAR..." />
-	
+
 	<!--soporte de auditoria-->
 	<audit>
 		<!--de donde saca los datos, por defecto es "_request"-->
@@ -27,7 +27,7 @@
 		-->
 		<pkey>id</pkey>
 	</audit>
-
+	
 	<transaction>
 		<classname>dinamica.audit.AuditableTransaction</classname>
 		<validator>true</validator>
@@ -36,6 +36,8 @@
 		<recordset id="query.sql" source="sql" scope="transaction" />
 	</transaction>
 
+	<query>delete-menu-role.sql</query>
+	<query>delete-service-role.sql</query>
 	<query>delete.sql</query>
 
 	<output>

@@ -27,7 +27,7 @@
 	-->
 	<mail enabled="true">
 		<subject>Estatus del servicio Tomcat</subject>
-		<mail-to>martin.cordova@gmail.com</mail-to>
+		<mail-to>dinamica4java@yahoo.com</mail-to>
 		<body>body.txt</body>
 	</mail>
 

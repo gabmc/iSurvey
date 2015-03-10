@@ -2,7 +2,7 @@
 
 <head>
 
-	<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
 	<title>iSurvey</title>
 	
 	<script language="javascript" src="${def:context}/action/script">
@@ -49,11 +49,11 @@ ${inc:${def:actionroot}/header}
 		</td>
 	</tr>
 	<tr style="display:${req:display}">
-            <td class="formlabel required">Contrase&ntilde;a</td>
+		<td class="formlabel required">Contraseña</td>
 		<td><input name="passwd" type="password" size="20" maxlength="15"></td>
 	</tr>
 	<tr style="display:${req:display}">
-            <td class="formlabel required">Confirme contrase&ntilde;a </td>
+		<td class="formlabel required">Confirme contraseña </td>
 		<td><input name="confirm" type="password" size="20" maxlength="15"></td>
 	</tr>
 	<tr>
@@ -68,34 +68,21 @@ ${inc:${def:actionroot}/header}
 		<td class="formlabel">E-mail</td>
 		<td><input name="email" type="text" size="30" maxlength="80" value="${fld:email}"></td>
 	</tr>
-        <tr>
-                <td class="formlabel required">Empresa</td>
-        	<td>
-			<!--almacena el ID del item seleccionado-->
-			<input type="hidden" name="id_empresa" id="id_empresa" />
-			<!--almacena el nombre del item seleccionado-->
-			<input type="text" name="id_empresa_name" id="id_empresa_name" style="width: 80%;" readonly />
-			<!--botones del picklist-->
-			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" />
-			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_empresa.value='';document.form1.id_empresa_name.value='';"
-				title="Borrar valor seleccionado" />
-		</td>
-        </tr>
 	<tr>
-            <td valign="top" class="formlabel"><br>Pol&iacute;tica de contrase&ntilde;a</td>
+		<td valign="top" class="formlabel"><br>Política de contraseña</td>
 		<td valign="top">
 			<br>
 			<select name="pwd_policy">
-                            <option value="-2">Usar la pol&iacute;tica predeterminada de la Aplicaci&oacute;n</option>
-                            <option value="-1">La contrase&ntilde;a nunca vence</option>
-                            <option value="15">Cambiar contrase&ntilde;a despu&eacute;s de 15 d&iacute;as</option>
-                            <option value="30">Cambiar contrase&ntilde;a despu&eacute;s de 30 d&iacute;as</option>
-                            <option value="60">Cambiar contrase&ntilde;a despu&eacute;s de 60 d&iacute;as</option>
-                            <option value="90">Cambiar contrase&ntilde;a despu&eacute;s de 90 d&iacute;as</option>
+				<option value="-2">Usar la política predeterminada de la Aplicación</option>
+				<option value="-1">La contraseña nunca vence</option>
+				<option value="15">Cambiar contrasela despues de 15 días</option>
+				<option value="30">Cambiar contrasela despues de 30 días</option>
+				<option value="60">Cambiar contrasela despues de 60 días</option>
+				<option value="90">Cambiar contrasela despues de 90 días</option>
 			</select>
 			<br>
 			<input name="force_newpass" type="checkbox" value="1" > 
-			Obligar nueva contrase&ntilde;a en proximo ingreso
+			Obligar nueva contraseña en proximo ingreso
 			<br><br>
 		</td>
 	</tr>
@@ -112,8 +99,8 @@ ${inc:${def:actionroot}/header}
 		<td class="formlabel">Idioma predeterminado</td>
 		<td>
 			<select name="locale">
-                            <option value="es">Espa&ntilde;ol</option>
-                            <option value="en">Ingl&eacute;s</option>
+				<option value="es">Español</option>
+				<option value="en">Inglés</option>
 			</select>
 		</td>
 	</tr>			
@@ -141,13 +128,6 @@ ${inc:${def:actionroot}/header}
 			
 		document.form1.elements[0].focus();
 
-                    /** picklist de seleccion simple **/
-
-                    //desplegar picklist de seleccion simple
-                    function pickIdEmpresa(){
-                            var url = "${def:context}/action/picklist/empresa/form";
-                            pickOpen ('id_empresa_name','id_empresa',url,'450','335');
-                    }
 		</script>
 		<!--END FORM-->
 

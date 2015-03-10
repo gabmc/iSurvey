@@ -12,7 +12,7 @@
 	<!--soporte de auditoria-->
 	<audit>
 		<!--de donde saca los datos, por defecto es "_request"-->
-		<recordset>query.sql</recordset>
+		<recordset></recordset>
 		<!--que campos extrae para el registro descriptivo-->
 		<cols>	
 			<colname>rolename</colname>		
@@ -26,11 +26,11 @@
 			la columna que contiene el pkey, si es query, 
 			el alias del campo debe ser "id"
 		-->
-		<pkey>role_id</pkey>
+		<pkey params="insert.sql">select ${fld:insert.sql.lastid} as id</pkey>
 	</audit>
 
 	<transaction>
-		<classname>domain.admin.AfterTransaction</classname>
+		<classname>dinamica.audit.AuditableTransactionIdentity</classname>
 		<validator>true</validator>
 		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>

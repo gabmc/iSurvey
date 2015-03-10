@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+
+<!--
+	Configuration file for a framework transaction
+-->
+
+<config>
+
+	<summary>
+		Generic paging navigation controls
+		for mutipage views
+	</summary>
+	
+	<log>false</log>
+
+	<transaction>
+		<classname>dinamica.PagingControls</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>controls.txt</template>
+		<set-http-headers>false</set-http-headers>
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+		<print mode="form" recordset="paging.controls" />
+	</output>
+
+</config>

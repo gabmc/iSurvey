@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
-<config>
+<config nodb="true">
 
 	<summary>
 		Calendario popup de dinámica

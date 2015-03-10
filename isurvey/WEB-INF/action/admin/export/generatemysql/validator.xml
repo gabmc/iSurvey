@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+	<parameter id="webapp" type="varchar" required="true" label="Aplicación" />
+	<parameter id="rol_usuario" type="integer" required="false" label="Rol-Usuario" />
+</validator>
