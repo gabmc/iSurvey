@@ -10,7 +10,7 @@
 	<!--form title-->
 	<tr>
 		<th colspan="2">
-			Filtro de B&uacute;squeda
+			Filtro de B&uacute;squeda (Administradores de Seguridad)
 		</th>
 	</tr>
 
@@ -22,7 +22,7 @@
 	<!--form fields-->
 	
 	<tr>
-		<td class="formlabel">El Login del usuario comienza con: </td>
+		<td class="formlabel">El Login comienza con: </td>
 		<td>
 		<input name="userlogin"  value="${fld:userlogin}" type="text" size="30" maxlength="80" >
 		</td>
@@ -41,15 +41,8 @@
 		<input name="fname"  value="${fld:fname}" type="text" size="30" maxlength="80" >
 		</td>
 	</tr>
-	
-	<tr>
-		<td class="formlabel">El Usuario esta en el Rol: </td>
-		<td>
-                    <input type="hidden" name="role_id" value="507">
-		
-		</td>
-	</tr>
 
+    <input type="hidden" name="role_id" value="507">
 	
 	<tr>
 		<td></td>
@@ -75,9 +68,9 @@
 
 		<select name="pagesize" size="1">
 		  <option value="">[Default]</option>
-		  <option value="10">10 registros por p�gina</option>
-		  <option value="20">20 registros por p�gina</option>
-		  <option value="50">50 registros por p�gina</option>
+		  <option value="10">10 registros por p&aacute;gina</option>
+		  <option value="20">20 registros por p&aacute;gina</option>
+		  <option value="50">50 registros por p&aacute;gina</option>
 		</select>
 		
 		</td>
@@ -92,7 +85,7 @@
 		<td align="center" colspan="2">
 			<input type="submit" value="Buscar">
 			<input type="button" value="Limpiar Filtro" onclick="clearForm('form1')">
-			<input type="button" value="Agregar Usuario" onclick="onAddNew()">
+			<input type="button" value="Agregar Administrador de Seguridad" onclick="onAddNew()">
 		</td>
 	</tr>
 

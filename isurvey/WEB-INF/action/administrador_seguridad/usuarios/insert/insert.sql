@@ -1,0 +1,24 @@
+insert into ${schema}s_user 
+(
+	userlogin,
+	passwd,
+	lname,
+	fname,
+	email,
+	enabled,
+	pwd_policy,
+	force_newpass,
+	locale
+)
+values 
+(
+	${fld:userlogin},
+	${fld:passwd},
+	${fld:lname},
+	${fld:fname},
+	${fld:email},
+	1,
+	${fld:pwd_policy},
+	${fld:force_newpass},
+	${fld:locale}
+)

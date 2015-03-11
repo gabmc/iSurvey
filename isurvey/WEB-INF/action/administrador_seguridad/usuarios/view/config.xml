@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+
+<config>
+
+	<summary>
+		View Recordset in paged view
+	</summary>
+	
+	<log>false</log>
+
+	<set-request-attribute id="paging.recordset" value="user.results" />
+	<set-request-attribute id="paging.action.uri" value="${def:actionroot}/view" />
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="user.results" source="session" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>template.htm</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+		<print mode="table" recordset="user.results" tag="rows" pagesize="8" alternate-colors="true" />
+	</output>
+
+</config>

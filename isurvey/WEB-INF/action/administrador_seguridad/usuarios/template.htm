@@ -1,0 +1,137 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	<title>iSurvey</title>
+	
+	<script language="javascript" src="${def:context}/action/script">
+	</script>
+	
+</head>
+
+<body>
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+<center>
+		
+		<!--START FORM-->
+		<form name="form1" action="${def:context}${def:actionroot}/${req:form.action}" method="POST">
+		
+		<table class="formgrid" width="70%">
+		
+			<!--layout-->
+			<col width="40%"> <!--labels-->
+			<col width="60%">
+
+
+			<!--section header-->
+			<tr>
+				<th colspan="2">
+					${req:form.mode}				
+				</th>
+			</tr>
+
+		
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--fields-->
+	<tr style="display:${req:display}">
+		<td class="formlabel required">Login</td>
+		<td>
+			<input name="userlogin" type="text" size="20" maxlength="25" value="${fld:userlogin}">
+		</td>
+	</tr>
+	<tr style="display:${req:display}">
+		<td class="formlabel required">Contraseña</td>
+		<td><input name="passwd" type="password" size="20" maxlength="15"></td>
+	</tr>
+	<tr style="display:${req:display}">
+		<td class="formlabel required">Confirme contraseña </td>
+		<td><input name="confirm" type="password" size="20" maxlength="15"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Apellido</td>
+		<td><input name="lname" type="text" size="25" maxlength="25" value="${fld:lname}"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Nombre</td>
+		<td><input name="fname" type="text" size="25" maxlength="25" value="${fld:fname}"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">E-mail</td>
+		<td><input name="email" type="text" size="30" maxlength="80" value="${fld:email}"></td>
+	</tr>
+	<tr>
+		<td valign="top" class="formlabel"><br>Política de contraseña</td>
+		<td valign="top">
+			<br>
+			<select name="pwd_policy">
+				<option value="-2">Usar la política predeterminada de la Aplicación</option>
+				<option value="-1">La contraseña nunca vence</option>
+				<option value="15">Cambiar contrasela despues de 15 días</option>
+				<option value="30">Cambiar contrasela despues de 30 días</option>
+				<option value="60">Cambiar contrasela despues de 60 días</option>
+				<option value="90">Cambiar contrasela despues de 90 días</option>
+			</select>
+			<br>
+			<input name="force_newpass" type="checkbox" value="1" > 
+			Obligar nueva contraseña en proximo ingreso
+			<br><br>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" class="formlabel required">Roles de Usuario </td>
+		<td>
+			<role-list>
+			<input name="role_id" type="checkbox" value="${fld:role_id}"> ${fld:app_alias}/${fld:description}<br>
+			</role-list>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="formlabel">Idioma predeterminado</td>
+		<td>
+			<select name="locale">
+				<option value="es">Español</option>
+				<option value="en">Inglés</option>
+			</select>
+		</td>
+	</tr>			
+				
+							
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--buttons-->
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="Guardar">
+					<input type="button" value="Cancelar" onClick="window.location='${ses:return.url}'">				
+				</td>
+			</tr>
+		</table>
+		
+		<input type="hidden" name="user_id" value="${fld:user_id}">
+						
+		</form>
+
+		<script language="javascript">
+			
+		document.form1.elements[0].focus();
+
+		</script>
+		<!--END FORM-->
+
+</center>
+
+</body>
+</html>
