@@ -1,0 +1,32 @@
+\select@language {spanish}
+\contentsline {chapter}{Sin\IeC {\'o}psis}{\es@scroman {v}}
+\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}
+\contentsline {chapter}{\numberline {2}Necesidades de la Empresa}{3}
+\contentsline {chapter}{\numberline {3}Soluci\IeC {\'o}n Propuesta}{5}
+\contentsline {chapter}{\numberline {4}Objetivos}{7}
+\contentsline {section}{\numberline {4.1}Objetivo General}{7}
+\contentsline {section}{\numberline {4.2}Objetivos Espec\IeC {\'\i }ficos}{7}
+\contentsline {section}{\numberline {4.3}Aporte Tecnol\IeC {\'o}gico}{8}
+\contentsline {section}{\numberline {4.4}Aporte Funcional}{8}
+\contentsline {chapter}{\numberline {5}Alcance}{9}
+\contentsline {section}{\numberline {5.1}Objetivos Espec\IeC {\'\i }ficos}{9}
+\contentsline {section}{\numberline {5.2}Aporte Tecnol\IeC {\'o}gico}{10}
+\contentsline {section}{\numberline {5.3}Aporte Funcional}{10}
+\contentsline {chapter}{\numberline {6}Limitaciones}{13}
+\contentsline {chapter}{\numberline {7}Justificaci\IeC {\'o}n}{15}
+\contentsline {chapter}{\numberline {8}Marco Te\IeC {\'o}rico}{17}
+\contentsline {chapter}{\numberline {9}Metodolog\IeC {\'\i }a}{19}
+\contentsline {chapter}{\numberline {10}Desarrollo}{21}
+\contentsline {section}{\numberline {10.1}Investigaci\IeC {\'o}n}{21}
+\contentsline {subsection}{\numberline {10.1.1}limevs}{22}
+\contentsline {section}{\numberline {10.2}An\IeC {\'a}lisis y Dise\IeC {\~n}o R\IeC {\'a}pido}{22}
+\contentsline {subsection}{\numberline {10.2.1}Diagramas Entidad - Relaci\IeC {\'o}n}{22}
+\contentsline {subsection}{\numberline {10.2.2}Casos de uso}{22}
+\contentsline {section}{\numberline {10.3}Prototipado}{22}
+\contentsline {subsection}{\numberline {10.3.1}Primera Iteraci\IeC {\'o}n}{22}
+\contentsline {subsection}{\numberline {10.3.2}Segunda Iteraci\IeC {\'o}n}{22}
+\contentsline {subsection}{\numberline {10.3.3}Tercera Iteraci\IeC {\'o}n}{22}
+\contentsline {subsection}{\numberline {10.3.4}Cuarta Iteraci\IeC {\'o}n}{22}
+\contentsline {section}{\numberline {10.4}Pruebas}{22}
+\contentsline {section}{\numberline {10.5}Implementaci\IeC {\'o}n}{22}
+\contentsline {chapter}{\numberline {11}Resultados}{23}

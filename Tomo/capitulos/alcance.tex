@@ -1,0 +1,27 @@
+\chapter{Alcance}
+La aplicación web a desarrollar comprende la implementación de varios módulos, los cuales incluyen el diseño y construcción de interfaces, funciones y procedimientos.
+
+\section{Objetivos Específicos}
+\begin{itemize}
+\item Diseñar e implementar la Base de Datos en donde se almacenarán los resultados y los distintos instrumentos de medición: se diseñará e implementará una base de datos para la persistencia en el sistema, esto comenzará con un diagrama Entidad – Relación (Diagrama E-R) y luego se implementará con un manejador de base de datos (PostgreSQL).
+
+\item Desarrollar el módulo de consultas y reportes con respecto a los instrumentos de medición y su data recopilada: se encargará de mostrar información recopilada de los instrumentos aplicados en diferentes formas (gráficos de barras, gráficos de torta, tablas, entre otros) a los roles Responsables del Proceso y Líderes.
+
+\item Desarrollar el módulo de control y seguimiento de los instrumentos de medición: se encargará de mostrar información sobre diferentes aspectos de los instrumentos creados (personas que han tomado los instrumentos, tendencias, entre otros) para llevar un control sobre los instrumentos que se están aplicando.
+
+\item Desarrollar el módulo de carga y corrección de información de instrumentos de medición hechos en papel: agregará información a la aplicación de instrumentos hechos con anterioridad en donde los resultados se encuentren en archivos Excel y también agregará información de instrumentos realizados de forma física en donde se extraerá la data a través de un lector óptico.
+
+\item Desarrollar el módulo de seguridad de la aplicación: es donde se definen los diferentes roles con sus niveles de acceso. También asegurará un flujo seguro de información entre las diferentes capas. El acceso a la aplicación (autenticación) será regido por este módulo.
+
+\item Desarrollar el módulo de gestión de usuarios e instrumentos de medición: su función será la de administrar (eliminar, crear y modificar) los instrumentos y participantes de la herramienta. Esto se verá reflejado en la base de datos del sistema.
+
+\item Desarrollar el módulo de análisis de resultados: se encargará del procesamiento de la data recopilada para luego mostrarlo en gráficos y apoyar la toma de decisiones.
+\end{itemize}
+
+\section{Aporte Tecnológico}
+Puesto que la aplicación web a desarrollar usará una herramienta de código abierto para la aplicación de instrumentos, se deben evaluar las diferentes opciones disponibles y seleccionar la más adecuada a las necesidades actuales de la empresa y que ofrezca el mayor número de funcionalidades para contar con escalabilidad en el sistema y poder implementar más funcionalidades en un futuro. Esta herramienta luego será integrada al sistema (ver Figura 2). La herramienta de aplicación de instrumentos será puesta en marcha en el desarrollo del proyecto y no será un servicio externo contratado.
+
+\section{Aporte Funcional}
+Utilizando la experiencia de los instrumentos hechos con anterioridad, se harán recomendaciones basándose en distintos indicadores (ejemplo: instrumentos hechos con anterioridad y para qué tipo de estudio fueron aplicados) en cuanto a qué tipo de instrumento es el más adecuado para el tipo de estudio a realizar. 
+
+En el proceso actual, el construir un instrumento de medición requiere de un experto y de personas de diferentes áreas. Con el desarrollo de este proyecto esto no será necesario. Además de requerir un un experto, el hacer estos instrumentos de medición de percepción está delimitado al área y a la empresa en donde será puesto en marcha. Se propone un cambio en el modo de hacer esto, teniendo una aplicación en donde se podrán construir estos instrumentos para cualquier area de cualquier empresa. Esto se logra al agregarle un proceso de selección de tipo de instrumento, el cual no existe en el proceso actual.
