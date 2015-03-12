@@ -1,0 +1,32 @@
+<!--data grid-->
+<table class="grid" style="width: 95%;">
+
+	<!--toolbar-->
+	<tr>
+		<th colspan="2">
+			<span style="color: gray; float: left;">Seleccione con un click </span>
+			<!--panel de control de navegacion-->
+			<span style="float: right;"> ${inc:/action/pagecontrols}</span> 
+			<!--indicador de progreso-->
+			<img id="grid-progress" style="float: right; display: none" src="${def:context}/images/progress.gif">
+		</th>
+	</tr>
+
+	<!--encabezados-->
+	<tr>
+		<th style="width: 50%;">
+			<a href="javascript:onclick=sortBy('productname')" title="Haga CLICK para ordenar por esta columna">ID</a>
+		</th>
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle} onmouseover="rowOn(this)" onmouseout="rowOff(this)" onclick="selectItem('${fld:productid}')">
+		<td align="center" style="font-size: 9pt; width: 30%;">
+			<span id="${fld:productid}">${fld:productname}</span>
+		</td>
+	</tr>
+	</rows>
+
+</table>
+

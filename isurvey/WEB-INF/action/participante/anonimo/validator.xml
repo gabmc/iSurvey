@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+	<parameter id="id_estudio" type="integer" required="true" label="id del estudio"/>
+</validator>

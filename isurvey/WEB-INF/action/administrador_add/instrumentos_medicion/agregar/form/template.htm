@@ -1,0 +1,252 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>CRUD Empresa</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">CRUD Empresa</div>
+	${req:progress}
+</div>
+
+<br>
+
+<!--formulario addnew/edit-->
+<div id="form" align="center">
+<form name="form1" onsubmit="return save()">
+
+<table class="formgrid" width="450px">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="30%">
+	<col width="60%">
+
+	<!--titulo-->
+	<tr>
+            <th colspan="2"><span id="formTitle"> A&ntilde;adir registro </span></th>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--campos-->
+		<!--control picklist de seleccion simple-->
+	<tr>
+		<td class="formlabel">ID Encuesta</td>
+		<td>
+			<!--almacena el ID del item seleccionado--> 
+			<input type="hidden" name="idSurvey" id="idSurvey" /> 
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="idSurvey_name" id="idSurvey_name" style="width: 80%;" readonly /> 
+			<!--botones del picklist--> 
+			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdSurvey();" title="Seleccionar item" /> 
+			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.idSurvey.value='';document.form1.idSurvey_name.value='';"
+				title="Borrar valor seleccionado" />
+		</td>
+	</tr>
+
+
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--botones-->
+	<tr>
+		<td align="center" colspan="2">
+			<input id="grabar" type="submit" value="Grabar" class="button">
+			<input type="button" value="Cancelar" class="button" onclick="addNew()">
+		</td>
+	</tr>
+
+	<!--separador-->
+	<tr height="5px">
+		<td colspan="2"></td>
+	</tr>
+
+</table>
+
+<input type="hidden" name="id" value="">
+
+</form>
+</div>
+
+<br>
+
+
+<!--panel de respuesta AJAX para el grid paginado-->
+<div id="response" style="display: none; width: 100%" align="center"></div>
+
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+	//inicializa cuando se carga la pagina
+	onload = function()
+	{
+		addNew(); //prepara formulario para ingresar nuevo registro 
+		search(); //mostrar registros en vista paginada
+
+	} 
+	
+	/** picklist de seleccion simple **/
+	
+	//desplegar picklist de seleccion simple
+	function pickIdSurvey(){
+		var url = "${def:context}/action/administrador_add/instrumentos_medicion/agregar/picklist_surveys_lime/form";
+		pickOpen ('idSurvey_name','idySurvey',url,'450','335');	
+	}
+	
+	//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
+	function search()
+	{
+		var url = "${def:actionroot}/search";
+		
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?currentpage=" + currentPage;
+
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+
+
+	//traer la pagina N del grid
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		gotoPage(url);
+	}	
+	
+	
+	//grabar el formulario
+	function save()
+	{
+		//determina si es un insert o un update
+		if (document.form1.id.value=="")
+			return insert();
+		else
+			return update();
+	}
+
+	//grabar registro nuevo en BD
+	function insert()
+	{
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/insert", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	    	
+	}
+
+	//restaurar el formulario en caso de error
+	function retryAddnewOrEdit() {
+		document.getElementById("grabar").disabled=false;
+		setFocusOnForm("form1");		
+	}
+
+	//editar registro en formulario
+	function edit(id)
+	{
+			clearErrorMessages();
+
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/edit?id=" + id , 
+							divResponse=null, 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=null);	
+	}
+	
+	//actualizar registro en BD
+	function update()
+	{		
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/update", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	
+	}
+	
+	//eliminar un registro
+	function deleteRecord(id)
+	{
+		if (window.confirm("�Est� seguro que desea ELIMINAR este registro?")==false)
+		{
+			return false;
+		}
+		
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/delete?id=" + id,
+							divResponse=null, 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=null);	
+						
+	}
+	
+	//configurar formulario para ingresar registro nuevo
+	function addNew()
+	{
+		clearForm("form1");
+		document.getElementById("formTitle").innerHTML = "A&ntilde;adir registro";
+		document.getElementById("grabar").disabled=false;
+		setFocusOnForm("form1");
+	}
+	
+	//invoca la generacion de un PDF en un popup
+	function openPDF()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//invoca la generacion de un Excel en un popup
+	function openExcel()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+</script>
+
+</html>

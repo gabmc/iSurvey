@@ -859,7 +859,6 @@ function pickOpen(id, idCtl, url, ancho, altura, isMovil)
 
 	pickControl = id;
 	idControl = idCtl;
-	
 	if (isMovil != null) {
 		isCenter = 'true';
 		//mostrar popup dhtml
