@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror='/action/error/validation/ajax'>
+	<parameter id='id_estudio_name' type='varchar' required='true' label='Estudio'/>
+	<parameter id='id_estudio' type='integer' required='false' label='Estudio' maxlen='10'/>
+	<parameter id='nombre' type='varchar' required='true' label='Nombre' maxlen='30'/>
+	<parameter id='id' type='integer' required='true' label='ID' maxlen='10'/>
+	<parameter id='id_instrumento' type='integer' required='false' label='ID Instrumento' maxlen='30' />
+</validator>
+

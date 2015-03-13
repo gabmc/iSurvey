@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror='/action/error/validation/ajax'>
+	<parameter id='nombre_lista_participantes' type='varchar' required='true' label='Nombre' maxlen='30'/>
+	<parameter id='tipo' type='varchar' required='true' label='Tipo' maxlen='4'/>
+</validator>

@@ -2,26 +2,27 @@
 <config nodb="true">
 
 	<summary>
-		Crear Instrumento
+		Ver resultado de consulta paginado
 	</summary>
 
 	<log>false</log>
 	
-	<set-request-attribute id="progress" value="file:/WEB-INF/action/progress/progress.htm"/>
+	<set-request-attribute id="controls" value="file:/WEB-INF/action/pagecontrols/controls.htm"/>
 
 	<transaction>
 		<classname>dinamica.GenericTransaction</classname>
 		<validator>false</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
+		<recordset id="query-instrumento.sql" source="session" scope="transaction" />
 	</transaction>
 
 	<output>
 		<classname>dinamica.GenericOutput</classname>
 		<template>template.htm</template>
 		<set-http-headers>true</set-http-headers>
-		<content-type>text/html</content-type>
-		<expiration>0</expiration>
+		<content-type>text/plain; charset=iso-8859-1</content-type>
+		<print mode="table" recordset="query-instrumento.sql" tag="rows" alternate-colors="true" />
 	</output>
 
 </config>

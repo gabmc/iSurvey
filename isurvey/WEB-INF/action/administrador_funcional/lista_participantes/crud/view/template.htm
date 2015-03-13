@@ -1,0 +1,41 @@
+<!--data grid-->
+<table class="grid" width="700px">
+
+	<!--toolbar-->
+	<tr>
+		<th colspan="4">
+			<!--t�tulo del grid--> 
+			<span style="float: left;">Contenido de la tabla </span>
+			<!--panel de control de navegacion--> 
+			<span style="float: right;">${req:controls}</span> 
+			<!--indicador de progreso-->
+			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
+			<!--toolbar del grid-->
+			<span style="float: left; margin-left: 40px">
+				<img src="${def:context}/images/reload.gif" onclick="search()" title="Recargar data" class="tool">
+				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/excel.gif" onclick="openExcel()" title="Exportar a Excel" class="tool">
+			</span>
+		</th>
+	</tr>
+
+	<!--encabezados-->
+	<tr>
+		<th colspan="2"></th>
+		<th width="50%"><a href="javascript:onclick=sortBy('nombre_lista_participantes','query-listaparticipantes.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="50%"><a href="javascript:onclick=sortBy('tipo','query-listaparticipantes.sql')" title="Haga CLICK para ordenar por esta columna">Tipo</a></th>
+
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_lista_participantes}')" title="Eliminar"></td>
+		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_lista_participantes}')" class="tool" title="Editar"></td>
+		<td align="center">${fld:nombre_lista_participantes}</td>
+		<td align="center">${fld:tipo}</td>
+
+	</tr>
+	</rows>
+
+</table>

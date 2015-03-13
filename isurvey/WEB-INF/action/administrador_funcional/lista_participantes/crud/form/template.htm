@@ -2,13 +2,13 @@
 
 <head>
 
-<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
 
 <!--biblioteca generica JS/Dinamica-->
 <script type="text/javascript" src="${def:context}/action/script">
 </script>
 
-<title>CRUD Empresa</title>
+<title>Administrar Listas de Participantes</title>
 
 </head>
 
@@ -16,7 +16,7 @@
 
 <!--banner-->
 <div class="banner">
-	<div style="float: left;">CRUD Empresa</div>
+	<div style="float: left;">Administrar Listas de Participantes</div>
 	${req:progress}
 </div>
 
@@ -43,21 +43,19 @@
 	</tr>
 
 	<!--campos-->
-		<!--control picklist de seleccion simple-->
-	<tr>
-		<td class="formlabel">ID Encuesta</td>
+		<tr>
+		<td class="formlabel required">Nombre</td>
 		<td>
-			<!--almacena el ID del item seleccionado--> 
-			<input type="hidden" name="idSurvey" id="idSurvey" /> 
-			<!--almacena el nombre del item seleccionado-->
-			<input type="text" name="idSurvey_name" id="idSurvey_name" style="width: 80%;" readonly /> 
-			<!--botones del picklist--> 
-			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdSurvey();" title="Seleccionar item" /> 
-			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.idSurvey.value='';document.form1.idSurvey_name.value='';"
-				title="Borrar valor seleccionado" />
+			<input id="nombre_lista_participantes" name="nombre_lista_participantes" type="text" size="30" maxlength="30">
 		</td>
 	</tr>
-
+	<tr>
+		<td class="formlabel required">Tipo</td>
+		<td>
+                    <label>Temporal</label><input id="tipo" name="tipo" type="radio" value="TEMP">
+                    <label>Permanente</label><input id="tipo2" name="tipo" type="radio" value="PERM">
+		</td>
+	</tr>
 
 
 	<!--separador-->
@@ -104,13 +102,6 @@
 
 	} 
 	
-	/** picklist de seleccion simple **/
-	
-	//desplegar picklist de seleccion simple
-	function pickIdSurvey(){
-		var url = "${def:context}/action/administrador_add/instrumentos_medicion/agregar/picklist_surveys_lime/form";
-		pickOpen ('idSurvey_name','idySurvey',url,'450','335');	
-	}
 	
 	//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
 	function search()
@@ -227,7 +218,7 @@
 	function addNew()
 	{
 		clearForm("form1");
-		document.getElementById("formTitle").innerHTML = "A&ntilde;adir registro";
+		document.getElementById("formTitle").innerHTML = "A�adir registro";
 		document.getElementById("grabar").disabled=false;
 		setFocusOnForm("form1");
 	}

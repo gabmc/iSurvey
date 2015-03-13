@@ -2,7 +2,8 @@
 <config>
 
 	<summary>
-		Participante - Anónimo
+		Leer registro y retornar javascript que llena
+		un formulario con los datos del registro
 	</summary>
 
 	<log>false</log>
@@ -12,14 +13,16 @@
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
+		<recordset id="query.sql" source="sql" scope="transaction" />
 	</transaction>
 
 	<output>
 		<classname>dinamica.GenericOutput</classname>
-		<template>template.htm</template>
+		<template>script.js</template>
 		<set-http-headers>true</set-http-headers>
-		<content-type>text/html</content-type>
-		<print mode="form" recordset="_request" />
+		<content-type>text/javascript; charset=iso-8859-1</content-type>
+		<expiration>0</expiration>
+		<print mode="form" recordset="query.sql" />
 	</output>
 
 </config>
