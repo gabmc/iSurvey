@@ -1,144 +1,119 @@
-<html>
+<!--FORM-->
+<form name="form1" action="${def:context}${def:actionroot}/search" method="POST">
 
-    <head>
+<table class="formgrid" width="70%">
 
-        <link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+	<!--layout-->
+	<col width="40%"> <!--labels-->
+	<col width="60%"> 
 
-        <!--biblioteca generica JS/Dinamica-->
-        <script type="text/javascript" src="${def:context}/action/script">
-        </script>
-
-        <title>Cuenta de usuario</title>
-    </head>
-
-    <body>
-
-        <!--banner-->
-        <div class="banner">
-            <div style="float: left;">Crear Cuenta de Aplicador</div>
-	${inc:/action/progress}
-        </div>
-
-        <br>
-        <!--colocar el formulario a la derecha del browser-->
-        <div  align="center" >
-
-            <!--formulario addnew/edit-->
-      <div id="form"  align="center">
-      <form name="form1" action="${def:context}${def:actionroot}/insert" method="POST">
-
-                    <table class="formgrid" width="450px">
-
-                        <!--ancho de la columna de etiquetas-->
-                        <col width="18%">
-                        <col width="20%">
-
-                        <!--titulo-->
+	<!--form title-->
 	<tr>
-            <th colspan="2"><span id="formTitle"> A&ntilde;adir registro </span></th>
+		<th colspan="2">
+			Filtro de Búsqueda
+		</th>
 	</tr>
 
-                        <!--separador-->
-                        <tr height="10px">
-                            <td colspan="2"></td>
-                        </tr>
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+			
+	<!--form fields-->
+	
+	<tr>
+		<td class="formlabel">El Login del usuario comienza con: </td>
+		<td>
+		<input name="userlogin"  value="${fld:userlogin}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
 
-                        <!--campos-->
-                        <tr>
-                            <td class="formlabel">Nombre</td>
-                            <td><input id="fname" name="fname"  type="text" size="30" maxlength="25" value="${fld:fname}"></td>
-                        </tr>
+	<tr>
+		<td class="formlabel">El Apellido comienza con: </td>
+		<td>
+		<input name="lname"  value="${fld:lname}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
 
-                        <tr>
-                            <td class="formlabel">Apellido</td>
-                            <td><input  id="lname" name="lname" type="text" size="30" maxlength="25" value="${fld:lname}"></td>
-                        </tr>
+	<tr>
+		<td class="formlabel">El Nombre comienza con: </td>
+		<td>
+		<input name="fname"  value="${fld:fname}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td>
 
-                        <tr>
-                            <td class="formlabel">E-mail</td>
-                            <td><input id="email" name="email"  type="text" size="30" maxlength="80" value="${fld:email}"></td>
-                        </tr>
-                        <tr>
-                            <td class="formlabel required">Login</td>
-                            <td><input id="userlogin" name="userlogin"  type="text" size="30" maxlength="25" value="${fld:userlogin}">                            </td></tr>
+		<br>
+		Ordenado por:<br>
 
-                        <tr >
-                            <td class="formlabel required">Contrase&ntilde;a</td>
-                            <td><input id="passwd" name="passwd"  type="password" size="30" maxlength="15"></td>
-                        </tr>
-                        <tr>
-                            <td class="formlabel required">Confirme contrase&ntilde;a </td>
-                            <td><input id="confirm" name="confirm"  type="password" size="30" maxlength="15"></td>
-                        </tr>                     
+		<select name="orderby" size="1">
+		  <option value="userlogin">Login del Usuario</option>
+		  <option value="fname">Nombre</option>
+		  <option value="lname">Apellido</option>
+		</select>
 
-                        <!--separador-->
+		<select name="sortmode" size="1">
+		  <option value="ASC">[Aa..Zz]</option>
+		  <option value="DESC">[Zz..Aa]</option>
+		</select>
+		
+		<br><br>
 
+		Tamaño de la página para los resultados:<br>
 
-                        <!--botones-->
-                       <tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="Guardar">
-					<input type="button" value="Cancelar" onClick="window.location='${def:context}/action/security/home/welcome'" >				</td>
-			</tr>
-                        <!--separador-->
-                        <tr height="5px">
-                            <td colspan="2"></td>
-                        </tr>
-                    </table>
+		<select name="pagesize" size="1">
+		  <option value="">[Default]</option>
+		  <option value="10">10 registros por página</option>
+		  <option value="20">20 registros por página</option>
+		  <option value="50">50 registros por página</option>
+		</select>
+		
+		</td>
+	</tr>	
 
-                    
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+	
+	<tr>
+		<td align="center" colspan="2">
+			<input type="submit" value="Buscar">
+			<input type="button" value="Limpiar Filtro" onclick="clearForm('form1')">
+			<input type="button" value="Agregar Usuario" onclick="onAddNew()">
+		</td>
+	</tr>
 
-                   <input type="hidden" name="user_id" value="${fld:user_id}">
-                   <input type="hidden" name="role_id" id="role_id" value="503">
-		</form>
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
 
-            </div>
-        </div>
+</table>
 
-        <!--colocar la respuesta a la izquierda del browser-->
-        <div style="float: left; padding-left: 50px">
-            <!--panel de respuesta AJAX para el grid paginado-->
-            <div id="response" style="display: none; width: 100%"></div>
-        </div>
+</form>
 
-<!--panel de respuesta AJAX para el grid paginado-->
-<div id="response" style="display: none; width: 100%" align="center"></div>
- </body>
+<script language="javascript">
 
- <script type="text/javascript">
-
-	//inicializa cuando se carga la pagina
-	onload = function()
+	document.form1.elements[0].focus();
+	
+	function onAddNew()
 	{
-		addNew(); //prepara formulario para ingresar nuevo registro
-		search(); //mostrar registros en vista paginada
-
-	}
-
-        function search()
+		var returnURL = "${def:context}${def:actionroot}/filter";
+		var url = "${def:context}${def:actionroot}/addnew?return.url=" + returnURL;
+		window.location=url;
+	}	
+	
+	function onAddNewLDAP()
 	{
-		var url = "${def:actionroot}/search";
-
-		//determina si refresca y se para en la pagina actual o en la pagina 1
-		if (currentPage > 0)
-			url = "${def:actionroot}/search?currentpage=" + currentPage;
-
-		//llamada Ajax...
-		ajaxCall(httpMethod="GET",
-						uri= url,
-						divResponse="response",
-						divProgress="status",
-						formName=null,
-						afterResponseFn=null,
-						onErrorFn=null);
-	}
-        
-        function addNew()
-	{
-		clearForm("form1");
-		document.getElementById("formTitle").innerHTML = "A&ntilde;adir registro";
-		document.getElementById("grabar").disabled=false;
-		setFocusOnForm("form1");
-	}
+		var returnURL = "${def:context}${def:actionroot}/filter";
+		var url = "${def:context}${def:actionroot}/addnew2?return.url=" + returnURL;
+		window.location=url;
+	}	
+	
 </script>
-</html>
+<!--END FORM-->
+

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		No se encontraron registros
+	</summary>
+	
+	<log>false</log>
+
+	<set-request-attribute id="help.msg" value="Ayuda en línea para la página NO SE ENCONTRARON..." />
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>message.htm</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+	</output>
+
+</config>

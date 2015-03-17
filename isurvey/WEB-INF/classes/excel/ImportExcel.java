@@ -131,12 +131,13 @@ public class ImportExcel extends GenericTableManager  {
                             rs.setValue("nombre_participante", columna2.getContents());
                             rs.setValue("apellido_participante", columna3.getContents());
                             rs.setValue("email_participante", columna4.getContents());
-                            rs.setValue("cargo", columna5.getContents());
-                            rs.setValue("supervisor", columna6.getContents());
+                            rs.setValue("empresa", columna5.getContents());
+                            rs.setValue("cargo", columna6.getContents());
+                            rs.setValue("supervisor", columna7.getContents());
 
-                            if (!columna7.getContents().equals(""))
+                            if (!columna8.getContents().equals(""))
                             {
-                                Date dcolum2 = ValidatorUtil.testDate(columna7.getContents(), "dd-MM-yy");
+                                Date dcolum2 = ValidatorUtil.testDate(columna8.getContents(), "dd-MM-yy");
                                 if (dcolum2!=null)
                                     rs.setValue("fecha_nacimiento", dcolum2);
                                 else{
@@ -145,9 +146,9 @@ public class ImportExcel extends GenericTableManager  {
                                 }
                             }
 
-                            if (!columna8.getContents().equals(""))
+                            if (!columna9.getContents().equals(""))
                             {
-                                Date dcolum3 = ValidatorUtil.testDate(columna8.getContents(), "dd-MM-yy");
+                                Date dcolum3 = ValidatorUtil.testDate(columna9.getContents(), "dd-MM-yy");
                                 if (dcolum3!=null)
                                     rs.setValue("fecha_ingreso", dcolum3);
                                 else{
@@ -155,10 +156,10 @@ public class ImportExcel extends GenericTableManager  {
                                     throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato Día-Mes-Año y use como separador el guión (-)");
                                 }
                             }
-                            if (columna9.getContents().equals("F") || columna9.getContents().equals("M"))
-                                rs.setValue("sexo", columna9.getContents());
-                            rs.setValue("tipo_nomina", columna10.getContents());
-                            rs.setValue("supervisor", columna11.getContents());
+                            if (columna10.getContents().equals("F") || columna10.getContents().equals("M"))
+                                rs.setValue("sexo", columna10.getContents());
+                            rs.setValue("tipo_nomina", columna11.getContents());
+                            rs.setValue("supervisor", columna12.getContents());
 
             }
             catch (Throwable a)

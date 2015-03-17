@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Recuperar los datos de un usuario de un directorio LDAP dado su Login
+	</summary>
+	
+	<log>false</log>
+	
+	<transaction>
+		<classname>domain.security.ldap.GetUser</classname>
+		<validator>true</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+	</transaction>
+	
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>datos.js</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/javascript</content-type>
+		<print mode="form" recordset="ldap"/>
+	</output>
+
+	<!--atributo que usamos para obtener nombre y apellido del usuario-->
+	<ldap-attribute>cn</ldap-attribute>
+	
+</config>

@@ -12,11 +12,10 @@
 	<set-request-attribute id="display" value=""/>
 	
 	<transaction>
-		<classname>dinamica.GenericTransaction</classname>
-		<validator session="true">true</validator>
+		<classname>domain.utils.SessionAttribute</classname>
+		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="roles.sql" source="sql" scope="transaction" />
 	</transaction>
 	
 	<output>
@@ -24,7 +23,6 @@
 		<template>/WEB-INF${def:actionroot}/template.htm</template>
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
-		<print mode="table" recordset="roles.sql" tag="role-list" />
 		<print mode="clear" />
 	</output>
 

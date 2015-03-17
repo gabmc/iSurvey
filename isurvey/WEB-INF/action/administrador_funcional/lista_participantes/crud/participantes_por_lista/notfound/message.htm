@@ -1,8 +1,30 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>Ver Participantes en Lista de Participantes</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Ver Participantes</div>
+	${req:progress}
+</div>
+<br>
 <div align="center">
 <h3>No hay registros cargados.</h3>
 <input type="button" value="Regresar" onclick="goBack()">
 </div>
-
+</body>
 <script type="text/javascript">
 	
 	function goBack()
@@ -14,5 +36,8 @@
 	}
 
 </script>
+
+
+
 
 

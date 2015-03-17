@@ -24,6 +24,7 @@
                 <col id='nombre_participante' label='Nombre' />
 		<col id='apellido_participante' label='Apellido' />
 		<col id='email_participante' label='e-mail' />
+		<col id='empresa' label='Empresa' />
 		<col id='cargo' label='Cargo' />
 		<col id='supervisor' label='Supervisor' />
 		<col id='fecha_nacimiento' label='Fecha de Nacimiento' />

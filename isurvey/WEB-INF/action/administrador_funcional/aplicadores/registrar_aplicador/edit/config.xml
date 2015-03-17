@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Usuario - Editar registro
+	</summary>
+	
+	<log>false</log>
+
+	<set-request-attribute id="form.action" value="update"/>
+	<set-request-attribute id="form.mode" value="Editar Usuario"/>
+	<set-request-attribute id="display" value="none"/>
+
+	<transaction>
+		<classname>domain.utils.SessionAttribute</classname>
+		<validator>true</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="getrecord.sql" source="sql" scope="transaction" />
+		<recordset id="roles.sql" source="sql" scope="transaction" />
+		<recordset id="userroles.sql" source="sql" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>/WEB-INF${def:actionroot}/template.htm</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+		<print mode="table" recordset="roles.sql" tag="role-list" />
+		<print mode="checkbox" recordset="userroles.sql" control="role_id" />
+		<print mode="checkbox" recordset="getrecord.sql" control="force_newpass" />
+		<print mode="combo" recordset="getrecord.sql" control="pwd_policy" />
+		<print mode="combo" recordset="getrecord.sql" control="locale" />
+		<print mode="form" recordset="getrecord.sql" />
+	</output>
+
+</config>

@@ -10,7 +10,7 @@
 	<!--soporte de auditoria-->
 	<audit>
 		<!--de donde saca los datos, por defecto es "_request"-->
-		<recordset>query.sql</recordset>
+		<recordset></recordset>
 		<!--que campos extrae para el registro descriptivo-->
 		<cols>
 			<colname>userlogin</colname>	
@@ -25,23 +25,21 @@
 			la columna que contiene el pkey, si es query, 
 			el alias del campo debe ser "id"
 		-->
-		<pkey>user_id</pkey>
+		<pkey params="insert.sql">select ${fld:insert.sql.lastid} as id</pkey>
 	</audit>
 	
 	<colname>role_id</colname>
-	<sql-template>insert-roles.sql</sql-template>
+	<sql-template params="insert.sql">insert-roles.sql</sql-template>
 	
 	<transaction>
 		<classname>domain.admin.InsertMaster</classname>
-		<validator session="true">true</validator>
+		<validator>true</validator>
 		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>
-                <recordset id="abc" source="session" scope="transaction" />
 	</transaction>
 
 	<query>insert.sql</query>
-	<query>insert-passlog.sql</query>
-       
+	<query params="insert.sql">insert-passlog.sql</query>
 
 	<output>
 		<classname>dinamica.GenericOutput</classname>
@@ -49,8 +47,6 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
-                <print mode="form" recordset="abc" />
-
 	</output>
 
 </config>

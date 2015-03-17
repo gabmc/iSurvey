@@ -1,28 +1,31 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
-<config nodb="true">
+
+<config>
 
 	<summary>
-		Ver resultado de consulta paginado
+		View Recordset in paged view
 	</summary>
-
-	<log>false</log>
 	
-	<set-request-attribute id="controls" value="file:/WEB-INF/action/pagecontrols/controls.htm"/>
+	<log>false</log>
+
+	<set-request-attribute id="paging.recordset" value="user.results" />
+	<set-request-attribute id="paging.action.uri" value="${def:actionroot}/view" />
 
 	<transaction>
 		<classname>dinamica.GenericTransaction</classname>
 		<validator>false</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="query-aplicador.sql" source="session" scope="transaction" />
+		<recordset id="user.results" source="session" scope="transaction" />
 	</transaction>
 
 	<output>
 		<classname>dinamica.GenericOutput</classname>
 		<template>template.htm</template>
 		<set-http-headers>true</set-http-headers>
-		<content-type>text/plain; charset=iso-8859-1</content-type>
-		<print mode="table" recordset="query-aplicador.sql" tag="rows" alternate-colors="true" />
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+		<print mode="table" recordset="user.results" tag="rows" pagesize="8" alternate-colors="true" />
 	</output>
 
 </config>

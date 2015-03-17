@@ -1,51 +1,132 @@
-<!--data grid-->
-<table class="grid" width="700px">
+<html>
 
-	<!--toolbar-->
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>iSurvey</title>
+</head>
+
+<body>
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+<center>
+[<a href="javascript:openPDF()">Exportar a PDF</a>]
+
+<br><br>
+</center>
+
+<!--start of navigation controls-->
+${inc:/action/paging-ctls}
+<!--end of navigation controls-->
+
+<center>
+
+<!--START GRID-->
+<table class="grid" width="80%" cellspacing="1">
+	
 	<tr>
-		<th colspan="12">
-			<!--tï¿½tulo del grid--> 
-			<span style="float: left;">Contenido de la tabla </span>
-			<!--panel de control de navegacion--> 
-			<span style="float: right;">${req:controls}</span> 
-			<!--indicador de progreso-->
-			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
-			<!--toolbar del grid-->
-			<span style="float: left; margin-left: 40px">
-				<img src="${def:context}/images/reload.gif" onclick="search()" title="Recargar data" class="tool">
-				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
-				<img src="${def:context}/images/excel.gif" onclick="openExcel()" title="Exportar a Excel" class="tool">
-			</span>
-		</th>
+	<th colspan="4"></th>
+	<th width="20%">Login de Usuario</th>
+	<th width="20%">Apellido</th>
+	<th width="15%">Nombre</th>
+	<th width="40%">Email</th>
+	<th width="10%">Tipo</th>
 	</tr>
-
-	<!--encabezados-->
-	<tr>
-		<th colspan="2"></th>
-                <th width="10%"><a href="javascript:onclick=sortBy('id_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('nombre_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('apellido_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('email_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('cargo','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Cargo</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('supervisor','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Supervisor</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('fecha_nacimiento','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Fecha de Nacimiento</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('fecha_ingreso','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Fecha de Ingreso</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('sexo','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Sexo</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('tipo_nomina','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Tipo de N&oacute;mina</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('funcion','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Funci&oacute;n</a></th>
-
-	</tr>
-
-	<!--data-->
+	
 	<rows>
-	<tr ${fld:_rowStyle}>
-		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_participante}')" title="Eliminar"></td>
-		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_participante}')" class="tool" title="Editar"></td>
-		<td align="center">${fld:fname}</td>
-                <td align="left">${fld:lname}</td>
-		<td align="left">${fld:userlogin}</td>
-                <td align="left">${fld:email}</td>    
+	<tr>
+		<td align="center" ${fld:_rowStyle}>
+			<img class="tool" src="${def:context}/images/table/edit.png" title="Editar registro"
+				onclick="onEdit(${fld:user_id})">
+		</td>
+		<td align="center" ${fld:_rowStyle}>
+			<img class="tool" src="${def:context}/images/table/delete.png" title="Eliminar registro"
+				onclick="onDelete(${fld:user_id})">
+		</td>
+		<td align="center" ${fld:_rowStyle}>
+			<img class="tool" src="${def:context}/images/table/block.png" title="Bloquear usuario"
+				onclick="onBlock(${fld:user_id})">
+		</td>
+		<td align="center" ${fld:_rowStyle}>
+			<img class="tool" src="${def:context}/images/table/encrypted.png" title="Reestablecer contraseña de usuario"
+				onclick="onResetPwd(${fld:user_id})">
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:userlogin}
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:lname}
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:fname}
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:email}
+		</td>
+		<td ${fld:_rowStyle}>
+			${fld:tipo}
+		</td>
 	</tr>
 	</rows>
-
+	
 </table>
+<!--END GRID-->
+
+	<br>
+
+	<input type="button"
+	onclick="window.location='${def:context}${def:actionroot}/filter'"
+	value="Buscar nuevamente">
+
+</center>
+
+<script language="javascript">
+
+	function onDelete(id, rowNum)
+	{
+		if (window.confirm("Eliminar registro?")==true)
+		{
+			var returnURL = "${def:context}${def:actionroot}/view?pagenumber=" + currentPage
+			var url = "${def:context}${def:actionroot}/delete?id=" + id + "&return.url=" + returnURL;
+			window.location=url;
+		}
+	}
+	
+	function onEdit(id)
+	{
+		var returnURL = "${def:context}${def:actionroot}/filter"
+		var url = "${def:context}${def:actionroot}/editrediret?id=" + id + "&return.url=" + returnURL;
+		window.location=url;
+	}
+
+	function onBlock(id)
+	{
+		if (window.confirm("Bloquear este usuario?")==true)
+		{
+			var returnURL = "${def:context}${def:actionroot}/view?pagenumber=" + currentPage
+			var url="${def:context}${def:actionroot}/disable?id=" + id + "&return.url=" + returnURL;
+			window.location=url;
+		}
+	}
+	
+	function onResetPwd(id)
+	{
+		var returnURL = "${def:context}${def:actionroot}/view?pagenumber=" + currentPage
+		var url="${def:context}${def:actionroot}/newpass/form?id=" + id + "&return.url=" + returnURL;
+		window.location=url;
+	}	
+	
+	function openPDF()
+	{	
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+	
+</script>
+
+</body>
+
+</html>
