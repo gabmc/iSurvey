@@ -23,7 +23,7 @@
 	<tr>
 		<th colspan="2"></th>
 		<th width="50%"><a href="javascript:onclick=sortBy('nombre_lista_participantes','query-listaparticipantes.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-		<th width="50%"><a href="javascript:onclick=sortBy('tipo','query-listaparticipantes.sql')" title="Haga CLICK para ordenar por esta columna">Tipo</a></th>
+		<th width="50%"><a href="javascript:onclick=sortBy('estudio','query-listaparticipantes.sql')" title="Haga CLICK para ordenar por esta columna">Estudio</a></th>
 
 	</tr>
 
@@ -32,8 +32,8 @@
 	<tr ${fld:_rowStyle}>
 		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_lista_participantes}')" title="Eliminar"></td>
 		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_lista_participantes}')" class="tool" title="Editar"></td>
-		<td align="center">${fld:nombre_lista_participantes}</td>
-		<td align="center">${fld:tipo}</td>
+		<td align="center"><a href="participantes_por_lista/form?id_lista=${fld:id_lista_participantes}">${fld:nombre_lista_participantes}</a></td>
+		<td align="center">${fld:estudio}</td>
 
 	</tr>
 	</rows>

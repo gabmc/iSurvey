@@ -1,5 +1,5 @@
 select
-	ajvieira_isurvey_app.lista_participantes.*
+	ajvieira_isurvey_app.lista_participantes.*, ajvieira_isurvey_app.estudio.nombre_estudio as estudio
 from 
 	ajvieira_isurvey_app.lista_participantes, ajvieira_isurvey_app.int_lista_participantes_estudio, 
 	ajvieira_isurvey_app.estudio

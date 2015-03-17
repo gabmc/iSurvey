@@ -49,14 +49,19 @@
 			<input id="nombre_lista_participantes" name="nombre_lista_participantes" type="text" size="30" maxlength="30">
 		</td>
 	</tr>
-	<tr>
-		<td class="formlabel required">Tipo</td>
+		<tr>
+		<td class="formlabel">Estudio</td>
 		<td>
-                    <label>Temporal</label><input id="tipo" name="tipo" type="radio" value="TEMP">
-                    <label>Permanente</label><input id="tipo2" name="tipo" type="radio" value="PERM">
+			<!--almacena el ID del item seleccionado--> 
+			<input type="hidden" name="id_estudio" id="id_estudio" /> 
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_estudio_name" id="id_estudio_name" style="width: 80%;" readonly /> 
+			<!--botones del picklist--> 
+			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdEstudio();" title="Seleccionar item" /> 
+			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_estudio.value='';document.form1.id_estudio_name.value='';"
+				title="Borrar valor seleccionado" />
 		</td>
 	</tr>
-
 
 	<!--separador-->
 	<tr height="10px">
@@ -237,6 +242,11 @@
 		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
 		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
 		var w = window.open(url, null, features);
+	}
+
+	function pickIdEstudio(){
+		var url = "${def:context}/action/administrador_funcional/lista_participantes/picklist_estudio/form";
+		pickOpen ('id_estudio_name','id_estudio',url,'450','335');	
 	}
 </script>
 

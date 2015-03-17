@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator id="asd">
+	<parameter id="id_lista" type="integer" required="true" label="id de la lista"/>
+</validator>

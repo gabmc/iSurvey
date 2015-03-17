@@ -3,7 +3,7 @@
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="12">
+		<th colspan="14">
 			<!--t�tulo del grid--> 
 			<span style="float: left;">Contenido de la tabla </span>
 			<!--panel de control de navegacion--> 
@@ -26,6 +26,7 @@
 		<th width="10%"><a href="javascript:onclick=sortBy('nombre_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('apellido_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('email_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('empresa','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Empresa</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('cargo','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Cargo</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('supervisor','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Supervisor</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('fecha_nacimiento','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Fecha de Nacimiento</a></th>
@@ -45,6 +46,7 @@
                 <td align="left">${fld:nombre_participante}</td>
 		<td align="left">${fld:apellido_participante}</td>
 		<td align="left">${fld:email_participante}</td>
+		<td align="left">${fld:empresa}</td>
 		<td align="left">${fld:cargo}</td>
 		<td align="left">${fld:supervisor}</td>
 		<td align="center">${fld:fecha_nacimiento@dd-MM-yyyy}</td>

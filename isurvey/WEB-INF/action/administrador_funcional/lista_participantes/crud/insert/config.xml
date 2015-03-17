@@ -10,11 +10,12 @@
 	<transaction>
 		<classname>dinamica.GenericTableManager</classname>
 		<validator>true</validator>
-		<transaction>false</transaction>
+		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>
 	</transaction>
 
 	<query>insert.sql</query>
+	<query>insert2.sql</query>
 	
 	<output>
 		<classname>dinamica.GenericOutput</classname>
