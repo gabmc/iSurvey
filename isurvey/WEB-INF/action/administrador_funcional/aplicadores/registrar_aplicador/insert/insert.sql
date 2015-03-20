@@ -18,6 +18,6 @@ ${fld:email},
 1,
 ${fld:pwd_policy},
 ${fld:force_newpass}, 
-${fld:locale}, 
+'es', 
 id_empresa 
 from ${schema}s_user where userlogin = '${def:user}'

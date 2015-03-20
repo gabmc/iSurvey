@@ -1,4 +1,4 @@
-insert into participante
+insert into ajvieira_isurvey_app.participante
 (
 	id_participante,
         nombre_participante,

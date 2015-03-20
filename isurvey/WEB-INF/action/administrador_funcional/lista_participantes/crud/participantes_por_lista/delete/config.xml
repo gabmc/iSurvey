@@ -2,19 +2,20 @@
 <config>
 
 	<summary>
-		Agregar Participante(s) a Lista
+		Eliminar registro de una tabla
 	</summary>
 
 	<log>false</log>
-	
-	<set-request-attribute id="progress" value="file:/WEB-INF/action/progress/progress.htm"/>
 
 	<transaction>
-		<classname>admin_funcional.agregarParticipante</classname>
-		<validator>false</validator>
+		<classname>dinamica.GenericTableManager</classname>
+		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
+
 	</transaction>
+
+	<query>delete.sql</query>
 
 	<output>
 		<classname>dinamica.GenericOutput</classname>

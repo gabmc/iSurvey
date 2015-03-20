@@ -49,7 +49,7 @@
 
 	<!--encabezados-->
 	<tr>
-		<th colspan="2"></th>
+		<th colspan="1"></th>
                 <th width="10%"><a href="javascript:onclick=sortBy('id_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('nombre_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('apellido_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
@@ -68,8 +68,7 @@
 	<!--data-->
 	<rows>
 	<tr ${fld:_rowStyle}>
-		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_participante}')" title="Eliminar"></td>
-		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_participante}')" class="tool" title="Editar"></td>
+		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_participante}', '${fld:id_lista_participantes}')" title="Eliminar"></td>
 		<td align="center">${fld:id_participante}</td>
 		<td align="left">${fld:nombre_participante}</td>
 		<td align="left">${fld:apellido_participante}</td>
@@ -199,7 +198,7 @@
 	}
 	
 	//eliminar un registro
-	function deleteRecord(id)
+	function deleteRecord(idParticipante, idLista)
 	{
 		if (window.confirm("�Est� seguro que desea ELIMINAR este registro?")==false)
 		{
@@ -208,7 +207,7 @@
 		
 			//llamada Ajax...
 			ajaxCall(httpMethod="GET", 
-							uri="${def:actionroot}/delete?id=" + id,
+							uri="${def:actionroot}/delete?id_participante=" + idParticipante + "&id_lista=" + idLista,
 							divResponse=null, 
 							divProgress="status", 
 							formName=null, 

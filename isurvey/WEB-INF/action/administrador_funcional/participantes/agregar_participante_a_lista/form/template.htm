@@ -198,8 +198,8 @@ $.extend( $.fn.dataTable.defaults, {
 
             function insertarParticipantes(){
                 var rows = $("#tablaB").dataTable().fnGetNodes();
-                if (document.form1.id_lista_participantes_name == null){
-                    alert("Disculpe, debe seleccionar la lista a donde pertenecer&aacute;n los participantes.");
+                if (document.form1.id_lista_participantes.value == ""){
+                    alert("Disculpe, debe seleccionar la lista a donde perteneceran los participantes.");
                     return false;
                 }
                 if(rows.length > 0){

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AdminDinamica</name>
-	<comment>Dinamica security administrator console</comment>
+	<name>iSurvey</name>
+	<comment>iSurvey app</comment>
 	<projects>
 	</projects>
 	<buildSpec>

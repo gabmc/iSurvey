@@ -1,3 +1,26 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>Consulta de Participantes</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Consulta de Participantes</div>
+</div>
+
+<br>
+
 <!--data grid-->
 <table class="grid" width="700px">
 
@@ -21,32 +44,29 @@
 
 	<!--encabezados-->
 	<tr>
-		<th colspan="2"></th>
-		<th width="8%"><a href="javascript:onclick=sortBy('nombre_lista_participantes_pl0','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Lista a la que pertenece</a></th>
+		<th width="8%"><a href="javascript:onclick=sortBy('cedula_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
 		<th width="8%"><a href="javascript:onclick=sortBy('nombre_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
 		<th width="8%"><a href="javascript:onclick=sortBy('apellido_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
-		<th width="8%"><a href="javascript:onclick=sortBy('cedula_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">C&acute;edula</a></th>
 		<th width="8%"><a href="javascript:onclick=sortBy('email_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
+		<th width="8%"><a href="javascript:onclick=sortBy('empresa','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Empresa</a></th>
 		<th width="8%"><a href="javascript:onclick=sortBy('cargo','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Cargo</a></th>
 		<th width="8%"><a href="javascript:onclick=sortBy('supervisor','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Supervisor</a></th>
 		<th width="8%"><a href="javascript:onclick=sortBy('fecha_nacimiento','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Fecha de Nacimiento</a></th>
 		<th width="8%"><a href="javascript:onclick=sortBy('fecha_ingreso','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Fecha de Ingreso</a></th>
 		<th width="8%"><a href="javascript:onclick=sortBy('sexo','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Sexo</a></th>
-                <th width="8%"><a href="javascript:onclick=sortBy('tipo_nomina','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Tipo N&acute;omina</a></th>
-                <th width="8%"><a href="javascript:onclick=sortBy('funcion','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Funci&acute;on</a></th>
+                <th width="8%"><a href="javascript:onclick=sortBy('tipo_nomina','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Tipo N&oacute;omina</a></th>
+                <th width="8%"><a href="javascript:onclick=sortBy('funcion','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Funci&oacute;on</a></th>
 
 	</tr>
 
 	<!--data-->
 	<rows>
 	<tr ${fld:_rowStyle}>
-		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_participante}')" title="Eliminar"></td>
-		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_participante}')" class="tool" title="Editar"></td>
-		<td>${fld:nombre_lista_participantes_pl0}</td>
+		<td align="left">${fld:id_participante}</td>
 		<td align="left">${fld:nombre_participante}</td>
 		<td align="left">${fld:apellido_participante}</td>
-		<td align="left">${fld:cedula_participante}</td>
 		<td align="left">${fld:email_participante}</td>
+		<td align="left">${fld:empresa}</td>
 		<td align="left">${fld:cargo}</td>
 		<td align="left">${fld:supervisor}</td>
 		<td align="center">${fld:fecha_nacimiento@dd-MM-yyyy}</td>

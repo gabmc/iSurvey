@@ -1,0 +1,2 @@
+select * 
+from ajvieira_isurvey_app.int_participante_lista_participantes

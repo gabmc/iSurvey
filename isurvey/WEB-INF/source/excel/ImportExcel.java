@@ -72,6 +72,7 @@ public class ImportExcel extends GenericTableManager  {
         rs.append("nombre_participante", java.sql.Types.VARCHAR);
         rs.append("apellido_participante", java.sql.Types.VARCHAR);
         rs.append("email_participante", java.sql.Types.VARCHAR);
+        rs.append("empresa", java.sql.Types.VARCHAR);
         rs.append("cargo", java.sql.Types.VARCHAR);
         rs.append("supervisor", java.sql.Types.VARCHAR);
         rs.append("fecha_nacimiento", java.sql.Types.DATE);
@@ -106,6 +107,7 @@ public class ImportExcel extends GenericTableManager  {
                     Cell columna9 = sheet.getCell(8,i);
                     Cell columna10 = sheet.getCell(9,i);
                     Cell columna11 = sheet.getCell(10,i);
+                    Cell columna12 = sheet.getCell(11,i);
 
                     //la celda esta vacia?
                     if (columna1.getContents() == null || columna1.getContents().equals(""))
@@ -210,6 +212,7 @@ public class ImportExcel extends GenericTableManager  {
                 "nombre_participante",
                 "apellido_participante",
                 "email_participante",
+                "empresa",
                 "cargo",
                 "supervisor",
                 "fecha_nacimiento",
@@ -223,12 +226,13 @@ public class ImportExcel extends GenericTableManager  {
         String sql = getSQL(getResource("insert.sql"), inputParams);
 
         //ejecutar en Batch
-        getDb().execBatch(sql, rs, params);
-        getDb().commit();
+        //getDb().execBatch(sql, rs, params);
+        //getDb().commit();
 
         Map parametros = this.getRequest().getParameterMap();
         String idLista = ((String[]) parametros.get("id_lista_participantes"))[0];
-        String query = StringUtil.replace(getResource("insert_int_participante_lista.sql"), "{{id_participante}}", rs.getString("id_participante"));
+        String query = StringUtil.replace(getResource("insert_int_participante_lista.sql"), 
+            "{{id_participante}}", rs.getString("id_participante"));
         query = StringUtil.replace(query, "{{id_lista_participantes}}", idLista);
         getDb().exec(query);
         getDb().commit();

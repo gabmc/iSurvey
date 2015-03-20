@@ -1,4 +1,4 @@
 select
 	id_participante
 from
-	participante
+	ajvieira_isurvey_app.participante
