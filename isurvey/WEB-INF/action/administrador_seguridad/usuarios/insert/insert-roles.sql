@@ -6,5 +6,5 @@ insert into ${schema}s_user_role
 values 
 (
 	${fld:insert.sql.lastid},
-	${fld:role_id}
+	503
 )

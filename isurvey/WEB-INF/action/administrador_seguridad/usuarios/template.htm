@@ -90,18 +90,10 @@ ${inc:${def:actionroot}/header}
 		<td valign="top" class="formlabel required">Roles de Usuario </td>
 		<td>
 			<role-list>
-			<input name="role_id" type="checkbox" value="${fld:role_id}"> ${fld:app_alias}/${fld:description}<br>
+			<input name="role_id" type="checkbox" value="${fld:role_id}"> 
+			${fld:description}<br>
 			</role-list>
-		</td>
-	</tr>
-
-	<tr>
-		<td class="formlabel">Idioma predeterminado</td>
-		<td>
-			<select name="locale">
-				<option value="es">Español</option>
-				<option value="en">Inglés</option>
-			</select>
+<input type="text" name="locale" value="es" hidden>
 		</td>
 	</tr>			
 				

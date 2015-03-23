@@ -21,9 +21,6 @@
 		<set-http-headers>false</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
-		<!--add your own data bindings below this comment-->
-		<print mode="table" recordset="roles.sql" tag="rows"/>
-		<print mode="combo" control="role_id" recordset="user.filter"/>
 		<!--standard data bindings - do not remove-->
 		<print mode="form" recordset="user.filter"/>
 		<print mode="combo" control="orderby" recordset="user.filter"/>

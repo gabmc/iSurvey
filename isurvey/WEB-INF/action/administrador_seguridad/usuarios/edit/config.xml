@@ -31,7 +31,6 @@
 		<print mode="checkbox" recordset="userroles.sql" control="role_id" />
 		<print mode="checkbox" recordset="getrecord.sql" control="force_newpass" />
 		<print mode="combo" recordset="getrecord.sql" control="pwd_policy" />
-		<print mode="combo" recordset="getrecord.sql" control="locale" />
 		<print mode="form" recordset="getrecord.sql" />
 	</output>
 
