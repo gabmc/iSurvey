@@ -126,7 +126,13 @@
 	<context-param>
 		<description>Default footer for PDF reports</description>
 		<param-name>pdf-footer</param-name>
-		<param-value>Dinámica- Sistema de Seguridad</param-value>
+		<param-value>iSurvey</param-value>
+	</context-param>
+
+	  <context-param>
+		<description>Default date format for PDF report footer</description>
+		<param-name>pdf-dateformat</param-name>
+		<param-value>dd-MM-yyyy HH:mm</param-value>
 	</context-param>
 
 	<context-param>
@@ -366,6 +372,14 @@
 		</init-param>
    	</filter>
 
+   	<!--file upload filter-->
+	
+	<filter>
+		<description>File Upload Filter</description>
+		<filter-name>UploadFilter</filter-name>
+		<filter-class>dinamica.upload.MultipartRequestFilter</filter-class>
+	</filter>
+
 	<!--performance log filter-->
 	<!--UNCOMMENT THIS BLOCK TO ENABLE APP-LEVEL PERFORMANCE LOG
 	<filter>
@@ -423,6 +437,13 @@
    	</filter-mapping>
 	-->
 	 
+	<!--upload filter mapping-->
+	
+	<filter-mapping>
+		<filter-name>UploadFilter</filter-name>
+		<url-pattern>/action/administrador_funcional/participantes/importar_exportar/importexcel/insert</url-pattern>
+	</filter-mapping>
+	
 	<!-- 
 	<filter-mapping>
 		<filter-name>AllowHostFilter</filter-name>

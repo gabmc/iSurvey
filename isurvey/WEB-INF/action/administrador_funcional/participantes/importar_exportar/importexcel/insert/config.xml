@@ -16,7 +16,7 @@
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
 		<recordset id="participante.sql" source="sql" scope="transaction" />
-		<recordset id="int_participante_lista_participantes.sql" source="sql" scope="transaction" />
+		
 	</transaction>
 
 	<output>

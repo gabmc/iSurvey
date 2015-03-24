@@ -1,5 +1,5 @@
 select
-	participante.*
+	distinct participante.*
 from
 	ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_lista_participantes,
 	ajvieira_isurvey_app.lista_participantes, ajvieira_isurvey_app.int_lista_participantes_estudio,
