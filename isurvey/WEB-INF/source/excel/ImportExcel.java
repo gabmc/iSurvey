@@ -85,7 +85,7 @@ public class ImportExcel extends GenericTableManager  {
         int columnas = sheet.getColumns();
 
         //numero de columnas del archivo es igual a 10?
-        if (columnas == 11)
+        if (columnas == 12)
         {
             //mientras exista registros
             for(int i = 1; i<numOfRows;i++)
@@ -226,8 +226,8 @@ public class ImportExcel extends GenericTableManager  {
         String sql = getSQL(getResource("insert.sql"), inputParams);
 
         //ejecutar en Batch
-        //getDb().execBatch(sql, rs, params);
-        //getDb().commit();
+        getDb().execBatch(sql, rs, params);
+        getDb().commit();
 
         Map parametros = this.getRequest().getParameterMap();
         String idLista = ((String[]) parametros.get("id_lista_participantes"))[0];
