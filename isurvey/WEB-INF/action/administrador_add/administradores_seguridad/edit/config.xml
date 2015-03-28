@@ -27,11 +27,11 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
-		<print mode="table" recordset="roles.sql" tag="role-list" />
+		
 		<print mode="checkbox" recordset="userroles.sql" control="role_id" />
 		<print mode="checkbox" recordset="getrecord.sql" control="force_newpass" />
 		<print mode="combo" recordset="getrecord.sql" control="pwd_policy" />
-		<print mode="combo" recordset="getrecord.sql" control="locale" />
+		
 		<print mode="form" recordset="getrecord.sql" />
 	</output>
 

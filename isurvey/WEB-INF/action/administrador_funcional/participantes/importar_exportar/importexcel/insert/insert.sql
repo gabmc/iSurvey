@@ -11,7 +11,8 @@ insert into ajvieira_isurvey_app.participante
         fecha_ingreso,
         sexo,
         tipo_nomina,
-        funcion
+        funcion,
+        id_empresa
 )
 values
 (
@@ -26,5 +27,6 @@ values
         ?,
         ?,
         ?,
-        ?
+        ?,
+        (select id_empresa from ajvieira_isurvey_security.s_user where userlogin = '${def:user}')
 )

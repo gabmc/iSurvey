@@ -11,10 +11,10 @@ INSERT INTO ajvieira_isurvey_app.participante
 	fecha_ingreso,
 	sexo,
 	tipo_nomina,
-	funcion
+	funcion,
+	id_empresa
 )
-VALUES
-(
+SELECT
 	${fld:id_participante},
 	${fld:nombre_participante},
 	${fld:apellido_participante},
@@ -26,5 +26,7 @@ VALUES
 	${fld:fecha_ingreso},
 	${fld:sexo},
 	${fld:tipo_nomina},
-	${fld:funcion}
-)
+	${fld:funcion},
+	id_empresa
+FROM
+	ajvieira_isurvey_security.s_user where userlogin = '${def:user}'

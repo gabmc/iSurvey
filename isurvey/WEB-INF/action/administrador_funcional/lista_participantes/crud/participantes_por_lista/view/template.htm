@@ -3,7 +3,7 @@
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="4">
+		<th colspan="13">
 			<!--t�tulo del grid--> 
 			<span style="float: left;">Contenido de la tabla </span>
 			<!--panel de control de navegacion--> 
@@ -21,19 +21,38 @@
 
 	<!--encabezados-->
 	<tr>
-		<th colspan="2"></th>
-		<th width="50%"><a href="javascript:onclick=sortBy('nombre_lista_participantes','query-listaparticipantes.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-		<th width="50%"><a href="javascript:onclick=sortBy('estudio','query-listaparticipantes.sql')" title="Haga CLICK para ordenar por esta columna">Estudio</a></th>
+		<th colspan="1"></th>
+        <th width="10%"><a href="javascript:onclick=sortBy('id_participante','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('nombre_participante','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('apellido_participante','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('email_participante','participantes.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('empresa','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Empresa</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('cargo','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Cargo</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('supervisor','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Supervisor</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('fecha_nacimiento','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Fecha de Nacimiento</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('fecha_ingreso','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Fecha de Ingreso</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('sexo','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Sexo</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('tipo_nomina','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Tipo de N&oacute;mina</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('funcion','participantes.sql')" title="Haga CLICK para ordenar por esta columna">Funci&oacute;n</a></th>
 
 	</tr>
 
 	<!--data-->
 	<rows>
 	<tr ${fld:_rowStyle}>
-		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_lista_participantes}')" title="Eliminar"></td>
-		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_lista_participantes}')" class="tool" title="Editar"></td>
-		<td align="center"><a href="participantes_por_lista/form?id_lista=${fld:id_lista_participantes}">${fld:nombre_lista_participantes}</a></td>
-		<td align="center">${fld:estudio}</td>
+		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord(${fld:id_participante}, '${fld:id_lista_participantes}', ${fld:id_empresa})" title="Eliminar"></td>
+		<td align="center">${fld:id_participante}</td>
+		<td align="left">${fld:nombre_participante}</td>
+		<td align="left">${fld:apellido_participante}</td>
+		<td align="left">${fld:email_participante}</td>
+		<td align="left">${fld:empresa}</td>
+		<td align="left">${fld:cargo}</td>
+		<td align="left">${fld:supervisor}</td>
+		<td align="center">${fld:fecha_nacimiento@dd-MM-yyyy}</td>
+		<td align="center">${fld:fecha_ingreso@dd-MM-yyyy}</td>
+		<td align="center">${fld:sexo}</td>
+		<td align="left">${fld:tipo_nomina}</td>
+		<td align="left">${fld:funcion}</td>
 
 	</tr>
 	</rows>

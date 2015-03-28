@@ -2,4 +2,5 @@
 <validator onerror="/action/error/validation/alert">
 	<parameter id="id_participante" type="integer" required="true" label="ID Participante" maxlen="10" />
 	<parameter id="id_lista" type="integer" required="true" label="ID Lista" maxlen="10" />
+	<parameter id="id_empresa" type="integer" required="true" label="ID Empresa"/>
 </validator>

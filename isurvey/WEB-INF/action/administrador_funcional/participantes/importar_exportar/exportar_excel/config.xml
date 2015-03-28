@@ -21,7 +21,7 @@
 	
 	<excel recordset='query-participantes.sql' sheetname='Listado de Participantes' filename='participantes.xls'>
 		<col id='id_participante' label='Identificador' />
-                <col id='nombre_participante' label='Nombre' />
+        <col id='nombre_participante' label='Nombre' />
 		<col id='apellido_participante' label='Apellido' />
 		<col id='email_participante' label='e-mail' />
 		<col id='empresa' label='Empresa' />

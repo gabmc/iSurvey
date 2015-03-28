@@ -1,26 +1,24 @@
-insert into ${schema}s_user 
-(
-	user_id,
-	userlogin,
-	passwd,
-	lname,
-	fname,
-	email,
-	enabled,
-	pwd_policy,
-	force_newpass,
-	locale
-)
-values 
-(
-	${seq:nextval@${schema}seq_user},
-	${fld:userlogin},
-	${fld:passwd},
-	${fld:lname},
-	${fld:fname},
-	${fld:email},
-	1,
-	${fld:pwd_policy},
-	${fld:force_newpass},
-	${fld:locale}
+INSERT INTO ${schema}s_user 
+	(userlogin, 
+	passwd, 
+	lname, 
+	fname, 
+	email, 
+	enabled, 
+	pwd_policy, 
+	force_newpass, 
+	locale,
+	id_empresa) 
+VALUES
+( 
+${fld:userlogin}, 
+${fld:passwd}, 
+${fld:lname}, 
+${fld:fname}, 
+${fld:email}, 
+1,
+${fld:pwd_policy},
+${fld:force_newpass}, 
+'es', 
+${fld:id_empresa} 
 )

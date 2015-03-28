@@ -227,13 +227,15 @@ public class ImportExcel extends GenericTableManager  {
 
         //ejecutar en Batch
         getDb().execBatch(sql, rs, params);
-        getDb().commit();
+        //getDb().commit();
 
         Map parametros = this.getRequest().getParameterMap();
         String idLista = ((String[]) parametros.get("id_lista_participantes"))[0];
         String query = StringUtil.replace(getResource("insert_int_participante_lista.sql"), 
             "{{id_participante}}", rs.getString("id_participante"));
         query = StringUtil.replace(query, "{{id_lista_participantes}}", idLista);
+        System.out.println("idLista: "+idLista);
+        System.out.println("query: "+query);
         getDb().exec(query);
         getDb().commit();
         return rc;

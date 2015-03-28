@@ -2,7 +2,7 @@
 
 <head>
 
-	<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
 	<title>iSurvey</title>
 	
 	<script language="javascript" src="${def:context}/action/script">
@@ -21,7 +21,7 @@ ${inc:${def:actionroot}/header}
 		<!--START FORM-->
 		<form name="form1" onsubmit="return valid()" action="${def:context}${def:actionroot}/${req:form.action}" method="POST">
 		
-		<table class="table table-bordered" width="70%">
+		<table class="formgrid" width="70%">
 		
 			<!--layout-->
 			<col width="40%"> <!--labels-->

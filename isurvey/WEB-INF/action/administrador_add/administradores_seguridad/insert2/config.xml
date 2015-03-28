@@ -10,7 +10,7 @@
 	<!--soporte de auditoria-->
 	<audit>
 		<!--de donde saca los datos, por defecto es "_request"-->
-		<recordset>query.sql</recordset>
+		<recordset></recordset>
 		<!--que campos extrae para el registro descriptivo-->
 		<cols>
 			<colname>userlogin</colname>	
@@ -25,11 +25,11 @@
 			la columna que contiene el pkey, si es query, 
 			el alias del campo debe ser "id"
 		-->
-		<pkey>user_id</pkey>
+		<pkey params="insert.sql">select ${fld:insert.sql.lastid} as id</pkey>
 	</audit>
 	
 	<colname>role_id</colname>
-	<sql-template>insert-roles.sql</sql-template>
+	<sql-template params="insert.sql">insert-roles.sql</sql-template>
 	
 	<transaction>
 		<classname>domain.admin.InsertMaster</classname>

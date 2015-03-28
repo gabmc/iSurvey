@@ -14,7 +14,6 @@
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="participantes.sql" source="sql" scope="transaction" on-empty-return="1"/>
 		<recordset id="lista.sql" source="sql" scope="transaction" />
 	</transaction>
 
@@ -25,7 +24,6 @@
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
 		<print mode="form" recordset="lista.sql" />
-		<print mode="table" recordset="participantes.sql" tag="rows" alternate-colors="true" />
 	</output>
 
 
