@@ -2,7 +2,9 @@
 
 <head>
 
-<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<!--<link rel="stylesheet" type="text/css" href="${def:context}/css/jquery.dataTables.css" />
+<link rel="stylesheet" type="text/css" href="${def:context}/css/jquery.dataTables_themeroller.css" />-->
 <script type="text/javascript" charset="utf-8" src="${def:context}/js/jquery.js"></script>
 <script type="text/javascript" language="javascript" charset="utf-8" src="${def:context}/js/jquery.dataTables.js"></script>
 <!--biblioteca generica JS/Dinamica-->
@@ -110,12 +112,11 @@
         </td>
     </tr>
 </table>
-<div id="inputs"></div>
-<input type="submit" value="Agregar Participantes" id="subm" align="center" />
+<br>
+<div id="inputs" align="center">
+    <input type="submit" value="Agregar Participantes" id="subm" align="center" />
+</div>
 </form>
-
-<!--panel de respuesta AJAX para el grid paginado-->
-<div id="response" style="display: none; width: 100%" align="center"></div>
 
 </body>
 
@@ -139,7 +140,21 @@ $.extend( $.fn.dataTable.defaults, {
                         { data: 'nombre' },
                         { data: 'apellido' },
                         { data: 'accion'}
-                    ]
+                    ],
+                    "language": {
+                        "lengthMenu": "Mostrar _MENU_ participantes por p&aacute;gina",
+                        "zeroRecords": "No se encontraron participantes registrados",
+                        "info": "P&aacute;gina _PAGE_ de _PAGES_",
+                        "infoEmpty": " ",
+                        "infoFiltered": "(filtrado de _MAX_ participantes totales)",
+                        "sLoadingRecords": "Cargando...",
+                        "sSearch": "Buscar: ",
+                        "sZeroRecords": "No se encontr&oacute; ning&uacute;n participante",
+                        "sProcessing": "Procesando",
+                        "sLoadingRecords": "Cargando... Por favor espere",
+                        "sPrevious": "Anterior",
+                        "sNext": "Siguiente"
+                    }
             });
             $('#tablaA').DataTable({
                     columns: [
