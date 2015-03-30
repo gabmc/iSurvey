@@ -24,6 +24,7 @@ public class agregarParticipante extends GenericTransaction {
         Map parametros = this.getRequest().getParameterMap();
 
         String idLista = ((String[]) parametros.get("id_lista_participantes"))[0];
+        String userlogin = ((String[]) parametros.get("userlogin"))[0];
         while(names.hasMoreElements()){
             String nombreCampo = (String) names.nextElement();
             if (nombreCampo.contains("cod_")){
@@ -32,6 +33,7 @@ public class agregarParticipante extends GenericTransaction {
                 if (finder(idParticipante, idLista) == false){
                     String sql = StringUtil.replace(getResource("insert.sql"), "{{id_participante}}", idParticipante);
                     sql = StringUtil.replace(sql, "{{id_lista_participantes}}", idLista);
+                    sql = StringUtil.replace(sql, "{{userlogin}}", userlogin);
                     getDb().exec(sql);
                 }
             }

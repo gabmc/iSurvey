@@ -161,7 +161,7 @@ public class ImportExcel extends GenericTableManager  {
                             if (columna10.getContents().equals("F") || columna10.getContents().equals("M"))
                                 rs.setValue("sexo", columna10.getContents());
                             rs.setValue("tipo_nomina", columna11.getContents());
-                            rs.setValue("supervisor", columna12.getContents());
+                            rs.setValue("funcion", columna12.getContents());
 
             }
             catch (Throwable a)
@@ -228,15 +228,26 @@ public class ImportExcel extends GenericTableManager  {
         //ejecutar en Batch
         getDb().execBatch(sql, rs, params);
         //getDb().commit();
-
+        rs.first();
         Map parametros = this.getRequest().getParameterMap();
         String idLista = ((String[]) parametros.get("id_lista_participantes"))[0];
+        String userlogin = ((String[]) parametros.get("userlogin"))[0];
+        
         String query = StringUtil.replace(getResource("insert_int_participante_lista.sql"), 
-            "{{id_participante}}", rs.getString("id_participante"));
-        query = StringUtil.replace(query, "{{id_lista_participantes}}", idLista);
-        System.out.println("idLista: "+idLista);
-        System.out.println("query: "+query);
-        getDb().exec(query);
+	            "{{id_participante}}", rs.getString("id_participante"));
+	        query = StringUtil.replace(query, "{{id_lista_participantes}}", idLista);
+	        query = StringUtil.replace(query, "{{userlogin}}", userlogin);
+	        System.out.println("id_participante: "+rs.getString("id_participante"));
+	        getDb().exec(query);
+        
+        while (rs.next()){
+	        query = StringUtil.replace(getResource("insert_int_participante_lista.sql"), 
+	            "{{id_participante}}", rs.getString("id_participante"));
+	        query = StringUtil.replace(query, "{{id_lista_participantes}}", idLista);
+	        query = StringUtil.replace(query, "{{userlogin}}", userlogin);
+	        System.out.println("id_participante: "+rs.getString("id_participante"));
+	        getDb().exec(query);
+        }
         getDb().commit();
         return rc;
 
