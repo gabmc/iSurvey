@@ -1,0 +1,188 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>Ver Listas Asociadas a Estudio</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Ver Listas de Participantes</div>
+	${req:progress}
+</div>
+<br>
+<div align="center">
+	<h2>Listas de Participantes Asociadas al estudio "${fld:nombre_estudio}"</h2>
+
+</div>
+<br>
+
+<!--panel de respuesta AJAX para el grid paginado-->
+<div id="response" style="display: none; width: 100%" align="center"></div>
+<br>
+<div align="center">
+<input type="button" value="Regresar" onclick="goBack()">
+</div>
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+	//inicializa cuando se carga la pagina
+	onload = function()
+	{
+		search(); //mostrar registros en vista paginada
+
+	} 
+	
+	
+	//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
+	function search()
+	{
+		var url = "${def:actionroot}/search";
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		//if (currentPage > 0)
+		url = "${def:actionroot}/search?currentpage=" + 1 + "&id_estudio=${fld:id_estudio}";	
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+
+
+	//traer la pagina N del grid
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		gotoPage(url);
+	}	
+	
+	
+	//grabar el formulario
+	function save()
+	{
+		//determina si es un insert o un update
+		if (document.form1.id.value=="")
+			return insert();
+		else
+			return update();
+	}
+
+	//grabar registro nuevo en BD
+	function insert()
+	{
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/insert", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	    	
+	}
+
+	//restaurar el formulario en caso de error
+	function retryAddnewOrEdit() {
+		document.getElementById("grabar").disabled=false;
+		setFocusOnForm("form1");		
+	}
+
+	//editar registro en formulario
+	function edit(id)
+	{
+			clearErrorMessages();
+
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/edit?id=" + id , 
+							divResponse=null, 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=null);	
+	}
+	
+	//actualizar registro en BD
+	function update()
+	{		
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/update", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	
+	}
+	
+	//eliminar un registro
+	function deleteRecord(idLista, idEstudio)
+	{
+		if (window.confirm("Esta seguro que desea remover la Lista seleccionada del Estudio?")==false)
+		{
+			return false;
+		}
+		
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/delete?id_lista=" + idLista + "&id_estudio=" + idEstudio,
+							divResponse=null, 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=null);	
+						
+	}
+	
+	
+	//invoca la generacion de un PDF en un popup
+	function openPDF()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//invoca la generacion de un Excel en un popup
+	function openExcel()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	function pickIdEstudio(){
+		var url = "${def:context}/action/administrador_funcional/lista_participantes/picklist_estudio/form";
+		pickOpen ('id_estudio_name','id_estudio',url,'450','335');	
+	}
+
+	function goBack()
+	{
+		if (window.opener==null)
+			history.back();
+		else
+			window.close();
+	}
+</script>
+
+</html>

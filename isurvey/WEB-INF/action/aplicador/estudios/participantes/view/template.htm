@@ -1,0 +1,53 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>Consulta de Participantes</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Consulta de Participantes</div>
+</div>
+
+<br>
+
+<!--data grid-->
+<table class="grid" width="700px" align="center">
+
+	<!--toolbar-->
+	<tr>
+		<th colspan="14">
+			<!--t�tulo del grid--> 
+			<span style="float: left;">Participantes del Estudio </span>
+			<!--indicador de progreso-->
+			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
+		</th>
+	</tr>
+
+	<!--encabezados-->
+	<tr>
+		<th width="8%"><a href="javascript:onclick=sortBy('id_participante','query-participante-aplicador.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
+		<th width="8%"><a href="javascript:onclick=sortBy('nombre_participante','query-participante-aplicador.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="8%"><a href="javascript:onclick=sortBy('apellido_participante','query-participante-aplicador.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center">${fld:id_participante}</td>
+		<td align="center">${fld:nombre_participante}</td>
+		<td align="center">${fld:apellido_participante}</td>
+	</tr>
+	</rows>
+
+</table>

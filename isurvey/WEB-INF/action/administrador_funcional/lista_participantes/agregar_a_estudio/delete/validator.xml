@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror="/action/error/validation/alert">
+	<parameter id="id_lista_participantes" type="integer" required="true" label="ID Participantes" />
+	<parameter id="id_estudio" type="integer" required="true" label="ID Estudio" />
+</validator>

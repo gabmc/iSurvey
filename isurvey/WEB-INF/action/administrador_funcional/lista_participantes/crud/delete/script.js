@@ -1,4 +1,4 @@
-alert ('El registro fue eliminado de la base de datos');
+alert ('La lista ha sido eliminada');
 addNew();
 search();
 

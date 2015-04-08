@@ -48,8 +48,11 @@ Para utilizar esta plantilla requiere descargar los siguiente archivos de Excel:
         	<tr>
             <th colspan="2"> Seleccione la Lista a donde pertenecer&aacute;n los Participantes </th>
 	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
+	</tr>
             <tr>
-		<td>
+		<td colspan="2" align="center">
 			<!--almacena el ID del item seleccionado-->
 			<input type="hidden" name="userlogin" id="userlogin" value="${def:user}" />
 			<input type="hidden" name="id_lista_participantes" id="id_lista_participantes" />
@@ -60,6 +63,9 @@ Para utilizar esta plantilla requiere descargar los siguiente archivos de Excel:
 			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_lista_participantes.value='';document.form1.id_lista_participantes_name.value='';"
 				title="Borrar valor seleccionado" />
 		</td>
+	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
 	</tr>
 	<tr>
 		<th colspan="2">
@@ -83,29 +89,16 @@ Para utilizar esta plantilla requiere descargar los siguiente archivos de Excel:
 	</tr>
 
 	<!--separador-->
-	<tr height="10px">
-		<td colspan="2"></td>
-	</tr>
-
-	<!--botones-->
-	<tr>
-		<td align="center" colspan="2">
-			<input type="submit" value="Grabar" class="button" name="submit">
-		</td>
-	</tr>
-	
-	<!--separador-->
-	<tr height="10px">
+	<tr height="5px">
 		<td colspan="2"></td>
 	</tr>
 
 </table>	
-
+	<!--botones-->
+<br>
+			<input type="submit" value="Importar" class="button" name="submit">
 <br>
 </form>
-
-<!--comandos-->
-[<a href="javascript:searchLote()">Ver lotes cargados</a>]
 
 </div>
 

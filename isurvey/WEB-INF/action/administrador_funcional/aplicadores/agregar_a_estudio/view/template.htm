@@ -21,7 +21,7 @@
 
 	<!--encabezados-->
 	<tr>
-		<th colspan="2"></th>
+		<th colspan="1"></th>
 		<th width="50%"><a href="javascript:onclick=sortBy('id_usuario','query-intestudiousuario.sql')" title="Haga CLICK para ordenar por esta columna">Aplicador</a></th>
 		<th width="50%"><a href="javascript:onclick=sortBy('nombre_estudio_pl0','query-intestudiousuario.sql')" title="Haga CLICK para ordenar por esta columna">Estudio</a></th>
 
@@ -30,8 +30,8 @@
 	<!--data-->
 	<rows>
 	<tr ${fld:_rowStyle}>
-		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_int_estudio_usuario}')" title="Eliminar"></td>
-		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_int_estudio_usuario}')" class="tool" title="Editar"></td>
+		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_estudio}', '${fld:id_usuario}')" title="Eliminar"></td>
+		<!--<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_int_estudio_usuario}')" class="tool" title="Editar"></td>-->
 		<td align="center">${fld:userlogin_p10}</td>
 		<td align="center">${fld:nombre_estudio_pl0}</td>
 

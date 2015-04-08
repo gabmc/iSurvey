@@ -1,3 +1,3 @@
-alert ('El registro fue añadido en la base de datos');
+alert ('La Lista ha sido guardada');
 addNew();
 search();

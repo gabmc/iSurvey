@@ -1,4 +1,4 @@
-alert ('El registro fue eliminado de la base de datos');
+alert ('El Aplicador ha sido removido del Estudio');
 addNew();
 search();
 

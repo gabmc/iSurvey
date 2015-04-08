@@ -1,5 +1,10 @@
-<script type="text/javascript">
-	onload = function(){
-			window.location = "http://localhost:8090/limesurvey/index.php/${fld:id_survey}/lang-es";
-		} 
+<h1>ANONIMO</h1>
+            <iframe frameborder="0"  src="http://localhost:8090/limesurvey/index.php/${fld:id_survey}/lang-es" width="95%" onload='javascript:resizeIframe(this);'>Tu Navegador no soporta esta caracteristica
+            </iframe>
+<script language="javascript" type="text/javascript">
+
+	function resizeIframe(obj) {
+	obj.style.height = 500;
+    //obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  } 
 </script>

@@ -10,6 +10,3 @@ from
 where
 	ajvieira_isurvey_app.estudio.id_estudio=ajvieira_isurvey_app.int_estudio_usuario.id_estudio
 	and ajvieira_isurvey_security.s_user.user_id = ajvieira_isurvey_app.int_estudio_usuario.id_usuario
-
-order by
-	id_int_estudio_usuario

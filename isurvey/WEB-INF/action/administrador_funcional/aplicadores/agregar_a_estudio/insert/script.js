@@ -1,3 +1,3 @@
-alert ('El registro fue anadido en la base de datos');
+alert ('El Aplicador fue agregado al Estudio');
 addNew();
 search();

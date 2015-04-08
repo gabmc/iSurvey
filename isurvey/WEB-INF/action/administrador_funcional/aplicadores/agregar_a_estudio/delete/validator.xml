@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <validator onerror="/action/error/validation/alert">
-	<parameter id="id" type="integer" required="true" label="ID" />
+	<parameter id="id_estudio" type="integer" required="true" label="ID Estudio" />
+	<parameter id="id_usuario" type="integer" required="true" label="ID Aplicador" />
 </validator>
