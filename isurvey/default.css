@@ -194,6 +194,19 @@
 	margin-bottom: 0px
 }
 
+.bannerGrande {
+	background-image: url(images/header-bg.gif);
+	background-repeat: repeat-x;
+	font-family: "Trebuchet MS", Verdana, Arial;
+	font-weight: bold;
+	font-size: 20pt;
+	padding: 3px;
+	border: 1px #eeeeee solid;
+	color: gray;
+	height: 60px; 
+	margin-bottom: 5px
+}
+
 /* regular tags */
 form {
 	margin: 0px;
