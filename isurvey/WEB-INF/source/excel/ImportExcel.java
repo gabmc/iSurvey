@@ -6,6 +6,8 @@ import jxl.*;
 import dinamica.*;
 import java.util.Map;
 
+import tokens_participantes.TokenGenerator;
+
 /**
  * Clase que lee una hoja de calculo de archivo Excel, la valida contra la
  * base de datos, verifica que los registros sean del tipo Date, Integer,
@@ -247,12 +249,24 @@ public class ImportExcel extends GenericTableManager  {
 	        query = StringUtil.replace(query, "{{userlogin}}", userlogin);
 	        System.out.println("id_participante: "+rs.getString("id_participante"));
 	        getDb().exec(query);
+	        
+////////////////////////////////////////////////////////
+        	Recordset instrumentos = getInstrumentos(idLista);
+        	instrumentos.top();
+        	while (instrumentos.next()){
+        		TokenGenerator tg = new TokenGenerator();
+    	        String token = tg.generarToken(rs.getString("id_participante"), instrumentos.getString("id_instrumento"));
+    	        if (findToken(token) == false){
+    		            String sql2 = StringUtil.replace(getResource("insert-token.sql"), "{{id_participante}}", rs.getString("id_participante"));
+    		            sql2 = StringUtil.replace(sql2, "{{id_instrumento}}", instrumentos.getString("id_instrumento"));
+    		            sql2 = StringUtil.replace(sql2, "{{token}}", token);
+    		            getDb().exec(sql2);
+    	        }
+            }                 
+////////////////////////////////////////////////////////
         }
         getDb().commit();
         return rc;
-
-
-
     }
 
     /**
@@ -269,6 +283,30 @@ public class ImportExcel extends GenericTableManager  {
                     return participante;
             else
                     throw new Throwable("El Identificador del Participante [" + participante + "] ya está registrado.");
+    }
+    
+    Recordset getInstrumentos (String idLista) throws Throwable{
+    	String query = "SELECT instrumento . * " +
+    			"FROM ajvieira_isurvey_app.instrumento, ajvieira_isurvey_app.estudio, " +
+    			"ajvieira_isurvey_app.int_lista_participantes_estudio, ajvieira_isurvey_app.lista_participantes " +
+    			"WHERE lista_participantes.id_lista_participantes = " + idLista + " " +
+    			"AND lista_participantes.id_lista_participantes = int_lista_participantes_estudio.id_lista_participantes " +
+    			"AND int_lista_participantes_estudio.id_estudio = estudio.id_estudio " +
+    			"AND estudio.id_estudio = instrumento.id_estudio";
+    	Recordset instrumentos = this.getDb().get(query);
+    	return instrumentos;
+    }
+    
+    Boolean findToken (String token) throws Throwable{
+        String query = "select * from ajvieira_isurvey_app.int_participante_instrumento";
+        Recordset rs = this.getDb().get(query);
+        rs.top();
+        while (rs.next()){
+            if (rs.getString("token_participante").equals(token)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator id="asd">
+	<parameter id="id_participante" type="integer" required="true" label="id del participante"/>
+	<parameter id="id_estudio" type="integer" required="true" label="id del estudio"/>
+</validator>

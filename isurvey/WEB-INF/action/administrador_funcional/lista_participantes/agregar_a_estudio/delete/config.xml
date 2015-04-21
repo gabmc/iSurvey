@@ -8,11 +8,10 @@
 	<log>false</log>
 
 	<transaction>
-		<classname>dinamica.GenericTableManager</classname>
+		<classname>admin_funcional.EliminarListaDeEstudio</classname>
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-
 	</transaction>
 
 	<query>delete.sql</query>

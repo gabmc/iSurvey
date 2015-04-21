@@ -3,7 +3,7 @@
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="4">
+		<th colspan="5">
 			<!--t�tulo del grid--> 
 			<span style="float: left;">Contenido de la tabla </span>
 			<!--panel de control de navegacion--> 
@@ -22,9 +22,9 @@
 	<!--encabezados-->
 	<tr>
 		<th colspan="2"></th>
-		<th width="50%"><a href="javascript:onclick=sortBy('nombre_estudio','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-		<th width="50%"><a href="javascript:onclick=sortBy('nombre_empresa_pl0','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Empresa</a></th>
-
+		<th width="33%"><a href="javascript:onclick=sortBy('nombre_estudio','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="33%"><a href="javascript:onclick=sortBy('nombre_empresa_pl0','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Empresa</a></th>
+		<th width="33%"><a href="javascript:onclick=sortBy('tipo','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Tipo</a></th>
 	</tr>
 
 	<!--data-->
@@ -34,7 +34,7 @@
 		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_estudio}')" class="tool" title="Editar"></td>
 		<td align="left">${fld:nombre_estudio}</td>
 		<td>${fld:nombre_empresa_pl0}</td>
-
+		<td>${fld:tipo}</td>
 	</tr>
 	</rows>
 

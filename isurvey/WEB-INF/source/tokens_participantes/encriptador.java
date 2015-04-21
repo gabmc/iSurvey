@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package crypt;
+package tokens_participantes;
 
 
 
@@ -16,7 +16,7 @@ import javax.crypto.spec.*;
  * de manera simetrica usando TripleDES y SHA1
  * <br>
  */
-public class encuesta_crypto {
+public class encriptador {
 
    String algorithm = "PBEWithSHA1AndDESede";
 

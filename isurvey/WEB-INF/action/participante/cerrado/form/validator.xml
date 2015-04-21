@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror="/action/error/validation/alert">
+	<parameter id="id_participante" type="integer" required="true" label="ID del Participante" />
+	<parameter id="id_instrumento" type="integer" required="true" label="ID del Instrumento" />
+	<parameter id="id_empresa_participante" type="integer" required="true" label="ID de la Empresa del Participante" />
+</validator>

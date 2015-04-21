@@ -1,0 +1,30 @@
+<!--data grid-->
+<table class="grid" width="700px">
+
+	<!--toolbar-->
+	<tr>
+		<th colspan="3">
+			<!--t�tulo del grid--> 
+			<span style="float: left;">Encuestas Disponibles</span>
+			<!--panel de control de navegacion--> 
+			<span style="float: right;">${req:controls}</span> 
+			<!--indicador de progreso-->
+			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
+		</th>
+	</tr>
+
+	<!--encabezados-->
+	<tr>
+		<th width="50%"><a href="javascript:onclick=sortBy('nombre','query-instrumentos.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="50%">Estatus</th>
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center"><a href="${def:context}/action/participante/cerrado/form?id_instrumento=${fld:id_instrumento}&id_participante=${fld:id_participante}">${fld:nombre}</a></td>
+		<td align="center">estatus</td>
+	</tr>
+	</rows>
+
+</table>

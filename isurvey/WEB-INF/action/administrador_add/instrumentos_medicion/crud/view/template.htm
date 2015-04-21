@@ -3,7 +3,7 @@
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="5">
+		<th colspan="6">
 			<!--título del grid--> 
 			<span style="float: left;">Contenido de la tabla </span>
 			<!--panel de control de navegacion--> 
@@ -23,9 +23,9 @@
 	<tr>
 		<th colspan="2"></th>
 		<th><a href="javascript:onclick=sortBy('id_instrumento','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">ID Survey</a></th>
-		<th width="50%"><a href="javascript:onclick=sortBy('nombre_estudio_pl0','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Estudio</a></th>
-		<th width="50%"><a href="javascript:onclick=sortBy('nombre','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre_estudio_pl0','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Estudio</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="60%">Link</th>
 	</tr>
 
 	<!--data-->
@@ -36,7 +36,7 @@
 		<td>${fld:id_instrumento}</td>
 		<td>${fld:nombre_estudio_pl0}</td>
 		<td align="left">${fld:nombre}</td>
-
+		<td align="center"><a href="http://localhost/isurvey/">http://localhost/isurvey/</a></td>
 	</tr>
 	</rows>
 
