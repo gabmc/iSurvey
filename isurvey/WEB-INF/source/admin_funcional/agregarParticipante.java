@@ -37,6 +37,7 @@ public class agregarParticipante extends GenericTransaction {
                     getDb().exec(sql);
 ////////////////////////////////////////////////////////
                 	Recordset instrumentos = getInstrumentos(idLista);
+                	Recordset participantes = getParticipantesInsertados(idLista);
                 	instrumentos.top();
                 	while (instrumentos.next()){
                 		TokenGenerator tg = new TokenGenerator();
@@ -46,6 +47,16 @@ public class agregarParticipante extends GenericTransaction {
             		            sql2 = StringUtil.replace(sql2, "{{id_instrumento}}", instrumentos.getString("id_instrumento"));
             		            sql2 = StringUtil.replace(sql2, "{{token}}", token);
             		            getDb().exec(sql2);
+            		            
+            		            participantes.top();
+            		            while (participantes.next()){
+            		            String sql3 = StringUtil.replace(getResource("insert-lime.sql"), "{{id_encuesta}}", instrumentos.getString("id_instrumento"));
+            		            sql3 = StringUtil.replace(sql3, "{{firstname}}", participantes.getString("nombre_participante"));
+            		            sql3 = StringUtil.replace(sql3, "{{lastname}}", participantes.getString("apellido_participante"));
+            		            sql3 = StringUtil.replace(sql3, "{{email}}", participantes.getString("email_participante"));
+            		            sql3 = StringUtil.replace(sql3, "{{token}}", token);
+            		            getDb().exec(sql3);
+            		            }
             	        }
                     }                 
 ////////////////////////////////////////////////////////                    
@@ -98,5 +109,18 @@ public class agregarParticipante extends GenericTransaction {
     			"AND estudio.id_estudio = instrumento.id_estudio";
     	Recordset instrumentos = this.getDb().get(query);
     	return instrumentos;
+    }
+    
+    Recordset getParticipantesInsertados (String idLista) throws Throwable{
+    	String query = "select participante.* " +
+    			"from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_lista_participantes, " +
+    			"ajvieira_isurvey_app.lista_participantes " +
+    			"where " +
+    			"participante.id_participante = int_participante_lista_participantes.id_participante " +
+    			"and int_participante_lista_participantes.id_lista_participantes = lista_participantes.id_lista_participantes " +
+    			"and participante.id_empresa in (select id_empresa from ajvieira_isurvey_security.s_user where userlogin = 'admin_func') " +
+    			"and lista_participantes.id_lista_participantes = " + idLista;
+    	Recordset participantes = this.getDb().get(query);
+    	return participantes;
     }
 }

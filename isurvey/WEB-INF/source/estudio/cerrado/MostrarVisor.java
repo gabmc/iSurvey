@@ -42,6 +42,8 @@ public class MostrarVisor extends GenericTransaction {
 	        	visor.setValue("instrumento", info.getString("instrumento"));
 	        	visor.setValue("id_instrumento", info.getString("id_instrumento"));
 	        	visor.setValue("token", info.getString("token"));
+	        	System.out.println("visor.estudio: " + visor.getValue("estudio"));
+	        	System.out.println("visor.instrumento: " + visor.getValue("instrumento"));
         	}
         }
         this.publish("visor", visor);

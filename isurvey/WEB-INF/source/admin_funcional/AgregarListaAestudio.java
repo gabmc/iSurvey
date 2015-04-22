@@ -29,10 +29,7 @@ public class AgregarListaAestudio extends GenericTransaction {
         
         Recordset participantes = getParticipantes(idLista);
         participantes.top();
-        while (participantes.next()){
-
-        
-        
+        while (participantes.next()){ 
 ////////////////////////////////////////////////////////
                 	Recordset instrumentos = getInstrumentos(idEstudio);
                 	instrumentos.top();
@@ -44,6 +41,12 @@ public class AgregarListaAestudio extends GenericTransaction {
             		            sql2 = StringUtil.replace(sql2, "{{id_instrumento}}", instrumentos.getString("id_instrumento"));
             		            sql2 = StringUtil.replace(sql2, "{{token}}", token);
             		            getDb().exec(sql2);
+            		            String sql3 = StringUtil.replace(getResource("insert-lime.sql"), "{{id_encuesta}}", instrumentos.getString("id_instrumento"));
+            		            sql3 = StringUtil.replace(sql3, "{{firstname}}", participantes.getString("nombre_participante"));
+            		            sql3 = StringUtil.replace(sql3, "{{lastname}}", participantes.getString("apellido_participante"));
+            		            sql3 = StringUtil.replace(sql3, "{{email}}", participantes.getString("email_participante"));
+            		            sql3 = StringUtil.replace(sql3, "{{token}}", token);
+            		            getDb().exec(sql3);
             	        }
                     }                 
 ////////////////////////////////////////////////////////                    
