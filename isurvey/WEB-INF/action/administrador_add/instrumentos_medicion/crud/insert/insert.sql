@@ -6,7 +6,7 @@ INSERT INTO ajvieira_isurvey_app.instrumento
 )
 VALUES
 (
-	${fld:id_survey},
-	${fld:id_estudio},
-	${fld:nombre}
+	{{id_survey}},
+	{{id_estudio}},
+	'{{nombre}}'
 )

@@ -8,7 +8,7 @@
 	<log>false</log>
 
 	<transaction>
-		<classname>dinamica.GenericTableManager</classname>
+		<classname>admin_add.InsertarInstrumento</classname>
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
