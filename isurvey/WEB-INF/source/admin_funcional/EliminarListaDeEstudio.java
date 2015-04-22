@@ -30,24 +30,23 @@ public class EliminarListaDeEstudio extends GenericTransaction {
         Recordset participantes = getParticipantes(idLista);
         participantes.top();
         while (participantes.next()){
-
-        
-        
-////////////////////////////////////////////////////////
-                	Recordset instrumentos = getInstrumentos(idEstudio);
-                	instrumentos.top();
-                	while (instrumentos.next()){
-                		TokenGenerator tg = new TokenGenerator();
-            	        String token = tg.generarToken(participantes.getString("id_participante"), instrumentos.getString("id_instrumento"));
-            	        if (findToken(token) == true){
-            		            String sql2 = StringUtil.replace(getResource("delete-token.sql"), "{{id_participante}}", participantes.getString("id_participante"));
-            		            sql2 = StringUtil.replace(sql2, "{{id_instrumento}}", instrumentos.getString("id_instrumento"));
-            		            sql2 = StringUtil.replace(sql2, "{{token_participante}}", token);
-            		            getDb().exec(sql2);
-            	        }
-                    }                 
-////////////////////////////////////////////////////////                    
-        }        
+	        if (estaEnVariasListas(participantes.getString("id_participante"), participantes.getString("id_empresa"), idEstudio) == false){
+	        	////////////////////////////////////////////////////////
+	                	Recordset instrumentos = getInstrumentos(idEstudio);
+	                	instrumentos.top();
+	                	while (instrumentos.next()){
+	                		TokenGenerator tg = new TokenGenerator();
+	            	        String token = tg.generarToken(participantes.getString("id_participante"), instrumentos.getString("id_instrumento"));
+	            	        if (findToken(token) == true){
+	            		            String sql2 = StringUtil.replace(getResource("delete-token.sql"), "{{id_participante}}", participantes.getString("id_participante"));
+	            		            sql2 = StringUtil.replace(sql2, "{{id_instrumento}}", instrumentos.getString("id_instrumento"));
+	            		            sql2 = StringUtil.replace(sql2, "{{token_participante}}", token);
+	            		            getDb().exec(sql2);
+	            	        }
+	                    }                 
+	////////////////////////////////////////////////////////                    
+	        } 
+        }
         
         String sql = StringUtil.replace(getResource("delete.sql"), "{{id_lista_participantes}}", idLista);
         sql = StringUtil.replace(sql, "{{id_estudio}}", idEstudio);
@@ -96,8 +95,37 @@ public class EliminarListaDeEstudio extends GenericTransaction {
     			"where " +
     			"lista_participantes.id_lista_participantes = int_participante_lista_participantes.id_lista_participantes " +
     			"and int_participante_lista_participantes.id_participante = participante.id_participante " +
+    			"and participante.id_empresa = lista_participantes.id_empresa " +
     			"and lista_participantes.id_lista_participantes = " + idLista;
     	Recordset instrumentos = this.getDb().get(query);
     	return instrumentos;
+    }
+    
+    Boolean estaEnVariasListas (String idParticipante, String idEmpresa, String idEstudio) throws Throwable{
+    	String query = "select lista_participantes.* " +
+    			"from ajvieira_isurvey_app.participante, " +
+    			"ajvieira_isurvey_app.int_participante_lista_participantes, " +
+    			"ajvieira_isurvey_app.lista_participantes, " +
+    			"ajvieira_isurvey_app.int_lista_participantes_estudio, " +
+    			"ajvieira_isurvey_app.estudio " +
+    			"where " +
+    			"participante.id_participante = " + idParticipante + " " +
+    			"and participante.id_empresa = " + idEmpresa + " " +
+    			"and estudio.id_estudio = " + idEstudio + " " +
+    			"and int_participante_lista_participantes.id_participante = participante.id_participante " +
+    			"and int_participante_lista_participantes.id_empresa_participante = participante.id_empresa " +
+    			"and int_participante_lista_participantes.id_lista_participantes = lista_participantes.id_lista_participantes " +
+    			"and lista_participantes.id_lista_participantes = int_lista_participantes_estudio.id_lista_participantes " +
+    			"and int_lista_participantes_estudio.id_estudio = estudio.id_estudio";
+    	Recordset listas = this.getDb().get(query);
+    	listas.top();
+    	int contador = 0;
+    	while (listas.next()){
+    		contador++;
+    	}
+    	if (contador > 1)
+    		return true;
+    	else
+    		return false;
     }
 }

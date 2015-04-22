@@ -46,13 +46,12 @@ public class EliminarParticipanteDeLista extends GenericTransaction {
             	        }
                     }                 
 ////////////////////////////////////////////////////////                            
-        
-			        String sql = StringUtil.replace(getResource("delete.sql"), "{{id_lista}}", idLista);
-			        sql = StringUtil.replace(sql, "{{id_participante}}", idParticipante);
-			        sql = StringUtil.replace(sql, "{{userlogin}}", this.getUserName());
-			        System.out.println(sql);
-			        getDb().exec(sql);
         }
+        String sql = StringUtil.replace(getResource("delete.sql"), "{{id_lista}}", idLista);
+        sql = StringUtil.replace(sql, "{{id_participante}}", idParticipante);
+        sql = StringUtil.replace(sql, "{{userlogin}}", this.getUserName());
+        System.out.println(sql);
+        getDb().exec(sql);
         getDb().commit();
         return 0;
     }

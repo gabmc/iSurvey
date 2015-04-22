@@ -15,7 +15,7 @@
 
 	</transaction>
 
-	<query>delete.sql</query>
+	<!--<query>delete.sql</query>-->
 
 	<output>
 		<classname>dinamica.GenericOutput</classname>
