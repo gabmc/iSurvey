@@ -43,6 +43,14 @@ public class EliminarParticipanteDeLista extends GenericTransaction {
             		            sql2 = StringUtil.replace(sql2, "{{id_instrumento}}", instrumentos.getString("id_instrumento"));
             		            sql2 = StringUtil.replace(sql2, "{{token_participante}}", token);
             		            getDb().exec(sql2);
+            		            
+            		            String sql3 = StringUtil.replace(getResource("delete-lime-token.sql"), "{{id_instrumento}}", instrumentos.getString("id_instrumento"));
+            		            sql3 = StringUtil.replace(sql3, "{{token}}", token);
+            		            getDb().exec(sql3);
+            		            
+            		            String sql4 = StringUtil.replace(getResource("delete-lime-respuestas.sql"), "{{id_instrumento}}", instrumentos.getString("id_instrumento"));
+            		            sql4 = StringUtil.replace(sql4, "{{token}}", token);
+            		            getDb().exec(sql4);
             	        }
                     }                 
 ////////////////////////////////////////////////////////                            
