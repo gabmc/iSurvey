@@ -230,24 +230,23 @@ public class ImportExcel extends GenericTableManager  {
         //ejecutar en Batch
         getDb().execBatch(sql, rs, params);
         //getDb().commit();
-        rs.first();
+        rs.top();
         Map parametros = this.getRequest().getParameterMap();
         String idLista = ((String[]) parametros.get("id_lista_participantes"))[0];
         String userlogin = ((String[]) parametros.get("userlogin"))[0];
         
-        String query = StringUtil.replace(getResource("insert_int_participante_lista.sql"), 
-	            "{{id_participante}}", rs.getString("id_participante"));
-	        query = StringUtil.replace(query, "{{id_lista_participantes}}", idLista);
-	        query = StringUtil.replace(query, "{{userlogin}}", userlogin);
-	        System.out.println("id_participante: "+rs.getString("id_participante"));
-	        getDb().exec(query);
+//        String query = StringUtil.replace(getResource("insert_int_participante_lista.sql"), 
+//	            "{{id_participante}}", rs.getString("id_participante"));
+//	        query = StringUtil.replace(query, "{{id_lista_participantes}}", idLista);
+//	        query = StringUtil.replace(query, "{{userlogin}}", userlogin);
+//	        System.out.println("id_participante: "+rs.getString("id_participante"));
+//	        getDb().exec(query);
         
         while (rs.next()){
-	        query = StringUtil.replace(getResource("insert_int_participante_lista.sql"), 
+	        String query = StringUtil.replace(getResource("insert_int_participante_lista.sql"), 
 	            "{{id_participante}}", rs.getString("id_participante"));
 	        query = StringUtil.replace(query, "{{id_lista_participantes}}", idLista);
 	        query = StringUtil.replace(query, "{{userlogin}}", userlogin);
-	        System.out.println("id_participante: "+rs.getString("id_participante"));
 	        getDb().exec(query);
 	        
 ////////////////////////////////////////////////////////
@@ -261,6 +260,13 @@ public class ImportExcel extends GenericTableManager  {
     		            sql2 = StringUtil.replace(sql2, "{{id_instrumento}}", instrumentos.getString("id_instrumento"));
     		            sql2 = StringUtil.replace(sql2, "{{token}}", token);
     		            getDb().exec(sql2);
+    		            
+    		            String sql3 = StringUtil.replace(getResource("insert-lime.sql"), "{{id_encuesta}}", instrumentos.getString("id_instrumento"));
+    		            sql3 = StringUtil.replace(sql3, "{{firstname}}", rs.getString("nombre_participante"));
+    		            sql3 = StringUtil.replace(sql3, "{{lastname}}", rs.getString("apellido_participante"));
+    		            sql3 = StringUtil.replace(sql3, "{{email}}", rs.getString("email_participante"));
+    		            sql3 = StringUtil.replace(sql3, "{{token}}", token);
+    		            getDb().exec(sql3);
     	        }
             }                 
 ////////////////////////////////////////////////////////
