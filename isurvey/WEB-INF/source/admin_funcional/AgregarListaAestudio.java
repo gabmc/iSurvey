@@ -47,6 +47,9 @@ public class AgregarListaAestudio extends GenericTransaction {
             		            sql3 = StringUtil.replace(sql3, "{{email}}", participantes.getString("email_participante"));
             		            sql3 = StringUtil.replace(sql3, "{{token}}", token);
             		            getDb().exec(sql3);
+            		            String sql4 = StringUtil.replace(getResource("insert-lime-respuestas.sql"), "{{id_encuesta}}", instrumentos.getString("id_instrumento"));
+            		            sql4 = StringUtil.replace(sql4, "{{token}}", token);
+            		            getDb().exec(sql4);
             	        }
                     }                 
 ////////////////////////////////////////////////////////                    

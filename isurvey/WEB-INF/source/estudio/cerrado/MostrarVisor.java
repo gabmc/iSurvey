@@ -90,7 +90,7 @@ public class MostrarVisor extends GenericTransaction {
     
     Recordset getInfoVisor (String token) throws Throwable{
     	String query = "select estudio.nombre_estudio as estudio, instrumento.nombre as instrumento, " +
-    			"instrumento.id_instrumento, '"+token+"' as token, int_participante_instrumento.estatus " +
+    			"instrumento.id_instrumento, int_participante_instrumento.token_participante as token, int_participante_instrumento.estatus " +
     			"from " +
     			"ajvieira_isurvey_app.estudio, ajvieira_isurvey_app.instrumento, " +
     			"ajvieira_isurvey_app.int_participante_instrumento " +
@@ -133,9 +133,12 @@ public class MostrarVisor extends GenericTransaction {
 		"where token_participante = '"+token+"') ";
     	Recordset instrumentos = this.getDb().get(query);
     	instrumentos.top();
+    	Recordset participante = getParticipante(token);
+    	participante.top();
     	while (instrumentos.next()){
+    		TokenGenerator tg = new TokenGenerator();
     		String sql = "select * from ajvieira_isurvey_lime.survey_" + instrumentos.getString("id_instrumento") + " " +
-    				"where token = '" + token + "'";
+    				"where token = '" + tg.generarToken(/*participante.getString("id_participante")*/"1", instrumentos.getString("id_instrumento")) + "'";
     		Recordset respuestas = this.getDb().get(sql);
     		respuestas.top();
     		Recordset columnas = getNombresColumnas("survey_" + instrumentos.getString("id_instrumento"));
