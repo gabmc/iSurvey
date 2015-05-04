@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>iSurvey</title>
+
+</head>
+<body>
+<div align="center">
+<!--<a href="localhost/${def:actionroot}">--><img src="${def:context}/images/banners_estudios/${fld:banner}" width="1000" height="268"><!--</a>-->
+		
+			<div style="width:300px">
+			<form name="form1">
+	
+			<table class="formgrid" width="95%" align="center">
+			
+				<!--column layout-->
+				<col width="40%">
+				<col width="60%">
+			
+				<!--section header-->
+				<tr>
+					<th colspan="2">
+						<span style="float: left">Ingresar al Sistema</span>
+						<img id="status" style="float: right; margin-right: 10px; display: none" src="images/progress.gif">
+					</th>
+				</tr>
+	
+				<!--separator row-->
+				<tr height="10px">
+					<td colspan="2"></td>
+				</tr>
+				
+				<!--form fields-->
+				<tr>
+					<td  class="formlabel">
+						Identificador:
+					</td>
+					<td>
+						<input name="userlogin" id="userlogin" type="text" size="20" value="">
+						<input type="hidden" name="id_instrumento" id="id_instrumento" value="${fld:id}">
+					</td>
+				</tr>				
+				<tr>
+					<td align="center" colspan="2">
+						<div id="form_error" class="errormsg"></div>
+					</td>
+				</tr>
+				
+				<!--separador-->
+				<tr height="10px">
+					<td colspan="2"></td>
+				</tr>
+		
+				<!--form buttons-->
+				<tr>
+					<td align="center" colspan="2">
+						<input id="loginbutton" type="submit" value="Ingresar" class="button">
+					</td>
+				</tr>
+				
+				<!--separador-->
+				<tr height="10px">
+					<td colspan="2"></td>
+				</tr>
+		
+			</table>
+			
+<br>
+			
+			</form>
+			</div>
+						<div style="width:300px">
+			
+				<table align="center" width="95%" class="formgrid">
+					
+					<tr>
+						<td align="center" valign="top" style="padding-right:3px">
+						<b>No tienes cuenta de acceso?</b><br>
+						Haz click <a href="registro?id=${fld:id}">AQUI</a> 
+						para crear una cuenta.
+						</td>
+					</tr>
+					
+				</table>
+			
+			</div>
+	</div>
+</body>
+</html>

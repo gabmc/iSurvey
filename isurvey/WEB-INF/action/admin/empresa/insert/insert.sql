@@ -1,6 +1,5 @@
 INSERT INTO ajvieira_isurvey_app.empresa
 (
-	id_empresa,
 	id_sector_empresarial,
 	nombre_empresa,
 	telefono,
@@ -9,7 +8,6 @@ INSERT INTO ajvieira_isurvey_app.empresa
 )
 VALUES
 (
-	${seq:nextval@ajvieira_isurvey_app.seq_empresa},
 	${fld:id_sector_empresarial},
 	${fld:nombre_empresa},
 	${fld:telefono},

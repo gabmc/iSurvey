@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <validator id="asd">
 	<parameter id="id" type="integer" required="true" label="id del instrumento"/>
+	<parameter id="token" type="varchar" required="true" label="token participante
+		"/>
 </validator>

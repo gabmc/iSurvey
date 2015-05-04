@@ -1,0 +1,101 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	<title>iSurvey</title>
+	
+	<script language="javascript" src="${def:context}/action/script">
+	</script>
+	
+</head>
+
+<body>
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+<center>
+		
+		<!--START FORM-->
+		<form name="form1" action="${def:context}${def:actionroot}/${req:form.action}" method="POST">
+		
+		<table class="formgrid" width="70%">
+		
+			<!--layout-->
+			<col width="40%"> <!--labels-->
+			<col width="60%">
+
+
+			<!--section header-->
+			<tr>
+				<th colspan="2">
+					Registro				
+				</th>
+			</tr>
+
+		
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--fields-->
+	<tr style="display:${req:display}">
+		<td class="formlabel required">Identificador</td>
+		<td>
+			<input name="id" type="text" size="20" maxlength="25">
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel">Nombre</td>
+		<td><input name="fname" type="text" size="25" maxlength="25"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Apellido</td>
+		<td><input name="lname" type="text" size="25" maxlength="25"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">E-mail</td>
+		<td><input name="email" type="text" size="30" maxlength="80"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Empresa</td>
+		<td><input name="empresa" type="text" size="30" maxlength="80"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Cargo</td>
+		<td><input name="cargo" type="text" size="30" maxlength="80"></td>
+	</tr>	
+				
+							
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--buttons-->
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="Guardar">
+					<input type="button" value="Cancelar">				
+				</td>
+			</tr>
+		</table>
+		
+		<input type="hidden" name="user_id" value="${fld:user_id}">
+						
+		</form>
+
+		<script language="javascript">
+			
+		document.form1.elements[0].focus();
+
+		</script>
+		<!--END FORM-->
+
+</center>
+
+</body>
+</html>

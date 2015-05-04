@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>iSurvey</title>
+
+</head>
+<body>
+</body>
+<script type="text/javascript">
+
+	//inicializa cuando se carga la pagina
+	onload = function()
+	{
+		window.location = "http://localhost:8090/limesurvey/index.php/${fld:id}/";
+	} 
+	
+	</script>
+</html>
