@@ -28,14 +28,19 @@ public class MostrarVisor extends GenericTransaction {
         Enumeration names = this.getRequest().getParameterNames();
         Map parametros = this.getRequest().getParameterMap();
         String token = ((String[]) parametros.get("token"))[0];
-        Recordset participante = getParticipante(token);
-        participante.top();
+        Recordset empresa = getEmpresa(token);
+        empresa.top();
+        String logoEmpresa = "";
+        while (empresa.next()){
+        	logoEmpresa = empresa.getString("logo");
+        }
         Recordset visor = new Recordset();
         visor.append("estudio", java.sql.Types.VARCHAR);
         visor.append("instrumento", java.sql.Types.VARCHAR);
         visor.append("id_instrumento", java.sql.Types.VARCHAR);
         visor.append("token", java.sql.Types.VARCHAR);
         visor.append("estatus", java.sql.Types.VARCHAR);
+        visor.append("logo", java.sql.Types.VARCHAR);
         
         updateStatus(token);
         
@@ -47,6 +52,7 @@ public class MostrarVisor extends GenericTransaction {
 	        	visor.setValue("instrumento", info.getString("instrumento"));
 	        	visor.setValue("id_instrumento", info.getString("id_instrumento"));
 	        	visor.setValue("token", info.getString("token"));
+	        	visor.setValue("logo", logoEmpresa);
 	        	if (info.getValue("estatus").equals("Incompleta")){
 	        		visor.setValue("estatus", red);
 	        	}
@@ -64,7 +70,8 @@ public class MostrarVisor extends GenericTransaction {
     Recordset getEmpresa (String token) throws Throwable{
     	String query = "select empresa.* " +
     			"from ajvieira_isurvey_app.estudio, ajvieira_isurvey_app.instrumento, " +
-    			"ajvieira_isurvey_app.int_participante_instrumento " +
+    			"ajvieira_isurvey_app.int_participante_instrumento, " +
+    			"ajvieira_isurvey_app.empresa " +
     			"where estudio.id_estudio = instrumento.id_estudio " +
     			"and instrumento.id_instrumento = int_participante_instrumento.id_instrumento " +
     			"and estudio.id_empresa = empresa.id_empresa " +

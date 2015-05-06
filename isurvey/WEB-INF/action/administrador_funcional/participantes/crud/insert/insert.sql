@@ -12,7 +12,10 @@ INSERT INTO ajvieira_isurvey_app.participante
 	sexo,
 	tipo_nomina,
 	funcion,
-	id_empresa
+	id_empresa,
+	fecha_registro,
+	verificado,
+	fecha_verificacion
 )
 SELECT
 	${fld:id_participante},
@@ -27,6 +30,9 @@ SELECT
 	${fld:sexo},
 	${fld:tipo_nomina},
 	${fld:funcion},
-	id_empresa
+	id_empresa,
+	now(),
+	'Si',
+	0000-00-00
 FROM
 	ajvieira_isurvey_security.s_user where userlogin = '${def:user}'

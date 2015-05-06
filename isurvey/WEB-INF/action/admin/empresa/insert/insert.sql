@@ -4,7 +4,8 @@ INSERT INTO ajvieira_isurvey_app.empresa
 	nombre_empresa,
 	telefono,
 	tipo,
-	rif
+	rif,
+	logo
 )
 VALUES
 (
@@ -12,5 +13,6 @@ VALUES
 	${fld:nombre_empresa},
 	${fld:telefono},
 	${fld:tipo},
-	${fld:rif}
+	${fld:rif},
+	${fld:logo}
 )

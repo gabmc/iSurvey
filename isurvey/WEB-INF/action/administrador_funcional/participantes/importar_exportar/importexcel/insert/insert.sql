@@ -12,7 +12,10 @@ insert into ajvieira_isurvey_app.participante
         sexo,
         tipo_nomina,
         funcion,
-        id_empresa
+        id_empresa,
+        fecha_registro,
+        verificado,
+        fecha_verificacion
 )
 values
 (
@@ -28,5 +31,8 @@ values
         ?,
         ?,
         ?,
-        (select id_empresa from ajvieira_isurvey_security.s_user where userlogin = '${def:user}')
+        (select id_empresa from ajvieira_isurvey_security.s_user where userlogin = '${def:user}'),
+        curdate(),
+        'Si',
+        0000-00-00
 )

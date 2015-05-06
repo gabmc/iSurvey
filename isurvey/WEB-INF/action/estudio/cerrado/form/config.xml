@@ -22,6 +22,7 @@
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
 		<print mode="table" recordset="visor" tag="rows" alternate-colors="true"/>
+		<print mode="form" recordset="visor"/>
 	</output>
 
 </config>

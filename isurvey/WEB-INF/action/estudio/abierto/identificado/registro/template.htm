@@ -17,11 +17,15 @@ ${inc:${def:actionroot}/header}
 <!--end of common header-->
 
 <center>
-		
+
+		<img src="${def:context}/images/logos_empresas/${fld:logo}" width="188" height="188" alt="logo" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
+<img src="${def:context}/images/banners_estudios/${fld:banner}" width="700" height="188" alt="banner" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
+<p style="clear: both;">
+<br>
 		<!--START FORM-->
 		<form name="form1" action="${def:context}${def:actionroot}/${req:form.action}" method="POST">
 		
-		<table class="formgrid" width="70%">
+		<table class="formgrid" width="50%">
 		
 			<!--layout-->
 			<col width="40%"> <!--labels-->
@@ -83,8 +87,6 @@ ${inc:${def:actionroot}/header}
 				</td>
 			</tr>
 		</table>
-		
-		<input type="hidden" name="user_id" value="${fld:user_id}">
 						
 		</form>
 
