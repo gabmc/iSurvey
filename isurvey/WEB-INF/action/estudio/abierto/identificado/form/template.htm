@@ -18,7 +18,7 @@
 <p style="clear: both;">
 		<br>
 			<div style="width:300px">
-			<form name="form1">
+			<form name="form1" action="log_in" method="POST">
 	
 			<table class="formgrid" width="95%" align="center">
 			
@@ -45,8 +45,9 @@
 						Identificador:
 					</td>
 					<td>
-						<input name="userlogin" id="userlogin" type="text" size="20" value="">
+						<input name="id_participante" id="id_participante" type="text" size="20">
 						<input type="hidden" name="id_instrumento" id="id_instrumento" value="${fld:id}">
+						<input type="hidden" name="id_empresa" id="id_empresa" value="${fld:id_empresa}">
 					</td>
 				</tr>				
 				<tr>
@@ -95,4 +96,13 @@
 			</div>
 	</div>
 </body>
+		<script language="javascript">
+			onload = function()
+	{
+		document.form1.id_participante.onkeypress = keypressInteger;
+
+	} 
+		document.form1.elements[0].focus();
+
+		</script>
 </html>

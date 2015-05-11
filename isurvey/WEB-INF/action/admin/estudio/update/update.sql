@@ -1,8 +1,8 @@
 UPDATE ajvieira_isurvey_app.estudio SET
-	nombre_estudio=${fld:nombre_estudio},
-	tipo=${fld:tipo},
-	id_empresa=${fld:id_empresa}
+	nombre_estudio='{{nombre_estudio}}',
+	tipo='{{tipo}}',
+	id_empresa={{id_empresa}}
 
 WHERE
-	id_estudio=${fld:id}
+	id_estudio={{id_estudio}}
 

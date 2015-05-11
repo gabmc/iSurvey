@@ -23,7 +23,7 @@ ${inc:${def:actionroot}/header}
 <p style="clear: both;">
 <br>
 		<!--START FORM-->
-		<form name="form1" action="${def:context}${def:actionroot}/${req:form.action}" method="POST">
+		<form name="form1" action="insertar_participante" method="POST">
 		
 		<table class="formgrid" width="50%">
 		
@@ -49,20 +49,21 @@ ${inc:${def:actionroot}/header}
 	<tr style="display:${req:display}">
 		<td class="formlabel required">Identificador</td>
 		<td>
-			<input name="id" type="text" size="20" maxlength="25">
+			<input type="hidden" name="id_empresa" value="${fld:id_empresa}">
+			<input name="id_participante" type="text" size="20" maxlength="25">
 		</td>
 	</tr>
 	<tr>
 		<td class="formlabel">Nombre</td>
-		<td><input name="fname" type="text" size="25" maxlength="25"></td>
+		<td><input name="nombre_participante" type="text" size="25" maxlength="25"></td>
 	</tr>
 	<tr>
 		<td class="formlabel">Apellido</td>
-		<td><input name="lname" type="text" size="25" maxlength="25"></td>
+		<td><input name="apellido_participante" type="text" size="25" maxlength="25"></td>
 	</tr>
 	<tr>
 		<td class="formlabel">E-mail</td>
-		<td><input name="email" type="text" size="30" maxlength="80"></td>
+		<td><input name="email_participante" type="text" size="30" maxlength="80"></td>
 	</tr>
 	<tr>
 		<td class="formlabel">Empresa</td>
@@ -91,7 +92,11 @@ ${inc:${def:actionroot}/header}
 		</form>
 
 		<script language="javascript">
-			
+			onload = function()
+	{
+		document.form1.id_participante.onkeypress = keypressInteger;
+
+	} 
 		document.form1.elements[0].focus();
 
 		</script>

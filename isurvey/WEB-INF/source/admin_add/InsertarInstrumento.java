@@ -44,6 +44,17 @@ public class InsertarInstrumento extends GenericTransaction {
             		            sql2 = StringUtil.replace(sql2, "{{id_instrumento}}", idInstrumento);
             		            sql2 = StringUtil.replace(sql2, "{{token}}", token);
             		            getDb().exec(sql2);
+            		            
+            		            String sql3 = StringUtil.replace(getResource("insert-lime-respuestas.sql"), "{{id_encuesta}}", idInstrumento);
+            		            sql3 = StringUtil.replace(sql3, "{{token}}", token);
+            		            getDb().exec(sql3);
+            		            
+            		            String sql4 = StringUtil.replace(getResource("insert-lime.sql"), "{{id_encuesta}}", idInstrumento);
+            		            sql4 = StringUtil.replace(sql4, "{{firstname}}", participantes.getString("nombre_participante"));
+            		            sql4 = StringUtil.replace(sql4, "{{lastname}}", participantes.getString("apellido_participante"));
+            		            sql4 = StringUtil.replace(sql4, "{{email}}", participantes.getString("email_participante"));
+            		            sql4 = StringUtil.replace(sql4, "{{token}}", token);
+            		            getDb().exec(sql4);
             	        }
                                    
 ////////////////////////////////////////////////////////                    
@@ -85,7 +96,8 @@ public class InsertarInstrumento extends GenericTransaction {
     }
     
     Recordset getParticipantesDeEstudio (String idEstudio) throws Throwable{
-    	String query = "select participante.* " +
+    	String query = "select participante.id_participante, participante.nombre_participante, participante.apellido_participante, " +
+    			"participante.email_participante " +
     			"from ajvieira_isurvey_app.participante, " +
     			"ajvieira_isurvey_app.int_participante_lista_participantes, " +
     			"ajvieira_isurvey_app.lista_participantes, " +
@@ -99,7 +111,7 @@ public class InsertarInstrumento extends GenericTransaction {
     			"and lista_participantes.id_lista_participantes = int_lista_participantes_estudio.id_lista_participantes " +
     			"and int_lista_participantes_estudio.id_estudio = estudio.id_estudio " +
     			"and estudio.id_empresa = participante.id_empresa " +
-    			"and estudio.id_estudio = 1";
+    			"and estudio.id_estudio = " + idEstudio;
     	Recordset participantes = this.getDb().get(query);
     	return participantes;
     }

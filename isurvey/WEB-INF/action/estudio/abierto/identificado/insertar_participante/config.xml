@@ -8,11 +8,13 @@
 	<log>false</log>
 
 	<transaction>
-		<classname>admin_add.InsertarEstudio</classname>
+		<classname>dinamica.GenericTableManager</classname>
 		<validator>true</validator>
-		<transaction>true</transaction>
+		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
 	</transaction>
+
+	<query>insert.sql</query>
 	
 	<output>
 		<classname>dinamica.GenericOutput</classname>

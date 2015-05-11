@@ -6,7 +6,7 @@ INSERT INTO ajvieira_isurvey_app.estudio
 )
 VALUES
 (
-	${fld:nombre_estudio},
-	${fld:id_empresa},
-	${fld:tipo}
+	'{{nombre_estudio}}',
+	{{id_empresa}},
+	'{{tipo}}'
 )

@@ -1,4 +1,4 @@
-select estudio.banner, empresa.logo
+select estudio.banner, empresa.logo, empresa.id_empresa
 from ajvieira_isurvey_app.estudio, ajvieira_isurvey_app.instrumento, ajvieira_isurvey_app.empresa
 where
 instrumento.id_instrumento = ${fld:id}
