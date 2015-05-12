@@ -36,9 +36,10 @@
 
 	<!--encabezados-->
 	<tr>
-		<th width="8%"><a href="javascript:onclick=sortBy('id_participante','query-participante-aplicador.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
-		<th width="8%"><a href="javascript:onclick=sortBy('nombre_participante','query-participante-aplicador.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-		<th width="8%"><a href="javascript:onclick=sortBy('apellido_participante','query-participante-aplicador.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
+		<th width="8%">Identificador</th>
+		<th width="8%">Nombre</th>
+		<th width="8%">Apellido</th>
+		<th width="8%">Link Encuesta</th>
 	</tr>
 
 	<!--data-->
@@ -47,7 +48,14 @@
 		<td align="center">${fld:id_participante}</td>
 		<td align="center">${fld:nombre_participante}</td>
 		<td align="center">${fld:apellido_participante}</td>
+		<td align="center"> <button onclick="copyToClipboard('http://localhost/isurvey/action/estudio/cerrado/form?token=${fld:token_participante}')">boton</button></td>
 	</tr>
 	</rows>
 
 </table>
+</body>
+<script type="text/javascript">
+	function copyToClipboard(text) {
+  window.prompt("Presiona Ctrl+C para copiar el link", text);
+}
+</script>
