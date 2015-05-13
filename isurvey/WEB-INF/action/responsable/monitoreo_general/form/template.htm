@@ -1,0 +1,32 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>CRUD Instrumento</title>
+</head>
+<body>
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Lista de Estudios en Curso</div>
+</div>
+<!--data grid-->
+<div align="center">
+<br>
+<br>
+<table class="grid" width="300px">
+
+	<!--encabezados-->
+	<tr>
+		<th>Nombre</th>
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center"><a href="${def:context}${def:actionroot}/estudio/form?id=${fld:id_estudio}">${fld:nombre_estudio}</a></td>
+	</tr>
+	</rows>
+
+</table>
+</div>
+</body>
