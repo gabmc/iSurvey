@@ -1,6 +1,11 @@
 select
 	distinct participante.id_participante, participante.nombre_participante, participante.apellido_participante,
-	int_participante_instrumento.token_participante
+	int_participante_instrumento.token_participante, 
+	case estudio.tipo
+		when 'Cerrado' then concat('http://localhost/isurvey/action/estudio/cerrado/form?token=', int_participante_instrumento.token_participante)
+		when 'Abierto-Anonimo' then concat('http://localhost/isurvey/action/estudio/abierto/anonimo/form?id=', instrumento.id_instrumento)
+        when 'Abierto-Identificado' then concat('http://localhost/isurvey/action/estudio/abierto/identificado/form?id=', instrumento.id_instrumento)
+        end as link
 from
 	ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_lista_participantes,
 	ajvieira_isurvey_app.lista_participantes, ajvieira_isurvey_app.int_lista_participantes_estudio,

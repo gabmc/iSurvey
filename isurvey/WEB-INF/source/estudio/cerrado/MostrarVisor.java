@@ -107,6 +107,7 @@ public class MostrarVisor extends GenericTransaction {
     			"where " +
     			"estudio.id_estudio = instrumento.id_estudio " +
     			"and int_participante_instrumento.id_instrumento = instrumento.id_instrumento " +
+    			"and estudio.tipo = 'Cerrado' " +
     			"and int_participante_instrumento.id_participante = (select id_participante from  " +
     			"ajvieira_isurvey_app.int_participante_instrumento " +
     			"where token_participante = '"+token+"') " +

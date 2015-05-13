@@ -24,7 +24,7 @@ public class EliminarInstrumento extends GenericTransaction {
         Enumeration names = this.getRequest().getParameterNames();
         Map parametros = this.getRequest().getParameterMap();
         String idInstrumento = ((String[]) parametros.get("id"))[0];
-        Recordset empresa = getEmpresa(this.getUserName());
+        Recordset empresa = getEmpresa(idInstrumento);
         String idEmpresa = "";
         empresa.top();
         TokenGenerator tg = new TokenGenerator();
@@ -52,9 +52,11 @@ public class EliminarInstrumento extends GenericTransaction {
 	    return 0;
     }
     
-    Recordset getEmpresa (String username) throws Throwable{
-    	String query = "select *" +
-		" from ajvieira_isurvey_app.empresa where id_empresa = (select id_empresa from ajvieira_isurvey_sec.s_user where userlogin = " + username + ")";
+    Recordset getEmpresa (String idInstrumento) throws Throwable{
+    	String query = "select estudio.id_empresa " +
+    			"from ajvieira_isurvey_app.instrumento, ajvieira_isurvey_app.estudio " +
+    			"where instrumento.id_estudio = estudio.id_estudio " +
+    			"and instrumento.id_instrumento = " + idInstrumento;
 return this.getDb().get(query);
     }
     
