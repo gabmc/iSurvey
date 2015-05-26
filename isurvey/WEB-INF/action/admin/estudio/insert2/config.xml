@@ -2,27 +2,24 @@
 <config>
 
 	<summary>
-		Leer registro y retornar javascript que llena
-		un formulario con los datos del registro
+		Insertar valores de un formulario en una tabla
 	</summary>
 
 	<log>false</log>
 
 	<transaction>
-		<classname>dinamica.GenericTransaction</classname>
+		<classname>admin_add.InsertarEstudio2</classname>
 		<validator>true</validator>
-		<transaction>false</transaction>
+		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="query.sql" source="sql" scope="transaction" />
 	</transaction>
-
+	
 	<output>
 		<classname>dinamica.GenericOutput</classname>
 		<template>script.js</template>
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/javascript; charset=iso-8859-1</content-type>
 		<expiration>0</expiration>
-		<print mode="form" recordset="query.sql" />
 	</output>
 
 </config>

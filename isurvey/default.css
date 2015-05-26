@@ -65,8 +65,7 @@
 }
 
 .grid th {
-	background-image: url(images/grid-hdr-bgcolor.gif);
-	background-repeat: repeat-x;
+	background-color: lightgray;
 	font-family: "Trebuchet MS", Verdana, Arial;
 	font-size: 10pt;
 	font-weight: normal;
@@ -83,7 +82,7 @@
 }
 
 .grid tr.altColor td {
-	background-color: #F7F7F7;
+	background-color: lightgray;
 }
 
 .grid tr.normalColor td {
@@ -105,6 +104,7 @@
 	font-size: 10pt;
 	padding: 3px;
 	color: gray;
+	font-weight: bold;
 }
 
 .grid th a:visited {
@@ -118,7 +118,6 @@
 .grid th a:hover {
 	text-decoration: none;
 	color: red;
-	background-color: yellow;
 }
 
 .grid TR.hilite TD {
@@ -134,15 +133,14 @@
 }
 
 .formgrid TH {
-	background-image: url(images/grid-hdr-bgcolor.gif);
-	background-repeat: repeat-x;
+	background-color: #AFC6F4;
 	font-family: "Trebuchet MS", Verdana, Arial;
 	font-size: 10pt;
 	font-weight: bold;
 	padding-top: 2px;
 	padding-left: 4px;
 	border: 1px lightgrey solid;
-	text-align: left;
+	text-align: center;
 	color: gray;
 }
 
@@ -182,27 +180,25 @@
 }
 
 .banner {
-	background-image: url(images/header-bg.gif);
-	background-repeat: repeat-x;
+	background-color: #AFC6F4;
 	font-family: "Trebuchet MS", Verdana, Arial;
 	font-weight: bold;
-	font-size: 10pt;
+	font-size: 15pt;
 	padding: 3px;
 	border: 1px #eeeeee solid;
-	color: gray;
-	height: 20px; 
-	margin-bottom: 0px
+	color: white;
+	height: 25px; 
+	margin-bottom: 15px
 }
 
 .bannerGrande {
-	background-image: url(images/header-bg.gif);
-	background-repeat: repeat-x;
+	background-color: #AFC6F4;
 	font-family: "Trebuchet MS", Verdana, Arial;
 	font-weight: bold;
 	font-size: 20pt;
 	padding: 3px;
 	border: 1px #eeeeee solid;
-	color: gray;
+	color: 0051F2;
 	height: 60px; 
 	margin-bottom: 5px
 }
@@ -215,7 +211,7 @@ form {
 body {
 	font-family: Verdana;
 	font-size: 9pt;
-	background: white;
+	background-color: white;
 	margin: 0px;
 }
 
@@ -247,7 +243,7 @@ a {
 	font-family: Arial;
 	font-size: 9pt;
 	text-decoration: none;
-	font-weight: normal;
+	font-weight: bold;
 }
 
 a:link {
@@ -255,12 +251,11 @@ a:link {
 }
 
 a:visited {
-	color: blue;
+	color: purple;
 }
 
 a:hover {
 	color: red;
-	background-color: yellow;
 }
 
 /* message box */
@@ -295,9 +290,6 @@ select {
 	background-color: white;
 }
 
-.button {
-	cursor: pointer;
-}
 
 .tool {
 	cursor: pointer;
@@ -321,22 +313,22 @@ BEGIN MENU
 */
 .menuBody {
 	height: 1100px;
-	margin-left: 0px;
+	margin-left: 1px;
 	margin-right: 0px;
-	border-right: dotted 1px silver;
+	border-right: solid 1px gray;
 }
 
 .menuContainer {
 	width: 100%;
-	border-bottom: dotted 1px silver;
+	border-bottom: solid 1px gray;
 }
 
 .menuTitle {
 	background-color: white;
-	color: black;
+	color: gray;
 	font-family: Verdana;
-	font-size: 9pt;
-	font-weight: normal;
+	font-size: 10pt;
+	font-weight: bold;
 	padding-left: 6px;
 	padding-top: 7px;
 	height: 24px;
@@ -350,17 +342,16 @@ BEGIN MENU
 
 .menuItem {
 	padding-left: 16px;
-	color: black;
+	color: gray;
 	font-family: Verdana;
-	font-size: 8pt;
+	font-size: 9pt;
 	font-weight: normal;
 	padding-bottom: 5px;
 }
 
 div.menuTitle:hover,div.menuItem:hover {
 	cursor: pointer;
-	background-color: Lavender;
-	color: blue;
+	background-color: #AFC6F4;
 }
 
 	/* BEGIN IE6 hack */
@@ -389,4 +380,6 @@ div.menuTitle:hover,div.menuItem:hover {
 	/* END IE6 hack */ 
 
 /* END MENU */
+
+
 

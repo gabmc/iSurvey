@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Insertar valores de un formulario en una tabla
+	</summary>
+
+	<log>false</log>
+
+    <transaction>
+        <classname>admin_add.UpdateEstudioConImagen</classname>
+        <validator>true</validator>
+        <transaction>true</transaction>
+        <jdbc-log>false</jdbc-log>
+    </transaction>
+	
+    <maxsize>100000000</maxsize>
+    <imagespath>/images/banners_estudios</imagespath>
+    <prefix>banner_</prefix>
+    <validext>jpg,gif,png,bmp</validext>
+
+	<query>update.sql</query>
+
+    <forcescale>true</forcescale>
+    <aspectradio>true</aspectradio>
+    <createthumb>false</createthumb>
+    <maximgwidth>701</maximgwidth>
+    <maximgheight>189</maximgheight>
+    <maxthumbheight>80</maxthumbheight>
+    <maxthumbwidth>80</maxthumbwidth>
+    <imgfield>file</imgfield>	
+	
+    <output>
+        <classname>dinamica.GenericOutput</classname>
+        <template>template.htm</template>
+        <set-http-headers>true</set-http-headers>
+        <content-type>text/html; charset=iso-8859-1</content-type>
+        <expiration>0</expiration>
+        <print mode="form" recordset="_request"/>
+    </output>
+    
+</config>

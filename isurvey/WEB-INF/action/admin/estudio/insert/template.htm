@@ -1,0 +1,22 @@
+<html>
+
+	<head>
+		<LINK REL="stylesheet" type="text/css" href="${def:context}/default.css" />
+	</head>
+	
+	<body>
+	
+		<script language="javascript">
+		alert("INSERT1->INSERT2");
+		
+		parent.document.getElementById("nombre_estudio2").value = parent.document.getElementById("nombre_estudio").value;
+		parent.document.getElementById("tipo2").value = parent.document.getElementById("tipo").value;
+		parent.document.getElementById("id_empresa2").value = parent.document.getElementById("id_empresa").value;
+
+
+		parent.document.getElementById("form2").submit();
+		</script>
+	
+	</body>
+
+</html>

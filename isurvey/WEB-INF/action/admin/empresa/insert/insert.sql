@@ -14,5 +14,5 @@ VALUES
 	${fld:telefono},
 	${fld:tipo},
 	${fld:rif},
-	${fld:logo}
+	replace( ${fld:file}, '/images/logos_empresas/', '')
 )

@@ -6,6 +6,9 @@
 	<parameter id='telefono' type='varchar' required='true' label='Teléfono' maxlen='30'/>
 	<parameter id='tipo' type='varchar' required='true' label='Tipo' maxlen='30'/>
 	<parameter id='rif' type='varchar' required='true' label='RIF' maxlen='30'/>
-	<parameter id='id' type='integer' required='true' label='ID' maxlen='10'/>
-</validator>
 
+	<parameter id='id' type='varchar' required='true' label='ID Empresa' maxlen='30'/>
+
+	<parameter id="file" type="varchar" required="false" label="Archivo temporal" maxlen="500"/>
+	<parameter id="file.filename" type="varchar" required="false" label="Archivo" maxlen="400"/>
+</validator>

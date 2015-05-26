@@ -3,8 +3,8 @@
 <head>
 
 <link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
-<!--<link rel="stylesheet" type="text/css" href="${def:context}/css/jquery.dataTables.css" />
-<link rel="stylesheet" type="text/css" href="${def:context}/css/jquery.dataTables_themeroller.css" />-->
+<link rel="stylesheet" type="text/css" href="${def:context}/css/jquery.dataTables.css" />
+<link rel="stylesheet" type="text/css" href="${def:context}/css/jquery.dataTables_themeroller.css" />
 <script type="text/javascript" charset="utf-8" src="${def:context}/js/jquery.js"></script>
 <script type="text/javascript" language="javascript" charset="utf-8" src="${def:context}/js/jquery.dataTables.js"></script>
 <!--biblioteca generica JS/Dinamica-->
@@ -131,7 +131,21 @@
         /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $.extend( $.fn.dataTable.defaults, {
-    "ordering": false
+    "ordering": false,
+    "lengthChange": false,
+    "language":{
+                "lengthMenu": "Mostrar _MENU_ participantes por p&aacute;gina",
+                "zeroRecords": "No se encontraron participantes registrados",
+                "info": "P&aacute;gina _PAGE_ de _PAGES_",
+                "infoEmpty": " ",
+                "infoFiltered": "(filtrado de _MAX_ participantes totales)",
+                "sLoadingRecords": "Cargando...",
+                "sSearch": "Buscar: ",
+                "sZeroRecords": "No se encontr&oacute; ning&uacute;n participante",
+                "sProcessing": "Procesando",
+                "sPrevious": "Anterior",
+                "sNext": "Siguiente"
+    }
 } );
         $(document).ready( function () {
             $('#tablaB').DataTable({
@@ -140,21 +154,7 @@ $.extend( $.fn.dataTable.defaults, {
                         { data: 'nombre' },
                         { data: 'apellido' },
                         { data: 'accion'}
-                    ],
-                    "language": {
-                        "lengthMenu": "Mostrar _MENU_ participantes por p&aacute;gina",
-                        "zeroRecords": "No se encontraron participantes registrados",
-                        "info": "P&aacute;gina _PAGE_ de _PAGES_",
-                        "infoEmpty": " ",
-                        "infoFiltered": "(filtrado de _MAX_ participantes totales)",
-                        "sLoadingRecords": "Cargando...",
-                        "sSearch": "Buscar: ",
-                        "sZeroRecords": "No se encontr&oacute; ning&uacute;n participante",
-                        "sProcessing": "Procesando",
-                        "sLoadingRecords": "Cargando... Por favor espere",
-                        "sPrevious": "Anterior",
-                        "sNext": "Siguiente"
-                    }
+                    ] 
             });
             $('#tablaA').DataTable({
                     columns: [
@@ -166,10 +166,6 @@ $.extend( $.fn.dataTable.defaults, {
             });
         });
 
-        function crearInputs(){
-            
-        }
-
         function agregarParticipante(id, nombre, apellido, tablaDestino){
             if (tablaDestino == "#tablaA"){
                 var tabla2 = "#tablaB";
@@ -179,7 +175,7 @@ $.extend( $.fn.dataTable.defaults, {
                 var tabla2 = "#tablaA";
                 var boton = "Quitar";
                 var inputs = document.getElementById("inputs");
-                var input = document.createElement('input');//"<input type=\"hidden\" id=cod_"+id;
+                var input = document.createElement('input');
                 input.setAttribute('name', 'cod_'+id);
                 input.setAttribute('type', 'hidden');
                 input.setAttribute('id', 'id_cod_'+id);

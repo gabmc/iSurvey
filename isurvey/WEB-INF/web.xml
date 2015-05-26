@@ -441,9 +441,9 @@
 	
 	<filter-mapping>
 		<filter-name>UploadFilter</filter-name>
-		<url-pattern>/action/administrador_funcional/participantes/importar_exportar/importexcel/insert</url-pattern>
+		<url-pattern>/action/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- 
 	<filter-mapping>
 		<filter-name>AllowHostFilter</filter-name>

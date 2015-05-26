@@ -4,7 +4,5 @@ UPDATE ajvieira_isurvey_app.empresa SET
 	telefono=${fld:telefono},
 	tipo=${fld:tipo},
 	rif=${fld:rif}
-
 WHERE
 	id_empresa=${fld:id}
-

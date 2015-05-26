@@ -7,21 +7,36 @@
 
 	<log>false</log>
 
-	<transaction>
-		<classname>dinamica.GenericTableManager</classname>
-		<validator>true</validator>
-		<transaction>false</transaction>
-		<jdbc-log>false</jdbc-log>
-	</transaction>
+    <transaction>
+        <classname>admin_add.InsertarEmpresa</classname>
+        <validator>true</validator>
+        <transaction>true</transaction>
+        <jdbc-log>false</jdbc-log>
+    </transaction>
 
 	<query>insert.sql</query>
 	
-	<output>
-		<classname>dinamica.GenericOutput</classname>
-		<template>script.js</template>
-		<set-http-headers>true</set-http-headers>
-		<content-type>text/javascript; charset=iso-8859-1</content-type>
-		<expiration>0</expiration>
-	</output>
+    <maxsize>100000000</maxsize>
+    <imagespath>/images/logos_empresas</imagespath>
+    <prefix>logo_</prefix>
+    <validext>jpg,gif,png,bmp</validext>
 
+    <forcescale>true</forcescale>
+    <aspectradio>true</aspectradio>
+    <createthumb>false</createthumb>
+    <maximgwidth>1000</maximgwidth>
+    <maximgheight>1000</maximgheight>
+    <maxthumbheight>80</maxthumbheight>
+    <maxthumbwidth>80</maxthumbwidth>
+    <imgfield>file</imgfield>	
+	
+    <output>
+        <classname>dinamica.GenericOutput</classname>
+        <template>template.htm</template>
+        <set-http-headers>true</set-http-headers>
+        <content-type>text/html; charset=iso-8859-1</content-type>
+        <expiration>0</expiration>
+        <print mode="form" recordset="_request"/>
+    </output>
+    
 </config>

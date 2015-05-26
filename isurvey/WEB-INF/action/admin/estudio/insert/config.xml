@@ -7,19 +7,36 @@
 
 	<log>false</log>
 
-	<transaction>
-		<classname>admin_add.InsertarEstudio</classname>
-		<validator>true</validator>
-		<transaction>true</transaction>
-		<jdbc-log>false</jdbc-log>
-	</transaction>
+    <transaction>
+        <classname>admin_add.InsertarEstudio</classname>
+        <validator>true</validator>
+        <transaction>true</transaction>
+        <jdbc-log>false</jdbc-log>
+    </transaction>
 	
-	<output>
-		<classname>dinamica.GenericOutput</classname>
-		<template>script.js</template>
-		<set-http-headers>true</set-http-headers>
-		<content-type>text/javascript; charset=iso-8859-1</content-type>
-		<expiration>0</expiration>
-	</output>
+    <maxsize>100000000</maxsize>
+    <imagespath>/images/banners_estudios</imagespath>
+    <prefix>banner_</prefix>
+    <validext>jpg,gif,png,bmp</validext>
 
+    <query>insert.sql</query>
+
+    <forcescale>true</forcescale>
+    <aspectradio>true</aspectradio>
+    <createthumb>false</createthumb>
+    <maximgwidth>701</maximgwidth>
+    <maximgheight>189</maximgheight>
+    <maxthumbheight>80</maxthumbheight>
+    <maxthumbwidth>80</maxthumbwidth>
+    <imgfield>file</imgfield>	
+	
+    <output>
+        <classname>dinamica.GenericOutput</classname>
+        <template>template.htm</template>
+        <set-http-headers>true</set-http-headers>
+        <content-type>text/html; charset=iso-8859-1</content-type>
+        <expiration>0</expiration>
+        <print mode="form" recordset="_request"/>
+    </output>
+    
 </config>

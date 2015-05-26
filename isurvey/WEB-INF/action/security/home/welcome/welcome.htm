@@ -43,77 +43,9 @@
 
 <div class="alert" style="width: 50%; color: gray; font-weight: bold">
 
-Bienvenid@ ${fld:fname} ${fld:lname}, por favor selecciona<br>
-un comando del Menú que aparece a tu izquierda.</div>
-
-<br>
-
-<!--include al menu iconografico--> 
-${inc:${def:actionroot}/panel/view}
-
-<br>
-
-<!--tabla de ultimos logins-->
-<table class="grid" width="50%">
-
-	<tr>
-		<th colspan="4">Sus últimos accesos al servidor</th>
-	</tr>
-
-	<tr>
-		<th width="25%">Fecha</th>
-		<th width="25%">Hora</th>
-		<th width="25%">Dirección IP</th>
-		<th width="25%">Aplicación</th>
-	</tr>
-
-	<rows>
-	<tr ${fld:_rowStyle}>
-		<td align="center">${fld:login_date}</td>
-		<td align="center">${fld:login_time}</td>
-		<td align="center">${fld:remote_addr}</td>
-		<td align="center">${fld:context}</td>
-	</tr>
-	</rows>
-
-</table>
-
-<br>
-
-<!--tabla de ultimos logins fallidos-->
-<div class="alert" style="width: 50%; color: red; font-weight: normal">
-
-La siguiente información se provee para su control, por favor avise de
-inmediato al administrador del sistema si nota algo irregular.</div>
-
-<br>
-
-<table class="grid" width="50%">
-
-	<tr>
-		<th colspan="4">Ingresos fallidos usando su Identificador</th>
-	</tr>
-
-	<tr>
-		<th width="25%">Fecha</th>
-		<th width="25%">Hora</th>
-		<th width="25%">Dirección IP</th>
-		<th width="25%">Aplicación</th>
-	</tr>
-
-	<rows2>
-	<tr ${fld:_rowStyle}>
-		<td align="center">${fld:login_date}</td>
-		<td align="center">${fld:login_time}</td>
-		<td align="center">${fld:remote_addr}</td>
-		<td align="center">${fld:context}</td>
-	</tr>
-	</rows2>
-
-</table>
-
+¡ Hola ${fld:fname} ${fld:lname} !</div>
+<p>Bienvenido al sistema de encuestas iSurvey, puede elegir entre las diferentes opciones que se encuentran en el men&uacute; de la izquierda.</p>
 </center>
-
 </body>
 
 </html>

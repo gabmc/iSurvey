@@ -8,7 +8,7 @@
 	<log>false</log>
 
 	<transaction>
-		<classname>dinamica.GenericTransaction</classname>
+		<classname>responsable.MonitoreoGeneralEstudio</classname>
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
@@ -22,6 +22,7 @@
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
 		<!--<print mode="table" recordset="query.sql" tag="rows" alternate-colors="true"/>-->
+		<print mode="form" recordset="output" />
 	</output>
 
 </config>

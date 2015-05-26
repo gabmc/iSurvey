@@ -8,33 +8,29 @@
 <script type="text/javascript" src="${def:context}/action/script">
 </script>
 
-<title>CRUD Empresa</title>
-
+<title>iSurvey</title>
 </head>
 
 <body>
-
 <!--banner-->
 <div class="banner">
 	<div style="float: left;">Administraci&oacute;n de Empresas</div>
 	${req:progress}
 </div>
 
-<br>
-
 <!--formulario addnew/edit-->
 <div id="form" align="center">
-<form name="form1" onsubmit="return save()">
+<form id="form1" name="form1" onsubmit="return save()" action="${def:context}${def:actionroot}/insertImagen" method="POST" enctype="multipart/form-data" target="uploadFrame">
 
 <table class="formgrid" width="450px">
 
 	<!--ancho de la columna de etiquetas-->
-	<col width="20%">
-	<col width="70%">
+	<col width="30%">
+	<col width="60%">
 
 	<!--titulo-->
 	<tr>
-            <th colspan="2"><span id="formTitle"> A&ntilde;adir registro </span></th>
+		<th colspan="2"><span id="formTitle"> Añadir registro </span></th>
 	</tr>
 
 	<!--separador-->
@@ -43,8 +39,9 @@
 	</tr>
 
 	<!--campos-->
-		<!--control picklist de seleccion simple-->
-	<tr>
+
+	<!--control picklist de seleccion simple-->
+   	<tr>
 		<td class="formlabel">Sector Empresarial</td>
 		<td>
 			<!--almacena el ID del item seleccionado--> 
@@ -84,11 +81,11 @@
 	<tr>
 		<td class="formlabel">Logo</td>
 		<td>
-			<input type="file" name="logo" id="logo" size="30">
+			<input type="file" name="file" size="30">
+			<input id="urlimg" name="urlimg" type="hidden" size="35" maxlength="150">
 		</td>
 	</tr>
-
-
+	
 	<!--separador-->
 	<tr height="10px">
 		<td colspan="2"></td>
@@ -97,7 +94,7 @@
 	<!--botones-->
 	<tr>
 		<td align="center" colspan="2">
-			<input id="grabar" type="submit" value="Grabar" class="button">
+			<input id="grabar"  name="submit" type="submit" value="Grabar" class="button">
 			<input type="button" value="Cancelar" class="button" onclick="addNew()">
 		</td>
 	</tr>
@@ -116,30 +113,112 @@
 
 <br>
 
+<!-- Filtro de busqueda -->
 
 <!--panel de respuesta AJAX para el grid paginado-->
 <div id="response" style="display: none; width: 100%" align="center"></div>
+<br>
+<br>
+<br>
+
+
+<iframe name="uploadFrame" style="display:none" width="300" height="300">
+</iframe>
 
 </body>
 
 <!--codigo de soporte del template-->
 <script type="text/javascript">
 
-	//inicializa cuando se carga la pagina
-	onload = function()
-	{
-		addNew(); //prepara formulario para ingresar nuevo registro 
-		search(); //mostrar registros en vista paginada
-
-	} 
-	
-	/** picklist de seleccion simple **/
-	
 	//desplegar picklist de seleccion simple
 	function pickIdSectorEmpresarial(){
 		var url = "${def:context}/action/picklist/sectorempresarial/form";
 		pickOpen ('id_sector_empresarial_name','id_sector_empresarial',url,'450','335');	
 	}
+	//inicializa cuando se carga la pagina
+	onload = function()
+	{
+		addNew(); //prepara formulario para ingresar nuevo registro 
+		search(); //mostrar registros en vista paginada
+	} 
+	
+
+	/** ---------------------- NUEVOS METODOS O MOFIFICADOS ---------------------- **/		
+	
+	
+	//grabar el formulario
+	function save()
+	{
+		//determina si es un insert o un update
+		if (document.form1.id.value=="")
+		{
+           	document.forms.form1.action= "${def:context}${def:actionroot}/insert";	
+			//return insert();	           			
+		}
+		else
+		{
+			if(document.form1.file.value == "")
+			{
+				document.forms.form1.action= "";
+				return update();	
+								
+			}
+			else
+			{
+           		document.forms.form1.action= "${def:context}${def:actionroot}/updateConImagen";
+
+			}
+		}
+	}
+
+	function insertarOK()
+	{
+		alert("El registro fue agregado en la base de datos");
+		document.form1.file.value = "";		
+		addNew();
+		search();
+	}
+	
+	function modificaOK()
+	{
+		alert("El registro fue atualizado en la base de datos.");
+		document.form1.file.value = "";		
+		addNew();
+		search();
+	}	
+	
+	//actualizar registro en BD
+	function update()
+	{		
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/update", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	
+	}
+
+		function updateConImagen()
+	{		
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/updateConImagen", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	
+	}
+	
+	/** ---------------------------------------------------------------------- **/	
 	
 	//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
 	function search()
@@ -170,15 +249,7 @@
 	}	
 	
 	
-	//grabar el formulario
-	function save()
-	{
-		//determina si es un insert o un update
-		if (document.form1.id.value=="")
-			return insert();
-		else
-			return update();
-	}
+
 
 	//grabar registro nuevo en BD
 	function insert()
@@ -217,26 +288,10 @@
 							onErrorFn=null);	
 	}
 	
-	//actualizar registro en BD
-	function update()
-	{		
-			clearErrorMessages();
-			document.getElementById("grabar").disabled=true;
-			
-			//llamada Ajax...
-			return ajaxCall(httpMethod="POST", 
-							uri="${def:actionroot}/update", 
-							divResponse=null, 
-							divProgress="status", 
-							formName="form1", 
-							afterResponseFn=null, 
-							onErrorFn=retryAddnewOrEdit);	
-	}
-	
 	//eliminar un registro
 	function deleteRecord(id)
 	{
-		if (window.confirm("�Est� seguro que desea ELIMINAR este registro?")==false)
+		if (window.confirm("¿Está seguro que desea ELIMINAR este registro?")==false)
 		{
 			return false;
 		}

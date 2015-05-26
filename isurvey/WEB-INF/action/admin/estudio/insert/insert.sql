@@ -2,11 +2,13 @@ INSERT INTO ajvieira_isurvey_app.estudio
 (
 	nombre_estudio,
 	id_empresa,
-	tipo
+	tipo,
+	banner
 )
 VALUES
 (
-	'{{nombre_estudio}}',
-	{{id_empresa}},
-	'{{tipo}}'
+	${fld:nombre_estudio},
+	${fld:id_empresa},
+	${fld:tipo},
+	replace( ${fld:file}, '/images/banners_estudios/', '')
 )
