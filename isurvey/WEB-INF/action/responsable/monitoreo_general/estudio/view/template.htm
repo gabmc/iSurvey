@@ -1,0 +1,8 @@
+			<!--indicador de progreso de carga del chart-->
+			<div id="chart1_wait" class="alert"
+				style="color: gray; width: 20%; font-weight: bold; font-family: Arial">
+				<img src="${def:context}/images/progress.gif"> Generando
+				gráfico 1...
+			</div> <!--chart--> <img id="chart1" style="display: none"
+			src="${def:context}${def:actionroot}/chart1?dummy=${def:time}"
+			border="0" onload="displayChart('chart1')">

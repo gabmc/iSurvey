@@ -44,18 +44,18 @@
 			this recordset must have been saved in session by
 			a previous Action
 		-->
-		<recordset>output</recordset>
+		<recordset>query.sql</recordset>
 
 		<!--
 			column that represents the "X" field or category
 		-->
-		<field-x>incompletas</field-x>
+		<field-x>x</field-x>
 		
 		<!--
 			column that represents the "Y" field or values
 			if multiseries then type multiple column names separated by ";"		
 		-->
-		<field-y>completas</field-y>
+		<field-y>y</field-y>
 
 		<!--chart dimension in pixels-->
 		<width>500</width>

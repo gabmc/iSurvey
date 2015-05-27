@@ -22,9 +22,11 @@ public class MostrarVisor extends GenericTransaction {
     public int service(Recordset inputParams) throws Throwable{
         this.getDb().beginTrans();
     	String red = "<img src=\"${def:context}/images/reddot.png\" " +
-		"title=\"Incompleta\" class=\"tool\" width=\"24\" height=\"24\">";
+		"title=\"Sin Iniciar\" class=\"tool\" width=\"24\" height=\"24\">";
     	String green = "<img src=\"${def:context}/images/greendot.png\" " +
 		"title=\"Completa\" class=\"tool\" width=\"24\" height=\"24\">";
+    	String yellow = "<img src=\"${def:context}/images/yellowdot.png\" " +
+		"title=\"Incompleta\" class=\"tool\" width=\"24\" height=\"24\">";
         Enumeration names = this.getRequest().getParameterNames();
         Map parametros = this.getRequest().getParameterMap();
         String token = ((String[]) parametros.get("token"))[0];
@@ -54,9 +56,12 @@ public class MostrarVisor extends GenericTransaction {
 	        	visor.setValue("token", info.getString("token"));
 	        	visor.setValue("logo", logoEmpresa);
 	        	if (info.getValue("estatus").equals("Incompleta")){
+	        		visor.setValue("estatus", yellow);
+	        	}
+	        	if (info.getValue("estatus").equals("Sin Iniciar")){
 	        		visor.setValue("estatus", red);
 	        	}
-	        	else{
+	        	if (info.getValue("estatus").equals("Completa")){
 	        		visor.setValue("estatus", green);
 	        	}
         	}
@@ -131,13 +136,14 @@ public class MostrarVisor extends GenericTransaction {
     }
     
     void updateStatus (String token) throws Throwable{
-    	String estatus = "Completa";
+    	String estatus = "";
     	String query = "select instrumento.id_instrumento " +
 		"from " +
 		"ajvieira_isurvey_app.estudio, ajvieira_isurvey_app.instrumento, " +
 		"ajvieira_isurvey_app.int_participante_instrumento " +
 		"where " +
 		"estudio.id_estudio = instrumento.id_estudio " +
+		"and estudio.tipo = 'Cerrado' " +
 		"and int_participante_instrumento.id_instrumento = instrumento.id_instrumento " +
 		"and int_participante_instrumento.id_participante = (select id_participante from  " +
 		"ajvieira_isurvey_app.int_participante_instrumento " +
@@ -146,24 +152,50 @@ public class MostrarVisor extends GenericTransaction {
     	instrumentos.top();
     	Recordset participante = getParticipante(token);
     	participante.top();
-    	while (instrumentos.next()){
-    		TokenGenerator tg = new TokenGenerator();
-    		String sql = "select * from ajvieira_isurvey_lime.survey_" + instrumentos.getString("id_instrumento") + " " +
-    				"where token = '" + tg.generarToken(/*participante.getString("id_participante")*/"1", instrumentos.getString("id_instrumento")) + "'";
-    		Recordset respuestas = this.getDb().get(sql);
-    		respuestas.top();
-    		Recordset columnas = getNombresColumnas("survey_" + instrumentos.getString("id_instrumento"));
-    		columnas.top();
-    		while (respuestas.next()){
+    	while (participante.next()){
+    		System.out.println("---INICIO PARTICIPANTE---");
+	    	while (instrumentos.next()){
+	    		System.out.println("---INICIO INSTRUMENTOS---");
+	    		TokenGenerator tg = new TokenGenerator();
+	    		String sql = "select * from ajvieira_isurvey_lime.survey_" + instrumentos.getString("id_instrumento") + " " +
+	    				"where token = '" + tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")) + "'";
+	    		Recordset respuestas = this.getDb().get(sql);
+	    		respuestas.top();
+	    		Recordset columnas = getNombresColumnas("survey_" + instrumentos.getString("id_instrumento"));
+	    		columnas.top();
+	    		int numeroColumnas = -5;
 	    		while (columnas.next()){
-	    			String column = columnas.getString("column_name");
-	    			column = column.toLowerCase();
-	    			if (respuestas.getString(column) == null){
-	    				estatus = "Incompleta";
-	    			}
+	    			numeroColumnas++;
 	    		}
-    		}
-    		setEstatus(token, estatus);
+	    		System.out.println("numeroColumnas: " + numeroColumnas);
+	    		columnas.top();
+	    		while (respuestas.next()){
+	    			System.out.println("---INICIO RESPUESTAS---");
+	    			int numeroColumnas2 = numeroColumnas;
+		    		while (columnas.next()){
+		    			String column = columnas.getString("column_name");
+		    			column = column.toLowerCase();
+		    			if (respuestas.getString(column) == null && (!column.equals("submitdate") || !column.equals("lastpage"))){
+		    				numeroColumnas2--;
+		    			}
+		    		}
+		    		System.out.println("numeroColumnas2: " + numeroColumnas2);
+		    		if (numeroColumnas2 <= 0){
+		    			estatus = "Sin Iniciar";
+		    		}
+		    		if (numeroColumnas2 > 0 && numeroColumnas2 < numeroColumnas){
+		    			estatus = "Incompleta";
+		    		}
+		    		if (numeroColumnas2 == numeroColumnas){
+		    			estatus = "Completa";
+		    		}
+		    		System.out.println("---FIN RESPUESTAS---");
+	    		}
+	    		System.out.println(estatus);
+	    		setEstatus(token, estatus);
+	    		System.out.println("---FIN INSTRUMENTOS---");
+	    	}
+	    	System.out.println("---FIN PARTICIPANTE---");
     	}
     }
 }

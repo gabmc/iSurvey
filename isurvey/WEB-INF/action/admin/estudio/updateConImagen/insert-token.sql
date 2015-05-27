@@ -10,5 +10,5 @@ values
         {{id_participante}},
         {{id_instrumento}},
         '{{token}}',
-        'Incompleta'
+        'Sin Iniciar'
 )

@@ -33,6 +33,6 @@ SELECT
 	id_empresa,
 	now(),
 	'Si',
-	0000-00-00
+	now()
 FROM
 	ajvieira_isurvey_security.s_user where userlogin = '${def:user}'
