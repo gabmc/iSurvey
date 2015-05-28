@@ -28,6 +28,7 @@ public class MonitoreoGeneralEstudio extends GenericTransaction {
         Recordset estudio = getEstudio(id);
         estudio.first();
         
+        int sinIniciar = 0;
         int incompletas = 0;
         int completas = 0;
         Recordset instrumentos = getInstrumentos(id);
@@ -42,18 +43,23 @@ public class MonitoreoGeneralEstudio extends GenericTransaction {
         		if (intParticpanteInstrumento.getString("estatus").equals("Completa")){
         			completas++;
         		}
+        		if (intParticpanteInstrumento.getString("estatus").equals("Sin Iniciar")){
+        			sinIniciar++;
+        		}
         	}    	
         }
         Recordset output = new Recordset();
+        output.append("sin_iniciar", java.sql.Types.INTEGER);
         output.append("incompletas", java.sql.Types.INTEGER);
         output.append("completas", java.sql.Types.INTEGER);
         output.append("nombre_estudio", java.sql.Types.VARCHAR);
         output.append("total", java.sql.Types.INTEGER);
         output.addNew();
+        output.setValue("sin_iniciar", sinIniciar);
         output.setValue("incompletas", incompletas);
         output.setValue("completas", completas);
         output.setValue("nombre_estudio", estudio.getString("nombre_estudio"));
-        output.setValue("total", completas + incompletas);
+        output.setValue("total", completas + incompletas + sinIniciar);
         publish("output", output);
         //getDb().commit();
         return 0;

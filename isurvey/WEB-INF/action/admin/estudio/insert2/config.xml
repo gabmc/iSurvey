@@ -16,9 +16,9 @@
 	
 	<output>
 		<classname>dinamica.GenericOutput</classname>
-		<template>script.js</template>
+		<template>template.htm</template>
 		<set-http-headers>true</set-http-headers>
-		<content-type>text/javascript; charset=iso-8859-1</content-type>
+		<content-type>text/html; charset=iso-8859-1</content-type>
 		<expiration>0</expiration>
 	</output>
 

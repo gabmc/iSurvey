@@ -130,9 +130,11 @@ public class MostrarVisor extends GenericTransaction {
     }
     
     void setEstatus (String token, String estatus) throws Throwable{
+    	System.out.println("setEstatus");
     	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "' " +
     			"where token_participante = '" + token + "'";
     	this.getDb().exec(sql);
+    	this.getDb().commit();
     }
     
     void updateStatus (String token) throws Throwable{
@@ -153,9 +155,7 @@ public class MostrarVisor extends GenericTransaction {
     	Recordset participante = getParticipante(token);
     	participante.top();
     	while (participante.next()){
-    		System.out.println("---INICIO PARTICIPANTE---");
 	    	while (instrumentos.next()){
-	    		System.out.println("---INICIO INSTRUMENTOS---");
 	    		TokenGenerator tg = new TokenGenerator();
 	    		String sql = "select * from ajvieira_isurvey_lime.survey_" + instrumentos.getString("id_instrumento") + " " +
 	    				"where token = '" + tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")) + "'";
@@ -167,10 +167,8 @@ public class MostrarVisor extends GenericTransaction {
 	    		while (columnas.next()){
 	    			numeroColumnas++;
 	    		}
-	    		System.out.println("numeroColumnas: " + numeroColumnas);
 	    		columnas.top();
 	    		while (respuestas.next()){
-	    			System.out.println("---INICIO RESPUESTAS---");
 	    			int numeroColumnas2 = numeroColumnas;
 		    		while (columnas.next()){
 		    			String column = columnas.getString("column_name");
@@ -179,7 +177,6 @@ public class MostrarVisor extends GenericTransaction {
 		    				numeroColumnas2--;
 		    			}
 		    		}
-		    		System.out.println("numeroColumnas2: " + numeroColumnas2);
 		    		if (numeroColumnas2 <= 0){
 		    			estatus = "Sin Iniciar";
 		    		}
@@ -189,13 +186,9 @@ public class MostrarVisor extends GenericTransaction {
 		    		if (numeroColumnas2 == numeroColumnas){
 		    			estatus = "Completa";
 		    		}
-		    		System.out.println("---FIN RESPUESTAS---");
 	    		}
-	    		System.out.println(estatus);
 	    		setEstatus(token, estatus);
-	    		System.out.println("---FIN INSTRUMENTOS---");
 	    	}
-	    	System.out.println("---FIN PARTICIPANTE---");
     	}
     }
 }

@@ -8,13 +8,13 @@
 	<log>false</log>
 
 	<transaction>
-		<classname>dinamica.GenericTableManager</classname>
+		<classname>estudio.abierto.identificado.InsertarParticipante</classname>
 		<validator>true</validator>
-		<transaction>false</transaction>
+		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>
 	</transaction>
 
-	<query>insert.sql</query>
+	<query>insert-int-participante-lista.sql</query>
 	
 	<output>
 		<classname>dinamica.GenericOutput</classname>
