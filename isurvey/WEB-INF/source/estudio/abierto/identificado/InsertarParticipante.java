@@ -49,8 +49,16 @@ public class InsertarParticipante extends GenericTableManager {
         sql = StringUtil.replace(getResource("insert-int-participante-instrumento.sql"), "{{token_participante}}", token);
         sql = StringUtil.replace(sql, "{{id_participante}}", idParticipante);
         sql = StringUtil.replace(sql, "{{id_instrumento}}", idInstrumento);
-        
         this.getDb().exec(sql);
+        
+        Recordset rs = new Recordset();
+        rs.append("id_encuesta", java.sql.Types.VARCHAR);
+        rs.append("token", java.sql.Types.VARCHAR);
+        
+        rs.addNew();
+        rs.setValue("id_encuesta", idInstrumento);
+        rs.setValue("token", token);
+        this.publish("id_encuesta", rs);
 
         return super.service(inputParams);
     }

@@ -6,7 +6,7 @@ from
 	ajvieira_isurvey_app.empresa,
 	ajvieira_isurvey_app.estudio 
 where
-	ajvieira_isurvey_app.empresa.id_empresa=ajvieira_isurvey_app.estudio.id_empresa 
+	empresa.id_empresa=estudio.id_empresa 
 
 order by 
 	id_estudio

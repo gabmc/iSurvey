@@ -1,0 +1,225 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<link rel="stylesheet" type="text/css" href="${def:context}/css/jquery.dataTables.css" />
+<link rel="stylesheet" type="text/css" href="${def:context}/css/jquery.dataTables_themeroller.css" />
+<script type="text/javascript" charset="utf-8" src="${def:context}/js/jquery.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="${def:context}/js/jquery.dataTables.js"></script>
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>Agregar Participante(s) a Lista</title>
+
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Agregar Participante(s) a Lista</div>
+	${req:progress}
+</div>
+<table align="center" class="formgrid" width="450px">
+<tr><td>
+    Empresa
+</td>
+        <td>
+            <!--almacena el ID del item seleccionado--> 
+            <input type="hidden" name="id_empresa_search" id="id_empresa_search"  /> 
+            <!--almacena el nombre del item seleccionado-->
+            <input type="text" name="id_empresa_name_search" id="id_empresa_name_search" style="width: 80%;" readonly /> 
+            <!--botones del picklist--> 
+            <img src="${def:context}/images/search.gif" class="button" onclick="pickIdEmpresa2();" title="Seleccionar item" /> 
+            <img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_empresa_search.value='';document.form1.id_empresa_name_search.value='';"
+                title="Borrar valor seleccionado" />
+        </td>
+        <td><input type="button" value="Buscar" class="button" onclick="search(document.getElementById('id_empresa_search').value)"></td>
+        </tr>
+    <tr>
+        <td>
+            Lista
+        </td>
+        <td>
+        <!--almacena el ID del item seleccionado-->
+        <input type="hidden" name="id_lista_participantes" id="id_lista_participantes" />
+        <input type="hidden" name="userlogin" id="userlogin" value="${def:user}" />
+        <!--almacena el nombre del item seleccionado-->
+        <input type="text" name="id_lista_participantes_name" id="id_lista_participantes_name" style="width: 80%;" readonly />
+        <!--botones del picklist-->
+        <img src="${def:context}/images/search.gif" class="button" onclick="pickIdLista();" title="Seleccionar item" />
+        <img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_lista_participantes.value='';document.form1.id_lista_participantes_name.value='';"
+                title="Borrar valor seleccionado" />
+        </td>
+        <td></td>
+    </tr>
+</table>
+<br>
+<div id="response" style="display: none; width: 100%" align="center"></div>
+
+
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+	function pickIdLista(){
+        if (document.getElementById("id_empresa_search").value != ''){
+		var url = "${def:context}/action/administrador_add/participantes/agregar_participante_a_lista/picklist_listaparticipantes/form?id_empresa=" + document.getElementById("id_empresa_search").value;
+		pickOpen ('id_lista_participantes_name','id_lista_participantes',url,'450','335');
+    }
+    else{
+        alert("Debe seleccionar una empresa primero");
+    }
+	}
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$.extend( $.fn.dataTable.defaults, {
+    "ordering": false,
+    "lengthChange": false,
+    "language":{
+                "lengthMenu": "Mostrar _MENU_ participantes por p&aacute;gina",
+                "zeroRecords": "No se encontraron participantes registrados",
+                "info": "P&aacute;gina _PAGE_ de _PAGES_",
+                "infoEmpty": " ",
+                "infoFiltered": "(filtrado de _MAX_ participantes totales)",
+                "sLoadingRecords": "Cargando...",
+                "sSearch": "Buscar: ",
+                "sZeroRecords": "No se encontr&oacute; ning&uacute;n participante",
+                "sProcessing": "Procesando",
+                "sPrevious": "Anterior",
+                "sNext": "Siguiente"
+    }
+} );
+        $(document).ready( function () {
+            $('#tablaB').DataTable({
+                    columns: [
+                        { data: 'id' },
+                        { data: 'nombre' },
+                        { data: 'apellido' },
+                        { data: 'accion'}
+                    ] 
+            });
+            $('#tablaA').DataTable({
+                    columns: [
+                        { data: 'id' },
+                        { data: 'nombre' },
+                        { data: 'apellido' },
+                        { data: 'accion'}
+                    ]
+            });
+        });
+
+        function agregarParticipante(id, nombre, apellido, tablaDestino){
+            if (tablaDestino == "#tablaA"){
+                var tabla2 = "#tablaB";
+                var boton = "Agregar";
+            }
+            else{
+                var tabla2 = "#tablaA";
+                var boton = "Quitar";
+                var inputs = document.getElementById("inputs");
+                var input = document.createElement('input');
+                input.setAttribute('name', 'cod_'+id);
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('id', 'id_cod_'+id);
+                inputs.appendChild(input);
+            }
+            $(tablaDestino).dataTable().fnAddData({
+                "id":   id,
+                "nombre":   nombre,
+                "apellido": apellido,
+                "accion": "<input type=\"button\" value="+boton+" onclick=\"agregarParticipante('"+id+"','"+nombre+"', '"+apellido+"', '"+tabla2+"')\">"
+            });
+            quitarParticipante(id, tabla2);
+        }
+
+        function quitarParticipante(id, tabla){
+            var targetRow = 0;
+            var rows = $(tabla).dataTable().fnGetNodes();
+            for(var i=0; i<rows.length; i++){
+                var valorActual = $(rows[i]).find("td:eq(0)").html();
+                if(valorActual == id){
+                    targetRow = i;
+                }
+            }
+            $(tabla).dataTable().fnDeleteRow(targetRow);
+            if (tabla == "#tablaB"){
+                var input = document.getElementById("id_cod_"+id);
+                input.parentNode.removeChild(input);
+            }
+        }
+
+
+
+            function insertarParticipantes(){
+                var rows = $("#tablaB").dataTable().fnGetNodes();
+                if (document.form1.id_lista_participantes.value == ""){
+                    alert("Disculpe, debe seleccionar la lista a donde perteneceran los participantes.");
+                    return false;
+                }
+                if(rows.length > 0){
+                    document.form1.subm.disabled = true;
+                    //llamada Ajax...
+                    return ajaxCall(httpMethod="POST",
+                    uri="${def:actionroot}/insert",
+                    divResponse=null,
+                    divProgress="status",
+                    formName="form1",
+                    onErrorFn=null);
+                }
+                else
+                {
+                    alert("Disculpe, debe postular al menos a una persona.");
+                    return false;
+                }
+            }
+
+            function restart(){
+                document.documentElement.innerHTML = '';
+                var url = "${def:actionroot}/form";
+                //llamada Ajax...
+		ajaxCall(httpMethod="GET",
+						uri= url,
+						divResponse="response",
+						divProgress="status",
+						formName=null,
+						afterResponseFn=null,
+						onErrorFn=null);
+            }
+
+    function pickIdEmpresa2(){
+        var url = "${def:context}/action/picklist/empresa/form";
+        pickOpen ('id_empresa_name_search','id_empresa_search',url,'450','335');
+            
+    }
+
+    function search(idEmpresa)
+    {
+        var url = "${def:actionroot}/search?id_empresa=" + idEmpresa;
+        
+        //determina si refresca y se para en la pagina actual o en la pagina 1
+
+
+        //llamada Ajax...
+        ajaxCall(httpMethod="GET", 
+                        uri= url, 
+                        divResponse="response", 
+                        divProgress="status", 
+                        formName=null, 
+                        afterResponseFn=null, 
+                        onErrorFn=null);
+    }
+
+        //traer la pagina N del grid
+    function viewPage()
+    {
+        var url = "${def:actionroot}/view";
+        gotoPage(url);
+    }
+</script>
+
+</html>

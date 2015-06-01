@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror='/action/error/validation/ajax'>
+	<parameter id='id_usuario' type='integer' required='false' label='Aplicador'/>
+	<parameter id='id_estudio' type='integer' required='false' label='Estudio'/>
+	<parameter id="id_empresa" type="integer" required="true" label="ID Empresa" maxlen="10" />
+	<custom-validator 	
+	classname="dinamica.validators.DuplicatedKeyValidator" 
+	on-error-label="Este Aplicador ya se encuentra asignado al Estudio seleccionado"
+	sql="dupkey.sql" id='id_usuario'/>
+</validator>

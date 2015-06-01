@@ -8,8 +8,7 @@ INSERT INTO ajvieira_isurvey_app.participante
 	cargo,
 	id_empresa,
 	fecha_registro,
-	verificado,
-	fecha_verificacion
+	verificado
 )
 values
 (
@@ -21,6 +20,5 @@ values
 	'{{cargo}}',
 	'{{id_empresa}}',
 	now(),
-	'No',
-	0000-00-00
+	'No'
 )
