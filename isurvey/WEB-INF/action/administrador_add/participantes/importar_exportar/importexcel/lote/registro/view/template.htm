@@ -1,0 +1,81 @@
+<!--comandos-->
+[<a href="javascript:goBack()">Retornar</a>]
+
+<br><br>
+<!--data grid-->
+<table class="grid" width="750px">
+	
+	<!--encabezados-->
+	<tr>
+		<th colspan="5">
+			<span style="float:left">
+				Datos cargados del Archivo Excel
+			</span>
+			<span style="float:right;">
+				<!--panel de control de navegacion-->
+				${inc:/action/pagecontrols}
+			</span>
+
+			<span id="grid-progress" style="float:right;margin-right:20px;display:none">
+				<img src="${def:context}/images/progress.gif">
+			</span>
+			
+			<span style="float:left;margin-left:60px">
+				<img src="${def:context}/images/grid-split.gif" class="tool">
+				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/grid-split.gif" class="tool">
+			</span>
+		</th>
+	</tr>
+	<tr>
+		<th>
+			<a href="javascript:onclick=sortBy('customerid')" title="Haga CLICK para ordenar por esta columna">
+				Código Cliente
+			</a>
+		</th>
+		<th>
+			<a href="javascript:onclick=sortBy('orderdate')" title="Haga CLICK para ordenar por esta columna">
+				Fecha de la Orden
+			</a>
+		</th>
+		<th>
+			<a href="javascript:onclick=sortBy('productid')" title="Haga CLICK para ordenar por esta columna">
+				Código Producto
+			</a>
+		</th>
+		<th>
+			<a href="javascript:onclick=sortBy('unitprice')" title="Haga CLICK para ordenar por esta columna">
+				Precio Unitario
+			</a>
+		</th>
+		<th>
+			<a href="javascript:onclick=sortBy('discount')" title="Haga CLICK para ordenar por esta columna">
+				Descuento
+			</a>
+		</th>
+	</tr>
+	
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center" width="30%">
+			${fld:customerid}
+		</td>
+		<td align="center" width="20%">
+			${fld:orderdate}
+		</td>
+		<td align="center" width="20%">
+			${fld:productid}
+		</td>
+		<td align="right" width="20%">
+			${fld:unitprice@#,###,##0.00} 
+		</td>
+		<td align="right" width="20%">
+			${fld:discount@#,###,##0.00} 
+		</td>
+	</tr>
+	</rows>
+		
+</table>
+
+

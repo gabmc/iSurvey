@@ -1,0 +1,90 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>Agregar Participante(s) a Lista</title>
+
+</head>
+
+<body>
+
+    <h1>Exportar Lista de Participantes</h1>
+
+<!--formulario addnew/edit-->
+<div id="form" align="center">
+<form name="form1" >
+
+<table width="400px" class="formgrid">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="30%"> 
+
+	<!--titulo-->
+
+        	<tr>
+            <th colspan="2"> Seleccione la Empresa </th>
+	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
+	</tr>
+            <tr>
+<td colspan="2" align="center">
+			<!--almacena el ID del item seleccionado--> 
+			<input type="hidden" name="id_empresa" id="id_empresa" /> 
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_empresa_name" id="id_empresa_name" style="width: 80%;" readonly /> 
+			<!--botones del picklist--> 
+			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" /> 
+			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_empresa.value='';document.form1.id_empresa_name.value='';"
+				title="Borrar valor seleccionado" />
+		</td>
+	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
+	</tr>
+
+
+</table>	
+
+<table width="400px" class="formgrid">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="30%"> 
+
+	<!--titulo-->
+
+        	<tr>
+            <th colspan="2"> Seleccione la Lista a donde pertenecer&aacute;n los Participantes </th>
+	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
+	</tr>
+            <tr>
+		<td colspan="2" align="center">
+			<!--almacena el ID del item seleccionado-->
+			<input type="hidden" name="userlogin" id="userlogin" value="${def:user}" />
+			<input type="hidden" name="id_lista_participantes" id="id_lista_participantes" />
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_lista_participantes_name" id="id_lista_participantes_name" style="width: 80%;" readonly />
+			<!--botones del picklist-->
+			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdListaImp();" title="Seleccionar item" />
+			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_lista_participantes.value='';document.form1.id_lista_participantes_name.value='';"
+				title="Borrar valor seleccionado" />
+		</td>
+	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
+	</tr>
+	</table>
+<br>
+<input type="submit" name="exportar" value="Exportar" onclick="exportar_excel()" align="center">
+</form>
+</div>
+</body>
+</html>

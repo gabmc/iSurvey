@@ -3,6 +3,7 @@ UPDATE ajvieira_isurvey_app.participante SET
 	apellido_participante=${fld:apellido_participante},
 	email_participante=${fld:email_participante},
 	cargo=${fld:cargo},
+	empresa=${fld:empresa},
 	supervisor=${fld:supervisor},
 	fecha_nacimiento=${fld:fecha_nacimiento},
 	fecha_ingreso=${fld:fecha_ingreso},

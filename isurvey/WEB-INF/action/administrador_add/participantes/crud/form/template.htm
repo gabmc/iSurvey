@@ -51,9 +51,9 @@
 			<!--almacena el nombre del item seleccionado-->
 			<input type="text" name="id_empresa_name" id="id_empresa_name" style="width: 80%;" readonly /> 
 			<!--botones del picklist--> 
-			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" /> 
+			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" id="buscar" /> 
 			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_empresa.value='';document.form1.id_empresa_name.value='';"
-				title="Borrar valor seleccionado" />
+				title="Borrar valor seleccionado" id="borrar" />
 		</td>
 	</tr>
 		<tr>
@@ -65,7 +65,7 @@
 	<tr>
 		<td class="formlabel">Nombre</td>
 		<td>
-			<input id="nombre_participante" name="nombre_participante" type="text" size="30" maxlength="30" onchange="search(2)"> 
+			<input id="nombre_participante" name="nombre_participante" type="text" size="30" maxlength="30"> 
 		</td>
 	</tr>
 	<tr>
@@ -340,8 +340,12 @@
 
 	function pickIdEmpresa2(){
 		var url = "${def:context}/action/picklist/empresa/form";
-		pickOpen ('id_empresa_name_search','id_empresa_search',url,'450','335');
-			
+		pickOpen ('id_empresa_name_search','id_empresa_search',url,'450','335');	
+	}
+
+	function borrarCampo(){
+		document.form1.id_empresa.value='';
+		document.form1.id_empresa_name.value='';
 	}
 </script>
 

@@ -1,6 +1,7 @@
 document.form1.nombre_participante.value='${fld:nombre_participante@js}';
 document.form1.apellido_participante.value='${fld:apellido_participante@js}';
 document.form1.email_participante.value='${fld:email_participante@js}';
+document.form1.empresa.value='${fld:empresa@js}';
 document.form1.cargo.value='${fld:cargo@js}';
 document.form1.supervisor.value='${fld:supervisor@js}';
 document.form1.fecha_nacimiento.value='${fld:fecha_nacimiento@dd-MM-yyyy}';

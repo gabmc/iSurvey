@@ -1,0 +1,4 @@
+select
+	id_participante
+from
+	ajvieira_isurvey_app.participante

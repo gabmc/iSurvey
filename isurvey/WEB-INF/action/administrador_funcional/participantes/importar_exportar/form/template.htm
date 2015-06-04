@@ -163,10 +163,17 @@
 
         function exportar_excel()
 	{
+		if (document.getElementById("id_lista_participantes").value != ''){
                 var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
 		var url = "${def:context}${def:actionroot}/exportar_excel?random=" + Math.random()+
                     "&id_lista_participantes="+document.getElementById("id_lista_participantes").value;
 		var w = window.open(url, null, features);
+		}
+		else{
+			alert("Debe seleccionar una Lista");
+			exportar();
+
+		}
 	}
 
 	//restaurar el formulario en caso de error
@@ -221,10 +228,15 @@
 			document.form1.file.focus();
 			return false;
 		}
-
-		document.form1.submit.disabled = true;
-		document.getElementById("status").style.display="";
-		return true;
+		if (document.getElementById("id_lista_participantes").value != ''){
+			document.form1.submit.disabled = true;
+			document.getElementById("status").style.display="";
+			return true;
+		}
+		else{
+			alert("Debe seleccionar una Lista");
+			return false;
+		}
 	}
 
 

@@ -1,0 +1,10 @@
+select
+	customerid, 
+	orderdate, 
+	productid, 
+	unitprice, 
+	discount
+from 
+	demo.import_excel
+where
+	lote_excel_id=${fld:id}

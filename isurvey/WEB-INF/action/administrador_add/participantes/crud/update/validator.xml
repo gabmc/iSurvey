@@ -3,6 +3,7 @@
 	<parameter id='nombre_participante' type='varchar' required='false' label='Nombre' maxlen='30'/>
 	<parameter id='apellido_participante' type='varchar' required='false' label='Apellido' maxlen='30'/>
 	<parameter id='email_participante' type='varchar' required='false' label='e-mail' maxlen='30'/>
+	<parameter id='empresa' type='varchar' required='false' label='Empresa' maxlen='30'/>
 	<parameter id='cargo' type='varchar' required='false' label='Cargo' maxlen='30'/>
 	<parameter id='supervisor' type='varchar' required='false' label='Supervisor' maxlen='30'/>
 	<parameter id='fecha_nacimiento' type='date' required='false' label='Fecha de Nacimiento' maxlen='13'/>

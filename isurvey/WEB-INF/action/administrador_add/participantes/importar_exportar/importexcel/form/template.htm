@@ -1,0 +1,224 @@
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+	
+	<title>ImportExcel</title>
+	
+</head>
+
+<body>
+
+<!--banner-->
+<h1>
+	Importar Lista de Participantes
+</h1>
+
+<center>
+
+<div id="form">
+
+<form name="form1" onsubmit="return upload()" action="${def:context}${def:actionroot}/insert" 
+		method="POST" enctype="multipart/form-data" target="uploadFrame">
+
+<table width="400px" class="formgrid">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="30%"> 
+
+	<!--titulo-->
+
+        	<tr>
+            <th colspan="2"> Seleccione la Empresa </th>
+	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
+	</tr>
+            <tr>
+<td colspan="2" align="center">
+			<!--almacena el ID del item seleccionado--> 
+			<input type="hidden" name="id_empresa" id="id_empresa" /> 
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_empresa_name" id="id_empresa_name" style="width: 80%;" readonly /> 
+			<!--botones del picklist--> 
+			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" /> 
+			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_empresa.value='';document.form1.id_empresa_name.value='';"
+				title="Borrar valor seleccionado" />
+		</td>
+	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
+	</tr>
+
+
+</table>	
+
+<table width="400px" class="formgrid">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="30%"> 
+
+	<!--titulo-->
+
+        	<tr>
+            <th colspan="2"> Seleccione la Lista a donde pertenecer&aacute;n los Participantes </th>
+	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
+	</tr>
+            <tr>
+		<td colspan="2" align="center">
+			<!--almacena el ID del item seleccionado-->
+			<input type="hidden" name="userlogin" id="userlogin" value="${def:user}" />
+			<input type="hidden" name="id_lista_participantes" id="id_lista_participantes" />
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_lista_participantes_name" id="id_lista_participantes_name" style="width: 80%;" readonly />
+			<!--botones del picklist-->
+			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdListaImp();" title="Seleccionar item" />
+			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_lista_participantes.value='';document.form1.id_lista_participantes_name.value='';"
+				title="Borrar valor seleccionado" />
+		</td>
+	</tr>
+		<tr height="15px">
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<th colspan="2">
+			Cargar archivo Excel
+		</th>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--campos-->
+	<tr>
+		<td class="formlabel required">
+			Archivo:
+		</td>
+		<td>
+			<input type="file" name="file" size="30">
+		</td>
+	</tr>
+
+	<!--separador-->
+	<tr height="5px">
+		<td colspan="2"></td>
+	</tr>
+
+</table>	
+	<!--botones-->
+<br>
+			<input type="submit" value="Importar" class="button" name="submit">
+<br>
+</form>
+
+</div>
+
+<!--frame invisible para hacer el post-->
+<iframe name="uploadFrame" style="display:none">
+</iframe>
+
+<!--panel de respuesta AJAX #3-->
+<div id="responseError" style="display:none;width:100%;">
+</div>
+
+<br>
+
+<!--indicador de progreso-->
+<div id="status" class="alert" style="display:none;color:gray;width:20%;font-weight:bold;font-family:Arial">
+	<img src="${def:context}/images/progress.gif"> Por favor espere...
+</div>
+
+
+</center>
+
+<script language="javascript">
+
+	//inicializacion de la pagina cuando carga
+	onload = function()
+	{ 
+		document.form1.file.focus();
+	} 
+		
+	//enviar POST del formulario
+	function upload()
+	{
+		if (document.form1.file.value=="") {
+			alert("Por favor indique el archivo a ser cargado.");
+			document.form1.file.focus();
+			return false;
+		}
+
+		document.form1.submit.disabled = true;
+		document.getElementById("status").style.display="";
+		return true;		
+	}
+				
+
+
+	//funcion de callback del iframe cuando no carga correctamente el documento
+	function uploadError(msg)
+	{
+		document.getElementById("status").style.display="none";	
+		document.form1.submit.disabled = false;
+		alert(msg);
+	}
+	
+	//retorna al estado previo que corresponde
+	//al estado actual de la pagina, cada llamada Ajax
+	//se encarga de definir cual es la funcion de goBack() que aplica
+	function goBack() 
+	{
+		_goBackFn()			
+	}
+		
+	//mostrar filtro de busqueda
+	function showFilter()
+	{
+		document.getElementById("form").style.display="";
+		document.getElementById("responseError").style.display='none';
+		document.form1.submit.disabled = false;
+		document.form1.file.focus();
+	}
+	
+	//ejecutar consulta de errores del archivo Excel
+	function uploadErrorGrid(msg)
+	{
+		//esconder el DIV de progreso para mostrar el alert del error
+		document.getElementById("status").style.display="none";	
+		alert(msg);
+		
+		//definir funcion goBack()
+		_goBackFn = showFilter;
+			
+		//esconder filtro de busqueda
+		document.getElementById("form").style.display="none";
+			
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri="${def:actionroot}/errorgrid", 
+						divResponse="responseError", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+	
+	//redireccionar a la vista de lotes
+	function searchLote()
+	{
+		window.location='${def:context}${def:actionroot}/lote/form';
+	}
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror='/action/error/validation/ajax'>
+	<parameter id='id_lista_participantes' type='integer' required='true' label='ID Lista'/>
+	<parameter id='id_estudio' type='integer' required='true' label='ID Estudio'/>
+	<parameter id="id_empresa" type="integer" required="true" label="ID Empresa" maxlen="10" />
+		<custom-validator 	
+	classname="dinamica.validators.DuplicatedKeyValidator" 
+	on-error-label="Esta Lista ya se encuentra agregada al Estudio seleccionado"
+	sql="dupkey.sql" id='id_lista_participantes'/>
+</validator>

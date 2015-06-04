@@ -16,7 +16,7 @@
 </head>
 
 <body>
-
+<form action="${def:context}${def:actionroot}/seleccion_participantes/form" method="POST">
 <!--banner-->
 <div class="banner">
 	<div style="float: left;">Agregar Participante(s) a Lista</div>
@@ -28,90 +28,28 @@
 </td>
         <td>
             <!--almacena el ID del item seleccionado--> 
-            <input type="hidden" name="id_empresa_search" id="id_empresa_search"  /> 
+            <input type="hidden" name="id_empresa" id="id_empresa"  /> 
             <!--almacena el nombre del item seleccionado-->
-            <input type="text" name="id_empresa_name_search" id="id_empresa_name_search" style="width: 80%;" readonly /> 
+            <input type="text" name="id_empresa_name" id="id_empresa_name" style="width: 80%;" readonly /> 
             <!--botones del picklist--> 
             <img src="${def:context}/images/search.gif" class="button" onclick="pickIdEmpresa2();" title="Seleccionar item" /> 
-            <img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_empresa_search.value='';document.form1.id_empresa_name_search.value='';"
+            <img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_empresa.value='';document.form1.id_empresa_name.value='';"
                 title="Borrar valor seleccionado" />
         </td>
-        <td><input type="button" value="Buscar" class="button" onclick="search(document.getElementById('id_empresa_search').value)"></td>
         </tr>
-    <tr>
-        <td>
-            Lista
-        </td>
-        <td>
-        <!--almacena el ID del item seleccionado-->
-        <input type="hidden" name="id_lista_participantes" id="id_lista_participantes" />
-        <input type="hidden" name="userlogin" id="userlogin" value="${def:user}" />
-        <!--almacena el nombre del item seleccionado-->
-        <input type="text" name="id_lista_participantes_name" id="id_lista_participantes_name" style="width: 80%;" readonly />
-        <!--botones del picklist-->
-        <img src="${def:context}/images/search.gif" class="button" onclick="pickIdLista();" title="Seleccionar item" />
-        <img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_lista_participantes.value='';document.form1.id_lista_participantes_name.value='';"
-                title="Borrar valor seleccionado" />
-        </td>
-        <td></td>
-    </tr>
+        
 </table>
 <br>
+<div align="center">
+<input type="submit" value="Buscar" class="button">
+</div>
 <div id="response" style="display: none; width: 100%" align="center"></div>
-
+</form>
 
 </body>
 
 <!--codigo de soporte del template-->
 <script type="text/javascript">
-
-	function pickIdLista(){
-        if (document.getElementById("id_empresa_search").value != ''){
-		var url = "${def:context}/action/administrador_add/participantes/agregar_participante_a_lista/picklist_listaparticipantes/form?id_empresa=" + document.getElementById("id_empresa_search").value;
-		pickOpen ('id_lista_participantes_name','id_lista_participantes',url,'450','335');
-    }
-    else{
-        alert("Debe seleccionar una empresa primero");
-    }
-	}
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-$.extend( $.fn.dataTable.defaults, {
-    "ordering": false,
-    "lengthChange": false,
-    "language":{
-                "lengthMenu": "Mostrar _MENU_ participantes por p&aacute;gina",
-                "zeroRecords": "No se encontraron participantes registrados",
-                "info": "P&aacute;gina _PAGE_ de _PAGES_",
-                "infoEmpty": " ",
-                "infoFiltered": "(filtrado de _MAX_ participantes totales)",
-                "sLoadingRecords": "Cargando...",
-                "sSearch": "Buscar: ",
-                "sZeroRecords": "No se encontr&oacute; ning&uacute;n participante",
-                "sProcessing": "Procesando",
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
-    }
-} );
-        $(document).ready( function () {
-            $('#tablaB').DataTable({
-                    columns: [
-                        { data: 'id' },
-                        { data: 'nombre' },
-                        { data: 'apellido' },
-                        { data: 'accion'}
-                    ] 
-            });
-            $('#tablaA').DataTable({
-                    columns: [
-                        { data: 'id' },
-                        { data: 'nombre' },
-                        { data: 'apellido' },
-                        { data: 'accion'}
-                    ]
-            });
-        });
 
         function agregarParticipante(id, nombre, apellido, tablaDestino){
             if (tablaDestino == "#tablaA"){
@@ -193,7 +131,7 @@ $.extend( $.fn.dataTable.defaults, {
 
     function pickIdEmpresa2(){
         var url = "${def:context}/action/picklist/empresa/form";
-        pickOpen ('id_empresa_name_search','id_empresa_search',url,'450','335');
+        pickOpen ('id_empresa_name','id_empresa',url,'450','335');
             
     }
 
@@ -201,16 +139,13 @@ $.extend( $.fn.dataTable.defaults, {
     {
         var url = "${def:actionroot}/search?id_empresa=" + idEmpresa;
         
-        //determina si refresca y se para en la pagina actual o en la pagina 1
-
-
         //llamada Ajax...
         ajaxCall(httpMethod="GET", 
                         uri= url, 
                         divResponse="response", 
                         divProgress="status", 
                         formName=null, 
-                        afterResponseFn=null, 
+                        afterResponseFn=setTablas(), 
                         onErrorFn=null);
     }
 
@@ -219,6 +154,42 @@ $.extend( $.fn.dataTable.defaults, {
     {
         var url = "${def:actionroot}/view";
         gotoPage(url);
+    }
+
+    function setTablas(){
+        $.extend( $.fn.dataTable.defaults, {
+    "ordering": false,
+    "lengthChange": false,
+    "language":{
+                "lengthMenu": "Mostrar _MENU_ participantes por p&aacute;gina",
+                "zeroRecords": "No se encontraron participantes registrados",
+                "info": "P&aacute;gina _PAGE_ de _PAGES_",
+                "infoEmpty": " ",
+                "infoFiltered": "(filtrado de _MAX_ participantes totales)",
+                "sLoadingRecords": "Cargando...",
+                "sSearch": "Buscar: ",
+                "sZeroRecords": "No se encontr&oacute; ning&uacute;n participante",
+                "sProcessing": "Procesando",
+                "sPrevious": "Anterior",
+                "sNext": "Siguiente"
+    }
+} );
+                            $('#tablaB').DataTable({
+                    columns: [
+                        { data: 'id' },
+                        { data: 'nombre' },
+                        { data: 'apellido' },
+                        { data: 'accion'}
+                    ] 
+            });
+            $('#tablaA').DataTable({
+                    columns: [
+                        { data: 'id' },
+                        { data: 'nombre' },
+                        { data: 'apellido' },
+                        { data: 'accion'}
+                    ]
+            });
     }
 </script>
 

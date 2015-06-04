@@ -1,0 +1,55 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/public/css/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>Agregar Participante(s) a Lista</title>
+
+</head>
+
+<body>
+    <h1>Importar Lista de Participantes</h1>
+    <br>
+<!--formulario addnew/edit-->
+<div id="form" align="center">
+<form name="form1">
+
+<table class="formgrid" width="450px">
+	<tr>
+            <th colspan="2"> Escriba el nombre de la lista de participantes a importar </th>
+	</tr>
+            <tr>
+		<td>
+			<!--almacena el ID del item seleccionado-->
+			<input type="hidden" name="id_lista_participantes" id="id_lista_participantes" />
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_lista_participantes_name" id="id_lista_participantes_name" style="width: 80%;" readonly />
+			<!--botones del picklist-->
+			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdListaImp();" title="Seleccionar item" />
+			<img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_lista_participantes.value='';document.form1.id_lista_participantes_name.value='';"
+				title="Borrar valor seleccionado" />
+		</td>
+	</tr>
+        <tr>
+            <td>
+                <input type="button" name="importar" value="Importar" onclick="importar_excel()">
+            </td>
+        </tr>
+</table>
+
+</form>
+</div>
+
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+</script>
+
+</html>

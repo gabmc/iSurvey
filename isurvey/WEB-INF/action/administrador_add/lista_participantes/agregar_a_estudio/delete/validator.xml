@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror="/action/error/validation/alert">
+	<parameter id="id_lista_participantes" type="integer" required="true" label="ID Participantes" />
+	<parameter id="id_estudio" type="integer" required="true" label="ID Estudio" />
+	<parameter id="id_empresa" type="integer" required="true" label="ID Empresa" maxlen="10" />
+	<!--<custom-validator 	
+	classname="admin_funcional.validators.DeleteIntListaEstudioValidator" 
+	on-error-label="Este Alias ya está registrado en la base de datos, use otro alias."
+	sql="dupkey.sql" />-->
+</validator>

@@ -28,7 +28,7 @@
 		<plugin>dinamica.charts.PieChart3D</plugin>
 
 		<!--titles-->
-		<title>Distribución porcentual del total de Cuestionarios</title>
+		<title>Titulo</title>
 		<title-x>Status</title-x>
 		<title-y>Cantidad de Cuestionarios</title-y>
 
