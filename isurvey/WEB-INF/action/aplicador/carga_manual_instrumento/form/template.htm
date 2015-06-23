@@ -190,6 +190,16 @@
 		pickOpen ('id_estudio_name','id_estudio',url,'450','335');
 	}
 
+	function uploadOK(total)
+	{
+
+                document.getElementById("status").style.display="none";
+		document.form1.file.value="";
+		document.form1.submit.disabled = false;
+		alert("Se cargaron exitosamente " + total + " registros.");
+		window.location = "http://localhost/isurvey/action/aplicador/carga_manual_instrumento/form";
+	}
+
 </script>
 
 

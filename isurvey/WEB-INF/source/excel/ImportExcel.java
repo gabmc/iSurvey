@@ -75,6 +75,7 @@ public class ImportExcel extends GenericTableManager  {
         rs.append("apellido_participante", java.sql.Types.VARCHAR);
         rs.append("email_participante", java.sql.Types.VARCHAR);
         rs.append("empresa", java.sql.Types.VARCHAR);
+        rs.append("area", java.sql.Types.VARCHAR);
         rs.append("cargo", java.sql.Types.VARCHAR);
         rs.append("supervisor", java.sql.Types.VARCHAR);
         rs.append("fecha_nacimiento", java.sql.Types.DATE);
@@ -87,7 +88,7 @@ public class ImportExcel extends GenericTableManager  {
         int columnas = sheet.getColumns();
 
         //numero de columnas del archivo es igual a 10?
-        if (columnas == 12)
+        if (columnas == 13)
         {
             //mientras exista registros
             for(int i = 1; i<numOfRows;i++)
@@ -110,6 +111,7 @@ public class ImportExcel extends GenericTableManager  {
                     Cell columna10 = sheet.getCell(9,i);
                     Cell columna11 = sheet.getCell(10,i);
                     Cell columna12 = sheet.getCell(11,i);
+                    Cell columna13 = sheet.getCell(12,i);
 
                     //la celda esta vacia?
                     if (columna1.getContents() == null || columna1.getContents().equals(""))
@@ -129,41 +131,42 @@ public class ImportExcel extends GenericTableManager  {
                             else
                             {
                                     columna = "Identificador";
-                                    throw new Throwable ("El dato ingresado no representa un n√∫mero.");
+                                    throw new Throwable ("El dato ingresado no representa un n˙mero.");
                             }
                     }
                             rs.setValue("nombre_participante", columna2.getContents());
                             rs.setValue("apellido_participante", columna3.getContents());
                             rs.setValue("email_participante", columna4.getContents());
                             rs.setValue("empresa", columna5.getContents());
-                            rs.setValue("cargo", columna6.getContents());
-                            rs.setValue("supervisor", columna7.getContents());
+                            rs.setValue("area", columna6.getContents());
+                            rs.setValue("cargo", columna7.getContents());
+                            rs.setValue("supervisor", columna8.getContents());
 
-                            if (!columna8.getContents().equals(""))
+                            if (!columna9.getContents().equals(""))
                             {
-                                Date dcolum2 = ValidatorUtil.testDate(columna8.getContents(), "dd-MM-yy");
+                                Date dcolum2 = ValidatorUtil.testDate(columna9.getContents(), "dd-MM-yy");
                                 if (dcolum2!=null)
                                     rs.setValue("fecha_nacimiento", dcolum2);
                                 else{
                                     columna = "Fecha de Nacimiento";
-                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato D√≠a-Mes-A√±o y use como separador el gui√≥n (-)");
+                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato DÌa-Mes-AÒo y use como separador el guiÛn (-)");
                                 }
                             }
 
-                            if (!columna9.getContents().equals(""))
+                            if (!columna10.getContents().equals(""))
                             {
-                                Date dcolum3 = ValidatorUtil.testDate(columna9.getContents(), "dd-MM-yy");
+                                Date dcolum3 = ValidatorUtil.testDate(columna10.getContents(), "dd-MM-yy");
                                 if (dcolum3!=null)
                                     rs.setValue("fecha_ingreso", dcolum3);
                                 else{
                                     columna = "Fecha de Ingreso";
-                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato D√≠a-Mes-A√±o y use como separador el gui√≥n (-)");
+                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato DÌa-Mes-AÒo y use como separador el guiÛn (-)");
                                 }
                             }
-                            if (columna10.getContents().equals("F") || columna10.getContents().equals("M"))
+                            if (columna11.getContents().equals("F") || columna11.getContents().equals("M"))
                                 rs.setValue("sexo", columna10.getContents());
-                            rs.setValue("tipo_nomina", columna11.getContents());
-                            rs.setValue("funcion", columna12.getContents());
+                            rs.setValue("tipo_nomina", columna12.getContents());
+                            rs.setValue("funcion", columna13.getContents());
 
             }
             catch (Throwable a)
@@ -181,14 +184,14 @@ public class ImportExcel extends GenericTableManager  {
                     if (rsError.getRecordCount()>20)
                     {
                             getSession().setAttribute("error.excel",rsError);
-                            throw new Throwable("El archivo de Excel contiene m√°s de 20 errores.");
+                            throw new Throwable("El archivo de Excel contiene m·s de 20 errores.");
                     }
             }
             }
         }
         else
         {
-                throw new Throwable("El archivo de Excel no contiene el formato especif√≠cado.");
+                throw new Throwable("El archivo de Excel no contiene el formato especificado.");
         }
 
         //recordset de errores tiene registro?
@@ -215,6 +218,7 @@ public class ImportExcel extends GenericTableManager  {
                 "apellido_participante",
                 "email_participante",
                 "empresa",
+                "area",
                 "cargo",
                 "supervisor",
                 "fecha_nacimiento",
@@ -279,8 +283,10 @@ public class ImportExcel extends GenericTableManager  {
 
             if (rs.findRecord("id_participante", participante) == -1)
                     return participante;
-            else
-                    throw new Throwable("El Identificador del Participante [" + participante + "] ya est√° registrado.");
+            else{
+            		columna = "Identificador";
+                    throw new Throwable("El Identificador del Participante [" + participante + "] ya est· registrado.");
+            }
     }
     
     Recordset getInstrumentos (String idLista) throws Throwable{

@@ -130,11 +130,18 @@ public class MostrarVisor extends GenericTransaction {
     }
     
     void setEstatus (String token, String estatus) throws Throwable{
-    	System.out.println("setEstatus");
     	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "' " +
     			"where token_participante = '" + token + "'";
     	this.getDb().exec(sql);
     	this.getDb().commit();
+    }
+    
+    Recordset questionsOrdenadas (String idEncuesta) throws Throwable{
+    	String sql = "select * from ajvieira_isurvey_lime.questions where parent_qid = 0 and sid = " + idEncuesta;
+    	Recordset questions = this.getDb().get(sql);
+    	questions.top();
+    	questions.sort("question_order");
+    	return questions;
     }
     
     void updateStatus (String token) throws Throwable{
@@ -163,19 +170,22 @@ public class MostrarVisor extends GenericTransaction {
 	    		respuestas.top();
 	    		Recordset columnas = getNombresColumnas("survey_" + instrumentos.getString("id_instrumento"));
 	    		columnas.top();
-	    		int numeroColumnas = -5;
-	    		while (columnas.next()){
-	    			numeroColumnas++;
-	    		}
-	    		columnas.top();
+	    		int numeroColumnas = columnas.getRecordCount() - 5;
+	    		Recordset preguntas = questionsOrdenadas(instrumentos.getString("id_instrumento"));
+
 	    		while (respuestas.next()){
+	    			preguntas.first();
+		    		for (int i = 1; i <= 5; i++){
+		    			columnas.next();
+		    		}
 	    			int numeroColumnas2 = numeroColumnas;
 		    		while (columnas.next()){
 		    			String column = columnas.getString("column_name");
 		    			column = column.toLowerCase();
-		    			if (respuestas.getString(column) == null && (!column.equals("submitdate") || !column.equals("lastpage"))){
+		    			if (respuestas.getString(column) == null && (preguntas.getString("mandatory").equals("Y")) && (!column.equals("submitdate") || !column.equals("lastpage"))){
 		    				numeroColumnas2--;
 		    			}
+		    			preguntas.next();
 		    		}
 		    		if (numeroColumnas2 <= 0){
 		    			estatus = "Sin Iniciar";

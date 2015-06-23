@@ -193,13 +193,15 @@ public class CargaManual extends GenericTableManager  {
 		                    
 		                    if (preguntasOrdenadas.getString("type").equals("D")){
 		                    	if (!columna2.getContents().equals("") || columna2.getContents() != null){
-			                    	Date t = ValidatorUtil.testDate(columna2.getContents(), "dd/mm/yyyy");
+			                    	Date t = ValidatorUtil.testDate(columna2.getContents(), "dd-MM-yy");
 			                    	if (t == null){
 		                                    columna = getExcelColumnName(m + 1);
 		                                    throw new Throwable ("La respuesta debe ser una fecha con el formato dd/mm/yyyy");
 		                            }
-			                    	else
-			                    		rs.setValue(preguntasOrdenadas.getString("question"), columna2.getContents());
+			                    	else{
+			                    		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			                    		rs.setValue(preguntasOrdenadas.getString("question"), sdf.format(t));
+			                    	}
 		                    	}
 		                    	else
 		                    		rs.setValue(preguntasOrdenadas.getString("question"), "");
@@ -302,20 +304,15 @@ public class CargaManual extends GenericTableManager  {
                     if (rsError.getRecordCount()>20)
                     {
                             getSession().setAttribute("error.excel",rsError);
-                            throw new Throwable("El archivo de Excel contiene más de 20 errores.");
+                            throw new Throwable("El archivo de Excel contiene m�s de 20 errores.");
                     }
                     
             }
         }
             rs.top();
-            while (rs.next()){
-            	
-            	System.out.println("id_participante: " + rs.getString("id_participante"));
-
-            }
         }
         else{
-                throw new Throwable("El archivo de Excel no contiene el formato especifícado.");
+                throw new Throwable("El archivo de Excel no contiene el formato especificado.");
         }
 
         //recordset de errores tiene registro?
@@ -329,16 +326,17 @@ public class CargaManual extends GenericTableManager  {
         inputParams.setValue("total_registros", new Integer(rs.getRecordCount()));
 
         //dar inicio a la transacción
-//        getDb().beginTrans();
+        getDb().beginTrans();
      
      rs.top();
      TokenGenerator generator = new TokenGenerator();
      while (rs.next()){
     	 String query = updateConstructor(numeroPreguntas, idEncuesta, generator.generarToken(rs.getString("id_participante"), idEncuesta), rs, preguntasOrdenadas);
-    	 System.out.println(query);
+    	 getDb().exec(query);
      }
-//        getDb().commit();
-        return rc;
+     
+    getDb().commit();
+    return rc;
     }
 
     
@@ -472,7 +470,6 @@ public class CargaManual extends GenericTableManager  {
     	preguntas.first();
     	while (nombresColumnas.next()){
     		if (preguntas.getString("type").equals("M")){
-    			System.out.println("tipo: " + preguntas.getString("type"));
     			Recordset opciones = questionsDeQuestions(preguntas.getString("qid"));
     			int numeroOpciones = opciones.getRecordCount();
     			for (int i=1; i<=numeroOpciones; i++){

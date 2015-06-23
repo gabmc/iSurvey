@@ -9,4 +9,4 @@ where
 	and estudio.id_empresa = (select s_user.id_empresa from ajvieira_isurvey_security.s_user where s_user.userlogin = '${def:user}')
 	and lista_participantes.oculta = 'No'
 order by 
-	id_lista_participantes
+	id_lista_participantes desc
