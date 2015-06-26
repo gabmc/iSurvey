@@ -138,8 +138,6 @@ public class MonitoreoGeneralEstudioCerrado extends GenericTransaction {
 			    		while (columnas.next()){
 			    			String column = columnas.getString("column_name");
 			    			column = column.toLowerCase();
-			    			System.out.println("columna: " + column);
-			    			System.out.println("respuesta: " + respuestas.getString(column));
 			    			if (respuestas.getString(column) == null && (preguntas.getString("mandatory").equals("Y")) && (!column.equals("submitdate") && !column.equals("lastpage"))){
 			    				estatus = "Incompleta";
 			    			}

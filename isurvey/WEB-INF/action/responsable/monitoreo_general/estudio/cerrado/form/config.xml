@@ -23,6 +23,7 @@
 		<expiration>0</expiration>
 		<!--<print mode="table" recordset="query.sql" tag="rows" alternate-colors="true"/>-->
 		<print mode="form" recordset="output" />
+		<print mode="form" recordset="_request"/>
 	</output>
 
 </config>

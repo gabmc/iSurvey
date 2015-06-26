@@ -1,0 +1,47 @@
+<!--data grid-->
+<table class="grid" width="700px">
+
+	<!--toolbar-->
+	<tr>
+		<th colspan="8">
+			<!--título del grid--> 
+			<span style="float: left;">Contenido de la tabla </span>
+			<!--panel de control de navegacion--> 
+			<span style="float: right;">${req:controls}</span> 
+			<!--indicador de progreso-->
+			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
+			<!--toolbar del grid-->
+			<span style="float: left; margin-left: 40px">
+				<img src="${def:context}/images/reload.gif" onclick="search()" title="Recargar data" class="tool">
+				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/excel.gif" onclick="openExcel()" title="Exportar a Excel" class="tool">
+			</span>
+		</th>
+	</tr>
+
+	<!--encabezados-->
+	<tr>
+		<th colspan="2"></th>
+		<th><a href="javascript:onclick=sortBy('id_instrumento','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre_estudio_pl0','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre_estudio_pl0','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">% Completo</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Encuesta</a></th>
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_instrumento}')" title="Eliminar"></td>
+		<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_instrumento}')" class="tool" title="Editar"></td>
+		<td align="center">${fld:id_participante}</td>
+		<td align="center">${fld:nombre_participante}</td>
+		<td align="center">${fld:apellido_participante}</td>
+		<td align="center">${fld:email_participante}</td>
+		<td align="center">${fld:completado}</td>
+		<td align="center">link</td>
+	</tr>
+	</rows>
+
+</table>

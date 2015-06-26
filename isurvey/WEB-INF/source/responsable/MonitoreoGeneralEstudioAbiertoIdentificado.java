@@ -47,24 +47,20 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
         	Recordset p = getParticipantesRegistrados(estudio.getString("id_estudio"));
         	Recordset intParticpanteInstrumento = getIntParticipanteInstrumento(instrumentos.getString("id_instrumento"));
         	intParticpanteInstrumento.top();
+        	p.top();
+        	while (p.next()){
         	while(intParticpanteInstrumento.next()){
-        		p.top();
-        		while (p.next()){
-        			System.out.println("participante: " + p.getString("id_participante"));
-	        		if (intParticpanteInstrumento.getString("id_participante").equals(p.getString("id_participante"))){
-	        			System.out.println("ENTRE");
 		        		if (intParticpanteInstrumento.getString("estatus").equals("Incompleta")){
 		        			incompletas++;
 		        		}
 		        		if (intParticpanteInstrumento.getString("estatus").equals("Completa")){
 		        			completas++;
 		        		}
-		        		if (intParticpanteInstrumento.getString("estatus").equals("Sin Iniciar")){
+		        		if ((intParticpanteInstrumento.getString("estatus").equals("Sin Iniciar")) && (intParticpanteInstrumento.getString("id_participante").equals(p.getString("id_participante")))){
 		        			sinIniciar++;
 		        		}
-	        		}
-        		}
-        	}    	
+        	}
+        	}
         }
         Recordset output = new Recordset();
         output.append("sin_iniciar", java.sql.Types.INTEGER);
