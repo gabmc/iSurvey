@@ -18,7 +18,7 @@ import tokens_participantes.TokenGenerator;
  *
  * @author addSolutions
  */
-public class MonitoreoGeneralEstudio extends GenericTransaction {
+public class MonitoreoGeneralEstudioAbiertoAnonimo extends GenericTransaction {
 
     public int service(Recordset inputParams) throws Throwable{
         super.service(inputParams);
@@ -30,8 +30,6 @@ public class MonitoreoGeneralEstudio extends GenericTransaction {
         Recordset estudio = getEstudio(id);
         estudio.first();
         
-        int sinIniciar = 0;
-        int incompletas = 0;
         int completas = 0;
         Recordset instrumentos = getInstrumentos(id);
         instrumentos.top();
@@ -47,31 +45,19 @@ public class MonitoreoGeneralEstudio extends GenericTransaction {
         	Recordset intParticpanteInstrumento = getIntParticipanteInstrumento(instrumentos.getString("id_instrumento"));
         	intParticpanteInstrumento.top();
         	while(intParticpanteInstrumento.next()){
-        		if (intParticpanteInstrumento.getString("estatus").equals("Incompleta")){
-        			incompletas++;
-        		}
         		if (intParticpanteInstrumento.getString("estatus").equals("Completa")){
         			completas++;
-        		}
-        		if (intParticpanteInstrumento.getString("estatus").equals("Sin Iniciar")){
-        			sinIniciar++;
         		}
         	}    	
         }
         Recordset output = new Recordset();
-        output.append("sin_iniciar", java.sql.Types.INTEGER);
-        output.append("incompletas", java.sql.Types.INTEGER);
         output.append("completas", java.sql.Types.INTEGER);
         output.append("nombre_estudio", java.sql.Types.VARCHAR);
         output.append("total", java.sql.Types.INTEGER);
         output.addNew();
-        output.setValue("sin_iniciar", sinIniciar);
-        output.setValue("incompletas", incompletas);
         output.setValue("completas", completas);
         output.setValue("nombre_estudio", estudio.getString("nombre_estudio"));
-        output.setValue("total", completas + incompletas + sinIniciar);
         publish("output", output);
-        //getDb().commit();
         return 0;
     }
     
@@ -124,29 +110,34 @@ public class MonitoreoGeneralEstudio extends GenericTransaction {
 	    		columnas.top();
 	    		int numeroColumnas = columnas.getRecordCount() - 5;
 	    		Recordset preguntas = questionsOrdenadas(instrumentos.getString("id_instrumento"));
+	    		
 
 	    		while (respuestas.next()){
-	    			preguntas.first();
-		    		for (int i = 1; i <= 5; i++){
-		    			columnas.next();
-		    		}
-	    			int numeroColumnas2 = numeroColumnas;
-		    		while (columnas.next()){
-		    			String column = columnas.getString("column_name");
-		    			column = column.toLowerCase();
-		    			if (respuestas.getString(column) == null && (preguntas.getString("mandatory").equals("Y")) && (!column.equals("submitdate") || !column.equals("lastpage"))){
-		    				numeroColumnas2--;
-		    			}
-		    			preguntas.next();
-		    		}
-		    		if (numeroColumnas2 <= 0){
-		    			estatus = "Sin Iniciar";
-		    		}
-		    		if (numeroColumnas2 > 0 && numeroColumnas2 < numeroColumnas){
-		    			estatus = "Incompleta";
-		    		}
-		    		if (numeroColumnas2 == numeroColumnas){
+		    		if (respuestas.getString("submitdate") != null){
 		    			estatus = "Completa";
+		    		}
+		    		else{
+		    			preguntas.first();
+			    		for (int i = 1; i <= 5; i++){
+			    			columnas.next();
+			    		}
+		    			int numeroColumnas2 = numeroColumnas;
+			    		while (columnas.next()){
+			    			String column = columnas.getString("column_name");
+			    			column = column.toLowerCase();
+			    			System.out.println("columna: " + column);
+			    			System.out.println("respuesta: " + respuestas.getString(column));
+			    			if (respuestas.getString(column) == null && (preguntas.getString("mandatory").equals("Y")) && (!column.equals("submitdate") && !column.equals("lastpage"))){
+			    				estatus = "Incompleta";
+			    			}
+			    			if (respuestas.getString(column) == null)
+			    				numeroColumnas2--;
+			    			preguntas.next();
+			    		}
+			    		if (numeroColumnas2 <= 0)
+			    			estatus = "Sin Iniciar";
+			    		else 
+			    			estatus = "Incompleta";
 		    		}
 	    		}
 	    		setEstatus(token, estatus);

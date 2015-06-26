@@ -7,3 +7,5 @@ where
         and s_user.user_id = s_user_role.user_id
         and s_user_role.role_id = s_role.role_id
         and s_role.role_id = 503
+order by
+		s_user.user_id desc

@@ -33,6 +33,7 @@ public class InsertarParticipante extends GenericTableManager {
         sql = StringUtil.replace(sql, "{{empresa}}", ((String[]) parametros.get("empresa"))[0]);
         sql = StringUtil.replace(sql, "{{cargo}}", ((String[]) parametros.get("cargo"))[0]);
         sql = StringUtil.replace(sql, "{{id_empresa}}", ((String[]) parametros.get("id_empresa"))[0]);
+        sql = StringUtil.replace(sql, "{{id_estudio_identificado}}", getIdEstudio(idInstrumento));
         this.getDb().exec(sql);
         
         sql = StringUtil.replace(getResource("insert-lime.sql"), "{{firstname}}", ((String[]) parametros.get("nombre_participante"))[0]);
@@ -61,6 +62,17 @@ public class InsertarParticipante extends GenericTableManager {
         this.publish("id_encuesta", rs);
 
         return super.service(inputParams);
+    }
+    
+    String getIdEstudio (String idInstrumento) throws Throwable{
+    	String sql = "select id_estudio from ajvieira_isurvey_app.instrumento where id_instrumento = " + idInstrumento;
+    	Recordset rs = this.getDb().get(sql);
+    	String id = "";
+    	rs.top();
+    	while (rs.next()){
+    		id = rs.getString("id_estudio");
+    	}
+    	return id;
     }
     
     
