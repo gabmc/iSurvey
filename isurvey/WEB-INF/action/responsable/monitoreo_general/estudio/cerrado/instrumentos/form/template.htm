@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>CRUD Instrumento</title>
+</head>
+<body>
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Lista de Encuestas en Curso del Estudio "${fld:nombre_estudio}"</div>
+</div>
+<!--data grid-->
+<div align="center">
+<table class="grid" width="300px">
+
+	<!--encabezados-->
+	<tr>
+		<th>Nombre</th>
+		<th>Completado</th>
+		<th>% Completado</th>
+		<th>Incompleto</th>
+		<th>% Incompleto</th>
+		<th>Sin Iniciar</th>
+		<th>% Sin Iniciar</th>
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center"><a href="${def:context}${def:actionroot}/participantes/form?id=${fld:id_instrumento}">${fld:nombre}</a></td>
+		<td align="center">${fld:completado}</td>
+		<td align="center">${fld:porcentaje_completado}</td>
+		<td align="center">${fld:incompleto}</td>
+		<td align="center">${fld:porcentaje_incompleto}</td>
+		<td align="center">${fld:sin_iniciar}</td>
+		<td align="center">${fld:porcentaje_sin_iniciar}</td>
+
+	</tr>
+	</rows>
+
+</table>
+</div>
+</body>

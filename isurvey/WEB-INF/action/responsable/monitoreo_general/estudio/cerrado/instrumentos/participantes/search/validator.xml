@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <validator onerror='/action/error/validation/ajax'>
-	<parameter id='id_estudio' type='integer' required='true' label='ID Estudio' maxlen='10'/>
-
+	<parameter id='id_instrumento' type='integer' required='true' label='ID Instrumento' maxlen='10'/>
 	<parameter id='identificador' type='varchar' required='false' label='ID Participante' maxlen='50'/>
 	<parameter id='nombre' type='varchar' required='false' label='Nombre Participante' maxlen='50'/>
 	<parameter id='apellido' type='varchar' required='false' label='Apellido Participante' maxlen='50'/>

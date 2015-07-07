@@ -2,17 +2,18 @@
 <config>
 
 	<summary>
-		Progreso de Estudio
+		Monitoreo General
 	</summary>
 
 	<log>false</log>
 
 	<transaction>
-		<classname>responsable.MonitoreoGeneralEstudioCerrado</classname>
+		<classname>dinamica.GenericTransaction</classname>
 		<validator>true</validator>
-		<transaction>true</transaction>
+		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<!--<recordset id="query.sql" source="sql" scope="transaction" />-->
+		<recordset id="query.sql" source="sql" scope="transaction" />
+		<recordset id="estudio.sql" source="sql" scope="transaction" />
 	</transaction>
 
 	<output>
@@ -21,9 +22,8 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
-		<!--<print mode="table" recordset="query.sql" tag="rows" alternate-colors="true"/>-->
-		<print mode="form" recordset="output" />
-		<print mode="form" recordset="_request"/>
+		<print mode="table" recordset="query.sql" tag="rows" alternate-colors="true"/>
+		<print mode="form" recordset="estudio.sql" />
 	</output>
 
 </config>

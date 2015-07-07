@@ -2,7 +2,10 @@
 
 <head>
 <link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
-<title>CRUD Instrumento</title>
+<title>Monitoreo General</title>
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
 </head>
 <body>
 <!--banner-->
@@ -11,22 +14,44 @@
 </div>
 <!--data grid-->
 <div align="center">
-<br>
-<br>
-<table class="grid" width="300px">
 
-	<!--encabezados-->
-	<tr>
-		<th>Nombre</th>
-	</tr>
 
-	<!--data-->
-	<rows>
-	<tr ${fld:_rowStyle}>
-		<td align="center"><a href="${def:context}${def:actionroot}/estudio/form?id=${fld:id_estudio}">${fld:nombre_estudio}</a></td>
-	</tr>
-	</rows>
-
-</table>
+<!--panel de respuesta AJAX-->
+<div id="response" style="display: none; width: 100%; margin-top: 7px">
+</div>
 </div>
 </body>
+<script type="text/javascript">
+
+	//inicializa cuando se carga la pagina
+	onload = function()
+	{
+		search(); //mostrar registros en vista paginada
+	} 
+
+	function search()
+	{
+		var url = "${def:actionroot}/search";
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?currentpage=" + currentPage;
+		
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		gotoPage(url);
+	}
+
+</script>
+
+</html>

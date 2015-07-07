@@ -10,11 +10,10 @@
 <body>
 <!--banner-->
 <div class="banner">
-	<div style="float: left;">Estatus del Estudio ${fld:nombre_estudio}</div>
+	<div style="float: left;">Estatus de ${fld:nombre_estudio} - ${fld:nombre}</div>
 </div>
 <!--data grid-->
 <div align="center">
-<h3>Encuestas:</h3>
 <table class="grid" width="400px">
 
 <tbody>
@@ -23,22 +22,23 @@
 			Sin Iniciar
 		</td>
 		<td align="center">
-			${fld:sin_iniciar}
+			<a href="#" onclick="setEstatus('Sin Iniciar')">${fld:sin_iniciar}</a>
 		</td>
 		<td align="center">
 			Incompletas
 		</td>
 		<td align="center">
-			${fld:incompletas}
+			<a href="#" onclick="setEstatus('Incompleta')">${fld:incompletas}</a>
 		</td>
 		<td align="center">
 			Completas
 		</td>
 		<td align="center">
-			${fld:completas}
+			<a href="#" onclick="setEstatus('Completa')">${fld:completas}</a>
 		</td>
-		<td align="center">Total</td>
-		<td align="center">${fld:total}</td>
+		<td align="center">Todas</td>
+		<td align="center">
+		<a href="#" onclick="cleanEstatus()">${fld:total}</td></a>
 	</tr>
 </tbody>
 </table>
@@ -49,23 +49,23 @@
 	</tr>
 		<tr>
 			<td align="center">Identificador</td>
-			<td align="center"><input id="identificador" placeholder="12332553" type="text"></td>
+			<td align="center"><input onkeyup="actualizalista()" id="identificador" placeholder="12332553" type="text"></td>
 		</tr>
 		<tr>
 			<td align="center">Nombre</td>
-			<td align="center"><input id="nombre" placeholder="Carlos" type="text"></td>
+			<td align="center"><input onkeyup="actualizalista()" id="nombre" placeholder="Carlos" type="text"></td>
 		</tr>
 		<tr>
 			<td align="center">Apellido</td>
-			<td align="center"><input id="apellido" placeholder="P&eacute;rez" type="text"></td>
+			<td align="center"><input onkeyup="actualizalista()" id="apellido" placeholder="P&eacute;rez" type="text"></td>
 		</tr>
 		<tr>
 			<td align="center">e-mail</td>
-			<td align="center"><input id="email" placeholder="carlos.perez@gmail.com" type="text"></td>
+			<td align="center"><input onkeyup="actualizalista()" id="email" placeholder="carlos.perez@gmail.com" type="text"></td>
 		</tr>
 		<tr>
 			<td align="center">Estatus</td>
-			<td align="center"><input name="estatus" readonly type="text"></td>
+			<td align="center"><input id="estatus" readonly type="text"></td>
 		</tr>
 </table>
 <input type="button" value="Buscar" onclick="search()">
@@ -82,6 +82,7 @@
 
 	onload = function()
 	{ 
+		document.getElementById("identificador").onkeypress = keypressInteger;
 		search(); //mostrar registros en vista paginada
 	}
 	            //mostrar imagen y esconder su indicador de progreso de carga
@@ -93,11 +94,11 @@
 
 	function search()
 	{
-		var url = "${def:actionroot}/search?id_estudio=${fld:id}";
+		var url = "${def:actionroot}/search?id_instrumento=${fld:id}";
 		
 		//determina si refresca y se para en la pagina actual o en la pagina 1
 		if (currentPage > 0)
-			url = "${def:actionroot}/search?id_estudio=${fld:id}&currentpage=" + currentPage;
+			url = "${def:actionroot}/search?id_instrumento=${fld:id}&currentpage=" + currentPage;
 		//llamada Ajax...
 		ajaxCall(httpMethod="GET", 
 						uri= url, 
@@ -122,5 +123,34 @@
 		document.getElementById("email").value = "";
 		document.getElementById("estatus").value = "";
 	}
+
+	function cleanEstatus(){
+		document.getElementById("estatus").value = "";
+		actualizalista();
+	}
+
+	function setEstatus(estatus){
+		document.getElementById("estatus").value = estatus;
+		actualizalista();
+	}
+
+	function actualizalista()
+            {
+
+                var id = document.getElementById("identificador").value;
+                var nombre = document.getElementById("nombre").value;
+                var apellido = document.getElementById("apellido").value;
+                var email = document.getElementById("email").value;
+                var estatus = document.getElementById("estatus").value;
+            
+                var url = "${def:actionroot}/search?id_instrumento=${fld:id}&identificador="+id+"&nombre="+nombre+"&email="+email+"&apellido="+apellido+"&estatus="+estatus;
+                ajaxCall(httpMethod="GET",
+                uri= url,
+                  divResponse="response",
+                divProgress="status",
+                formName=null,
+                afterResponseFn=null,
+                onErrorFn=null);
+            }
 </script>
 </html>

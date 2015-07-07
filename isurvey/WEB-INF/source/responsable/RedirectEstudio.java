@@ -29,7 +29,7 @@ public class RedirectEstudio extends GenericTransaction {
 	       Map parametros = this.getRequest().getParameterMap();
 	       String id = ((String[]) parametros.get("id"))[0];
 	       if (getTipoEstudio(id).equals("Cerrado"))
-	    	   getRequest().setAttribute("ruta", "action/responsable/monitoreo_general/estudio/cerrado/form?id=" + id);
+	    	   getRequest().setAttribute("ruta", "action/responsable/monitoreo_general/estudio/cerrado/instrumentos/form?id=" + id);
 	       if (getTipoEstudio(id).equals("Abierto-Identificado"))
 	    	   getRequest().setAttribute("ruta", "action/responsable/monitoreo_general/estudio/abierto_identificado/form?id=" + id);
 	       if (getTipoEstudio(id).equals("Abierto-Anonimo"))

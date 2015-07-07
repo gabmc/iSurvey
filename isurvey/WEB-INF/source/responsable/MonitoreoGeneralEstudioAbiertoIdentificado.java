@@ -47,8 +47,6 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
         	Recordset p = getParticipantesRegistrados(estudio.getString("id_estudio"));
         	Recordset intParticpanteInstrumento = getIntParticipanteInstrumento(instrumentos.getString("id_instrumento"));
         	intParticpanteInstrumento.top();
-        	p.top();
-        	while (p.next()){
         	while(intParticpanteInstrumento.next()){
 		        		if (intParticpanteInstrumento.getString("estatus").equals("Incompleta")){
 		        			incompletas++;
@@ -56,7 +54,10 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
 		        		if (intParticpanteInstrumento.getString("estatus").equals("Completa")){
 		        			completas++;
 		        		}
-		        		if ((intParticpanteInstrumento.getString("estatus").equals("Sin Iniciar")) && (intParticpanteInstrumento.getString("id_participante").equals(p.getString("id_participante")))){
+		        		p.top();
+		        		while (p.next()){
+		        		if ((intParticpanteInstrumento.getString("estatus").equals("Sin Iniciar")) && 
+		        				(intParticpanteInstrumento.getString("id_participante").equals(p.getString("id_participante")))){
 		        			sinIniciar++;
 		        		}
         	}
@@ -101,13 +102,16 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
     
     void updateStatus (String token) throws Throwable{
     	String estatus = "";
+    	float porcentaje = 1;
+    	int preguntasObligatorias = 0;
+    	int preguntasRespondidas = 0;
     	String query = "select instrumento.id_instrumento " +
 		"from " +
 		"ajvieira_isurvey_app.estudio, ajvieira_isurvey_app.instrumento, " +
 		"ajvieira_isurvey_app.int_participante_instrumento " +
 		"where " +
 		"estudio.id_estudio = instrumento.id_estudio " +
-		"and estudio.tipo = 'Cerrado' " +
+		"and estudio.tipo = 'Abierto-Identificado' " +
 		"and int_participante_instrumento.id_instrumento = instrumento.id_instrumento " +
 		"and int_participante_instrumento.id_participante = (select id_participante from  " +
 		"ajvieira_isurvey_app.int_participante_instrumento " +
@@ -127,11 +131,16 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
 	    		columnas.top();
 	    		int numeroColumnas = columnas.getRecordCount() - 5;
 	    		Recordset preguntas = questionsOrdenadas(instrumentos.getString("id_instrumento"));
-	    		
+	    		preguntas.top();
+	    		while (preguntas.next()){
+	    			if (preguntas.getString("mandatory").equals("Y"))
+	    				preguntasObligatorias++;
+	    		}
 
 	    		while (respuestas.next()){
 		    		if (respuestas.getString("submitdate") != null){
 		    			estatus = "Completa";
+		    			porcentaje = 100;
 		    		}
 		    		else{
 		    			preguntas.first();
@@ -145,17 +154,26 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
 			    			if (respuestas.getString(column) == null && (preguntas.getString("mandatory").equals("Y")) && (!column.equals("submitdate") && !column.equals("lastpage"))){
 			    				estatus = "Incompleta";
 			    			}
+			    			if (respuestas.getString(column) != null && respuestas.getString(column) != "" && (preguntas.getString("mandatory").equals("Y")) && (!column.equals("submitdate") && !column.equals("lastpage"))){
+			    				preguntasRespondidas++;
+			    			}
 			    			if (respuestas.getString(column) == null)
 			    				numeroColumnas2--;
 			    			preguntas.next();
 			    		}
-			    		if (numeroColumnas2 <= 0)
+			    		if (numeroColumnas2 <= 0){
 			    			estatus = "Sin Iniciar";
+			    			porcentaje = 0;
+			    		}
 			    		else 
 			    			estatus = "Incompleta";
 		    		}
 	    		}
-	    		setEstatus(token, estatus);
+	    		if (porcentaje != 0 && porcentaje != 100 && preguntasObligatorias != 0)
+	    			porcentaje = (preguntasRespondidas*100)/preguntasObligatorias;
+	    		if (preguntasObligatorias == 0)
+	    			porcentaje = 100;
+	    		setEstatus(token, estatus, String.valueOf(porcentaje));
 	    	}
     	}
     }
@@ -168,9 +186,10 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
     	return this.getDb().get(sql);
     }
     
-    void setEstatus (String token, String estatus) throws Throwable{
-    	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "' " +
-    			"where token_participante = '" + token + "'";
+    void setEstatus (String token, String estatus, String porcentaje) throws Throwable{
+    	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "', " +
+    			" porcentaje_completado = " + porcentaje + " where token_participante = '" + token + "'";
+    	System.out.println("sql: " + sql);
     	this.getDb().exec(sql);
     }
     

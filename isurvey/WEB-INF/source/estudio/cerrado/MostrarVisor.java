@@ -129,9 +129,9 @@ public class MostrarVisor extends GenericTransaction {
     	return this.getDb().get(sql);
     }
     
-    void setEstatus (String token, String estatus) throws Throwable{
-    	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "' " +
-    			"where token_participante = '" + token + "'";
+    void setEstatus (String token, String estatus, String porcentaje) throws Throwable{
+    	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "', " +
+    			" porcentaje_completado = " + porcentaje + " where token_participante = '" + token + "'";
     	this.getDb().exec(sql);
     	this.getDb().commit();
     }
@@ -146,6 +146,9 @@ public class MostrarVisor extends GenericTransaction {
     
     void updateStatus (String token) throws Throwable{
     	String estatus = "";
+    	float porcentaje = 1;
+    	int preguntasObligatorias = 0;
+    	int preguntasRespondidas = 0;
     	String query = "select instrumento.id_instrumento " +
 		"from " +
 		"ajvieira_isurvey_app.estudio, ajvieira_isurvey_app.instrumento, " +
@@ -172,11 +175,16 @@ public class MostrarVisor extends GenericTransaction {
 	    		columnas.top();
 	    		int numeroColumnas = columnas.getRecordCount() - 5;
 	    		Recordset preguntas = questionsOrdenadas(instrumentos.getString("id_instrumento"));
-	    		
+	    		preguntas.top();
+	    		while (preguntas.next()){
+	    			if (preguntas.getString("mandatory").equals("Y"))
+	    				preguntasObligatorias++;
+	    		}
 
 	    		while (respuestas.next()){
 		    		if (respuestas.getString("submitdate") != null){
 		    			estatus = "Completa";
+		    			porcentaje = 100;
 		    		}
 		    		else{
 		    			preguntas.first();
@@ -187,22 +195,30 @@ public class MostrarVisor extends GenericTransaction {
 			    		while (columnas.next()){
 			    			String column = columnas.getString("column_name");
 			    			column = column.toLowerCase();
-			    			System.out.println("columna: " + column);
-			    			System.out.println("respuesta: " + respuestas.getString(column));
 			    			if (respuestas.getString(column) == null && (preguntas.getString("mandatory").equals("Y")) && (!column.equals("submitdate") && !column.equals("lastpage"))){
 			    				estatus = "Incompleta";
+			    			}
+			    			if (respuestas.getString(column) != null && respuestas.getString(column) != "" && (preguntas.getString("mandatory").equals("Y")) && (!column.equals("submitdate") && !column.equals("lastpage"))){
+			    				preguntasRespondidas++;
 			    			}
 			    			if (respuestas.getString(column) == null)
 			    				numeroColumnas2--;
 			    			preguntas.next();
 			    		}
-			    		if (numeroColumnas2 <= 0)
+			    		System.out.println("respondidas: " + preguntasRespondidas);
+			    		if (numeroColumnas2 <= 0){
 			    			estatus = "Sin Iniciar";
+			    			porcentaje = 0;
+			    		}
 			    		else 
 			    			estatus = "Incompleta";
 		    		}
 	    		}
-	    		setEstatus(token, estatus);
+	    		if (porcentaje != 0 && porcentaje != 100 && preguntasObligatorias != 0)
+	    			porcentaje = (preguntasRespondidas*100)/preguntasObligatorias;
+	    		if (preguntasObligatorias == 0)
+	    			porcentaje = 100;
+	    		setEstatus(token, estatus, String.valueOf(porcentaje));
 	    	}
     	}
     }

@@ -8,7 +8,7 @@
 	<log>false</log>
 
 	<transaction>
-		<classname>responsable.MonitoreoGeneralEstudioAbiertoIdentificado</classname>
+		<classname>responsable.MonitoreoGeneralEstudioCerrado</classname>
 		<validator>true</validator>
 		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>
