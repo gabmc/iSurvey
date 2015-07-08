@@ -6,6 +6,7 @@
 	<parameter id='apellido' type='varchar' required='false' label='Apellido Participante' maxlen='50'/>
 	<parameter id='email' type='varchar' required='false' label='Email Participante' maxlen='50'/>
 	<parameter id='estatus' type='varchar' required='false' label='Estatus' maxlen='50'/>
+	<parameter id='porcentaje_completado' type='integer' required='false' label='porcentaje' maxlen='50'/>
 
 	<custom-validator
 		classname="dinamica.validators.SQLPatternTransformer"

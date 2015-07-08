@@ -48,6 +48,7 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
         	Recordset intParticpanteInstrumento = getIntParticipanteInstrumento(instrumentos.getString("id_instrumento"));
         	intParticpanteInstrumento.top();
         	while(intParticpanteInstrumento.next()){
+        		System.out.println("int: " + intParticpanteInstrumento.getString("id_participante"));
 		        		if (intParticpanteInstrumento.getString("estatus").equals("Incompleta")){
 		        			incompletas++;
 		        		}
@@ -56,13 +57,16 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
 		        		}
 		        		p.top();
 		        		while (p.next()){
-		        		if ((intParticpanteInstrumento.getString("estatus").equals("Sin Iniciar")) && 
-		        				(intParticpanteInstrumento.getString("id_participante").equals(p.getString("id_participante")))){
-		        			sinIniciar++;
+			        		if ((intParticpanteInstrumento.getString("estatus").equals("Sin Iniciar")) && 
+			        				(intParticpanteInstrumento.getString("id_participante").equals(p.getString("id_participante")))){
+			        			sinIniciar++;
+			        		}
 		        		}
         	}
-        	}
         }
+        System.out.println("si: " + sinIniciar);
+        System.out.println("i: " + incompletas);
+        System.out.println("c: " + completas);
         Recordset output = new Recordset();
         output.append("sin_iniciar", java.sql.Types.INTEGER);
         output.append("incompletas", java.sql.Types.INTEGER);
@@ -189,7 +193,6 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
     void setEstatus (String token, String estatus, String porcentaje) throws Throwable{
     	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "', " +
     			" porcentaje_completado = " + porcentaje + " where token_participante = '" + token + "'";
-    	System.out.println("sql: " + sql);
     	this.getDb().exec(sql);
     }
     

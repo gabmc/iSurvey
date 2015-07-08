@@ -22,12 +22,12 @@
 	<!--encabezados-->
 	<tr>
 		<th colspan="2"></th>
-		<th><a href="javascript:onclick=sortBy('id_instrumento','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
-		<th width="20%"><a href="javascript:onclick=sortBy('nombre_estudio_pl0','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-		<th width="20%"><a href="javascript:onclick=sortBy('nombre_estudio_pl0','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
-		<th width="20%"><a href="javascript:onclick=sortBy('nombre','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
-		<th width="20%"><a href="javascript:onclick=sortBy('nombre','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">% Completo</a></th>
-		<th width="20%"><a href="javascript:onclick=sortBy('nombre','query-instrumento.sql')" title="Haga CLICK para ordenar por esta columna">Encuesta</a></th>
+		<th><a href="javascript:onclick=sortBy('id_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('apellido_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('completado','query.sql')" title="Haga CLICK para ordenar por esta columna">% Completo</a></th>
+		<th width="20%">Encuesta</th>
 	</tr>
 
 	<!--data-->
@@ -39,7 +39,7 @@
 		<td align="center">${fld:nombre_participante}</td>
 		<td align="center">${fld:apellido_participante}</td>
 		<td align="center">${fld:email_participante}</td>
-		<td align="center">${fld:completado}</td>
+		<td align="center">${fld:completado}%</td>
 		<td align="center"><a target="_blank" title="Haz CLICK aqu&iacute; para ver la encuesta de este participante" href="http://localhost:8090/limesurvey/index.php/${fld:id_instrumento}/token/${fld:token_participante}">Link</a></td>
 	</tr>
 	</rows>

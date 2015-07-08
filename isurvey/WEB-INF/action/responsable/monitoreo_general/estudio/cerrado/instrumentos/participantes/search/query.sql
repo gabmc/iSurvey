@@ -10,6 +10,6 @@ and int_participante_instrumento.id_instrumento = ${fld:id_instrumento}
 
 and concat(participante.id_participante) like ${fld:identificador}
 and estatus like ${fld:estatus}
-/*and upper(nombre_participante) like upper(${fld:nombre})
+and upper(nombre_participante) like upper(${fld:nombre})
 and upper(apellido_participante) like upper(${fld:apellido})
-and upper(email_participante) like upper(${fld:email})*/
+and upper(email_participante) like upper(${fld:email})
