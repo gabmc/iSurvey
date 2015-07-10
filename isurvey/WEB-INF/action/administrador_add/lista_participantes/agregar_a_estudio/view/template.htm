@@ -30,8 +30,8 @@
 	<!--data-->
 	<rows>
 	<tr ${fld:_rowStyle}>
-		<td align="center" width="3%"><img src="${def:context}/images/clear.gif" class="tool" onclick="deleteRecord('${fld:id_lista_participantes}', '${fld:id_estudio}', '${fld:id_empresa}')" title="Eliminar"></td>
-		<!--<td align="center" width="3%"><img src="${def:context}/images/edit.gif" style="cursor: pointer" onclick="edit('${fld:id_lista_participantes}')" class="tool" title="Editar"></td>-->
+		<td align="center" width="3%"><img src="${def:context}/images/clear.png" width="18" height="18" class="tool" onclick="deleteRecord('${fld:id_lista_participantes}', '${fld:id_estudio}', '${fld:id_empresa}')" title="Eliminar"></td>
+		<!--<td align="center" width="3%"><img src="${def:context}/images/edit.png" width="18" height="18" style="cursor: pointer" onclick="edit('${fld:id_lista_participantes}')" class="tool" title="Editar"></td>-->
 		<td align="center"><a href="${def:context}/action/administrador_funcional/lista_participantes/participantes_por_lista/form?id_lista=${fld:id_lista_participantes}">${fld:nombre_lista_participantes}</a></td>
 		<td align="center"><a href="${def:context}/action/administrador_funcional/lista_participantes/listas_por_estudio/form?id_estudio=${fld:id_estudio}">${fld:estudio}</a></td>
 
