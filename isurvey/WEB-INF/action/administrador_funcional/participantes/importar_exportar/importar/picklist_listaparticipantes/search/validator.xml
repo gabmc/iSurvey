@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
-<validator onerror='/action/error/crud'>
+<validator>
 	<parameter id='nombre_lista_participantes' type='varchar' required='false' label='Nombre' maxlen='30'/>
-	<custom-validator classname="dinamica.validators.SQLPatternTransformer" parameter="nombre_lista_participantes" rule="contains" />
+	<custom-validator classname="dinamica.validators.SQLPatternTransformer" parameter="nombre_lista_participantes" rule="like" ifnull="%" />
 </validator>

@@ -25,17 +25,20 @@ public class agregarParticipante extends GenericTransaction {
         Enumeration names = this.getRequest().getParameterNames();
         Map parametros = this.getRequest().getParameterMap();
         String idLista = ((String[]) parametros.get("id_lista_participantes"))[0];
-        String userlogin = ((String[]) parametros.get("userlogin"))[0];
+        Recordset participantesFinales = new Recordset();
+        participantesFinales.append("id_participante", java.sql.Types.VARCHAR);
         
         while(names.hasMoreElements()){
             String nombreCampo = (String) names.nextElement();
             if (nombreCampo.contains("cod_")){
                 String nombreCampoParticipante[] = nombreCampo.split("_");
                 String idParticipante = nombreCampoParticipante[1];
+                participantesFinales.addNew();
+                participantesFinales.setValue("id_participante", idParticipante);
                 if (finder(idParticipante, idLista) == false){
                     String sql = StringUtil.replace(getResource("insert.sql"), "{{id_participante}}", idParticipante);
                     sql = StringUtil.replace(sql, "{{id_lista_participantes}}", idLista);
-                    sql = StringUtil.replace(sql, "{{userlogin}}", userlogin);
+                    sql = StringUtil.replace(sql, "{{id_empresa}}", getIdEmpresa());
                     getDb().exec(sql);
                     
 ////////////////////////////////////////////////////////
@@ -68,8 +71,63 @@ public class agregarParticipante extends GenericTransaction {
             ////////////////////////////////////////////////////////
                 }
             }
+        
+        Recordset participantesAquitar = new Recordset();
+        participantesAquitar.append("id_participante", java.sql.Types.VARCHAR);
+        
+        Recordset participantesDeLista = getParticipantesDeLista(idLista);
+        participantesDeLista.top();
+
+        while(participantesDeLista.next()){
+        	String valor = participantesDeLista.getString("id_participante");
+        	if (!buscar(valor, participantesFinales, "id_participante")){
+        		participantesAquitar.addNew();
+        		participantesAquitar.setValue("id_participante", valor);
+        	}	
+        }
+        
+        Recordset instrumentos = getInstrumentos(idLista);
+        participantesAquitar.top();
+        while (participantesAquitar.next()){
+        	String sql = StringUtil.replace(getResource("delete-int-part-lista.sql"), "{{id_participante}}", participantesAquitar.getString("id_participante"));
+        	sql = StringUtil.replace(sql, "{{id_empresa}}", getIdEmpresa());
+        	sql = StringUtil.replace(sql, "{{id_lista_participantes}}", idLista);
+        	getDb().exec(sql);
+        	instrumentos.top();
+        	while (instrumentos.next()){
+        		TokenGenerator tg = new TokenGenerator();
+        		sql = StringUtil.replace(getResource("delete-token.sql"), 
+        				"{{token}}", 
+        				tg.generarToken(participantesAquitar.getString("id_participante"), instrumentos.getString("id_instrumento")));
+        		getDb().exec(sql);
+        		
+        		sql = StringUtil.replace(getResource("delete-lime.sql"), "{{id_encuesta}}", instrumentos.getString("id_instrumento"));
+        		sql = StringUtil.replace(sql, "{{token}}", tg.generarToken(participantesAquitar.getString("id_participante"), instrumentos.getString("id_instrumento")));
+        		getDb().exec(sql);
+        		
+        		sql = StringUtil.replace(getResource("delete-lime-respuestas.sql"), "{{id_encuesta}}", instrumentos.getString("id_instrumento"));
+        		sql = StringUtil.replace(sql, "{{token}}", tg.generarToken(participantesAquitar.getString("id_participante"), instrumentos.getString("id_instrumento")));
+        		getDb().exec(sql);
+        	}
+        	
+        }
         getDb().commit();
         return 0;
+    }
+    
+    Boolean buscar(String valor, Recordset rs, String columna) throws Throwable{
+    	rs.top();
+    	while (rs.next()){
+    		if (valor.equals(rs.getString(columna)))
+    			return true;
+    	}
+    	return false;
+    }
+    
+    Recordset getParticipantesDeLista(String idLista) throws Throwable{
+    	String sql = "select * from ajvieira_isurvey_app.int_participante_lista_participantes " +
+    			"where id_lista_participantes = " + idLista;
+    	return this.getDb().get(sql);
     }
 
     Boolean finder (String idParticipante, String idLista) throws Throwable{
@@ -96,7 +154,7 @@ public class agregarParticipante extends GenericTransaction {
         return false;
     }
 
-    String getEmpresa() throws Throwable{
+    String getIdEmpresa() throws Throwable{
         String query = "select * from ajvieira_isurvey_security.s_user where userlogin = '"+this.getUserName()+"'";
         Recordset rs;
 			rs = this.getDb().get(query);
@@ -117,7 +175,8 @@ public class agregarParticipante extends GenericTransaction {
     }   
     
     Recordset getParticipante (String id) throws Throwable{
-    	String query = "select * from ajvieira_isurvey_app.participante " +
+    	String query = "select id_participante, nombre_participante, apellido_participante, email_participante" +
+    			" from ajvieira_isurvey_app.participante " +
     			"where id_empresa = (select id_empresa from ajvieira_isurvey_security.s_user where userlogin = '" +this.getUserName()+ "') " +
     			"and id_participante = " + id;
     	return this.getDb().get(query);

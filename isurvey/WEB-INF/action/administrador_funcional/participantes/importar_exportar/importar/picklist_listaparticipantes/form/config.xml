@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
-<config nodb="true">
+<config>
 
 	<summary>
-		Picklist Lista Participantes
+		Filtro de búsqueda del picklist de selección simple con AddNew
 	</summary>
 
 	<log>false</log>

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <validator onerror='/action/error/validation/ajax'>
 	<parameter id='id_participante' type='integer' required='true' label='id_participante' maxlen='8'/>
-	<parameter id='nombre_participante' type='varchar' required='false' label='Nombre' maxlen='30'/>
-	<parameter id='apellido_participante' type='varchar' required='false' label='Apellido' maxlen='30'/>
-	<parameter id='email_participante' type='varchar' required='false' label='e-mail' maxlen='30'/>
-	<parameter id='empresa' type='varchar' required='false' label='Empresa' maxlen='100'/>
+	<parameter id='nombre_participante' type='varchar' required='true' label='Nombre' maxlen='30'/>
+	<parameter id='apellido_participante' type='varchar' required='true' label='Apellido' maxlen='30'/>
+	<parameter id='email_participante' type='varchar' required='true' label='e-mail' maxlen='30'/>
+	<parameter id='empresa' type='varchar' required='true' label='Empresa' maxlen='100'/>
 	<parameter id='area' type='varchar' required='false' label='Area' maxlen='100'/>
 	<parameter id='cargo' type='varchar' required='false' label='Cargo' maxlen='30'/>
 	<parameter id='supervisor' type='varchar' required='false' label='Supervisor' maxlen='30'/>

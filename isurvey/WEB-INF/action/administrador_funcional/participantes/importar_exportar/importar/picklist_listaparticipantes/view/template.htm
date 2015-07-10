@@ -3,10 +3,10 @@
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="1">
-			<span style="color: gray; float: left;"></span> 
+		<th colspan="2">
+			<span style="color: gray; float: left;">Seleccione con un click</span> 
 			<!--panel de control de navegacion--> 
-			<span style="float: right;">${req:controls}</span> 
+			<span style="float: right;"> ${inc:/action/pagecontrols}</span> 
 			<!--indicador de progreso-->
 			<img id="grid-progress" style="float: right; display: none" src="${def:context}/images/progress.gif">
 		</th>
@@ -14,15 +14,17 @@
 
 	<!--encabezados-->
 	<tr>
-		<th width="100%"><a href="javascript:onclick=sortBy('nombre_lista_participantes','query-listaparticipantes.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-
+		<th style="width: 50%;">
+			<a href="javascript:onclick=sortBy('categoryname')" title="Haga CLICK para ordenar por esta columna"> Nombre de la Lista de Participantes </a>
+		</th>
 	</tr>
 
 	<!--data-->
 	<rows>
-	<tr ${fld:_rowStyle} onmouseover="rowOn(this)"onmouseout="rowOff(this)" onclick="selectItem('${fld:id_lista_participantes}')">
-		<td style="font-size: 9pt;" align="center"><span id="${fld:id_lista_participantes}">${fld:nombre_lista_participantes}</span></td>
-		
+	<tr ${fld:_rowStyle} onmouseover="rowOn(this)"onmouseout="rowOff(this)" onclick="selectItem('${fld:categoryid}')">
+		<td align="center" style="font-size: 9pt;">
+			<span id="${fld:categoryid}">${fld:nombre_lista_participantes}</span>
+		</td>
 	</tr>
 	</rows>
 

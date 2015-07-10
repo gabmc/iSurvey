@@ -11,7 +11,7 @@
 	<on-error>${def:actionroot}/error</on-error>
 
 	<transaction>
-		<classname>excel.ImportExcel</classname>
+		<classname>admin_funcional.ImportExcelParticipantes</classname>
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>

@@ -16,18 +16,16 @@
 </head>
 
 <body>
-
+<form action="${def:context}${def:actionroot}/seleccion_participantes/form" method="POST">
 <!--banner-->
 <div class="banner">
 	<div style="float: left;">Agregar Participante(s) a Lista</div>
 	${req:progress}
 </div>
-<form name="form1" onSubmit="return insertarParticipantes();">
 <table align="center" class="formgrid" width="450px">
-    <tr>
-        <td>
-            Lista
-        </td>
+<tr><td>
+    Lista de Participantes a modificar
+</td>
         <td>
         <!--almacena el ID del item seleccionado-->
         <input type="hidden" name="id_lista_participantes" id="id_lista_participantes" />
@@ -39,83 +37,14 @@
         <img src="${def:context}/images/clear.gif" class="button" onclick="document.form1.id_lista_participantes.value='';document.form1.id_lista_participantes_name.value='';"
                 title="Borrar valor seleccionado" />
         </td>
-    </tr>
+        </tr>
+        
 </table>
 <br>
-
-<table align="center">
-    <tr>
-        <td>
-<table id="tablaA" class="grid" width="350px" align="center">
-
-	<!--toolbar-->
-        <thead>
-            <tr>
-                    <th colspan="13">
-                            <!--t�tulo del grid-->
-                            <span style="float: left;">Seleccione los Participantes a Agregar</span>
-                            <!--indicador de progreso-->
-                            <img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none">
-                    </th>
-            </tr>
-        </thead>
-        <tbody>
-	<!--encabezados-->
-	<tr>
-                <th width="9%"><a href="javascript:onclick=sortBy('id_participante','datos-participantes.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
-		<th width="9%"><a href="javascript:onclick=sortBy('nombre_participante','datos-participantes.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-		<th width="9%"><a href="javascript:onclick=sortBy('apellido_participante','datos-participantes.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
-                <th width="9%">Acci&oacute;n</th>
-        </tr>
-
-	<!--data-->
-                        <rows>
-                            <tr>
-                                <td>${fld:id_participante}</td>
-                                <td width="20%">${fld:nombre_participante}</td>
-                                <td width="80%">${fld:apellido_participante}</td>
-                                <td><input type="button" value="Agregar" onclick="agregarParticipante('${fld:id_participante}','${fld:nombre_participante}','${fld:apellido_participante}','#tablaB');"/></td>
-                            </tr>
-                        </rows>
-        </tbody>
-</table>
-</td>
-
-
-        <td>
-<table id="tablaB" class="grid" width="350px">
-	<!--encabezados-->
-        <thead>
-        <!--toolbar-->
-	<tr>
-		<th colspan="13">
-			<!--t�tulo del grid-->
-			<span style="float: left;">Grupo de Participantes Seleccionados</span>
-			<!--indicador de progreso-->
-			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none">
-		</th>
-	</tr>
-	<tr>
-                <th width="9%"><a href="javascript:onclick=sortBy('cedula_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Identificador</a></th>
-		<th width="9%"><a href="javascript:onclick=sortBy('nombre_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-		<th width="9%"><a href="javascript:onclick=sortBy('apellido_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
-                <th width="9%">Acci&oacute;n</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-
-	<!--data-->
-
-</table>
-        </td>
-    </tr>
-</table>
-<br>
-<div id="inputs" align="center">
-    <input type="submit" value="Agregar Participantes" id="subm" align="center" />
+<div align="center">
+<input type="submit" value="Buscar" class="button">
 </div>
+<div id="response" style="display: none; width: 100%" align="center"></div>
 </form>
 
 </body>
@@ -123,126 +52,10 @@
 <!--codigo de soporte del template-->
 <script type="text/javascript">
 
-	function pickIdLista(){
-		var url = "${def:context}/action/administrador_funcional/participantes/agregar_participante_a_lista/picklist_listaparticipantes/form";
-		pickOpen ('id_lista_participantes_name','id_lista_participantes',url,'450','335');
-	}
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-$.extend( $.fn.dataTable.defaults, {
-    "ordering": false,
-    "lengthChange": false,
-    "language":{
-                "lengthMenu": "Mostrar _MENU_ participantes por p&aacute;gina",
-                "zeroRecords": "No se encontraron participantes registrados",
-                "info": "P&aacute;gina _PAGE_ de _PAGES_",
-                "infoEmpty": " ",
-                "infoFiltered": "(filtrado de _MAX_ participantes totales)",
-                "sLoadingRecords": "Cargando...",
-                "sSearch": "Buscar: ",
-                "sZeroRecords": "No se encontr&oacute; ning&uacute;n participante",
-                "sProcessing": "Procesando",
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
+    function pickIdLista(){
+        var url = "${def:context}/action/administrador_funcional/participantes/agregar_participante_a_lista/picklist_listaparticipantes/form";
+        pickOpen ('id_lista_participantes_name','id_lista_participantes',url,'450','335');
     }
-} );
-        $(document).ready( function () {
-            $('#tablaB').DataTable({
-                    columns: [
-                        { data: 'id' },
-                        { data: 'nombre' },
-                        { data: 'apellido' },
-                        { data: 'accion'}
-                    ] 
-            });
-            $('#tablaA').DataTable({
-                    columns: [
-                        { data: 'id' },
-                        { data: 'nombre' },
-                        { data: 'apellido' },
-                        { data: 'accion'}
-                    ]
-            });
-        });
-
-        function agregarParticipante(id, nombre, apellido, tablaDestino){
-            if (tablaDestino == "#tablaA"){
-                var tabla2 = "#tablaB";
-                var boton = "Agregar";
-            }
-            else{
-                var tabla2 = "#tablaA";
-                var boton = "Quitar";
-                var inputs = document.getElementById("inputs");
-                var input = document.createElement('input');
-                input.setAttribute('name', 'cod_'+id);
-                input.setAttribute('type', 'hidden');
-                input.setAttribute('id', 'id_cod_'+id);
-                inputs.appendChild(input);
-            }
-            $(tablaDestino).dataTable().fnAddData({
-                "id":   id,
-                "nombre":   nombre,
-                "apellido": apellido,
-                "accion": "<input type=\"button\" value="+boton+" onclick=\"agregarParticipante('"+id+"','"+nombre+"', '"+apellido+"', '"+tabla2+"')\">"
-            });
-            quitarParticipante(id, tabla2);
-        }
-
-        function quitarParticipante(id, tabla){
-            var targetRow = 0;
-            var rows = $(tabla).dataTable().fnGetNodes();
-            for(var i=0; i<rows.length; i++){
-                var valorActual = $(rows[i]).find("td:eq(0)").html();
-                if(valorActual == id){
-                    targetRow = i;
-                }
-            }
-            $(tabla).dataTable().fnDeleteRow(targetRow);
-            if (tabla == "#tablaB"){
-                var input = document.getElementById("id_cod_"+id);
-                input.parentNode.removeChild(input);
-            }
-        }
-
-
-
-            function insertarParticipantes(){
-                var rows = $("#tablaB").dataTable().fnGetNodes();
-                if (document.form1.id_lista_participantes.value == ""){
-                    alert("Disculpe, debe seleccionar la lista a donde perteneceran los participantes.");
-                    return false;
-                }
-                if(rows.length > 0){
-                    document.form1.subm.disabled = true;
-                    //llamada Ajax...
-                    return ajaxCall(httpMethod="POST",
-                    uri="${def:actionroot}/insert",
-                    divResponse=null,
-                    divProgress="status",
-                    formName="form1",
-                    onErrorFn=null);
-                }
-                else
-                {
-                    alert("Disculpe, debe postular al menos a una persona.");
-                    return false;
-                }
-            }
-
-            function restart(){
-                document.documentElement.innerHTML = '';
-                var url = "${def:actionroot}/form";
-                //llamada Ajax...
-		ajaxCall(httpMethod="GET",
-						uri= url,
-						divResponse="response",
-						divProgress="status",
-						formName=null,
-						afterResponseFn=null,
-						onErrorFn=null);
-            }
 </script>
 
 </html>

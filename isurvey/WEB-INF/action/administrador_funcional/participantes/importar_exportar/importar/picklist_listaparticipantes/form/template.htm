@@ -6,7 +6,7 @@
 
 <!--biblioteca generica JS/Dinamica-->
 <script type="text/javascript" src="${def:context}/action/script">
-	</script>
+</script>
 
 <title>PickList de Selección Simple</title>
 
@@ -35,24 +35,11 @@
 	<col width="35%">
 
 	<!--campos-->
-			<tr>
-			<td class="formlabel">Nombre</td>
-			<td>
-				<input id="nombre_lista_participantes" name="nombre_lista_participantes" type="text" size="30" maxlength="30">
-			</td>
-		</tr>
-
-	
-	<!--separador-->
-	<tr height="10px">
-		<td colspan="2"></td>
-	</tr>
-
-	<!--botones-->
 	<tr>
-		<td colspan="2" align="center">
-			<input type="button" value="Agregar Lista" class="button" style="font-size: 9pt" onclick="agregarLista()">
-			<input type="submit" value="Buscar" class="button" style="font-size: 9pt">	
+		<td class="formlabel" style="vertical-align: middle">Nombre comienza por:</td>
+		<td>
+			<input name="name" type="text" size="15" value="" maxlength="35"> <input type="submit" value="Buscar" class="button" style="font-size: 9pt"> 
+			<input type="button" value="Añadir" class="button" style="font-size: 9pt" title="Añadir un nuevo item" onclick="addNew()">
 		</td>
 	</tr>
 
@@ -61,8 +48,48 @@
 </form>
 </div>
 
+<!--formulario para añadir nuevo registro-->
+<div id="addnew" style="display: none">
+<form name="form2" onsubmit="return insert()" style="margin-top: 20px;">
+<table width="80%" class="formgrid">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="30%">
+
+	<!--separador-->
+	<tr style="height: 10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--campos-->
+	<tr>
+		<td class="formlabel required">Nombre de la Lista:</td>
+		<td><input id="newname" name="newname" type="text" size="30" value="" maxlength="50"></td>
+	</tr>
+
+	<!--separador-->
+	<tr style="height: 10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2" align="center"><input type="submit" value="Grabar" class="button" style="font-size: 9pt">
+			<input 	type="button" value="Cancelar" class="button" style="font-size: 9pt" onclick="cancelAddnew()">
+		</td>
+	</tr>
+
+	<!--separador-->
+	<tr style="height: 10px">
+		<td colspan="2"></td>
+	</tr>
+
+</table>
+</form>
+</div>
+
+
 <!--indicador de progreso-->
-<div id="status" class="alert" style="display: none; color: gray; width: 60%; font-weight: normal; font-family: Arial; margin-top: 10px">
+<div id="status" class="alert"	style="display: none; color: gray; width: 60%; font-weight: normal; font-family: Arial; margin-top: 10px">
 	<img src="${def:context}/images/progress.gif"> Por favor espere...
 </div>
 
@@ -79,14 +106,11 @@
 
 		var currstyle = "";
 
-		
-		
 		//inicializacion de la pagina cuando carga
 		onload = function()
 		{ 
 			document.form1.elements[0].focus();
 			search();
-			
 		} 
 	
 		//mostrar filtro de busqueda
@@ -134,14 +158,34 @@
 			parent.pickSelect(id, description);
 			parent.pickClose();
 		}
-
-		function agregarLista(){
-			var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
-			var url = "${def:context}${def:actionroot}/agregar_lista/form";
-			var w = window.open(url, null, features);
+		
+		//mostrar formulario para addnew
+		function addNew() {
+			document.getElementById("addnew").style.display="block";
+			document.getElementById("form").style.display="none";
+			document.getElementById("response").style.display="none";
+			document.form2.newname.focus();
 		}
 		
+		function cancelAddnew() {
+			document.getElementById("addnew").style.display="none";
+			document.getElementById("form").style.display="block";
+			document.form1.name.focus();
+		}
+		
+		//ejecutar consulta
+		function insert()
+		{
+			//llamada Ajax...
+			return ajaxCall(	httpMethod="POST", 
+								uri="${def:actionroot}/insert", 
+								divResponse=null, 
+								divProgress="status", 
+								formName="form2", 
+								afterResponseFn=null, 
+								onErrorFn=addNew);
+		}		
+		
 </script>
-
 
 </html>

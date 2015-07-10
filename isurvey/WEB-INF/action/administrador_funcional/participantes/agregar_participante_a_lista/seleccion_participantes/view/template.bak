@@ -1,0 +1,65 @@
+<!--data grid-->
+<form name="form1" onsubmit="return save()">
+<table class="grid" width="700px">
+
+	<!--toolbar-->
+	<tr>
+		<th colspan="13">
+			<!--t�tulo del grid--> 
+			<span style="float: left;">Participantes </span>
+			<!--panel de control de navegacion--> 
+			<span style="float: right;">${req:controls}</span> 
+			<!--indicador de progreso-->
+			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
+			<!--toolbar del grid-->
+			<span style="float: left; margin-left: 40px">
+				<img src="${def:context}/images/reload.gif" onclick="search()" title="Recargar data" class="tool">
+				<img src="${def:context}/images/print.gif" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/excel.gif" onclick="openExcel()" title="Exportar a Excel" class="tool">
+			</span>
+		</th>
+	</tr>
+
+	<!--encabezados-->
+	<tr>
+		<th width="9%"><a href="javascript:onclick=sortBy('nombre_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="9%"><a href="javascript:onclick=sortBy('apellido_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
+                <th width="9%"><a href="javascript:onclick=sortBy('cedula_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">C&eacute;dula</a></th>
+		<th width="9%"><a href="javascript:onclick=sortBy('email_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
+		<th width="9%"><a href="javascript:onclick=sortBy('cargo','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Cargo</a></th>
+		<th width="9%"><a href="javascript:onclick=sortBy('supervisor','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Supervisor</a></th>
+                <th width="9%"><a href="#">Agregar a la lista?</a></th>
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center">${fld:nombre_participante}</td>
+		<td align="center">${fld:apellido_participante}</td>
+		<td align="center">${fld:cedula_participante}</td>
+		<td align="center">${fld:email_participante}</td>
+		<td align="center">${fld:cargo}</td>
+		<td align="center">${fld:supervisor}</td>
+                <td align="center"><input type="checkbox"></td>
+	</tr>
+	</rows>
+</table>
+<input id="agregar" type="submit" value="Agregar" class="button" onclick="search()">
+</form>
+
+<script type="text/javascript">
+	function update()
+	{
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST",
+							uri="${def:actionroot}/update",
+							divResponse=null,
+							divProgress="status",
+							formName="form1",
+							afterResponseFn=null,
+							onErrorFn=retryAddnewOrEdit);
+	}
+</script>

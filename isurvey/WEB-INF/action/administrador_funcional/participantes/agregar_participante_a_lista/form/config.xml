@@ -23,7 +23,7 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
-		<print mode="table" recordset="datos-participantes.sql" tag="rows"/>
+		<!--<print mode="table" recordset="datos-participantes.sql" tag="rows"/>-->
 	</output>
 
 </config>
