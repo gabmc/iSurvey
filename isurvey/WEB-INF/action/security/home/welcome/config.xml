@@ -8,13 +8,11 @@
 	<log>false</log>
 
 	<transaction>
-		<classname>dinamica.GenericTransaction</classname>
+		<classname>utils.RedirectWelcome</classname>
 		<validator>false</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
 		<recordset id="user-info.sql" source="sql" scope="session" />
-		<recordset params="user-info.sql" id="last-logins.sql" source="sql" scope="transaction" max-rows="5" />
-		<recordset id="failed-logins.sql" source="sql" scope="transaction" max-rows="5" />
 	</transaction>
 
 	<output>

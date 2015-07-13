@@ -5,47 +5,14 @@
 <link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
 <title>iSurvey</title>
 
-<script type="text/javascript">
-		//mostrar imagen y esconder su indicador de progreso de carga
-		function displayImage(imageID)
-		{
-			document.getElementById(imageID + "_wait").style.display='none';
-			document.getElementById(imageID).style.display='';
-		}
-		function rowOn(obj) {
-			currStyle = obj.style.backgroundColor;
-			obj.style.cursor="pointer"
-			obj.style.backgroundColor="#E3E4FA"
-		}
-		
-		function rowOff(obj) {
-			obj.style.backgroundColor=currStyle
-		}
-	</script>
-
-<style>
-.pickListHeader {
-	background-color: #E3E4FA;
-	color: black;
-	font-family: Arial;
-	font-size: 9pt;
-	padding: 1px;
-}
-</style>
-
 </head>
 
 <body>
 
-<center>
-
-<br><br>
-
-<div class="alert" style="width: 50%; color: gray; font-weight: bold">
-
-¡ Hola ${fld:fname} ${fld:lname} !</div>
-<p>Bienvenido al sistema de encuestas iSurvey, puede elegir entre las diferentes opciones que se encuentran en el men&uacute; de la izquierda.</p>
-</center>
 </body>
+
+<script language="javascript">
+	window.location='${def:context}/${req:ruta}'
+</script>
 
 </html>

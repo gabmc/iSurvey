@@ -1,3 +1,17 @@
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	<title>iSurvey</title>
+	
+	<script language="javascript" src="${def:context}/action/script">
+	</script>
+	
+</head>
+<body>
+<div class="banner">
+    <div style="float: left;">Administraci&oacute;n de Usuarios</div>
+</div>
+<div align="center">
 <!--FORM-->
 <form name="form1" action="${def:context}${def:actionroot}/search" method="POST">
 
@@ -83,7 +97,7 @@
 		<td align="center" colspan="2">
 			<input type="submit" value="Buscar">
 			<input type="button" value="Limpiar Filtro" onclick="clearForm('form1')">
-			<input type="button" value="Agregar Usuario" onclick="onAddNew()">
+			<input type="button" value="Registrar" onclick="onAddNew()">
 		</td>
 	</tr>
 
@@ -95,6 +109,7 @@
 </table>
 
 </form>
+</div>
 
 <script language="javascript">
 
@@ -116,4 +131,5 @@
 	
 </script>
 <!--END FORM-->
+</body>
 

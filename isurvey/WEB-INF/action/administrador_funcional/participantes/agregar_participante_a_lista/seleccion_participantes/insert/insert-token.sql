@@ -3,12 +3,14 @@ insert into ajvieira_isurvey_app.int_participante_instrumento
         id_participante,
         id_instrumento,
         token_participante,
-        estatus
+        estatus,
+        porcentaje
 )
 values
 (
         {{id_participante}},
         {{id_instrumento}},
         '{{token}}',
-        'Sin Iniciar'
+        'Sin Iniciar',
+        0
 )

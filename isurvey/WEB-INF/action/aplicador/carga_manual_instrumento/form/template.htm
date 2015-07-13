@@ -14,10 +14,9 @@
 <body>
 
 <!--banner-->
-<h1>
-	Importar Lista de Participantes
-</h1>
-<br>
+<div class="banner">
+	<div style="float: left;">Administrar Listas de Participantes</div>
+</div>
 
 <center>
     			<table class="formgrid" width="450px">
@@ -52,7 +51,7 @@
 			<!--almacena el nombre del item seleccionado-->
 			<input type="text" name="id_estudio_name" id="id_estudio_name" style="width: 80%;" readonly />
 			<!--botones del picklist-->
-			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdEstudio();" title="Seleccionar item" />
+			<img src="${def:context}/images/search.png" width="18" height="18" class="button" onclick="pickIdEstudio();" title="Seleccionar item" />
 			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="document.form1.id_estudio.value='';document.form1.id_estudio_name.value='';"
 				title="Borrar valor seleccionado" />
 		</td>

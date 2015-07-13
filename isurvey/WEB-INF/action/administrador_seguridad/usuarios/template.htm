@@ -12,9 +12,9 @@
 
 <body>
 
-<!--common header-->
-${inc:${def:actionroot}/header}
-<!--end of common header-->
+<div class="banner">
+    <div style="float: left;">Registrar Usuario</div>
+</div>
 
 <center>
 		
@@ -45,16 +45,16 @@ ${inc:${def:actionroot}/header}
 	<tr style="display:${req:display}">
 		<td class="formlabel required">Login</td>
 		<td>
-			<input name="userlogin" type="text" size="20" maxlength="25" value="${fld:userlogin}">
+			<input name="userlogin" type="text" size="25" maxlength="25" value="${fld:userlogin}">
 		</td>
 	</tr>
 	<tr style="display:${req:display}">
 		<td class="formlabel required">Contraseña</td>
-		<td><input name="passwd" type="password" size="20" maxlength="15"></td>
+		<td><input name="passwd" type="password" size="25" maxlength="15"></td>
 	</tr>
 	<tr style="display:${req:display}">
 		<td class="formlabel required">Confirme contraseña </td>
-		<td><input name="confirm" type="password" size="20" maxlength="15"></td>
+		<td><input name="confirm" type="password" size="25" maxlength="15"></td>
 	</tr>
 	<tr>
 		<td class="formlabel">Apellido</td>
@@ -66,7 +66,7 @@ ${inc:${def:actionroot}/header}
 	</tr>
 	<tr>
 		<td class="formlabel">E-mail</td>
-		<td><input name="email" type="text" size="30" maxlength="80" value="${fld:email}"></td>
+		<td><input name="email" type="text" size="25" maxlength="80" value="${fld:email}"></td>
 	</tr>
 	<tr>
 		<td valign="top" class="formlabel"><br>Política de contraseña</td>
@@ -106,7 +106,7 @@ ${inc:${def:actionroot}/header}
 			<!--buttons-->
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="Guardar">
+					<input type="submit" value="Registrar">
 					<input type="button" value="Cancelar" onClick="window.location='${ses:return.url}'">				
 				</td>
 			</tr>

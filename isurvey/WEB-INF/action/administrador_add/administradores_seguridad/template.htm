@@ -12,10 +12,9 @@
 
 <body>
 
-<!--common header-->
-${inc:${def:actionroot}/header}
-<!--end of common header-->
-
+<div class="banner">
+    <div style="float: left;">Registrar Administrador de Seguridad</div>
+</div>
 <center>
 		
 		<!--START FORM-->
@@ -45,16 +44,16 @@ ${inc:${def:actionroot}/header}
 	<tr style="display:${req:display}">
 		<td class="formlabel required">Login</td>
 		<td>
-			<input name="userlogin" type="text" size="20" maxlength="25" value="${fld:userlogin}">
+			<input name="userlogin" type="text" size="25" maxlength="25" value="${fld:userlogin}">
 		</td>
 	</tr>
 	<tr style="display:${req:display}">
 		<td class="formlabel required">Contraseña</td>
-		<td><input name="passwd" type="password" size="20" maxlength="15"></td>
+		<td><input name="passwd" type="password" size="25" maxlength="15"></td>
 	</tr>
 	<tr style="display:${req:display}">
 		<td class="formlabel required">Confirme contraseña </td>
-		<td><input name="confirm" type="password" size="20" maxlength="15"></td>
+		<td><input name="confirm" type="password" size="25" maxlength="15"></td>
 	</tr>
 	<tr>
 		<td class="formlabel">Apellido</td>
@@ -66,7 +65,7 @@ ${inc:${def:actionroot}/header}
 	</tr>
 	<tr>
 		<td class="formlabel">E-mail</td>
-		<td><input name="email" type="text" size="30" maxlength="80" value="${fld:email}"></td>
+		<td><input name="email" type="text" size="25" maxlength="80" value="${fld:email}"></td>
 	</tr>
 		<!--control picklist de seleccion simple-->
 	<tr>
@@ -75,9 +74,9 @@ ${inc:${def:actionroot}/header}
 			<!--almacena el ID del item seleccionado--> 
 			<input type="hidden" name="id_empresa" id="id_empresa" /> 
 			<!--almacena el nombre del item seleccionado-->
-			<input type="text" name="id_empresa_name" id="id_empresa_name" style="width: 80%;" readonly /> 
+			<input type="text" name="id_empresa_name" size="25" id="id_empresa_name" style="width: 80%;" readonly /> 
 			<!--botones del picklist--> 
-			<img src="${def:context}/images/search.gif" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" /> 
+			<img src="${def:context}/images/search.png" width="18" height="18" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" /> 
 			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="document.form1.id_empresa.value='';document.form1.id_empresa_name.value='';"
 				title="Borrar valor seleccionado" />
 		</td>
@@ -105,7 +104,7 @@ ${inc:${def:actionroot}/header}
 			<!--buttons-->
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="Guardar">
+					<input type="submit" value="Registrar">
 					<input type="button" value="Cancelar" onClick="window.location='${ses:return.url}'">				
 				</td>
 			</tr>
