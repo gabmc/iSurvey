@@ -46,7 +46,7 @@ public class MonitoreoGeneral extends GenericTransaction {
             		updateStatus(tokens.getString("token_participante"));
         	}
         }
-        
+        //recordset para ser mostrado en la tabla
         Recordset output = new Recordset();
         output.append("nombre_estudio", java.sql.Types.VARCHAR);
         output.append("numero_encuestas", java.sql.Types.VARCHAR);
@@ -58,11 +58,25 @@ public class MonitoreoGeneral extends GenericTransaction {
         output.append("sin_iniciar", java.sql.Types.VARCHAR);
         output.append("porcentaje_sin_iniciar", java.sql.Types.VARCHAR);
         
+        //recordset para ser mostrado en el pdf que se genera
+        Recordset output2 = new Recordset();
+        output2.append("nombre_estudio", java.sql.Types.VARCHAR);
+        output2.append("numero_encuestas", java.sql.Types.VARCHAR);
+        output2.append("numero_participantes", java.sql.Types.VARCHAR);
+        output2.append("completado", java.sql.Types.VARCHAR);
+        output2.append("porcentaje_completado", java.sql.Types.VARCHAR);
+        output2.append("incompleto", java.sql.Types.VARCHAR);
+        output2.append("porcentaje_incompleto", java.sql.Types.VARCHAR);
+        output2.append("sin_iniciar", java.sql.Types.VARCHAR);
+        output2.append("porcentaje_sin_iniciar", java.sql.Types.VARCHAR);
+        
         estudios.top();
         while(estudios.next()){
         	output.addNew();
+        	output2.addNew();
         	numero_encuestas = getNumeroEncuestas(estudios.getString("id_estudio"));
         	output.setValue("numero_encuestas", numero_encuestas);
+        	output2.setValue("numero_encuestas", numero_encuestas);
         	if (estudios.getString("tipo").equals("Cerrado")){
 	        	nombre_estudio = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
 	        		+ estudios.getString("id_estudio") + "\">" + estudios.getString("nombre_estudio") + "</a>";
@@ -108,8 +122,17 @@ public class MonitoreoGeneral extends GenericTransaction {
         	output.setValue("sin_iniciar", sin_iniciar);
         	output.setValue("porcentaje_sin_iniciar", porcentaje_sin_iniciar);
         	
+        	output2.setValue("nombre_estudio", estudios.getString("nombre_estudio"));
+        	output2.setValue("numero_participantes", numero_participantes);
+        	output2.setValue("completado", completado);
+        	output2.setValue("porcentaje_completado", porcentaje_completado);
+        	output2.setValue("incompleto", incompleto);
+        	output2.setValue("porcentaje_incompleto", porcentaje_incompleto);
+        	output2.setValue("sin_iniciar", sin_iniciar);
+        	output2.setValue("porcentaje_sin_iniciar", porcentaje_sin_iniciar);
         }
-        this.getSession().setAttribute("query.sql", output);
+        this.getSession().setAttribute("estudios.sql", output);
+        this.getSession().setAttribute("query2.sql", output2);
         //publish("estudios", output);
         
         return 0;

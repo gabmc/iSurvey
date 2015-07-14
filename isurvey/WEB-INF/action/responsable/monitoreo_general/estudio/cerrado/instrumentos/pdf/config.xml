@@ -12,7 +12,7 @@
 		<validator>false</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="query2.sql" source="session" scope="transaction" />
+		<recordset id="encuestas.sql" source="session" scope="transaction" />
 	</transaction>
 
 	<output>
@@ -23,12 +23,10 @@
 	<pdf-logo url='/images/logo-dinamica.png' scale='100' />
 
 	<pdf-report pageSize="letter" rotate="false">
-		<table recordset='query2.sql' width='100' spacingBefore='40'>
-			<col name='nombre_estudio' title='Nombre del Estudio' width='55' align='center' />
-			<col name='numero_encuestas' title='Numero de Encuestas' width='55' align='center' />
-			<col name='numero_participantes' title='Numero de Participantes' width='65' align='center' />
-			<col name='completado' title='Completado' width='60' align='center' />
-			<col name='porcentaje_completado' title='Porcentaje Completado' width='60' align='center' />
+		<table recordset='encuestas.sql' width='100' spacingBefore='40'>
+			<col name='nombre' title='Nombre de la Encuesta' width='55' align='center' />
+			<col name='completado' title='Completado' width='55' align='center' />
+			<col name='porcentaje_completado' title='Porcentaje Completado' width='55' align='center' />
 			<col name='incompleto' title='Incompleto' width='55' align='center' />
 			<col name='porcentaje_incompleto' title='Porcentaje Incompleto' width='55' align='center' />
 			<col name='sin_iniciar' title='Sin Iniciar' width='55' align='center' />

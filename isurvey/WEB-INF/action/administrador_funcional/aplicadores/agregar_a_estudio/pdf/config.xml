@@ -20,7 +20,7 @@
 	</output>
 
 	<pdf-title>Agregar Aplicador a Estudio</pdf-title>
-	<pdf-logo url='/images/logo-dinamica.png' scale='100' />
+	<pdf-logo url='/images/logo-dinamica.png' scale='20' />
 
 	<pdf-report pageSize="letter" rotate="false">
 		<table recordset='query-intestudiousuario.sql' width='100' spacingBefore='40'>

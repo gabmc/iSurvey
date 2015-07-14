@@ -35,4 +35,4 @@ concat(round((select ((select count(int_participante_instrumento.id_participante
 		from ajvieira_isurvey_app.int_participante_instrumento
 		where int_participante_instrumento.id_instrumento = i.id_instrumento))),'%') as porcentaje_sin_iniciar
 from ajvieira_isurvey_app.instrumento as i 
-where id_estudio = ${fld:id}
+where id_estudio = ${fld:id_estudio}

@@ -12,17 +12,15 @@
 		<validator>false</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="query2.sql" source="session" scope="transaction" />
+		<recordset id="encuestas.sql" source="session" scope="transaction" />
 	</transaction>
 
 	<output>
 		<classname>dinamica.GenericExcelOutput</classname>
 	</output>
 	
-	<excel recordset='query2.sql' sheetname='Administrar Listas de Participantes' filename='monitoreo general.xls'>
-		<col id='nombre_estudio' label='Nombre del Estudio' />
-		<col id='numero_encuestas' label='Numero de Encuestas' />
-		<col id='numero_participantes' label='Numero de Participantes' />
+	<excel recordset='encuestas.sql' sheetname='Lista de Encuestas' filename='lista_encuestas.xls'>
+		<col id='nombre' label='Nombre de la Encuesta' />
 		<col id='completado' label='Completado' />
 		<col id='porcentaje_completado' label='Porcentaje Completado' />
 		<col id='incompleto' label='Incompleto' />

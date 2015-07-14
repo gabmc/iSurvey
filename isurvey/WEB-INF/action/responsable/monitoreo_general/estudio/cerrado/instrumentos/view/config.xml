@@ -14,7 +14,7 @@
 		<validator>false</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="estudios.sql" source="session" scope="transaction" />
+		<recordset id="encuestas.sql" source="session" scope="transaction" />
 	</transaction>
 
 	<output>
@@ -23,7 +23,7 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
-		<print mode="table" recordset="estudios.sql" tag="rows" alternate-colors="true"/>
+		<print mode="table" recordset="encuestas.sql" tag="rows" alternate-colors="true"/>
 	</output>
 
 </config>
