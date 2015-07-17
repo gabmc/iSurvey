@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Exportar documento excel directo al browser
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>true</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+        <recordset id="preguntas.sql" source="sql" scope="session"/>
+	</transaction>
+
+	<output>
+		<classname>aplicador.CrearExcelEjemplo</classname>
+	</output>
+
+	<excel recordset="preguntas.sql" sheetname="Ejemplo" filename="ejemplo_carga_instrumento.xls">
+
+	</excel>
+
+</config>

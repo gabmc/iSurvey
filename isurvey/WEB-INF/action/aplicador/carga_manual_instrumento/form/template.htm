@@ -44,7 +44,8 @@
 		<td colspan="2"></td>
 	</tr>
             <tr>
-		<td colspan="2" align="center">
+            <td class="formlabel required">Estudio</td>
+		<td>
 			<!--almacena el ID del item seleccionado-->
 			<input type="hidden" name="userlogin" id="userlogin" value="${def:user}" />
 			<input type="hidden" name="id_estudio" id="id_estudio" />
@@ -52,12 +53,37 @@
 			<input type="text" name="id_estudio_name" id="id_estudio_name" style="width: 80%;" readonly />
 			<!--botones del picklist-->
 			<img src="${def:context}/images/search.png" width="18" height="18" class="button" onclick="pickIdEstudio();" title="Seleccionar item" />
-			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="document.form1.id_estudio.value='';document.form1.id_estudio_name.value='';"
+			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="if (document.getElementById('id_instrumento').value != '') 
+			document.form1.id_instrumento.value='';document.form1.id_instrumento_name.value='';
+		document.form1.id_estudio.value='';document.form1.id_estudio_name.value='';"
+				title="Borrar valor seleccionado" />
+		</td>
+	</tr>
+			<tr>
+		<td class="formlabel required">Instrumento</td>
+		<td>
+			<!--almacena el ID del item seleccionado-->
+			<input type="hidden" name="id_instrumento" id="id_instrumento" />
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_instrumento_name" id="id_instrumento_name" style="width: 80%;" readonly />
+			<!--botones del picklist-->
+			<img src="${def:context}/images/search.png" width="18" height="18" class="button" onclick="pickIdInstrumento();" title="Seleccionar item" />
+			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="document.form1.id_instrumento.value='';document.form1.id_instrumento_name.value='';"
 				title="Borrar valor seleccionado" />
 		</td>
 	</tr>
 		<tr height="15px">
 		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<th colspan="2">
+			Descargar archivo de Ejemplo
+		</th>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<a href="#" onclick="descargarArchivo();"><img src="${def:context}/images/download.png" alt="descargar archivo de ejemplo" width="36" height="36" /></a>
+		</td>
 	</tr>
 	<tr>
 		<th colspan="2">
@@ -109,6 +135,9 @@
 	<img src="${def:context}/images/progress.gif"> Por favor espere...
 </div>
 
+<form id="form2" name="form2" action="..." 
+		method="POST">
+</form>
 
 </center>
 
@@ -197,6 +226,27 @@
 		document.form1.submit.disabled = false;
 		alert("Se cargaron exitosamente " + total + " registros.");
 		window.location = "http://localhost/isurvey/action/aplicador/carga_manual_instrumento/form";
+	}
+
+	function pickIdInstrumento(){
+		var idEstudio = document.getElementById('id_estudio').value;
+		if ( idEstudio!= '') {
+			var url = "${def:context}/action/aplicador/carga_manual_instrumento/picklist_instrumento/form?id_estudio=" + idEstudio;
+			pickOpen ('id_instrumento_name','id_instrumento',url,'450','335');
+		}
+		else{
+			alert("Debe seleccionar un Estudio primero");
+		}
+	}
+
+	function descargarArchivo(){
+		if (document.getElementById('id_instrumento').value != ''){
+			var url = "${def:actionroot}/generar_excel_ejemplo?id=" + document.getElementById('id_instrumento').value;
+			document.getElementById('form2').action = "${def:context}${def:actionroot}/generar_excel_ejemplo?id=" + document.getElementById('id_instrumento').value;
+			document.getElementById('form2').submit();
+		}
+		else
+			alert("Debe seleccionar un Instrumento primero");
 	}
 
 </script>

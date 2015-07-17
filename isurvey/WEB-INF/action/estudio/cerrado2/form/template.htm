@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
+<title>iSurvey</title>
+
+</head>
+<body>
+<br>
+<br>
+<br>
+<img src="${def:context}/images/logos_empresas/${fld:logo}" width="188" height="188" alt="logo" style="float: left; width=30%; margin-right: 1% margin-bottom: 0.5em;">
+<div align="center">
+<table class="grid" width="700px">
+	<tr>
+		<th width="40%">Instrumento</th>
+		<th width="10%">Estatus</th>
+		<th width="10%">Sugerencias</th>
+	</tr>
+		<rows>
+		<tr ${fld:_rowStyle}>
+		<td align="center"><a href="http://localhost:8090/limesurvey/index.php/${fld:id_instrumento}/token/${fld:token}" target="_blank">${fld:instrumento}</td>
+		<td align="center">${fld:estatus}</td>
+		<td align="center"><a href="opiniones/form?id=${fld:id_instrumento}&token=${fld:token}" target="_blank"><img src="${def:context}/images/questionmark.png" title="Escribir Sugerencias acerca de este Instrumento" class="tool" width="24" height="24"></a></td>
+		</tr>
+		</rows>
+</table>
+</div>
+<!--panel de respuesta AJAX para el grid paginado-->
+<div id="response" style="display: none; width: 100%" align="center"></div>
+
+</body>
+<script type="text/javascript">
+
+	//inicializa cuando se carga la pagina
+	onload = function()
+	{
+		//search('${fld:id_participante}', '${fld:id_empresa}'); //mostrar registros en vista paginada
+	} 
+
+		//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
+	function search(idParticipante, idEmpresa){
+		var url = "${def:actionroot}/search?id_participante="+idParticipante+"&id_empresa="+idEmpresa;
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+		//traer la pagina N del grid
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		gotoPage(url);
+	}	
+	</script>
+</html>

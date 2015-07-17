@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+
+<title>iSurvey</title>
+
+</head>
+<body>
+<div class="banner">
+	<div style="float: left;">Comentarios, sugerencias o solicitud de soporte</div>
+</div>
+<!--formulario addnew/edit-->
+<div id="form" align="center">
+<form name="form1" action="insert" method="post">
+
+<table class="formgrid" width="450px">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="30%">
+	<col width="60%">
+
+	<!--titulo-->
+	<tr>
+		<th colspan="2"><span id="formTitle">Introduzca su solicitud</span></th>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--campos-->
+		<!--control picklist de seleccion simple-->
+	<tr>
+		<td class="formlabel required">Qu&eacute; desea escribir?</td>
+		<td>
+		<input type="hidden" id="id" name="id" value="${fld:id}">
+		<input type="hidden" id="token" name="token" value="${fld:token}">
+			<input type="radio" name="tipo" value="Comentario">Comentario<br>
+<input type="radio" name="tipo" value="Sugerencia">Sugerencia<br>
+<input type="radio" name="tipo" value="Soporte">Solicitud de Soporte<br>
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Texto</td>
+		<td>
+			<textarea COLS="30" ROWS="3" NAME="texto" id="texto"></textarea>
+		</td>
+	</tr>
+
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--botones-->
+	<tr>
+		<td align="center" colspan="2">
+			<input id="grabar" type="submit" value="Enviar" class="button">
+		</td>
+	</tr>
+
+	<!--separador-->
+	<tr height="5px">
+		<td colspan="2"></td>
+	</tr>
+
+</table>
+
+</form>
+</div>
+</div>
+
+</body>
+<script type="text/javascript">
+ 
+	function insert()
+	{
+			alert("hola");
+			document.getElementById("grabar").disabled=true;
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/insert", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	    	
+	}
+</script>
+</html>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config nodb="true">
+
+	<summary>
+		Exportar documento excel directo al browser
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="query-participante-aplicador.sql" source="session" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericExcelOutput</classname>
+	</output>
+	
+	<excel recordset='query-participante-aplicador.sql' sheetname='Lista de Participantes' filename='lista_participantes.xls'>
+		<col id='id_participante' label='Identificador' />
+		<col id='nombre_participante' label='Nombre' />
+		<col id='apellido_participante' label='Apellido' />
+	</excel>
+
+</config>

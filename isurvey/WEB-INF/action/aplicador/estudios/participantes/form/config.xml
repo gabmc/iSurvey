@@ -11,7 +11,7 @@
 
 	<transaction>
 		<classname>dinamica.GenericTransaction</classname>
-		<validator>false</validator>
+		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
 	</transaction>
@@ -22,6 +22,7 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
+		<print mode="form" recordset="_request"/>
 	</output>
 
 </config>

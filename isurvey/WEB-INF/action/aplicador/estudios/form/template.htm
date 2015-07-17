@@ -8,7 +8,7 @@
 <script type="text/javascript" src="${def:context}/action/script">
 </script>
 
-<title>CRUD Participante</title>
+<title>Consulta de Estudios</title>
 
 </head>
 
@@ -16,175 +16,22 @@
 
 <!--banner-->
 <div class="banner">
-	<div style="float: left;">CRUD Participante</div>
-	${req:progress}
+	<div style="float: left;">Estudios</div>
 </div>
-
-<br>
-
-<!--formulario addnew/edit-->
-<div id="form" align="center">
-<form name="form1" onsubmit="return save()">
-
-<table class="formgrid" width="450px">
-
-	<!--ancho de la columna de etiquetas-->
-	<col width="30%">
-	<col width="60%">
-
-	<!--titulo-->
-	<tr>
-            <th colspan="2"><span id="formTitle"> A&ntilde;adir registro </span></th>
-	</tr>
-
-	<!--separador-->
-	<tr height="10px">
-		<td colspan="2"></td>
-	</tr>
-
-	<!--campos-->
-		<!--control picklist de seleccion simple-->
-	<tr>
-		<td class="formlabel">Lista a la que pertenece</td>
-		<td>
-			<!--almacena el ID del item seleccionado--> 
-			<input type="hidden" name="id_lista_participantes" id="id_lista_participantes" /> 
-			<!--almacena el nombre del item seleccionado-->
-			<input type="text" name="id_lista_participantes_name" id="id_lista_participantes_name" style="width: 80%;" readonly /> 
-			<!--botones del picklist--> 
-			<img src="${def:context}/images/search.png" width="18" height="18" class="button" onclick="pickIdListaParticipantes();" title="Seleccionar item" /> 
-			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="document.form1.id_lista_participantes.value='';document.form1.id_lista_participantes_name.value='';"
-				title="Borrar valor seleccionado" />
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">Nombre</td>
-		<td>
-			<input id="nombre_participante" name="nombre_participante" type="text" size="30" maxlength="30">
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">Apellido</td>
-		<td>
-			<input id="apellido_participante" name="apellido_participante" type="text" size="30" maxlength="30">
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">C�dula</td>
-		<td>
-			<input id="cedula_participante" name="cedula_participante" type="text" size="30" maxlength="30">
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">e-mail</td>
-		<td>
-			<input id="email_participante" name="email_participante" type="text" size="30" maxlength="30">
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">Cargo</td>
-		<td>
-			<input id="cargo" name="cargo" type="text" size="30" maxlength="30">
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">Supervisor</td>
-		<td>
-			<input id="supervisor" name="supervisor" type="text" size="30" maxlength="30">
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">Fecha de Nacimiento</td>
-		<td>
-			<input id="fecha_nacimiento" name="fecha_nacimiento" type="text" size="10" value="" maxlength="10">
-			<img class="tool2" src="${def:context}/images/calendar.png" height="18" width="18" title="Desplegar calendario.." onclick="calendarOpen('fecha_nacimiento')"> DD-MM-AAAA
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">Fecha de Ingreso</td>
-		<td>
-			<input id="fecha_ingreso" name="fecha_ingreso" type="text" size="10" value="" maxlength="10">
-			<img class="tool2" src="${def:context}/images/calendar.png" height="18" width="18" title="Desplegar calendario.." onclick="calendarOpen('fecha_ingreso')"> DD-MM-AAAA
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">Sexo</td>
-		<td>
-			<select>
-			  <option value="Masculino">Masculino</option>
-			  <option value="Femenino">Femenino</option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">Tipo N�mina</td>
-		<td>
-			<input id="tipo_nomina" name="tipo_nomina" type="text" size="30" maxlength="30">
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel">Funci�n</td>
-		<td>
-			<input id="funcion" name="funcion" type="text" size="30" maxlength="30">
-		</td>
-	</tr>
-
-
-	<!--separador-->
-	<tr height="10px">
-		<td colspan="2"></td>
-	</tr>
-
-	<!--botones-->
-	<tr>
-		<td align="center" colspan="2">
-			<input id="grabar" type="submit" value="Grabar" class="button">
-			<input type="button" value="Cancelar" class="button" onclick="addNew()">
-		</td>
-	</tr>
-
-	<!--separador-->
-	<tr height="5px">
-		<td colspan="2"></td>
-	</tr>
-
-</table>
-
-<input type="hidden" name="id" value="">
-
-</form>
-</div>
-
-<br>
-
 
 <!--panel de respuesta AJAX para el grid paginado-->
 <div id="response" style="display: none; width: 100%" align="center"></div>
 
 </body>
-
-<!--codigo de soporte del template-->
 <script type="text/javascript">
 
 	//inicializa cuando se carga la pagina
 	onload = function()
 	{
-		addNew(); //prepara formulario para ingresar nuevo registro 
 		search(); //mostrar registros en vista paginada
-		document.form1.fecha_nacimiento.onkeypress = keypressDate;
-		document.form1.fecha_ingreso.onkeypress = keypressDate;
-
 	} 
-	
-	/** picklist de seleccion simple **/
-	
-	//desplegar picklist de seleccion simple
-	function pickIdListaParticipantes(){
-		var url = "${def:context}/action/picklist/listaparticipantes/form";
-		pickOpen ('id_lista_participantes_name','id_lista_participantes',url,'450','335');	
-	}
-	
-	//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
+
+		//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
 	function search()
 	{
 		var url = "${def:actionroot}/search";
@@ -203,107 +50,13 @@
 						onErrorFn=null);
 	}
 
-
-
 	//traer la pagina N del grid
 	function viewPage()
 	{
 		var url = "${def:actionroot}/view";
 		gotoPage(url);
-	}	
-	
-	
-	//grabar el formulario
-	function save()
-	{
-		//determina si es un insert o un update
-		if (document.form1.id.value=="")
-			return insert();
-		else
-			return update();
 	}
 
-	//grabar registro nuevo en BD
-	function insert()
-	{
-			clearErrorMessages();
-			document.getElementById("grabar").disabled=true;
-	
-			//llamada Ajax...
-			return ajaxCall(httpMethod="POST", 
-							uri="${def:actionroot}/insert", 
-							divResponse=null, 
-							divProgress="status", 
-							formName="form1", 
-							afterResponseFn=null, 
-							onErrorFn=retryAddnewOrEdit);	    	
-	}
-
-	//restaurar el formulario en caso de error
-	function retryAddnewOrEdit() {
-		document.getElementById("grabar").disabled=false;
-		setFocusOnForm("form1");		
-	}
-
-	//editar registro en formulario
-	function edit(id)
-	{
-			clearErrorMessages();
-
-			//llamada Ajax...
-			ajaxCall(httpMethod="GET", 
-							uri="${def:actionroot}/edit?id=" + id , 
-							divResponse=null, 
-							divProgress="status", 
-							formName=null, 
-							afterResponseFn=null, 
-							onErrorFn=null);	
-	}
-	
-	//actualizar registro en BD
-	function update()
-	{		
-			clearErrorMessages();
-			document.getElementById("grabar").disabled=true;
-			
-			//llamada Ajax...
-			return ajaxCall(httpMethod="POST", 
-							uri="${def:actionroot}/update", 
-							divResponse=null, 
-							divProgress="status", 
-							formName="form1", 
-							afterResponseFn=null, 
-							onErrorFn=retryAddnewOrEdit);	
-	}
-	
-	//eliminar un registro
-	function deleteRecord(id)
-	{
-		if (window.confirm("�Est� seguro que desea ELIMINAR este registro?")==false)
-		{
-			return false;
-		}
-		
-			//llamada Ajax...
-			ajaxCall(httpMethod="GET", 
-							uri="${def:actionroot}/delete?id=" + id,
-							divResponse=null, 
-							divProgress="status", 
-							formName=null, 
-							afterResponseFn=null, 
-							onErrorFn=null);	
-						
-	}
-	
-	//configurar formulario para ingresar registro nuevo
-	function addNew()
-	{
-		clearForm("form1");
-		document.getElementById("formTitle").innerHTML = "A�adir registro";
-		document.getElementById("grabar").disabled=false;
-		setFocusOnForm("form1");
-	}
-	
 	//invoca la generacion de un PDF en un popup
 	function openPDF()
 	{
@@ -320,5 +73,5 @@
 		var w = window.open(url, null, features);
 	}
 </script>
-
 </html>
+

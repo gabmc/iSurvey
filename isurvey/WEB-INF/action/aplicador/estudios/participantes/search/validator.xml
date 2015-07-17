@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror='/action/error/validation/ajax'>
+	<parameter id='id_estudio' type='integer' required='true' label='ID Estudio'/>
+	<parameter id='identificador' type='varchar' required='false' label='ID Participante'/>
+	<parameter id='nombre' type='varchar' required='false' label='Nombre Participante'/>
+	<parameter id='apellido' type='varchar' required='false' label='Apellido Participante'/>
+
+		<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="identificador"
+		rule="like"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="nombre"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="apellido"
+		rule="contains"
+		ifnull="%"
+		/>
+</validator>

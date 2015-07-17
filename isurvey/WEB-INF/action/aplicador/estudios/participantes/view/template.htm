@@ -1,36 +1,21 @@
-<html>
-
-<head>
-
-<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
-
-<!--biblioteca generica JS/Dinamica-->
-<script type="text/javascript" src="${def:context}/action/script">
-</script>
-
-<title>Consulta de Participantes</title>
-
-</head>
-
-<body>
-
-<!--banner-->
-<div class="banner">
-	<div style="float: left;">Consulta de Participantes</div>
-</div>
-
-<br>
-
 <!--data grid-->
 <table class="grid" width="700px" align="center">
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="14">
+		<th colspan="4">
 			<!--t�tulo del grid--> 
-			<span style="float: left;">Participantes del Estudio </span>
+			<span style="float: left;">Contenido de la tabla </span>
+			<!--panel de control de navegacion--> 
+			<span style="float: right;">${req:controls}</span> 
 			<!--indicador de progreso-->
 			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
+			<!--toolbar del grid-->
+			<span style="float: left; margin-left: 40px">
+				<img src="${def:context}/images/reload.png" width="18" height="18" onclick="search()" title="Recargar data" class="tool">
+				<img src="${def:context}/images/print.png" height="20" width="20" onclick="openPDF()" title="Exportar a PDF" class="tool">
+				<img src="${def:context}/images/excel.png" width="18" height="18" onclick="openExcel()" title="Exportar a Excel" class="tool">
+			</span>
 		</th>
 	</tr>
 
@@ -39,7 +24,7 @@
 		<th width="8%">Identificador</th>
 		<th width="8%">Nombre</th>
 		<th width="8%">Apellido</th>
-		<th width="8%">Link Encuesta</th>
+		<th width="8%">Link Instrumentos</th>
 	</tr>
 
 	<!--data-->
@@ -48,14 +33,8 @@
 		<td align="center">${fld:id_participante}</td>
 		<td align="center">${fld:nombre_participante}</td>
 		<td align="center">${fld:apellido_participante}</td>
-		<td align="center"> <button onclick="copyToClipboard('${fld:link}')">boton</button></td>
+		<td align="center"><a href="#" onclick="ventanaDialogo(${fld:id_estudio},${fld:id_participante})"><img width="18" height="18" src="${def:context}/images/clipboard.png" alt="encuesta"></a></td>
 	</tr>
 	</rows>
 
 </table>
-</body>
-<script type="text/javascript">
-	function copyToClipboard(text) {
-  window.prompt("Presiona Ctrl+C para copiar el link", text);
-}
-</script>

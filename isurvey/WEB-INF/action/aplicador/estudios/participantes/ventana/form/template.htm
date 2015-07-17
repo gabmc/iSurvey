@@ -1,0 +1,77 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+<script type="text/javascript" charset="utf-8" src="${def:context}/js/jquery.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="${def:context}/js/ZeroClipboard.js"></script>
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner" style="height: 20px; margin-bottom: 0px; font-weight: normal">
+	<div style="float: left">Ficha de Participante</div>
+	<div style="float: right">
+		<img src="${def:context}/images/cancel_square.png" width="14" height="14" class="button" onclick="parent.closeDialog()" title="Cerrar">
+	</div>
+</div>
+<!--data grid-->
+<table class="grid" width="350px" height="150px" align="center">
+<tr>
+	<td width="40%" align="center">
+		Identificador
+	</td>
+	<td width="60%" align="center">
+		${fld:id_participante}
+	</td>
+</tr>
+<tr>
+	<td width="40%" align="center">
+		Nombre
+	</td>
+	<td width="60%" align="center">
+		${fld:nombre_participante}
+	</td>
+</tr>
+<tr>
+	<td width="40%" align="center">
+		Apellido
+	</td>
+	<td width="60%" align="center">
+		${fld:apellido_participante}
+	</td>
+</tr>
+</table>
+<br>
+<div align="center">
+<input id="link" type="text" value="${fld:link}" size="30">
+<a href="#"><img id="copy-button" src="${def:context}/images/copy.png" width="18" height="18" data-clipboard-text="${fld:link}" alt="clear" onclick="link.select();" title="Copiar Link al Portapapeles"></a>
+<a href="#"><img src="${def:context}/images/mail.png" alt="mail" width="18" height="18" title="Enviar Link al correo registrado"></a>
+</div>
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+		// Specify where the Flash movie can be found if not in root folder for web site
+ZeroClipboard.config( { moviePath: 'js/ZeroClipboard.swf' } );
+
+var client = new ZeroClipboard( $("#copy-button") );
+
+client.on( 'load', function(client) {
+
+  // callback triggered on successful copying
+  client.on( 'complete', function(client, args) {
+    console.log("Text copied to clipboard: \n" + args.text );
+  });
+});
+
+// In case of error - such as Flash not being available
+client.on( 'wrongflash noflash', function() {
+  ZeroClipboard.destroy();
+} );
+
+</script>

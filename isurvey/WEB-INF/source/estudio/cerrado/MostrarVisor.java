@@ -205,7 +205,6 @@ public class MostrarVisor extends GenericTransaction {
 			    				numeroColumnas2--;
 			    			preguntas.next();
 			    		}
-			    		System.out.println("respondidas: " + preguntasRespondidas);
 			    		if (numeroColumnas2 <= 0){
 			    			estatus = "Sin Iniciar";
 			    			porcentaje = 0;

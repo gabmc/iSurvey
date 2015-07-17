@@ -14,7 +14,7 @@
 		<validator>false</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="query-estudio-aplicador.sql" source="sql" scope="transaction" />
+		<recordset id="query-listaestudios.sql" source="session" scope="transaction" />
 	</transaction>
 
 	<output>
@@ -22,7 +22,7 @@
 		<template>template.htm</template>
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
-		<print mode="table" recordset="query-estudio-aplicador.sql" tag="rows" alternate-colors="true" />
+		<print mode="table" recordset="query-listaestudios.sql" tag="rows" alternate-colors="true" />
 	</output>
 
 </config>

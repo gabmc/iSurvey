@@ -11,10 +11,10 @@
 
 	<transaction>
 		<classname>dinamica.GenericTransaction</classname>
-		<validator>true</validator>
+		<validator>false</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="query-participante-aplicador.sql" source="sql" scope="transaction" />
+		<recordset id="query-participante-aplicador.sql" source="session" scope="transaction" />
 	</transaction>
 
 	<output>
