@@ -25,8 +25,8 @@
 <table class="formgrid" width="450px">
 
 	<!--ancho de la columna de etiquetas-->
-	<col width="30%">
-	<col width="60%">
+	<col width="20%">
+	<col width="80%">
 
 	<!--titulo-->
 	<tr>
@@ -42,7 +42,7 @@
 	<tr>
 		<td class="formlabel required">Nombre</td>
 		<td>
-			<input id="nombre_estudio" name="nombre_estudio" type="text" size="30" maxlength="30">
+			<input id="nombre_estudio" name="nombre_estudio" type="text" size="44" maxlength="30">
 		</td>
 	</tr>
 	<tr>
@@ -59,6 +59,14 @@
 			<input type="file" name="file" size="30">
 			<input id="urlimg" name="urlimg" type="hidden" size="35" maxlength="150">
 		</td>
+	</tr>
+	<tr>
+		<td class="formlabel required">T&iacute;tulo e-mail</td>
+		<td><input type="text" name="titulo_email" id="titulo_email" size="44"></td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Cuerpo e-mail</td>
+		<td><textarea name="cuerpo_email" id="cuerpo_email" cols="40" rows="8"></textarea></td>
 	</tr>
 		<tr>
 		<td class="formlabel required">Empresa</td>
@@ -310,6 +318,7 @@
 		clearForm("form1");
 		document.getElementById("formTitle").innerHTML = "A&ntilde;adir registro";
 		document.getElementById("grabar").disabled=false;
+		document.getElementById("tipo").disabled=false;
 		setFocusOnForm("form1");
 	}
 	

@@ -2,7 +2,7 @@
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="9">
+		<th colspan="10">
 			<!--t�tulo del grid--> 
 			<span style="float: left;">Contenido de la tabla </span>
 			<!--panel de control de navegacion--> 
@@ -29,6 +29,7 @@
 		<th><a href="javascript:onclick=sortBy('porcentaje_incompleto','query.sql')" title="Haga CLICK para ordenar por esta columna">% Incompleto</a></th>
 		<th><a href="javascript:onclick=sortBy('sin_iniciar','query.sql')" title="Haga CLICK para ordenar por esta columna">Sin Iniciar</a></th>
 		<th><a href="javascript:onclick=sortBy('porcentaje_sin_iniciar','query.sql')" title="Haga CLICK para ordenar por esta columna">% Sin Iniciar</a></th>
+		<th></th>
 	</tr>
 
 	<!--data-->
@@ -43,6 +44,7 @@
 		<td align="center">${fld:porcentaje_incompleto}</td>
 		<td align="center">${fld:sin_iniciar}</td>
 		<td align="center">${fld:porcentaje_sin_iniciar}</td>
+		<td align="center">${fld:participantes}${fld:link_instrumentos}</td>
 
 	</tr>
 	</rows>

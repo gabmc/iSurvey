@@ -1,0 +1,80 @@
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+	
+	<title>iSurvey</title>
+	
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Consulta Registros de Carga de Instrumentos</div>
+</div>
+
+<center>
+<!--panel de respuesta AJAX para el grid paginado-->
+<div id="response" style="display: none; width: 100%" align="center"></div>
+</center>
+
+<script language="javascript">
+
+	//inicializacion de la pagina cuando carga
+	onload = function()
+	{ 
+		search();
+	}
+
+			//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
+	function search()
+	{
+		var url = "${def:actionroot}/search";
+		
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?currentpage=" + currentPage;
+
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+		//traer la pagina N del grid
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		gotoPage(url);
+	}
+
+		//invoca la generacion de un PDF en un popup
+	function openPDF()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//invoca la generacion de un Excel en un popup
+	function openExcel()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+</script>
+
+
+</body>
+</html>

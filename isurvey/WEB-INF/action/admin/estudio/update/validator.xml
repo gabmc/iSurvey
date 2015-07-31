@@ -5,5 +5,7 @@
 	<parameter id='id_empresa' type='integer' required='false' label='Empresa' maxlen='10'/>
 	<parameter id='id' type='integer' required='true' label='ID' maxlen='10'/>
 	<parameter id='tipo' type='varchar' required='false' label='Tipo' maxlen='30'/>
+	<parameter id='titulo_email' type='varchar' required='true' label='Titulo Email' maxlen='20'/>
+	<parameter id='cuerpo_email' type='varchar' required='true' label='Cuerpo Email' maxlen='500'/>
 </validator>
 

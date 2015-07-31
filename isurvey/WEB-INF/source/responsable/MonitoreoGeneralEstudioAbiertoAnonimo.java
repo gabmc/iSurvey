@@ -140,7 +140,7 @@ public class MonitoreoGeneralEstudioAbiertoAnonimo extends GenericTransaction {
 			    			estatus = "Incompleta";
 		    		}
 	    		}
-	    		setEstatus(token, estatus);
+	    		setEstatus(tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")), estatus);
 	    	}
     	}
     }

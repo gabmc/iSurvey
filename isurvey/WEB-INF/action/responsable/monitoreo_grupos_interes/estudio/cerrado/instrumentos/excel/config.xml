@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config nodb="true">
+
+	<summary>
+		Exportar documento excel directo al browser
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="encuestas.sql" source="session" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericExcelOutput</classname>
+	</output>
+	
+	<excel recordset='encuestas.sql' sheetname='Lista de Encuestas' filename='lista_encuestas.xls'>
+		<col id='nombre' label='Nombre de la Encuesta' />
+		<col id='completado' label='Completado' />
+		<col id='porcentaje_completado' label='Porcentaje Completado' />
+		<col id='incompleto' label='Incompleto' />
+		<col id='porcentaje_incompleto' label='Porcentaje Incompleto' />
+		<col id='sin_iniciar' label='Sin Iniciar' />
+		<col id='porcentaje_sin_iniciar' label='Porcentaje Sin Iniciar' />
+	</excel>
+
+</config>

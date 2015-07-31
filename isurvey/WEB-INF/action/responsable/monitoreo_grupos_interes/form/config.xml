@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Monitoreo General
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>responsable.MonitoreoGeneral</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<!--<recordset id="query.sql" source="sql" scope="session" />-->
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>template.htm</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+		<!--<print mode="table" recordset="query.sql" tag="rows" alternate-colors="true"/>-->
+		<!--<print mode="table" recordset="estudios" tag="rows" alternate-colors="true"/>-->
+	</output>
+
+</config>

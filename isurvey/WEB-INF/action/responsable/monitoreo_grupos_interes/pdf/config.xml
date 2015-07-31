@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config nodb="true">
+
+	<summary>
+		Generar reporte generico PDF
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="query2.sql" source="session" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.PDFGenericReport</classname>
+	</output>
+
+	<pdf-title>Monitoreo General</pdf-title>
+	<pdf-logo url='/images/logo-dinamica.png' scale='100' />
+
+	<pdf-report pageSize="letter" rotate="false">
+		<table recordset='query2.sql' width='100' spacingBefore='40'>
+			<col name='nombre_estudio' title='Nombre del Estudio' width='55' align='center' />
+			<col name='numero_encuestas' title='Numero de Encuestas' width='55' align='center' />
+			<col name='numero_participantes' title='Numero de Participantes' width='65' align='center' />
+			<col name='completado' title='Completado' width='60' align='center' />
+			<col name='porcentaje_completado' title='Porcentaje Completado' width='60' align='center' />
+			<col name='incompleto' title='Incompleto' width='55' align='center' />
+			<col name='porcentaje_incompleto' title='Porcentaje Incompleto' width='55' align='center' />
+			<col name='sin_iniciar' title='Sin Iniciar' width='55' align='center' />
+			<col name='porcentaje_sin_iniciar' title='Porcentaje Sin Iniciar' width='55' align='center' />
+		</table>
+
+	</pdf-report>
+</config>

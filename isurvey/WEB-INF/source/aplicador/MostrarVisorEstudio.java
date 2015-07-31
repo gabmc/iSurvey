@@ -67,7 +67,6 @@ public class MostrarVisorEstudio extends GenericTransaction {
         	}
         this.publish("visor", visor);
        // this.getSession().setAttribute("visor", visor);
-
         return 0;
     }
  
@@ -117,7 +116,7 @@ public class MostrarVisorEstudio extends GenericTransaction {
     			"ajvieira_isurvey_app.int_participante_instrumento " +
     			"where token_participante = '"+token+"') " +
     			"and estudio.id_estudio = " + idEstudio + " " +
-    			"order by estudio, instrumento";
+    			"order by instrumento.fecha_registro";
     	Recordset info = this.getDb().get(query);
     	return info;
     }
@@ -134,7 +133,7 @@ public class MostrarVisorEstudio extends GenericTransaction {
     	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "', " +
     			" porcentaje_completado = " + porcentaje + " where token_participante = '" + token + "'";
     	this.getDb().exec(sql);
-    	this.getDb().commit();
+    	System.out.println(sql);
     }
     
     Recordset questionsOrdenadas (String idEncuesta) throws Throwable{
@@ -161,6 +160,7 @@ public class MostrarVisorEstudio extends GenericTransaction {
 		"and int_participante_instrumento.id_participante = (select id_participante from  " +
 		"ajvieira_isurvey_app.int_participante_instrumento " +
 		"where token_participante = '"+token+"') ";
+    	System.out.println(query);
     	Recordset instrumentos = this.getDb().get(query);
     	instrumentos.top();
     	Recordset participante = getParticipante(token);
@@ -218,7 +218,7 @@ public class MostrarVisorEstudio extends GenericTransaction {
 	    			porcentaje = (preguntasRespondidas*100)/preguntasObligatorias;
 	    		if (preguntasObligatorias == 0)
 	    			porcentaje = 100;
-	    		setEstatus(token, estatus, String.valueOf(porcentaje));
+	    		setEstatus(tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")), estatus, String.valueOf(porcentaje));
 	    	}
     	}
     }

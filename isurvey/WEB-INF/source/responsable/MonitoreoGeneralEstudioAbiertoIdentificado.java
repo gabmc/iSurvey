@@ -48,7 +48,6 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
         	Recordset intParticpanteInstrumento = getIntParticipanteInstrumento(instrumentos.getString("id_instrumento"));
         	intParticpanteInstrumento.top();
         	while(intParticpanteInstrumento.next()){
-        		System.out.println("int: " + intParticpanteInstrumento.getString("id_participante"));
 		        		if (intParticpanteInstrumento.getString("estatus").equals("Incompleta")){
 		        			incompletas++;
 		        		}
@@ -64,9 +63,6 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
 		        		}
         	}
         }
-        System.out.println("si: " + sinIniciar);
-        System.out.println("i: " + incompletas);
-        System.out.println("c: " + completas);
         Recordset output = new Recordset();
         output.append("sin_iniciar", java.sql.Types.INTEGER);
         output.append("incompletas", java.sql.Types.INTEGER);
@@ -177,7 +173,7 @@ public class MonitoreoGeneralEstudioAbiertoIdentificado extends GenericTransacti
 	    			porcentaje = (preguntasRespondidas*100)/preguntasObligatorias;
 	    		if (preguntasObligatorias == 0)
 	    			porcentaje = 100;
-	    		setEstatus(token, estatus, String.valueOf(porcentaje));
+	    		setEstatus(tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")), estatus, String.valueOf(porcentaje));
 	    	}
     	}
     }

@@ -1,6 +1,6 @@
 select
 	distinct participante.id_participante, participante.nombre_participante, participante.apellido_participante,
-	int_participante_instrumento.token_participante, 
+	int_participante_instrumento.token_participante, estudio.id_estudio, estudio.titulo_email, estudio.cuerpo_email, 
 	case estudio.tipo
 		when 'Cerrado' then concat('http://localhost/isurvey/action/estudio/cerrado2/form?id=',estudio.id_estudio,'&token=', int_participante_instrumento.token_participante)
 		when 'Abierto-Anonimo' then concat('http://localhost/isurvey/action/estudio/abierto/anonimo/form?id=', instrumento.id_instrumento)

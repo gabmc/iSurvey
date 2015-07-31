@@ -96,7 +96,9 @@ public class AgregarListaAestudio extends GenericTransaction {
     }
     
     Recordset getParticipantes (String idLista) throws Throwable{
-    	String query = "select participante.* from ajvieira_isurvey_app.participante, " +
+    	String query = "select participante.id_participante, participante.nombre_participante, " +
+    			"participante.apellido_participante, participante.email_participante " +
+    			"from ajvieira_isurvey_app.participante, " +
     			"ajvieira_isurvey_app.int_participante_lista_participantes, " +
     			"ajvieira_isurvey_app.lista_participantes " +
     			"where " +

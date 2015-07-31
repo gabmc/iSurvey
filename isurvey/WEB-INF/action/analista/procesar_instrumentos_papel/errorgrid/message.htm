@@ -1,0 +1,25 @@
+<center>
+<!--comandos-->
+[<a href="javascript:goBack()">Retornar</a>]
+
+<br><br>
+
+		<table class="grid" width="850px">
+			<tr>
+				<th></th>
+				<th>Columna</th>
+				<th>Fila</th>
+				<th>Tipo de Error</th>
+			</tr>
+			<rows>
+			<tr>
+				<td ${fld:_rowStyle} align="center"><img src="${def:context}/images/alert.gif"></td>
+				<td ${fld:_rowStyle} align="center">${fld:columna}</td>
+				<td ${fld:_rowStyle} align="center">${fld:fila}</td>
+				<td ${fld:_rowStyle} align="center">${fld:error}</td>
+			</tr>
+			</rows>
+		</table>
+
+</center>
+

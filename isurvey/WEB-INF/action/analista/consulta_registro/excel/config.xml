@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config nodb="true">
+
+	<summary>
+		Exportar documento excel directo al browser
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>dinamica.GenericTransaction</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="registros.sql" source="session" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericExcelOutput</classname>
+	</output>
+	
+	<excel recordset='registros.sql' sheetname='Registros de Carga de Instrumentos' filename='registros_carga.xls'>
+		<col id='nombre' label='Nombre Instrumento' />
+		<col id='id_participante' label='Identificador del Participante' />
+		<col id='userlogin' label='Usuario que realizo el registro' />
+		<col id='fecha_registro' label='Fecha de Registro' />
+	</excel>
+
+</config>

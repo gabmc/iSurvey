@@ -288,7 +288,6 @@ public class CargaManual extends GenericTableManager  {
 	                    }
                     }
 
-
             }
             catch (Throwable a){
                     //añadir un nuevo record
@@ -330,11 +329,15 @@ public class CargaManual extends GenericTableManager  {
      
      rs.top();
      TokenGenerator generator = new TokenGenerator();
+     String idUsuario = getIdUsuario(this.getUserName());
      while (rs.next()){
     	 String query = updateConstructor(numeroPreguntas, idEncuesta, generator.generarToken(rs.getString("id_participante"), idEncuesta), rs, preguntasOrdenadas);
     	 getDb().exec(query);
+    	 String registro = StringUtil.replace(getResource("insert-registro.sql"), "{{id_participante}}", rs.getString("id_participante"));
+    	 registro = StringUtil.replace(registro, "{{id_instrumento}}", idEncuesta);
+    	 registro = StringUtil.replace(registro, "{{id_usuario}}", idUsuario);
+    	 getDb().exec(registro); 
      }
-     
     getDb().commit();
     return rc;
     }
@@ -495,6 +498,13 @@ public class CargaManual extends GenericTableManager  {
             }
         }
     	return false;
+    }
+    
+    String getIdUsuario (String userlogin) throws Throwable{
+    	String query = "select user_id from ajvieira_isurvey_security.s_user where userlogin = '" + userlogin + "'";
+    	Recordset rs = this.getDb().get(query);
+    	rs.first();
+    	return rs.getString("user_id");
     }
         
 }

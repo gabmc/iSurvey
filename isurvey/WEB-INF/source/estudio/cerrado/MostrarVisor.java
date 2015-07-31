@@ -133,7 +133,6 @@ public class MostrarVisor extends GenericTransaction {
     	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "', " +
     			" porcentaje_completado = " + porcentaje + " where token_participante = '" + token + "'";
     	this.getDb().exec(sql);
-    	this.getDb().commit();
     }
     
     Recordset questionsOrdenadas (String idEncuesta) throws Throwable{
@@ -217,7 +216,7 @@ public class MostrarVisor extends GenericTransaction {
 	    			porcentaje = (preguntasRespondidas*100)/preguntasObligatorias;
 	    		if (preguntasObligatorias == 0)
 	    			porcentaje = 100;
-	    		setEstatus(token, estatus, String.valueOf(porcentaje));
+	    		setEstatus(tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")), estatus, String.valueOf(porcentaje));
 	    	}
     	}
     }

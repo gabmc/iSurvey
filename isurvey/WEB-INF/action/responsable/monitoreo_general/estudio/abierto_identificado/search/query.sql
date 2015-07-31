@@ -1,4 +1,4 @@
-select participante.*, porcentaje_completado as completado, token_participante, id_instrumento
+select participante.id_participante, participante.nombre_participante, participante.apellido_participante, participante.email_participante, porcentaje_completado as completado, token_participante, id_instrumento
 from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_instrumento
 where participante.id_participante in 
 	(select id_participante 
@@ -23,7 +23,7 @@ and upper(email_participante) like upper(${fld:email})
 
 union
 
-select participante.*, porcentaje_completado as completado, token_participante, id_instrumento
+select participante.id_participante, participante.nombre_participante, participante.apellido_participante, participante.email_participante, porcentaje_completado as completado, token_participante, id_instrumento
 from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_instrumento
 where id_estudio_identificado = ${fld:id_estudio}
 and participante.id_participante in

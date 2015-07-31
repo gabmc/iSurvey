@@ -162,13 +162,13 @@
     <context-param>
 		<description>Servidor de correo por defecto</description>
 		<param-name>mail-server</param-name>
-		<param-value>smtp.intercable.net.ve</param-value>
+		<param-value>localhost</param-value>
 	</context-param>
 
 	<context-param>
 		<description>Dirección email del remitente por defecto</description>
 		<param-name>mail-from</param-name>
-		<param-value>mcordova@intercable.net.ve</param-value>
+		<param-value>info@addsolutions.com.ve</param-value>
 	</context-param>
 	
 	<context-param>

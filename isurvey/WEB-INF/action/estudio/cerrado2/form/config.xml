@@ -10,7 +10,7 @@
 	<transaction>
 		<classname>aplicador.MostrarVisorEstudio</classname>
 		<validator>true</validator>
-		<transaction>false</transaction>
+		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>
 		<recordset id="visor" source="session" scope="transaction" />
 	</transaction>

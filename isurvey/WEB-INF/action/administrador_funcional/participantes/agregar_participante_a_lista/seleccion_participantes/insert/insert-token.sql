@@ -4,7 +4,7 @@ insert into ajvieira_isurvey_app.int_participante_instrumento
         id_instrumento,
         token_participante,
         estatus,
-        porcentaje
+        porcentaje_completado
 )
 values
 (

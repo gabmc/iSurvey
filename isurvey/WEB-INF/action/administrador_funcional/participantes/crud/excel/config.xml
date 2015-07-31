@@ -19,7 +19,7 @@
 		<classname>dinamica.GenericExcelOutput</classname>
 	</output>
 	
-	<excel recordset='query-participante.sql' sheetname='Administrar Participantes' filename='aaa.xls'>
+	<excel recordset='query-participante.sql' sheetname='Administrar Participantes' filename='participantes.xls'>
 		<col id='nombre_participante' label='Nombre' />
 		<col id='apellido_participante' label='Apellido' />
 		<col id='email_participante' label='e-mail' />

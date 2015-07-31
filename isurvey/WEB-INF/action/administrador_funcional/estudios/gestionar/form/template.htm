@@ -1,0 +1,173 @@
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	
+	<!--biblioteca generica JS/Dinamica-->
+	<script type="text/javascript" src="${def:context}/action/script">
+	</script>
+	
+	<title>iSurvey</title>
+	
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Gestionar Estudios</div>
+</div>
+
+<center>
+<form name="form1" onsubmit="return update()">
+<table class="formgrid" width="450px">
+
+	<!--ancho de la columna de etiquetas-->
+	<col width="30%">
+	<col width="60%">
+
+	<!--titulo-->
+	<tr>
+		<th colspan="2"><span id="formTitle"> Cambiar Estatus </span></th>
+	</tr>
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--campos-->
+
+	<tr>
+		<td class="formlabel">
+			Estudio
+		</td>
+		<td><input type="text" name="nombre_estudio" id="nombre_estudio" size="30" disabled>
+		<input type="text" name="id_estudio" id="id_estudio" hidden></td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Estatus</td>
+		<td>
+                    <input id="estatus1" name="estatus" type="radio" value="En Marcha"><label>En Marcha</label>
+                    <input id="estatus2" name="estatus" type="radio" value="Pausado"><label>Pausado</label>
+		</td>
+	</tr>
+
+
+	<!--separador-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+	<!--botones-->
+	<tr>
+		<td align="center" colspan="2">
+			<input id="grabar" type="submit" value="Grabar" class="button">
+			<!--<input type="button" value="Cancelar" class="button" onclick="addNew()">-->
+		</td>
+	</tr>
+
+	<!--separador-->
+	<tr height="5px">
+		<td colspan="2"></td>
+	</tr>
+
+</table>
+</form>
+<br>
+<!--panel de respuesta AJAX para el grid paginado-->
+<div id="response" style="display: none; width: 100%" align="center"></div>
+</center>
+
+<script language="javascript">
+
+	//inicializacion de la pagina cuando carga
+	onload = function()
+	{ 
+		search();
+	}
+
+			//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
+	function search()
+	{
+		var url = "${def:actionroot}/search";
+		
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?currentpage=" + currentPage;
+
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+		//traer la pagina N del grid
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		gotoPage(url);
+	}
+
+		//invoca la generacion de un PDF en un popup
+	function openPDF()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//invoca la generacion de un Excel en un popup
+	function openExcel()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//editar registro en formulario
+	function edit(id)
+	{
+			clearErrorMessages();
+
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="${def:actionroot}/edit?id=" + id , 
+							divResponse=null, 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=null);	
+	}
+
+	//actualizar registro en BD
+	function update()
+	{		
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/update", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	
+	}
+
+		//restaurar el formulario en caso de error
+	function retryAddnewOrEdit() {
+		document.getElementById("grabar").disabled=false;
+		setFocusOnForm("form1");		
+	}
+
+</script>
+
+
+</body>
+</html>

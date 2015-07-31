@@ -164,7 +164,7 @@ public class MonitoreoGeneralEstudioCerrado extends GenericTransaction {
 	    			porcentaje = (preguntasRespondidas*100)/preguntasObligatorias;
 	    		if (preguntasObligatorias == 0)
 	    			porcentaje = 100;
-	    		setEstatus(token, estatus, String.valueOf(porcentaje));
+	    		setEstatus(tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")), estatus, String.valueOf(porcentaje));
 	    	}
     	}
     }

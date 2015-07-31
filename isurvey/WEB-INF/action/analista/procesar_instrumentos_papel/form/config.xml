@@ -1,21 +1,19 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
-<config nodb="true">
+<config>
 
 	<summary>
-		Estudios
+		Agregar un archivo Excel
 	</summary>
-
+	
 	<log>false</log>
 	
-	<set-request-attribute id="progress" value="file:/WEB-INF/action/progress/progress.htm"/>
-
 	<transaction>
 		<classname>dinamica.GenericTransaction</classname>
 		<validator>false</validator>
 		<transaction>false</transaction>
-		<jdbc-log>false</jdbc-log>
+		<jdbc-log>false</jdbc-log>		
 	</transaction>
-
+	
 	<output>
 		<classname>dinamica.GenericOutput</classname>
 		<template>template.htm</template>
