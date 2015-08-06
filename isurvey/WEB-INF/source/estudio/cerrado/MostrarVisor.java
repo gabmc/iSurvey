@@ -37,13 +37,15 @@ public class MostrarVisor extends GenericTransaction {
         	logoEmpresa = empresa.getString("logo");
         }
         Recordset visor = new Recordset();
+        Recordset logo = new Recordset();
         visor.append("estudio", java.sql.Types.VARCHAR);
         visor.append("instrumento", java.sql.Types.VARCHAR);
         visor.append("id_instrumento", java.sql.Types.VARCHAR);
         visor.append("token", java.sql.Types.VARCHAR);
         visor.append("estatus", java.sql.Types.VARCHAR);
-        visor.append("logo", java.sql.Types.VARCHAR);
-        
+        logo.append("logo", java.sql.Types.VARCHAR);
+        logo.addNew();
+        logo.setValue("logo", logoEmpresa);
         updateStatus(token);
         
         	Recordset info = getInfoVisor(token);
@@ -54,7 +56,6 @@ public class MostrarVisor extends GenericTransaction {
 	        	visor.setValue("instrumento", info.getString("instrumento"));
 	        	visor.setValue("id_instrumento", info.getString("id_instrumento"));
 	        	visor.setValue("token", info.getString("token"));
-	        	visor.setValue("logo", logoEmpresa);
 	        	if (info.getValue("estatus").equals("Incompleta")){
 	        		visor.setValue("estatus", yellow);
 	        	}
@@ -65,10 +66,12 @@ public class MostrarVisor extends GenericTransaction {
 	        		visor.setValue("estatus", green);
 	        	}
         	}
-        this.publish("visor", visor);
-       // this.getSession().setAttribute("visor", visor);
-
-        return 0;
+        this.publish("logo", logo);
+        this.getSession().setAttribute("visor", visor);
+        if (visor.getRecordCount() > 0)
+	        return 0;
+        else
+        	return 1;
     }
  
   
@@ -113,6 +116,7 @@ public class MostrarVisor extends GenericTransaction {
     			"estudio.id_estudio = instrumento.id_estudio " +
     			"and int_participante_instrumento.id_instrumento = instrumento.id_instrumento " +
     			"and estudio.tipo = 'Cerrado' " +
+    			"and estudio.estatus = 'En Marcha' " +
     			"and int_participante_instrumento.id_participante = (select id_participante from  " +
     			"ajvieira_isurvey_app.int_participante_instrumento " +
     			"where token_participante = '"+token+"') " +

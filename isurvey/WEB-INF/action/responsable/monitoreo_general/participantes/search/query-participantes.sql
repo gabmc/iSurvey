@@ -1,7 +1,11 @@
-select participante.id_participante, 
+select participante.id_participante,
+       concat(participante.id_participante) as id_participante2, 
        participante.nombre_participante, 
        participante.apellido_participante, 
-       participante.email_participante, 
+       participante.email_participante,
+       participante.area,
+       participante.cargo,
+       participante.sexo,  
        case (select count(estatus) from ajvieira_isurvey_app.int_participante_instrumento 
     				where id_participante = ipi.id_participante and id_instrumento in (select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id}
     				and estatus = 'Completa')
@@ -16,6 +20,22 @@ select participante.id_participante,
 					(select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id} 
 					and estatus = 'Completa')) 
 end as completado,
+        case (select count(estatus) from ajvieira_isurvey_app.int_participante_instrumento 
+                            where id_participante = ipi.id_participante and id_instrumento in (select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id}
+                            and estatus = 'Completa')
+                            group by id_participante)
+                            when 0 then
+                            0
+                            when null then
+                            0
+                            else
+                            concat((select count(estatus) + 0 from ajvieira_isurvey_app.int_participante_instrumento 
+                            where estatus = 'Completa' and id_participante = ipi.id_participante and id_instrumento in 
+                            (select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id} 
+                            and estatus = 'Completa')),'/',(select count(instrumento.id_instrumento) + 0 as instrumentos
+                            from ajvieira_isurvey_app.instrumento 
+                            where instrumento.id_estudio = ${fld:id})) 
+        end as completado2,
         case (select count(estatus) from ajvieira_isurvey_app.int_participante_instrumento 
                     where id_participante = ipi.id_participante and id_instrumento in (select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id}
                     and estatus = 'Completa')
@@ -62,4 +82,7 @@ end as estatus1,
     			and upper(nombre_participante) like upper(${fld:nombre})
 				and upper(apellido_participante) like upper(${fld:apellido})
 				and upper(email_participante) like upper(${fld:email})
+                and upper(area) like upper(${fld:area})
+                and upper(cargo) like upper(${fld:cargo})
+                and upper(sexo) like upper(${fld:sexo})
                 group by id_participante

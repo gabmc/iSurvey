@@ -12,6 +12,7 @@
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
+		<recordset id="query.sql" source="sql" scope="transaction" />
 	</transaction>
 
 	<output>
@@ -21,6 +22,7 @@
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
 		<print mode="form" recordset="_request"/>
+		<print mode="form" recordset="query.sql"/>
 	</output>
 
 </config>

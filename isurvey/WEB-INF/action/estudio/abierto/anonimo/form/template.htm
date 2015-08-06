@@ -18,7 +18,13 @@
 	//inicializa cuando se carga la pagina
 	onload = function()
 	{
-		window.location = "http://localhost:8090/limesurvey/index.php/${fld:id}/";
+
+		if ('${fld:estatus}' == "Pausado") {
+			alert("Pausado!");
+		} 
+		else{
+			window.location = "http://localhost:8090/limesurvey/index.php/${fld:id}/";
+		}
 	} 
 	
 	</script>

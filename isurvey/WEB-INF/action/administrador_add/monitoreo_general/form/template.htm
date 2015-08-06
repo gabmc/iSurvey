@@ -1,0 +1,116 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<title>Monitoreo General</title>
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+</head>
+<body>
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Lista de Estudios en Curso</div>
+</div>
+<!--data grid-->
+<div align="center">
+<table class="formgrid" width="450px" align="center">
+<tr><td class="formlabel">
+	Empresa
+</td>
+		<td>
+			<!--almacena el ID del item seleccionado--> 
+			<input type="hidden" name="id_empresa_search" id="id_empresa_search"  /> 
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_empresa_name_search" id="id_empresa_name_search" style="width: 80%;" readonly /> 
+			<!--botones del picklist--> 
+			<img src="${def:context}/images/search.png" width="18" height="18" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" /> 
+			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="document.form1.id_empresa_search.value='';document.form1.id_empresa_name_search.value='';"
+				title="Borrar valor seleccionado" />
+		</td>
+		<td><input type="button" value="Buscar" class="button" onclick="go()"></td>
+		</tr>
+</table>
+
+<br>
+<!--panel de respuesta AJAX-->
+<div id="response" style="display: none; width: 100%; margin-top: 7px">
+</div>
+
+</div>
+</body>
+<script type="text/javascript">
+
+function go(){
+	var id = document.getElementById('id_empresa_search').value;
+	//window.location="${def:context}${def:actionroot}/pre_search?id_empresa=" + id;
+	var url ="${def:actionroot}/pre_search?id_empresa=" + id;
+			//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse=null, 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+
+		sleep(500);
+		search();
+
+}
+
+	function sleep(milliseconds) {
+	var start = new Date().getTime();
+	for (var i = 0; i < 1e7; i++) {
+	    if ((new Date().getTime() - start) > milliseconds){
+	      break;
+	    }
+	  }
+	}
+
+	function pickIdEmpresa(){
+		var url = "${def:context}/action/picklist/empresa/form";
+		pickOpen ('id_empresa_name_search','id_empresa_search',url,'450','335');	
+	}
+
+	function search()
+	{
+		var url = "${def:actionroot}/search";
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?currentpage=" + currentPage;
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		gotoPage(url);
+	}
+
+		//invoca la generacion de un PDF en un popup
+	function openPDF()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//invoca la generacion de un Excel en un popup
+	function openExcel()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+</script>
+
+</html>

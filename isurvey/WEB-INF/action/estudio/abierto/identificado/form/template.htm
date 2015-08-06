@@ -20,7 +20,7 @@
 			<div style="width:300px">
 			<form name="form1" action="log_in" method="POST">
 	
-			<table class="formgrid" width="95%" align="center">
+			<table class="formgrid" width="95%" align="center" id="tabla" hidden>
 			
 				<!--column layout-->
 				<col width="40%">
@@ -81,7 +81,7 @@
 			</div>
 						<div style="width:300px">
 			
-				<table align="center" width="95%" class="formgrid">
+				<table align="center" width="95%" class="formgrid" id="tabla2" hidden>
 					
 					<tr>
 						<td align="center" valign="top" style="padding-right:3px">
@@ -92,6 +92,8 @@
 					</tr>
 					
 				</table>
+
+				<h2 id="mensaje" hidden>Disculpe las molestias, el Estudio se encuentra deshabilitado en este momento</h2>
 			
 			</div>
 	</div>
@@ -99,6 +101,13 @@
 		<script language="javascript">
 			onload = function()
 	{
+		if ('${fld:estatus}' == "Pausado") {
+			document.getElementById('mensaje').hidden = false;
+		} 
+		else{
+			document.getElementById('tabla').hidden = false;
+			document.getElementById('tabla2').hidden = false;
+		};
 		document.form1.id_participante.onkeypress = keypressInteger;
 
 	} 

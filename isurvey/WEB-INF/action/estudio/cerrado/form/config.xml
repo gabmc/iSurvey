@@ -12,7 +12,7 @@
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="visor" source="session" scope="transaction" />
+		<recordset id="logo" source="session" scope="transaction" />
 	</transaction>
 
 	<output>
@@ -21,8 +21,7 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
-		<print mode="table" recordset="visor" tag="rows" alternate-colors="true"/>
-		<print mode="form" recordset="visor"/>
+		<print mode="form" recordset="logo"/>
 	</output>
 
 </config>

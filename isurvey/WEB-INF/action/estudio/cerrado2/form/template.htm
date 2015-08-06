@@ -12,25 +12,13 @@
 
 </head>
 <body>
-<br>
-<br>
-<br>
-<img src="${def:context}/images/logos_empresas/${fld:logo}" width="188" height="188" alt="logo" style="float: left; width=30%; margin-right: 1% margin-bottom: 0.5em;">
+
 <div align="center">
-<table class="grid" width="700px">
-	<tr>
-		<th width="40%">Instrumento</th>
-		<th width="10%">Estatus</th>
-		<th width="10%">Sugerencias</th>
-	</tr>
-		<rows>
-		<tr ${fld:_rowStyle}>
-		<td align="center"><a href="http://localhost:8090/limesurvey/index.php/${fld:id_instrumento}/token/${fld:token}" target="_blank">${fld:instrumento}</td>
-		<td align="center">${fld:estatus}</td>
-		<td align="center"><a href="opiniones/form?id=${fld:id_instrumento}&token=${fld:token}" target="_blank"><img src="${def:context}/images/questionmark.png" title="Escribir Sugerencias acerca de este Instrumento" class="tool" width="24" height="24"></a></td>
-		</tr>
-		</rows>
-</table>
+<img src="${def:context}/images/logos_empresas/${fld:logo}" width="188" height="188" alt="logo" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
+<img src="${def:context}/images/banners_estudios/${fld:banner}" width="700" height="188" alt="banner" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
+<br>
+<br>
+<h2 id="mensaje" hidden>Disculpe las molestias, el Estudio se encuentra deshabilitado en este momento</h2>
 </div>
 <!--panel de respuesta AJAX para el grid paginado-->
 <div id="response" style="display: none; width: 100%" align="center"></div>
@@ -41,12 +29,24 @@
 	//inicializa cuando se carga la pagina
 	onload = function()
 	{
-		//search('${fld:id_participante}', '${fld:id_empresa}'); //mostrar registros en vista paginada
+		if ('${fld:estatus_estudio}' == "Pausado") {
+			document.getElementById('mensaje').hidden = false;
+		} 
+		else{
+			search();
+		};
+
 	} 
 
 		//ejecutar consulta y mostrar grid, si hay data viewPage() sera invocada automaticamente
-	function search(idParticipante, idEmpresa){
-		var url = "${def:actionroot}/search?id_participante="+idParticipante+"&id_empresa="+idEmpresa;
+	function search()
+	{
+		var url = "${def:actionroot}/search";
+		
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?currentpage=" + currentPage;
+
 		//llamada Ajax...
 		ajaxCall(httpMethod="GET", 
 						uri= url, 

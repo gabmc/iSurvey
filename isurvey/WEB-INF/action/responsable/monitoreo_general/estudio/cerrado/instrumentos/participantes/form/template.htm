@@ -43,6 +43,7 @@
 </tbody>
 </table>
 <br>
+<form id="form">
 <table class="formgrid" width="400px">
 		<tr>
             <th colspan="2"><span id="formTitle"> Filtro de B&uacute;squeda </span></th>
@@ -64,11 +65,24 @@
 			<td align="center"><input onkeyup="actualizalista()" id="email" placeholder="carlos.perez@gmail.com" type="text"></td>
 		</tr>
 		<tr>
+			<td align="center">&Aacute;rea</td>
+			<td align="center"><input onkeyup="actualizalista()" id="area" placeholder="Recursos Humanos" type="text"></td>
+		</tr>
+		<tr>
+			<td align="center">Cargo</td>
+			<td align="center"><input onkeyup="actualizalista()" id="cargo" placeholder="Gerente" type="text"></td>
+		</tr>
+		<tr>
+			<td align="center">Sexo</td>
+			<td align="center"><input onclick="actualizalista()" id="sexom" name="sexo" type="radio" value="M"><label>Masculino</label>
+                    <input onclick="actualizalista()" id="sexof" name="sexo" type="radio" value="F"><label>Femenino</label><input id="sexo" type="text" hidden></td>
+		</tr>
+		<tr>
 			<td align="center">Estatus</td>
 			<td align="center"><input id="estatus" readonly type="text"></td>
 		</tr>
 </table>
-<input type="button" value="Buscar" onclick="search()">
+</form>
 <input type="button" value="Limpiar" onclick="clean()">
 <br>
 <br>
@@ -117,11 +131,8 @@
 	}
 
 	function clean(){
-		document.getElementById("identificador").value = "";
-		document.getElementById("nombre").value = "";
-		document.getElementById("apellido").value = "";
-		document.getElementById("email").value = "";
-		document.getElementById("estatus").value = "";
+		clearForm("form");
+		search();
 	}
 
 	function cleanEstatus(){
@@ -141,9 +152,18 @@
                 var nombre = document.getElementById("nombre").value;
                 var apellido = document.getElementById("apellido").value;
                 var email = document.getElementById("email").value;
+                var area = document.getElementById("area").value;
+                var cargo = document.getElementById("cargo").value;
+                if(document.getElementById('sexom').checked) {
+				  var sexo = document.getElementById('sexom').value;
+				}else if(document.getElementById('sexof').checked) {
+				  var sexo = document.getElementById('sexof').value;
+				} else{
+					var sexo = document.getElementById('sexo').value;
+				}
                 var estatus = document.getElementById("estatus").value;
             
-                var url = "${def:actionroot}/search?id_instrumento=${fld:id}&identificador="+id+"&nombre="+nombre+"&email="+email+"&apellido="+apellido+"&estatus="+estatus;
+                var url = "${def:actionroot}/search?id_instrumento=${fld:id}&identificador="+id+"&nombre="+nombre+"&email="+email+"&apellido="+apellido+"&area="+area+"&cargo="+cargo+"&sexo="+sexo+"&estatus="+estatus;
                 ajaxCall(httpMethod="GET",
                 uri= url,
                   divResponse="response",

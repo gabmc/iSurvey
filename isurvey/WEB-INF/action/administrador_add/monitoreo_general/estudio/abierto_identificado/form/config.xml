@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Progreso de Estudio
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>responsable.MonitoreoGeneralEstudioAbiertoIdentificado</classname>
+		<validator>true</validator>
+		<transaction>true</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="instrumento.sql" source="sql" scope="transaction" />
+		<recordset id="estudio.sql" source="sql" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>template.htm</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<expiration>0</expiration>
+		<!--<print mode="table" recordset="query.sql" tag="rows" alternate-colors="true"/>-->
+		<print mode="form" recordset="output" />
+		<print mode="form" recordset="_request"/>
+		<print mode="form" recordset="instrumento.sql" />
+		<print mode="form" recordset="estudio.sql" />
+	</output>
+
+</config>

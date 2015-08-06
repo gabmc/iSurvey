@@ -44,6 +44,8 @@ public class MostrarVisorEstudio extends GenericTransaction {
         visor.append("token", java.sql.Types.VARCHAR);
         visor.append("estatus", java.sql.Types.VARCHAR);
         visor.append("logo", java.sql.Types.VARCHAR);
+        visor.append("banner", java.sql.Types.VARCHAR);
+        visor.append("estatus_estudio", java.sql.Types.VARCHAR);
         
         updateStatus(token);
         
@@ -55,6 +57,8 @@ public class MostrarVisorEstudio extends GenericTransaction {
 	        	visor.setValue("id_instrumento", info.getString("id_instrumento"));
 	        	visor.setValue("token", info.getString("token"));
 	        	visor.setValue("logo", logoEmpresa);
+	        	visor.setValue("banner", getBannerEstudio(idEstudio));
+	        	visor.setValue("estatus_estudio", getEstatusEstudio(idEstudio));
 	        	if (info.getValue("estatus").equals("Incompleta")){
 	        		visor.setValue("estatus", yellow);
 	        	}
@@ -66,10 +70,23 @@ public class MostrarVisorEstudio extends GenericTransaction {
 	        	}
         	}
         this.publish("visor", visor);
-       // this.getSession().setAttribute("visor", visor);
+        this.getSession().setAttribute("visor", visor);
         return 0;
     }
+    
+    String getEstatusEstudio (String idEstudio) throws Throwable{
+    	String sql = "select estatus from ajvieira_isurvey_app.estudio where id_estudio = " + idEstudio;
+    	Recordset rs = this.getDb().get(sql);
+    	rs.first();
+    	return rs.getString("estatus");
+    }
  
+    String getBannerEstudio (String idEstudio) throws Throwable{
+    	String sql = "select banner from ajvieira_isurvey_app.estudio where id_estudio = " + idEstudio;
+    	Recordset rs = this.getDb().get(sql);
+    	rs.first();
+    	return rs.getString("banner");
+    }
   
     Recordset getEmpresa (String token) throws Throwable{
     	String query = "select empresa.* " +
@@ -133,7 +150,6 @@ public class MostrarVisorEstudio extends GenericTransaction {
     	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "', " +
     			" porcentaje_completado = " + porcentaje + " where token_participante = '" + token + "'";
     	this.getDb().exec(sql);
-    	System.out.println(sql);
     }
     
     Recordset questionsOrdenadas (String idEncuesta) throws Throwable{
@@ -160,7 +176,6 @@ public class MostrarVisorEstudio extends GenericTransaction {
 		"and int_participante_instrumento.id_participante = (select id_participante from  " +
 		"ajvieira_isurvey_app.int_participante_instrumento " +
 		"where token_participante = '"+token+"') ";
-    	System.out.println(query);
     	Recordset instrumentos = this.getDb().get(query);
     	instrumentos.top();
     	Recordset participante = getParticipante(token);
