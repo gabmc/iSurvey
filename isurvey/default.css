@@ -195,13 +195,58 @@
 	background-color: #AFC6F4;
 	font-family: "Trebuchet MS", Verdana, Arial;
 	font-weight: bold;
-	font-size: 20pt;
+	font-size: 12pt;
 	padding: 3px;
 	border: 1px #eeeeee solid;
-	color: 0051F2;
+	color: grey;
 	height: 60px; 
 	margin-bottom: 5px
 }
+
+#container{
+    position: relative;
+    width: 90%;
+    height: 90px;
+    margin-bottom: 1%;
+    /*margin-top: 0.5%;*/
+}
+
+#main_image{
+    width: 100%;
+    height: 100%;
+}
+#overlay_image{
+    position: absolute;
+    bottom: 0px;
+    left: 0.2%;
+    width: 90px;
+    height: 90px;
+}
+#overlay_image2{
+    position: absolute;
+    bottom: 0px;
+    right: -10.9%;
+    width: 90px;
+    height: 90px;
+}
+#overlay_text{
+    position: absolute;
+    bottom: 40%;
+    right: 5%;
+	font-size: 20px;
+	font-family: Verdana;
+	font-weight: bold;
+	color: grey;
+}
+#footer
+    {
+        position: absolute;
+        bottom: 0;
+        left: 0px;
+        width: 100%;
+        background: #CCC;
+        height: 24px;
+    }
 
 /* regular tags */
 form {
@@ -377,6 +422,32 @@ div.menuTitle:hover,div.menuItem:hover {
 		font-weight: normal;
 		padding-bottom: 5px;
 	}
+
+	html,
+body {
+	margin:0;
+	padding:0;
+	height:100%;
+}
+#wrapper {
+	min-height:100%;
+	position:relative;
+}
+#header {
+	background:#ededed;
+	padding:10px;
+}
+#content {
+	padding-bottom:63px; /* Height of the footer element */
+}
+#footer {
+	background: white;
+	width:100%;
+	height:63px;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
 	/* END IE6 hack */ 
 
 /* END MENU */

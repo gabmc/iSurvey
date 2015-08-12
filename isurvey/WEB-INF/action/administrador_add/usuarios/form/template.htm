@@ -1,0 +1,153 @@
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	<title>iSurvey</title>
+	
+	<script language="javascript" src="${def:context}/action/script">
+	</script>
+	
+</head>
+<body>
+<div class="banner">
+    <div style="float: left;">Administraci&oacute;n de Usuarios</div>
+</div>
+<div align="center">
+<!--FORM-->
+<form name="form1" action="${def:context}${def:actionroot}/search" method="POST">
+
+<table class="formgrid" width="70%">
+
+	<!--layout-->
+	<col width="40%"> <!--labels-->
+	<col width="60%"> 
+
+	<!--form title-->
+	<tr>
+		<th colspan="2">
+			Filtro de Búsqueda
+		</th>
+	</tr>
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+			
+	<!--form fields-->
+	
+	<tr>
+		<td class="formlabel">El Login del usuario comienza con: </td>
+		<td>
+		<input name="userlogin"  value="${fld:userlogin}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
+
+	<tr>
+		<td class="formlabel">El Apellido comienza con: </td>
+		<td>
+		<input name="lname"  value="${fld:lname}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
+
+	<tr>
+		<td class="formlabel">El Nombre comienza con: </td>
+		<td>
+		<input name="fname"  value="${fld:fname}" type="text" size="30" maxlength="80" >
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Empresa</td>
+		<td>
+			<!--almacena el ID del item seleccionado--> 
+			<input type="hidden" name="id_empresa" id="id_empresa" /> 
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_empresa_name" id="id_empresa_name" size="30" readonly /> 
+			<!--botones del picklist--> 
+			<img src="${def:context}/images/search.png" width="18" height="18" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" id="buscar" /> 
+			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="document.form1.id_empresa.value='';document.form1.id_empresa_name.value='';"
+				title="Borrar valor seleccionado" id="borrar" />
+		</td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td>
+
+		<br>
+		Ordenado por:<br>
+
+		<select name="orderby" size="1">
+		  <option value="userlogin">Login del Usuario</option>
+		  <option value="fname">Nombre</option>
+		  <option value="lname">Apellido</option>
+		</select>
+
+		<select name="sortmode" size="1">
+		  <option value="ASC">[Aa..Zz]</option>
+		  <option value="DESC">[Zz..Aa]</option>
+		</select>
+		
+		<br><br>
+
+		Tamaño de la página para los resultados:<br>
+
+		<select name="pagesize" size="1">
+		  <option value="">[Default]</option>
+		  <option value="10">10 registros por página</option>
+		  <option value="20">20 registros por página</option>
+		  <option value="50">50 registros por página</option>
+		</select>
+		
+		</td>
+	</tr>	
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+	
+	<tr>
+		<td align="center" colspan="2">
+			<input type="submit" value="Buscar">
+			<input type="button" value="Limpiar Filtro" onclick="clearForm('form1')">
+			<input type="button" value="Registrar" onclick="onAddNew()">
+		</td>
+	</tr>
+
+	<!--separator row-->
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+
+</table>
+
+</form>
+</div>
+
+<script language="javascript">
+
+	document.form1.elements[0].focus();
+	
+	function onAddNew()
+	{
+		var returnURL = "${def:context}${def:actionroot}/filter";
+		var url = "${def:context}${def:actionroot}/addnew?return.url=" + returnURL;
+		window.location=url;
+	}	
+	
+	function onAddNewLDAP()
+	{
+		var returnURL = "${def:context}${def:actionroot}/filter";
+		var url = "${def:context}${def:actionroot}/addnew2?return.url=" + returnURL;
+		window.location=url;
+	}
+
+	function pickIdEmpresa(){
+		var url = "${def:context}/action/picklist/empresa/form";
+		pickOpen ('id_empresa_name','id_empresa',url,'450','335');	
+	}	
+	
+</script>
+<!--END FORM-->
+</body>
+

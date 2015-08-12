@@ -30,7 +30,9 @@ public class InsertarParticipante extends GenericTableManager {
         sql = StringUtil.replace(sql, "{{nombre_participante}}", ((String[]) parametros.get("nombre_participante"))[0]);
         sql = StringUtil.replace(sql, "{{apellido_participante}}", ((String[]) parametros.get("apellido_participante"))[0]);
         sql = StringUtil.replace(sql, "{{email_participante}}", ((String[]) parametros.get("email_participante"))[0]);
+        sql = StringUtil.replace(sql, "{{telefono}}", ((String[]) parametros.get("telefono"))[0]);
         sql = StringUtil.replace(sql, "{{empresa}}", ((String[]) parametros.get("empresa"))[0]);
+        sql = StringUtil.replace(sql, "{{sector_empresa}}", ((String[]) parametros.get("sector2"))[0]);
         sql = StringUtil.replace(sql, "{{cargo}}", ((String[]) parametros.get("cargo"))[0]);
         sql = StringUtil.replace(sql, "{{id_empresa}}", ((String[]) parametros.get("id_empresa"))[0]);
         sql = StringUtil.replace(sql, "{{id_estudio_identificado}}", getIdEstudio(idInstrumento));

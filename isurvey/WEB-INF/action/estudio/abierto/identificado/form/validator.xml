@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
-<validator onerror="/action/error/validation/alert">
+<!--<validator onerror="/action/error/validation/alert">-->
+<validator onerror="/action/error/404">
 	<parameter id="id" type="integer" required="true" label="ID del Instrumento"/>
 		<custom-validator
 		classname='dinamica.validators.NoRecordsFound'

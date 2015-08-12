@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator>
+	<parameter id="id" type="integer" required="true" label="ID de Registro"/>
+	<parameter id="return.url" type="varchar" required="true" label="URL para retornar"/>
+	
+	<custom-validator
+		classname='dinamica.validators.DuplicatedKeyValidator'
+		on-error-label='El usuario se encuentra registrado en el directorio LDAP, por lo tanto no se puede restablecer la contraseña por este medio.'
+		sql='query.sql' />
+
+</validator>

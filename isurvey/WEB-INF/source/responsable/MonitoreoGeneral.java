@@ -152,7 +152,7 @@ public class MonitoreoGeneral extends GenericTransaction {
         this.getSession().setAttribute("estudios.sql", output);
         this.getSession().setAttribute("query2.sql", output2);
         //publish("estudios", output);
-        
+        this.getDb().commit();
         return 0;
     }
     
@@ -534,12 +534,16 @@ public class MonitoreoGeneral extends GenericTransaction {
 			    			estatus = "Sin Iniciar";
 			    			porcentaje = 0;
 			    		}
-			    		else 
+			    		else{ 
 			    			estatus = "Incompleta";
+			    			porcentaje = 1;
+			    		}
 		    		}
 	    		}
+	    		
 	    		if (porcentaje != 0 && porcentaje != 100 && preguntasObligatorias != 0)
 	    			porcentaje = (preguntasRespondidas*100)/preguntasObligatorias;
+
 	    		if (preguntasObligatorias == 0)
 	    			porcentaje = 100;
 	    		setEstatus(tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")), estatus, String.valueOf(porcentaje));

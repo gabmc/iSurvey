@@ -43,6 +43,7 @@ public class MostrarVisorEstudio extends GenericTransaction {
         visor.append("id_instrumento", java.sql.Types.VARCHAR);
         visor.append("token", java.sql.Types.VARCHAR);
         visor.append("estatus", java.sql.Types.VARCHAR);
+        visor.append("nombre_y_apellido", java.sql.Types.VARCHAR);
         visor.append("logo", java.sql.Types.VARCHAR);
         visor.append("banner", java.sql.Types.VARCHAR);
         visor.append("estatus_estudio", java.sql.Types.VARCHAR);
@@ -68,6 +69,7 @@ public class MostrarVisorEstudio extends GenericTransaction {
 	        	if (info.getValue("estatus").equals("Completa")){
 	        		visor.setValue("estatus", green);
 	        	}
+	        	visor.setValue("nombre_y_apellido", getNombreApellidoParticipante(token));
         	}
         this.publish("visor", visor);
         this.getSession().setAttribute("visor", visor);
@@ -237,4 +239,16 @@ public class MostrarVisorEstudio extends GenericTransaction {
 	    	}
     	}
     }
+    
+    String getNombreApellidoParticipante (String token) throws Throwable{
+    	String sql = "select case sexo when 'M' then concat('Bienvenido ',nombre_participante,' ',apellido_participante) " +
+    			"when 'F' then concat ('Bienvenida ',nombre_participante,' ',apellido_participante) end as datos " +
+    			"from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_instrumento " +
+    			"where participante.id_participante = int_participante_instrumento.id_participante " +
+    			"and int_participante_instrumento.token_participante = '" + token + "'";
+    	Recordset rs = this.getDb().get(sql);
+    	rs.first();
+    	return rs.getString("datos");
+    }
+
 }

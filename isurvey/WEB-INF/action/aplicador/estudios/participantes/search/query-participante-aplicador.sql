@@ -1,5 +1,5 @@
 select
-	distinct participante.id_participante, participante.nombre_participante, participante.apellido_participante,
+	participante.id_participante, participante.nombre_participante, participante.apellido_participante,
 	int_participante_instrumento.token_participante, estudio.id_estudio,
 	case estudio.tipo
 		when 'Cerrado' then concat('http://localhost/isurvey/action/estudio/cerrado/form?token=', int_participante_instrumento.token_participante)
@@ -26,5 +26,7 @@ where
 	and concat(participante.id_participante) like ${fld:identificador}
 	and upper(participante.nombre_participante) like upper(${fld:nombre})
 	and upper(participante.apellido_participante) like upper(${fld:apellido})
+group by
+	id_participante
 order by
 	id_participante

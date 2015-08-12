@@ -12,9 +12,19 @@
 
 </head>
 <body>
+<div id="wrapper">
+<!--banner-->
+<div id="container">
+	<img src="${def:context}/images/barra.png" id="main_image">
+	<!--<img src="${def:context}/images/isurvey.jpg" width="62" height="62" id="overlay_image">-->
+	<img src="${def:context}/images/isurvey.jpg" id="overlay_image" alt="logo isurvey">
+	<img src="${def:context}/images/logos_empresas/${fld:logo}" id="overlay_image2" width="90" height="90" alt="logo empresa" >
+	<div id="overlay_text">${fld:nombre_y_apellido}</div>
+</div>
+
 
 <div align="center">
-<img src="${def:context}/images/logos_empresas/${fld:logo}" width="188" height="188" alt="logo" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
+<!--<img src="${def:context}/images/logos_empresas/${fld:logo}" width="124" height="124" alt="logo" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">-->
 <img src="${def:context}/images/banners_estudios/${fld:banner}" width="700" height="188" alt="banner" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
 <br>
 <br>
@@ -23,6 +33,10 @@
 <!--panel de respuesta AJAX para el grid paginado-->
 <div id="response" style="display: none; width: 100%" align="center"></div>
 
+<div id="footer" align="center">
+				<img src="${def:context}/images/foot.jpg" valign="bottom">
+			</div>
+</div>			
 </body>
 <script type="text/javascript">
 
@@ -62,6 +76,10 @@
 	{
 		var url = "${def:actionroot}/view";
 		gotoPage(url);
+	}
+	function ventanaDialogo(idInstrumento, token) {
+		var action = "opiniones/form?id="+idInstrumento+"&token="+token;
+		openDialog('ventana',action, 500, 280);
 	}	
 	</script>
 </html>

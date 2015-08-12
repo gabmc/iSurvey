@@ -43,8 +43,9 @@ public class MonitoreoGeneral extends GenericTransaction {
         	while (instrumentos.next()){
         		Recordset tokens = getTokens(instrumentos.getString("id_instrumento"));
         		tokens.top();
-            	while(tokens.next())
+            	while(tokens.next()){
             		updateStatus(tokens.getString("token_participante"));
+            	}
         	}
         }
         //recordset para ser mostrado en la tabla
@@ -151,7 +152,7 @@ public class MonitoreoGeneral extends GenericTransaction {
         this.getSession().setAttribute("estudios.sql", output);
         this.getSession().setAttribute("query2.sql", output2);
         //publish("estudios", output);
-        
+        this.getDb().commit();
         return 0;
     }
     
@@ -445,6 +446,7 @@ public class MonitoreoGeneral extends GenericTransaction {
     	String sql = "update ajvieira_isurvey_app.int_participante_instrumento set estatus = '" + estatus + "', " +
     			" porcentaje_completado = " + porcentaje + " where token_participante = '" + token + "'";
     	this.getDb().exec(sql);
+    	
     }
     
     Recordset questionsOrdenadas (String idEncuesta) throws Throwable{
@@ -530,15 +532,14 @@ public class MonitoreoGeneral extends GenericTransaction {
 			    		}
 			    		else{ 
 			    			estatus = "Incompleta";
-			    			System.out.println("aja2");
+			    			porcentaje = 1;
 			    		}
 		    		}
 	    		}
-	    		System.out.println("porcentaje: " + porcentaje);
-	    		if (porcentaje != 0 && porcentaje != 100 && preguntasObligatorias != 0){
+	    		
+	    		if (porcentaje != 0 && porcentaje != 100 && preguntasObligatorias != 0)
 	    			porcentaje = (preguntasRespondidas*100)/preguntasObligatorias;
-	    			System.out.println("ENTRE!");
-	    		}
+
 	    		if (preguntasObligatorias == 0)
 	    			porcentaje = 100;
 	    		setEstatus(tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")), estatus, String.valueOf(porcentaje));

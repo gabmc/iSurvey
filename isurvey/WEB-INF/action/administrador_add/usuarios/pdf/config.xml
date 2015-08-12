@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Generar reporte PDF
+	</summary>
+	
+	<log>false</log>
+
+	<pdf-title>Usuarios de las Aplicaciones</pdf-title>
+
+	<transaction>
+		<classname>domain.reports.user.UserRoles</classname>
+		<validator>false</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="user.results" source="session" scope="transaction" />		
+		<recordset id="user.filter" source="session" scope="transaction" />		
+	</transaction>
+
+	<output>
+		<classname>domain.reports.user.PDFReportUser</classname>
+	</output>
+
+</config>

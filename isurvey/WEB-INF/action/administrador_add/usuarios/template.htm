@@ -1,0 +1,172 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+	<title>iSurvey</title>
+	
+	<script language="javascript" src="${def:context}/action/script">
+	</script>
+	
+</head>
+
+<body>
+
+<div class="banner">
+    <div style="float: left;">Registrar Usuario</div>
+</div>
+
+<center>
+		
+		<!--START FORM-->
+		<form name="form1" action="${def:context}${def:actionroot}/${req:form.action}" method="POST">
+		
+		<table class="formgrid" width="70%">
+		
+			<!--layout-->
+			<col width="40%"> <!--labels-->
+			<col width="60%">
+
+
+			<!--section header-->
+			<tr>
+				<th colspan="2">
+					${req:form.mode}				
+				</th>
+			</tr>
+
+		
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--fields-->
+	<tr style="display:${req:display}">
+		<td class="formlabel required">Login</td>
+		<td>
+			<input name="userlogin" type="text" size="25" maxlength="25" value="${fld:userlogin}">
+		</td>
+	</tr>
+	<tr style="display:${req:display}">
+		<td class="formlabel required">Contraseña</td>
+		<td><input name="passwd" type="password" size="25" maxlength="15"></td>
+	</tr>
+	<tr style="display:${req:display}">
+		<td class="formlabel required">Confirme contraseña </td>
+		<td><input name="confirm" type="password" size="25" maxlength="15"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Apellido</td>
+		<td><input name="lname" type="text" size="25" maxlength="25" value="${fld:lname}"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Nombre</td>
+		<td><input name="fname" type="text" size="25" maxlength="25" value="${fld:fname}"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">E-mail</td>
+		<td><input name="email" type="text" size="25" maxlength="80" value="${fld:email}"></td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Empresa</td>
+		<td>
+			<!--almacena el ID del item seleccionado--> 
+			<input type="hidden" name="id_empresa" id="id_empresa" /> 
+			<!--almacena el nombre del item seleccionado-->
+			<input type="text" name="id_empresa_name" id="id_empresa_name" size="25" readonly /> 
+			<!--botones del picklist--> 
+			<img src="${def:context}/images/search.png" width="18" height="18" class="button" onclick="pickIdEmpresa();" title="Seleccionar item" id="buscar" /> 
+			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="document.form1.id_empresa.value='';document.form1.id_empresa_name.value='';"
+				title="Borrar valor seleccionado" id="borrar" />
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" class="formlabel"><br>Política de contraseña</td>
+		<td valign="top">
+			<br>
+			<select name="pwd_policy">
+				<option value="-2">Usar la política predeterminada de la Aplicación</option>
+				<option value="-1">La contraseña nunca vence</option>
+				<option value="15">Cambiar contrasela despues de 15 días</option>
+				<option value="30">Cambiar contrasela despues de 30 días</option>
+				<option value="60">Cambiar contrasela despues de 60 días</option>
+				<option value="90">Cambiar contrasela despues de 90 días</option>
+			</select>
+			<br>
+			<input name="force_newpass" type="checkbox" value="1" > 
+			Obligar nueva contraseña en proximo ingreso
+			<br><br>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" class="formlabel required">Roles de Usuario </td>
+		<td>
+			<role-list>
+			<input onchange="checkRoles();" name="role_id" type="checkbox" value="${fld:role_id}"> 
+			${fld:description}<br>
+			</role-list>
+<input type="text" name="locale" value="es" hidden>
+		</td>
+	</tr>			
+				
+							
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--buttons-->
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="Registrar">
+					<input type="button" value="Cancelar" onClick="window.location='${ses:return.url}'">				
+				</td>
+			</tr>
+		</table>
+		
+		<input type="hidden" name="user_id" value="${fld:user_id}">
+						
+		</form>
+
+		<script language="javascript">
+			
+		document.form1.elements[0].focus();
+
+		function pickIdEmpresa(){
+			var url = "${def:context}/action/picklist/empresa/form";
+			pickOpen ('id_empresa_name','id_empresa',url,'450','335');	
+		}
+
+		function Boo(){
+		}
+
+		function checkRoles(){
+			var checkedValue = null;
+			var flag = 0; 
+			var inputElements = document.getElementsByName('role_id');
+			for(var i=0; inputElements[i]; ++i){
+			    if(inputElements[i].checked){
+           			checkedValue = inputElements[i].value;
+           			if (checkedValue == "506") {
+           				flag = 1;
+           				document.getElementById('buscar').setAttribute("onClick", "javascript: Boo();");
+           				document.getElementById('id_empresa_name').disabled = true;
+           				document.getElementById('id_empresa').value = "";
+           				document.getElementById('id_empresa_name').value = "";
+           			};
+      			}
+			}
+			if (flag == 0) {
+				document.getElementById('buscar').setAttribute("onClick", "javascript: pickIdEmpresa();");
+           		document.getElementById('id_empresa_name').disabled = false;
+			};
+		}
+
+		</script>
+		<!--END FORM-->
+
+</center>
+
+</body>
+</html>

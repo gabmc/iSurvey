@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Formulario de edición para reestablecer la contraseña de un usuario
+	</summary>
+	
+	<log>false</log>
+
+	<transaction>
+		<classname>domain.utils.SessionAttribute</classname>
+		<validator>true</validator>
+		<transaction>false</transaction>
+		<jdbc-log>false</jdbc-log>
+		<recordset id="getrecord.sql" source="sql" scope="transaction" />
+	</transaction>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>template.txt</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/html</content-type>
+		<print mode="form" recordset="getrecord.sql"/>
+	</output>
+
+</config>

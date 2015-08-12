@@ -1,0 +1,1 @@
+window.location = "http://localhost:8090/limesurvey/index.php/${fld:id_encuesta}/token/${fld:token}";

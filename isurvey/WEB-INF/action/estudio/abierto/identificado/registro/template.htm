@@ -16,14 +16,14 @@
 ${inc:${def:actionroot}/header}
 <!--end of common header-->
 
-<center>
+<div id="wrapper" align="center">
 
 		<img src="${def:context}/images/logos_empresas/${fld:logo}" width="188" height="188" alt="logo" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
 <img src="${def:context}/images/banners_estudios/${fld:banner}" width="700" height="188" alt="banner" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
 <p style="clear: both;">
 <br>
 		<!--START FORM-->
-		<form name="form1" action="insertar_participante" method="POST">
+		<form name="form1" onsubmit="return insert()" method="POST">
 		
 		<table class="formgrid" width="50%">
 		
@@ -52,28 +52,50 @@ ${inc:${def:actionroot}/header}
 			<input type="hidden" name="id_empresa" value="${fld:id_empresa}">
 			<input type="hidden" name="id_instrumento" value="${fld:id_instrumento}">
 			<input type="hidden" name="id_estudio" value="${fld:id_estudio}">
-			<input name="id_participante" type="text" size="20" maxlength="25">
+			<input id="id_participante" name="id_participante" type="text" size="30" maxlength="25">
 		</td>
 	</tr>
 	<tr>
 		<td class="formlabel">Nombre</td>
-		<td><input name="nombre_participante" type="text" size="25" maxlength="25"></td>
+		<td><input id="nombre_participante" name="nombre_participante" type="text" size="30" maxlength="25"></td>
 	</tr>
 	<tr>
 		<td class="formlabel">Apellido</td>
-		<td><input name="apellido_participante" type="text" size="25" maxlength="25"></td>
+		<td><input id="apellido_participante" name="apellido_participante" type="text" size="30" maxlength="25"></td>
 	</tr>
 	<tr>
 		<td class="formlabel">E-mail</td>
-		<td><input name="email_participante" type="text" size="30" maxlength="80"></td>
+		<td><input id="email_participante" name="email_participante" type="text" size="30" maxlength="80"></td>
 	</tr>
 	<tr>
-		<td class="formlabel">Empresa</td>
-		<td><input name="empresa" type="text" size="30" maxlength="80"></td>
+		<td class="formlabel">Tel&eacute;fono</td>
+		<td><input id="telefono" name="telefono" type="text" size="30" maxlength="30"></td>
 	</tr>
 	<tr>
 		<td class="formlabel">Cargo</td>
-		<td><input name="cargo" type="text" size="30" maxlength="80"></td>
+		<td><input id="cargo" name="cargo" type="text" size="30" maxlength="80"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Empresa</td>
+		<td><input id="empresa" name="empresa" type="text" size="30" maxlength="80"></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Sector de la Empresa</td>
+		<td><select name="sector1" id="sector1" onchange="revisarSelect()">
+			<option value="seleccione opcion">[Seleccione una opci&oacute;n]</option>
+			<option value="Banca y seguros">Banca y seguros</option>
+			<option value="Comercio y retail">Comercio y retail</option>
+			<option value="Construccion e ingenieria">Construcci&oacute;n e ingenier&iacute;a</option>
+			<option value="Consumo masivo">Consumo masivo</option>
+			<option value="Energia">Energ&iacute;a</option>
+			<option value="Entretenimiento / Medios / Publicidad">Entretenimiento / Medios / Publicidad</option>
+			<option value="Farmaceutico y salud">Farmac&eacute;utico y salud</option>
+			<option value="Industrial / Manufactura">Industrial / Manufactura</option>
+			<option value="Logistica y transporte">Log&iacute;stica y transporte</option>
+			<option value="Servicios profesionales y consultoria">Servicios profesionales y consultor&iacute;a</option>
+			<option value="Tecnologia y telecomunicaciones">Tecnolog&iacute;a y telecomunicaciones</option>
+			<option value="otro">Otro</option>
+		</select><input type="text" id="sector2" name="sector2" size="30" maxlength="60" hidden></td>
 	</tr>	
 				
 							
@@ -91,19 +113,52 @@ ${inc:${def:actionroot}/header}
 		</table>
 						
 		</form>
+						<div id="footer" align="center">
+				<img src="${def:context}/images/foot.jpg" alt="footer" valign="bottom">
+			</div>
+			</div>
 
 		<script language="javascript">
 			onload = function()
 	{
 		document.form1.id_participante.onkeypress = keypressInteger;
+		document.form1.telefono.onkeypress = keypressInteger;
 
 	} 
 		document.form1.elements[0].focus();
 
+			//grabar registro nuevo en BD
+	function insert()
+	{
+			clearErrorMessages();
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/insertar_participante", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=null);	    	
+	}
+
+	function revisarSelect(){
+		if (document.getElementById("sector1").value == "otro") {
+			document.getElementById("sector2").hidden = false;
+			document.getElementById("sector2").value = "";
+			document.form1.elements[11].focus();
+		} else{
+			document.getElementById("sector2").hidden = true;
+			document.getElementById("sector2").value = document.getElementById("sector1").value;
+			if (document.getElementById("sector1").value == "seleccione opcion")
+				document.getElementById("sector2").value = "";
+		};
+	}
+
 		</script>
 		<!--END FORM-->
 
-</center>
+
 
 </body>
 </html>
