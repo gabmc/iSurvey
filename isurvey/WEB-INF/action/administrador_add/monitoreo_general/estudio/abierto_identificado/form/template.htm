@@ -65,6 +65,28 @@
 			<td align="center"><input onkeyup="actualizalista()" id="email" placeholder="carlos.perez@gmail.com" type="text"></td>
 		</tr>
 		<tr>
+		<td class="formlabel">Sector de la Empresa</td>
+		<td align="center"><select name="sector" id="sector" onchange="actualizalista()">
+			<option value="seleccione opcion">[Seleccione una opci&oacute;n]</option>
+			<option value="Banca y seguros">Banca y seguros</option>
+			<option value="Comercio y retail">Comercio y retail</option>
+			<option value="Construccion e ingenieria">Construcci&oacute;n e ingenier&iacute;a</option>
+			<option value="Consumo masivo">Consumo masivo</option>
+			<option value="Energia">Energ&iacute;a</option>
+			<option value="Entretenimiento / Medios / Publicidad">Entretenimiento / Medios / Publicidad</option>
+			<option value="Farmaceutico y salud">Farmac&eacute;utico y salud</option>
+			<option value="Industrial / Manufactura">Industrial / Manufactura</option>
+			<option value="Logistica y transporte">Log&iacute;stica y transporte</option>
+			<option value="Servicios profesionales y consultoria">Servicios profesionales y consultor&iacute;a</option>
+			<option value="Tecnologia y telecomunicaciones">Tecnolog&iacute;a y telecomunicaciones</option>
+			<option value="otro">Otro</option>
+		</select></td>
+	</tr>
+		<tr>
+			<td align="center">Empresa</td>
+			<td align="center"><input onkeyup="actualizalista()" id="empresa" placeholder="Empresa C.A" type="text"></td>
+		</tr>
+		<tr>
 			<td align="center">&Aacute;rea</td>
 			<td align="center"><input onkeyup="actualizalista()" id="area" placeholder="Recursos Humanos" type="text"></td>
 		</tr>
@@ -146,10 +168,16 @@
 
 	function actualizalista()
             {
+            	var sector = "";
                 var id = document.getElementById("identificador").value;
                 var nombre = document.getElementById("nombre").value;
                 var apellido = document.getElementById("apellido").value;
                 var email = document.getElementById("email").value;
+                var empresa = document.getElementById("empresa").value;
+                if(document.getElementById("sector").value != "seleccione opcion")
+                	sector = document.getElementById("sector").value;
+                else
+                	sector = "";
                 var estatus = document.getElementById("estatus").value;
                 var area = document.getElementById("area").value;
                 var cargo = document.getElementById("cargo").value;
@@ -160,8 +188,13 @@
 				} else{
 					var sexo = document.getElementById('sexo').value;
 				}
-            
-                var url = "${def:actionroot}/search?id_estudio=${fld:id}&identificador="+id+"&nombre="+nombre+"&email="+email+"&apellido="+apellido+"&area="+area+"&cargo="+cargo+"&sexo="+sexo+"&estatus="+estatus;
+            	if (sector == "")
+                	var url = "${def:actionroot}/search?id_estudio=${fld:id}&identificador="+id+"&nombre="+nombre+"&email="+email+"&apellido="+apellido+"&area="+area+"&cargo="+cargo+"&sexo="+sexo+"&estatus="+estatus+"&empresa="+empresa;
+                if (sector == "otro")
+                	var url = "${def:actionroot}/search2?id_estudio=${fld:id}&identificador="+id+"&nombre="+nombre+"&email="+email+"&apellido="+apellido+"&area="+area+"&cargo="+cargo+"&sexo="+sexo+"&estatus="+estatus+"&empresa="+empresa+"&sector="+sector;
+                else
+                	var url = "${def:actionroot}/search3?id_estudio=${fld:id}&identificador="+id+"&nombre="+nombre+"&email="+email+"&apellido="+apellido+"&area="+area+"&cargo="+cargo+"&sexo="+sexo+"&estatus="+estatus+"&empresa="+empresa+"&sector="+sector;
+
                 ajaxCall(httpMethod="GET",
                 uri= url,
                   divResponse="response",
@@ -185,6 +218,11 @@
 		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
 		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
 		var w = window.open(url, null, features);
+	}
+
+	function ventanaRecordatorioIndividual(idEstudio, idParticipante) {
+		var action = "ventana_recordatorio_individual/form?id_participante="+idParticipante+"&id_estudio="+idEstudio;
+		openDialog('ventana',action, 470, 660);
 	}
 </script>
 </html>

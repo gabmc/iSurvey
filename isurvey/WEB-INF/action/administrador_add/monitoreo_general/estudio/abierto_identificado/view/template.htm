@@ -3,7 +3,7 @@
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="11">
+		<th colspan="14">
 			<!--título del grid--> 
 			<span style="float: left;">Contenido de la tabla </span>
 			<!--panel de control de navegacion--> 
@@ -25,11 +25,15 @@
 		<th width="20%"><a href="javascript:onclick=sortBy('nombre_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('apellido_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Tel&eacute;fono</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Sector Empresa</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Empresa</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">&Aacute;rea</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Cargo</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Sexo</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('completado','query.sql')" title="Haga CLICK para ordenar por esta columna">% Completo</a></th>
 		<th width="20%">Instrumento</th>
+		<th width="8%">Recordatorio</th>
 	</tr>
 
 	<!--data-->
@@ -39,11 +43,15 @@
 		<td align="center">${fld:nombre_participante}</td>
 		<td align="center">${fld:apellido_participante}</td>
 		<td align="center">${fld:email_participante}</td>
+		<td align="center">${fld:telefono}</td>
+		<td align="center">${fld:sector_empresa}</td>
+		<td align="center">${fld:empresa}</td>
 		<td align="center">${fld:area}</td>
 		<td align="center">${fld:cargo}</td>
 		<td align="center">${fld:sexo}</td>
 		<td align="center">${fld:completado}%</td>
-		<td align="center"><a target="_blank" title="Haz CLICK aqu&iacute; para ver la encuesta de este participante" href="http://localhost:8090/limesurvey/index.php/${fld:id_instrumento}/token/${fld:token_participante}"><img src="${def:context}/images/clipboard.png" alt="encuesta" width="18" height="18"></a></td>
+		<td align="center"><a target="_blank" title="Haz CLICK aqu&iacute; para ver la encuesta de este participante" href="http://localhost:8090/limesurvey/index.php/${fld:id_instrumento}/token/${fld:token_participante}"><img src="${def:context}/images/clipboard.png" alt="instrumento" width="18" height="18"></a></td>
+		<td align="center"><a href="#" onclick="ventanaRecordatorioIndividual(${fld:id_estudio},${fld:id_participante})"><img width="18" height="18" src="${def:context}/images/bell.png" alt="encuesta"></a></td>
 	</tr>
 	</rows>
 

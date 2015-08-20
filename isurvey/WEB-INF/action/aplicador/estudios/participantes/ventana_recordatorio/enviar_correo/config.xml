@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<config>
+
+	<summary>
+		Envio de link de encuenta a entrevistado o empleado de salida 
+	</summary>
+
+	<log>false</log>
+
+	<transaction>
+		<classname>aplicador.Email</classname>
+		<validator>true</validator>
+		<transaction>true</transaction>
+		<jdbc-log>false</jdbc-log>
+    </transaction>
+
+	
+        <mail enabled="true">
+		<subject recordset="output">${fld:subject}</subject>
+		<mail-to recordset="output" colname="email_participante"></mail-to>
+		<body html="true" recordset="output">body.txt</body>
+         </mail>
+
+	<output>
+		<classname>dinamica.GenericOutput</classname>
+		<template>script.js</template>
+		<set-http-headers>true</set-http-headers>
+		<content-type>text/javascript; charset=iso-8859-1</content-type>
+		<expiration>0</expiration>
+	</output>
+
+</config>

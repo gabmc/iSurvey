@@ -17,6 +17,7 @@
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
+		<recordset id="query-numero-instrumentos.sql" source="sql" scope="session" on-empty-return="1" />
 		<recordset id="query-participante-aplicador.sql" source="sql" scope="session" on-empty-return="1" />
 	</transaction>
 

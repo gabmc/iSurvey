@@ -52,11 +52,16 @@
 <!--<input id="link" type="text" value="${fld:link}" size="30">-->
 <a href="#"><img id="copy-button" src="${def:context}/images/copy.png" width="26" height="26" data-clipboard-text="${fld:link}" alt="clear" onclick="link.select();" title="Copiar Link al Portapapeles"></a>
 <h4>Opci&oacute;n 2: env&iacute;o de enlace por e-mail</h4>
-<input type="text" id="titulo_email" size="40" value="${fld:titulo_email}" disabled="true">
-<br><br>
-<textarea name="cuerpo_email" id="cuerpo_email" cols="40" rows="5" disabled="true">${fld:cuerpo_email}</textarea><br>
+</div>
+
+<div id="mail_sample">
+	<p>Asunto: ${fld:subject}</p>
+	${fld:body}
+</div>
+<div align="center">
 <a href="#"><img src="${def:context}/images/mail.png" alt="mail" width="26" height="26" title="Enviar enlace al correo registrado" onclick="envio();"></a>
 </div>
+
 </body>
 
 <!--codigo de soporte del template-->

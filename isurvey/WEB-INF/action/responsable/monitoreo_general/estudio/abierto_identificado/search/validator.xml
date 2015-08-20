@@ -11,6 +11,7 @@
 	<parameter id='area' type='varchar' required='false' label='Area' maxlen='50'/>
 	<parameter id='cargo' type='varchar' required='false' label='Cargo' maxlen='50'/>
 	<parameter id='sexo' type='varchar' required='false' label='Sexo' maxlen='50'/>
+	<parameter id='empresa' type='varchar' required='false' label='Empresa' maxlen='50'/>
 
 	<custom-validator
 		classname="dinamica.validators.SQLPatternTransformer"
@@ -64,6 +65,13 @@
 	<custom-validator
 		classname="dinamica.validators.SQLPatternTransformer"
 		parameter="sexo"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="empresa"
 		rule="contains"
 		ifnull="%"
 		/>

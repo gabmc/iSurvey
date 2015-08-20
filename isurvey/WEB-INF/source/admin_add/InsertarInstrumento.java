@@ -25,9 +25,9 @@ public class InsertarInstrumento extends GenericTransaction {
         Map parametros = this.getRequest().getParameterMap();
         String idEstudio = ((String[]) parametros.get("id_estudio"))[0];
         String idInstrumento = ((String[]) parametros.get("id_survey"))[0];
-        String nombreInstrumento = ((String[]) parametros.get("nombre"))[0];
         Recordset participantes = getParticipantesDeEstudio(idEstudio);
         
+        String nombreInstrumento = getNombreInstrumento(idInstrumento);
         String sql = StringUtil.replace(getResource("insert.sql"), "{{id_survey}}", idInstrumento);
         sql = StringUtil.replace(sql, "{{id_estudio}}", idEstudio);
         sql = StringUtil.replace(sql, "{{nombre}}", nombreInstrumento);
@@ -61,6 +61,15 @@ public class InsertarInstrumento extends GenericTransaction {
         }   
         getDb().commit();
         return 0;
+    }
+    
+    String getNombreInstrumento(String idInstrumento) throws Throwable{
+    	String query = "select surveyls_title " +
+    			"from ajvieira_isurvey_lime.surveys_languagesettings " +
+    			"where surveyls_survey_id = " + idInstrumento;
+    	Recordset rs = this.getDb().get(query);
+    	rs.first();
+    	return rs.getString("surveyls_title");
     }
 
     Boolean findToken (String token) throws Throwable{

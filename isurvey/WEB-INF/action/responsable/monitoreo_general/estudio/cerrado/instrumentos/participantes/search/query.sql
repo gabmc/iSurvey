@@ -1,4 +1,4 @@
-select participante.id_participante, nombre_participante, apellido_participante, email_participante, empresa, area, cargo, sexo, int_participante_instrumento.estatus, int_participante_instrumento.porcentaje_completado, int_participante_instrumento.token_participante, id_instrumento
+select participante.id_participante, nombre_participante, apellido_participante, email_participante, telefono, empresa, area, cargo, sexo, int_participante_instrumento.estatus, int_participante_instrumento.porcentaje_completado, int_participante_instrumento.token_participante, id_instrumento
 from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_instrumento
 where
 participante.id_participante in 

@@ -16,7 +16,8 @@
 <img src="${def:context}/images/logos_empresas/${fld:logo}" width="188" height="188" alt="logo" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
 <img src="${def:context}/images/banners_estudios/${fld:banner}" width="700" height="188" alt="banner" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
 <p style="clear: both;">
-		<br>
+
+		<div id="login">
 			<div style="width:300px">
 			<form name="form1" action="log_in" method="POST">
 	
@@ -30,7 +31,6 @@
 				<tr>
 					<th colspan="2">
 						<span style="float: left">Ingresar al Sistema</span>
-						<img id="status" style="float: right; margin-right: 10px; display: none" src="images/progress.gif">
 					</th>
 				</tr>
 	
@@ -40,6 +40,14 @@
 				</tr>
 				
 				<!--form fields-->
+				<tr>
+					<td  class="formlabel">
+						e-mail:
+					</td>
+					<td>
+						<input name="email" id="email" type="text" size="20">
+					</td>
+				</tr>
 				<tr>
 					<td  class="formlabel">
 						Identificador:
@@ -92,7 +100,7 @@
 					</tr>
 					
 				</table>
-
+</div>
 				<h2 id="mensaje" hidden>Disculpe las molestias, el Estudio se encuentra deshabilitado en este momento</h2>
 			
 			</div>

@@ -56,31 +56,35 @@ ${inc:${def:actionroot}/header}
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">Nombre</td>
+		<td class="formlabel required">Nombre</td>
 		<td><input id="nombre_participante" name="nombre_participante" type="text" size="30" maxlength="25"></td>
 	</tr>
 	<tr>
-		<td class="formlabel">Apellido</td>
+		<td class="formlabel required">Apellido</td>
 		<td><input id="apellido_participante" name="apellido_participante" type="text" size="30" maxlength="25"></td>
 	</tr>
 	<tr>
-		<td class="formlabel">E-mail</td>
+		<td class="formlabel required">E-mail</td>
 		<td><input id="email_participante" name="email_participante" type="text" size="30" maxlength="80"></td>
 	</tr>
 	<tr>
-		<td class="formlabel">Tel&eacute;fono</td>
+		<td class="formlabel required">Tel&eacute;fono</td>
 		<td><input id="telefono" name="telefono" type="text" size="30" maxlength="30"></td>
 	</tr>
 	<tr>
-		<td class="formlabel">Cargo</td>
+		<td class="formlabel required">Cargo</td>
 		<td><input id="cargo" name="cargo" type="text" size="30" maxlength="80"></td>
 	</tr>
 	<tr>
-		<td class="formlabel">Empresa</td>
+		<td class="formlabel required">&Aacute;rea</td>
+		<td><input id="area" name="area" type="text" size="30" maxlength="30"></td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Empresa</td>
 		<td><input id="empresa" name="empresa" type="text" size="30" maxlength="80"></td>
 	</tr>
 	<tr>
-		<td class="formlabel">Sector de la Empresa</td>
+		<td class="formlabel required">Sector de la Empresa</td>
 		<td><select name="sector1" id="sector1" onchange="revisarSelect()">
 			<option value="seleccione opcion">[Seleccione una opci&oacute;n]</option>
 			<option value="Banca y seguros">Banca y seguros</option>
@@ -95,8 +99,12 @@ ${inc:${def:actionroot}/header}
 			<option value="Servicios profesionales y consultoria">Servicios profesionales y consultor&iacute;a</option>
 			<option value="Tecnologia y telecomunicaciones">Tecnolog&iacute;a y telecomunicaciones</option>
 			<option value="otro">Otro</option>
-		</select><input type="text" id="sector2" name="sector2" size="30" maxlength="60" hidden></td>
+		</select></td>
 	</tr>	
+	<tr id="sector_otro" hidden>
+	<td class="formlabel required">&iquest;Cu&aacute;l?</td>
+		<td><input type="text" id="sector2" name="sector2" size="30" maxlength="60"></td>
+	</tr>
 				
 							
 			<!--separator row-->
@@ -107,15 +115,16 @@ ${inc:${def:actionroot}/header}
 			<!--buttons-->
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="Registrarse">			
+					<input type="submit" value="Registrarse">
+					<input type="button" value="Cancelar" onclick="pagPpal();">			
 				</td>
 			</tr>
 		</table>
 						
 		</form>
-						<div id="footer" align="center">
+						<!--<div id="footer" align="center">
 				<img src="${def:context}/images/foot.jpg" alt="footer" valign="bottom">
-			</div>
+			</div>-->
 			</div>
 
 		<script language="javascript">
@@ -144,15 +153,19 @@ ${inc:${def:actionroot}/header}
 
 	function revisarSelect(){
 		if (document.getElementById("sector1").value == "otro") {
-			document.getElementById("sector2").hidden = false;
+			document.getElementById("sector_otro").hidden = false;
 			document.getElementById("sector2").value = "";
 			document.form1.elements[11].focus();
 		} else{
-			document.getElementById("sector2").hidden = true;
+			document.getElementById("sector_otro").hidden = true;
 			document.getElementById("sector2").value = document.getElementById("sector1").value;
 			if (document.getElementById("sector1").value == "seleccione opcion")
 				document.getElementById("sector2").value = "";
 		};
+	}
+
+	function pagPpal(){
+		window.location = "http://localhost/isurvey/action/estudio/abierto/identificado/form?id=${fld:id_instrumento}";
 	}
 
 		</script>

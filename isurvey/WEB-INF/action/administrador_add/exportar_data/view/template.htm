@@ -1,0 +1,34 @@
+<!--data grid-->
+<table class="grid" width="900px">
+
+<!--toolbar-->
+	<tr>
+		<th colspan="16">
+			<!--t�tulo del grid--> 
+			<span style="float: left;">Contenido de la tabla </span>
+			<!--panel de control de navegacion--> 
+			<span style="float: right;">${req:controls}</span> 
+			<!--indicador de progreso-->
+			<img id="grid-progress" src="${def:context}/images/progress.gif" style="float: right; margin-right: 10px; display: none"> 
+		</th>
+	</tr>
+
+	<!--encabezados-->
+	<tr>
+		<th><a href="javascript:onclick=sortBy('nombre_estudio','query.sql')" title="Haga CLICK para ordenar por esta columna">Estudio</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('id_instrumento','query.sql')" title="Haga CLICK para ordenar por esta columna">ID Instrumento</a></th>
+		<th width="20%"><a href="javascript:onclick=sortBy('nombre_instrumento','query.sql')" title="Haga CLICK para ordenar por esta columna">Nombre Instrumento</a></th>
+		<th width="20%">link</th>
+	</tr>
+
+	<!--data-->
+	<rows>
+	<tr ${fld:_rowStyle}>
+		<td align="center">${fld:nombre_estudio}</td>
+		<td align="center">${fld:id_instrumento}</td>
+		<td align="center">${fld:nombre_instrumento}</td>
+		<td align="center"><a href="http://localhost:8090/limesurvey/index.php/admin/export/sa/exportresults/surveyid/${fld:id_instrumento}">link</a></td>
+	</tr>
+	</rows>
+
+</table>

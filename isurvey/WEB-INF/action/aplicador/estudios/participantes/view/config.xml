@@ -15,6 +15,7 @@
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
 		<recordset id="query-participante-aplicador.sql" source="session" scope="transaction" />
+		<recordset id="query-numero-instrumentos.sql" source="session" scope="transaction" />
 	</transaction>
 
 	<output>
@@ -22,6 +23,7 @@
 		<template>template.htm</template>
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
+		<print mode="form" recordset="query-numero-instrumentos.sql"/>
 		<print mode="table" recordset="query-participante-aplicador.sql" tag="rows" alternate-colors="true" />
 	</output>
 

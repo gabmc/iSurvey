@@ -25,7 +25,7 @@ values
 	'{{empresa}}',
 	'{{sector_empresa}}',
 	'{{cargo}}',
-	'',
+	'{{area}}',
 	'',
 	'{{id_empresa}}',
 	now(),

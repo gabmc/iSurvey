@@ -7,6 +7,7 @@
 <!--biblioteca generica JS/Dinamica-->
 <script type="text/javascript" src="${def:context}/action/script">
 </script>
+<script src="../../../ckeditor/ckeditor.js"></script>
 
 <title>iSurvey</title>
 </head>
@@ -22,7 +23,7 @@
 <div id="form" align="center">
 <form id="form1" name="form1" onsubmit="return save()" action="${def:context}${def:actionroot}/insertImagen" method="POST" enctype="multipart/form-data" target="uploadFrame">
 
-<table class="formgrid" width="450px">
+<table class="formgrid" width="850px">
 
 	<!--ancho de la columna de etiquetas-->
 	<col width="20%">
@@ -60,14 +61,6 @@
 			<input id="urlimg" name="urlimg" type="hidden" size="35" maxlength="150">
 		</td>
 	</tr>
-	<tr>
-		<td class="formlabel required">T&iacute;tulo e-mail</td>
-		<td><input type="text" name="titulo_email" id="titulo_email" size="44"></td>
-	</tr>
-	<tr>
-		<td class="formlabel required">Cuerpo e-mail</td>
-		<td><textarea name="cuerpo_email" id="cuerpo_email" cols="40" rows="8"></textarea></td>
-	</tr>
 		<tr>
 		<td class="formlabel required">Empresa</td>
 		<td>
@@ -80,6 +73,22 @@
 			<img src="${def:context}/images/clear.png" width="18" height="18" class="button" onclick="document.form1.id_empresa.value='';document.form1.id_empresa_name.value='';"
 				title="Borrar valor seleccionado" />
 		</td>
+	</tr>
+	<tr>
+		<!--<td class="formlabel required">T&iacute;tulo e-mail</td>-->
+		<td colspan="2" align="center">T&iacute;tulo e-mail Invitaci&oacute;n<br><input type="text" name="titulo_email" id="titulo_email" size="60"><br></td>
+	</tr>
+	<tr>
+		<!--<td class="formlabel required">Cuerpo e-mail</td>-->
+		<td colspan="2" align="center">Cuerpo e-mail Invitaci&oacute;n <br> Etiquetas que se pueden usar: {{banner}}, {{nombre_estudio}}, {{nombre_participante}}, {{apellido_participante}}, {{enlace}}<textarea name="cuerpo_email" id="cuerpo_email" cols="40" rows="8"></textarea><textarea name="cuerpo_email2" id="cuerpo_email2" cols="30" rows="10" hidden></textarea><br></td>
+	</tr>
+	<tr>
+		<!--<td class="formlabel required">T&iacute;tulo e-mail</td>-->
+		<td colspan="2" align="center">T&iacute;tulo e-mail Recordatorio<br><input type="text" name="titulo_email_recordatorio" id="titulo_email_recordatorio" size="60"><br></td>
+	</tr>
+	<tr>
+		<!--<td class="formlabel required">Cuerpo e-mail</td>-->
+		<td colspan="2" align="center">Cuerpo e-mail Recordatorio <br> Etiquetas que se pueden usar: {{banner}}, {{nombre_estudio}}, {{nombre_participante}}, {{apellido_participante}}, {{enlace}}<textarea name="cuerpo_email_recordatorio" id="cuerpo_email_recordatorio" cols="40" rows="8"></textarea><textarea name="cuerpo_email_recordatorio2" id="cuerpo_email_recordatorio2" cols="30" rows="10" hidden></textarea></td>
 	</tr>
 	
 	<!--separador-->
@@ -125,11 +134,22 @@
 
 <iframe name="uploadFrame" style="display:none" width="300" height="300">
 </iframe>
-
 </body>
 
 <!--codigo de soporte del template-->
 <script type="text/javascript">
+
+	CKEDITOR.replace( 'cuerpo_email' );
+	CKEDITOR.replace( 'cuerpo_email_recordatorio' );
+
+	timer = setInterval(updateText,100);
+
+	function updateText(){
+		var editorText = CKEDITOR.instances.cuerpo_email.getData();
+		document.getElementById("cuerpo_email2").value = editorText;
+		var editorText = CKEDITOR.instances.cuerpo_email_recordatorio.getData();
+		document.getElementById("cuerpo_email_recordatorio2").value = editorText;
+	}
 
 	//desplegar picklist de seleccion simple
 	function pickIdSectorEmpresarial(){
@@ -315,6 +335,8 @@
 	//configurar formulario para ingresar registro nuevo
 	function addNew()
 	{
+		CKEDITOR.instances['cuerpo_email'].setData('');
+		CKEDITOR.instances['cuerpo_email_recordatorio'].setData('');
 		clearForm("form1");
 		document.getElementById("formTitle").innerHTML = "A&ntilde;adir registro";
 		document.getElementById("grabar").disabled=false;

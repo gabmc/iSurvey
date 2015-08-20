@@ -17,6 +17,7 @@
 	<parameter id='id_empresa' type='integer' required='true' label='ID Empresa'/>
 	<parameter id='id_instrumento' type='integer' required='true' label='ID Instrumento'/>
 	<parameter id='id_estudio' type='integer' required='true' label='ID Estudio'/>
+	<parameter id='area' type='varchar' required='true' label='Area' maxlen='30'/>
 
 	<custom-validator classname="dinamica.validators.DuplicatedKeyValidator" on-error-label="Este valor ya se encuentra registrado en la base de datos." sql="duplicated.sql" id="id_participante" />
 

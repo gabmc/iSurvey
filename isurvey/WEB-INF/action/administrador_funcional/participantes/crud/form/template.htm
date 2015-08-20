@@ -49,37 +49,65 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">Nombre</td>
+		<td class="formlabel required">Nombre</td>
 		<td>
 			<input id="nombre_participante" name="nombre_participante" type="text" size="30" maxlength="30">
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">Apellido</td>
+		<td class="formlabel required">Apellido</td>
 		<td>
 			<input id="apellido_participante" name="apellido_participante" type="text" size="30" maxlength="30">
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">e-mail</td>
+		<td class="formlabel required">e-mail</td>
 		<td>
 			<input id="email_participante" name="email_participante" type="text" size="30" maxlength="30">
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">Empresa</td>
+		<td class="formlabel">Tel&eacute;fono</td>
+		<td>
+			<input id="telefono" name="telefono" type="text" size="30" maxlength="30">
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Empresa</td>
 		<td>
 			<input id="empresa" name="empresa" type="text" size="30" maxlength="30">
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">&Aacute;rea</td>
+		<td class="formlabel required">Sector de la Empresa</td>
+		<td align="left"><select name="sector1" id="sector1" onchange="revisarSelect()">
+			<option value="seleccione opcion">[Seleccione una opci&oacute;n]</option>
+			<option value="Banca y seguros">Banca y seguros</option>
+			<option value="Comercio y retail">Comercio y retail</option>
+			<option value="Construccion e ingenieria">Construcci&oacute;n e ingenier&iacute;a</option>
+			<option value="Consumo masivo">Consumo masivo</option>
+			<option value="Energia">Energ&iacute;a</option>
+			<option value="Entretenimiento / Medios / Publicidad">Entretenimiento / Medios / Publicidad</option>
+			<option value="Farmaceutico y salud">Farmac&eacute;utico y salud</option>
+			<option value="Industrial / Manufactura">Industrial / Manufactura</option>
+			<option value="Logistica y transporte">Log&iacute;stica y transporte</option>
+			<option value="Servicios profesionales y consultoria">Servicios profesionales y consultor&iacute;a</option>
+			<option value="Tecnologia y telecomunicaciones">Tecnolog&iacute;a y telecomunicaciones</option>
+			<option value="otro">Otro</option>
+		</select></td>
+	</tr>
+	<tr id="sector_otro" hidden>
+	<td class="formlabel">&iquest;Cu&aacute;l?</td>
+		<td><input type="text" id="sector2" name="sector2" size="30" maxlength="60"></td>
+	</tr>
+	<tr>
+		<td class="formlabel required">&Aacute;rea</td>
 		<td>
 			<input id="area" name="area" type="text" size="30" maxlength="50">
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">Cargo</td>
+		<td class="formlabel required">Cargo</td>
 		<td>
 			<input id="cargo" name="cargo" type="text" size="30" maxlength="30">
 		</td>
@@ -105,10 +133,11 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">Sexo</td>
+		<td class="formlabel required">Sexo</td>
 		<td>
                     <input id="sexom" name="sexo" type="radio" value="M"><label>Masculino</label>
                     <input id="sexof" name="sexo" type="radio" value="F"><label>Femenino</label>
+                    <input type="text" hidden id="sexo">
 		</td>
 	</tr>
 	<tr>
@@ -169,6 +198,7 @@
 		document.form1.id_participante.onkeypress = keypressInteger;
 		document.form1.fecha_nacimiento.onkeypress = keypressDate;
 		document.form1.fecha_ingreso.onkeypress = keypressDate;
+		document.form1.telefono.onkeypress = keypressInteger;
 
 	} 
 	
@@ -307,6 +337,19 @@
 		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
 		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
 		var w = window.open(url, null, features);
+	}
+
+	function revisarSelect(){
+		if (document.getElementById("sector1").value == "otro") {
+			document.getElementById("sector_otro").hidden = false;
+			document.getElementById("sector2").value = "";
+			document.form1.elements[11].focus();
+		} else{
+			document.getElementById("sector_otro").hidden = true;
+			document.getElementById("sector2").value = document.getElementById("sector1").value;
+			if (document.getElementById("sector1").value == "seleccione opcion")
+				document.getElementById("sector2").value = "";
+		};
 	}
 </script>
 

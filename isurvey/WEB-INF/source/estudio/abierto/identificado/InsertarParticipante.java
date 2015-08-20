@@ -36,6 +36,7 @@ public class InsertarParticipante extends GenericTableManager {
         sql = StringUtil.replace(sql, "{{cargo}}", ((String[]) parametros.get("cargo"))[0]);
         sql = StringUtil.replace(sql, "{{id_empresa}}", ((String[]) parametros.get("id_empresa"))[0]);
         sql = StringUtil.replace(sql, "{{id_estudio_identificado}}", getIdEstudio(idInstrumento));
+        sql = StringUtil.replace(sql, "{{area}}", ((String[]) parametros.get("area"))[0]);
         this.getDb().exec(sql);
         
         sql = StringUtil.replace(getResource("insert-lime.sql"), "{{firstname}}", ((String[]) parametros.get("nombre_participante"))[0]);

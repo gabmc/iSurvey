@@ -238,15 +238,10 @@
 	font-weight: bold;
 	color: grey;
 }
-#footer
-    {
-        position: absolute;
-        bottom: 0;
-        left: 0px;
-        width: 100%;
-        background: #CCC;
-        height: 24px;
-    }
+#mail_sample {
+	margin: 10px 15px 10px 15px;
+	border: 1px solid black;
+}
 
 /* regular tags */
 form {
@@ -432,6 +427,9 @@ body {
 #wrapper {
 	min-height:100%;
 	position:relative;
+	-webkit-transform-style: preserve-3d;
+  	-moz-transform-style: preserve-3d;
+  	transform-style: preserve-3d;
 }
 #header {
 	background:#ededed;
@@ -448,6 +446,19 @@ body {
 	bottom:0;
 	left:0;
 }
+
+#login {
+	position: relative;
+  	top: 50%;
+  	transform: translateY(50%);
+}
+
+#login2 {
+	position: relative;
+  	top: 50%;
+  	transform: translateY(10%);
+}
+
 	/* END IE6 hack */ 
 
 /* END MENU */

@@ -1,6 +1,7 @@
 select participante.id_participante, participante.nombre_participante, participante.apellido_participante, 
-participante.email_participante, participante.area, participante.cargo, participante.sexo, 
-porcentaje_completado as completado, token_participante, id_instrumento
+participante.email_participante, participante.telefono, participante.empresa, participante.sector_empresa, 
+participante.area, participante.cargo, participante.sexo, porcentaje_completado as completado, 
+token_participante, id_instrumento, '${fld:id_estudio}' as id_estudio
 from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_instrumento
 where participante.id_participante in 
 	(select id_participante 
@@ -26,13 +27,14 @@ and upper(email_participante) like upper(${fld:email})
 and upper(area) like upper(${fld:area})
 and upper(cargo) like upper(${fld:cargo})
 and upper(sexo) like upper(${fld:sexo})
-
+and upper(empresa) like upper(${fld:empresa})
 
 union
 
 select participante.id_participante, participante.nombre_participante, participante.apellido_participante, 
-participante.email_participante, participante.area, participante.cargo, participante.sexo, 
-porcentaje_completado as completado, token_participante, id_instrumento
+participante.email_participante, participante.telefono, participante.empresa, participante.sector_empresa, 
+participante.area, participante.cargo, participante.sexo, porcentaje_completado as completado, 
+token_participante, id_instrumento, '${fld:id_estudio}' as id_estudio
 from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_instrumento
 where id_estudio_identificado = ${fld:id_estudio}
 and participante.id_participante in
@@ -53,6 +55,7 @@ and upper(email_participante) like upper(${fld:email})
 and upper(area) like upper(${fld:area})
 and upper(cargo) like upper(${fld:cargo})
 and upper(sexo) like upper(${fld:sexo})
+and upper(empresa) like upper(${fld:empresa})
 
 
 order by id_participante

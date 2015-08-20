@@ -3,7 +3,7 @@
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="4">
+		<th colspan="6">
 			<!--t�tulo del grid--> 
 			<span style="float: left;">Contenido de la tabla </span>
 			<!--panel de control de navegacion--> 
@@ -24,7 +24,9 @@
 		<th width="8%">Identificador</th>
 		<th width="8%">Nombre</th>
 		<th width="8%">Apellido</th>
-		<th width="8%">Enlace Estudio</th>
+		<th width="8%"><a href="javascript:onclick=sortBy('completado','query-participante-aplicador.sql')" title="Haga CLICK para ordenar por esta columna">Instrumentos Completados</a></th>
+		<th width="8%">Ficha</th>
+		<th width="8%">Recordatorio</th>
 	</tr>
 
 	<!--data-->
@@ -33,7 +35,9 @@
 		<td align="center">${fld:id_participante}</td>
 		<td align="center">${fld:nombre_participante}</td>
 		<td align="center">${fld:apellido_participante}</td>
+		<td align="center">${fld:completado}/${fld:instrumentos}</td>
 		<td align="center"><a href="#" onclick="ventanaDialogo(${fld:id_estudio},${fld:id_participante})"><img width="18" height="18" src="${def:context}/images/clipboard.png" alt="encuesta"></a></td>
+		<td align="center"><a href="#" onclick="ventanaRecordatorioIndividual(${fld:id_estudio},${fld:id_participante})"><img width="18" height="18" src="${def:context}/images/bell.png" alt="encuesta"></a></td>
 	</tr>
 	</rows>
 

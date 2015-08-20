@@ -16,11 +16,11 @@
 
 	<output>
 		<classname>dinamica.GenericOutput</classname>
-		<template>template.htm</template>
+		<template>output.js</template>
 		<set-http-headers>true</set-http-headers>
-		<content-type>text/html</content-type>
+		<content-type>text/javascript; charset=iso-8859-1</content-type>
 		<expiration>0</expiration>
-		<print mode="form" recordset="id_instrumento" />
+		<print mode="form" recordset="id_instrumento"/>
 	</output>
 
 </config>

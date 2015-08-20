@@ -5,7 +5,21 @@ select
 		when 'Cerrado' then concat('http://localhost/isurvey/action/estudio/cerrado/form?token=', int_participante_instrumento.token_participante)
 		when 'Abierto-Anonimo' then concat('http://localhost/isurvey/action/estudio/abierto/anonimo/form?id=', instrumento.id_instrumento)
         when 'Abierto-Identificado' then concat('http://localhost/isurvey/action/estudio/abierto/identificado/form?id=', instrumento.id_instrumento)
-        end as link
+        end as link,
+    case (select count(estatus) from ajvieira_isurvey_app.int_participante_instrumento 
+    				where id_participante = participante.id_participante and id_instrumento in (select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id_estudio}
+    				and estatus = 'Completa')
+					group by id_participante)
+					when 0 then
+					0
+					when null then
+					0
+					else
+					(select count(estatus) from ajvieira_isurvey_app.int_participante_instrumento 
+					where estatus = 'Completa' and id_participante = participante.id_participante and id_instrumento in 
+					(select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id_estudio} 
+					and estatus = 'Completa')) 
+end as completado
 from
 	ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_lista_participantes,
 	ajvieira_isurvey_app.lista_participantes, ajvieira_isurvey_app.int_lista_participantes_estudio,

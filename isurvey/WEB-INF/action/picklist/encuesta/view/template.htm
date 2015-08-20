@@ -17,6 +17,9 @@
 		<th style="width: 50%;">
 			<a href="javascript:onclick=sortBy('productname')" title="Haga CLICK para ordenar por esta columna">ID</a>
 		</th>
+		<th style="width: 50%;">
+			<a href="javascript:onclick=sortBy('nombre')" title="Haga CLICK para ordenar por esta columna">Nombre</a>
+		</th>
 	</tr>
 
 	<!--data-->
@@ -24,6 +27,9 @@
 	<tr ${fld:_rowStyle} onmouseover="rowOn(this)" onmouseout="rowOff(this)" onclick="selectItem('${fld:productid}')">
 		<td align="center" style="font-size: 9pt; width: 30%;">
 			<span id="${fld:productid}">${fld:productname}</span>
+		</td>
+		<td align="center" style="font-size: 9pt; width: 30%;">
+			<span id="${fld:productid}">${fld:nombre}</span>
 		</td>
 	</tr>
 	</rows>

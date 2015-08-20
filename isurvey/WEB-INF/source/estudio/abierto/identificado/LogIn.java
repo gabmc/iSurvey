@@ -39,9 +39,7 @@ public class LogIn extends GenericTransaction {
         int numeroDeInstrumentos = contadorDeInstrumentos(instrumentos);
         
         if (numeroDeInstrumentos > 1){
-        	System.out.print("HAY VARIOS");
         }else{
-        	System.out.print("HAY UNO");
         	Recordset record = new Recordset();
         	record.append("id_instrumento", java.sql.Types.VARCHAR);
         	record.append("token", java.sql.Types.VARCHAR);
@@ -52,12 +50,6 @@ public class LogIn extends GenericTransaction {
         }
         return 0;
     }
-
-//    Recordset getIntParticipanteInstrumento (String token) throws Throwable{
-//    	String query = "select * from ajvieira_isurvey_app.int_participante_instrumento " +
-//    			"where token_participante = '" + token + "'";
-//    	return this.getDb().get(query);
-//    }
     
     String getToken (String idInstrumento, String idParticipante) throws Throwable{
     	String sql = "select * from ajvieira_isurvey_app.int_participante_instrumento where " +

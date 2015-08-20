@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror='/action/error/validation/ajax'>
+	<parameter id='id_estudio' type='integer' required='true' label='ID Estudio' maxlen='10'/>
+
+	<parameter id='identificador' type='varchar' required='false' label='ID Participante' maxlen='50'/>
+	<parameter id='nombre' type='varchar' required='false' label='Nombre Participante' maxlen='50'/>
+	<parameter id='apellido' type='varchar' required='false' label='Apellido Participante' maxlen='50'/>
+	<parameter id='email' type='varchar' required='false' label='Email Participante' maxlen='50'/>
+	<parameter id='estatus' type='varchar' required='false' label='Estatus' maxlen='50'/>
+	<parameter id='completado' type='integer' required='false' label='porcentaje' maxlen='50'/>
+	<parameter id='area' type='varchar' required='false' label='Area' maxlen='50'/>
+	<parameter id='cargo' type='varchar' required='false' label='Cargo' maxlen='50'/>
+	<parameter id='sexo' type='varchar' required='false' label='Sexo' maxlen='50'/>
+	<parameter id='empresa' type='varchar' required='false' label='Empresa' maxlen='50'/>
+	<parameter id='sector' type='varchar' required='false' label='Sector Empresa' maxlen='50'/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="identificador"
+		rule="like"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="nombre"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="apellido"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="email"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="estatus"
+		rule="like"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="area"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="cargo"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="sexo"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="empresa"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="sector"
+		rule="contains"
+		ifnull="%"
+		/>
+</validator>
+

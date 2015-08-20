@@ -3,16 +3,17 @@
 	<parameter id='id_participante' type='integer' required='true' label='id_participante' maxlen='8'/>
 	<parameter id='nombre_participante' type='varchar' required='true' label='Nombre' maxlen='30'/>
 	<parameter id='apellido_participante' type='varchar' required='true' label='Apellido' maxlen='30'/>
-	<parameter id='email_participante' type='varchar' required='true' label='e-mail' maxlen='30'/>
+	<parameter id='email_participante' type='varchar' required='true' label='e-mail' maxlen='30' regexp="^([\w-]+\.)*?[\w-]+@[\w-]+\.([\w-]+\.)*?[\w]+$" regexp-error-label="Formato incorrecto, use xxxx@xxxxxx.xxx" />
 	<parameter id='empresa' type='varchar' required='true' label='Empresa' maxlen='100'/>
-	<parameter id='area' type='varchar' required='false' label='Area' maxlen='100'/>
-	<parameter id='cargo' type='varchar' required='false' label='Cargo' maxlen='30'/>
+	<parameter id='area' type='varchar' required='true' label='Area' maxlen='100'/>
+	<parameter id='cargo' type='varchar' required='true' label='Cargo' maxlen='30'/>
 	<parameter id='supervisor' type='varchar' required='false' label='Supervisor' maxlen='30'/>
 	<parameter id='fecha_nacimiento' type='date' required='false' label='Fecha de Nacimiento' maxlen='13'/>
 	<parameter id='fecha_ingreso' type='date' required='false' label='Fecha de Ingreso' maxlen='13'/>
-	<parameter id='sexo' type='varchar' required='false' label='Sexo' maxlen='20'/>
+	<parameter id='sexo' type='varchar' required='true' label='Sexo' maxlen='20'/>
 	<parameter id='tipo_nomina' type='varchar' required='false' label='Tipo de Nómina' maxlen='30'/>
 	<parameter id='funcion' type='varchar' required='false' label='Función' maxlen='30'/>
+	<parameter id='sector2' type='varchar' required='true' label='Sector Empresa' maxlen='50'/>
 	
 
 	<custom-validator classname="dinamica.validators.DuplicatedKeyValidator" on-error-label="Este valor ya se encuentra registrado en la base de datos." sql="duplicated.sql" id="id_participante" />

@@ -1,6 +1,6 @@
 select
 	id_participante, nombre_participante, apellido_participante, email_participante, empresa, area, cargo,
-	supervisor, fecha_nacimiento, fecha_ingreso, sexo, tipo_nomina, funcion
+	supervisor, fecha_nacimiento, fecha_ingreso, sexo, tipo_nomina, funcion, sector_empresa, telefono
 from 
 	ajvieira_isurvey_app.participante
 where

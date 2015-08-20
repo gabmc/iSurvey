@@ -10,11 +10,10 @@
 	<set-request-attribute id="progress" value="file:/WEB-INF/action/progress/progress.htm"/>
 
 	<transaction>
-		<classname>dinamica.GenericTransaction</classname>
+		<classname>aplicador.VentanaInvitacion</classname>
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
-		<recordset id="query-participante-aplicador.sql" source="sql" scope="transaction" on-empty-return="1" />
 	</transaction>
 
 	<output>
@@ -24,6 +23,7 @@
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
 		<print mode="form" recordset="query-participante-aplicador.sql" />
+		<print mode="form" recordset="sql.sql" />
 	</output>
 
 </config>

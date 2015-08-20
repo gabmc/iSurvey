@@ -9,8 +9,8 @@
 	<log>false</log>
 
 	<!--configura el control de paginacion-->
-	<!--<set-request-attribute id="paging.recordset" value="visor" />
-	<set-request-attribute id="paging.pagesize" value="6" />-->
+	<set-request-attribute id="paging.recordset" value="visor" />
+	<set-request-attribute id="paging.pagesize" value="6" />
 
 	<transaction>
 		<classname>dinamica.GenericTransaction</classname>

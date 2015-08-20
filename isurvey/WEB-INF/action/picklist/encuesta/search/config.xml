@@ -9,7 +9,7 @@
 
 	<!--configura el control de paginacion-->
 	<set-request-attribute id="paging.recordset" value="query.sql" />
-	<set-request-attribute id="paging.pagesize" value="2" />
+	<set-request-attribute id="paging.pagesize" value="5" />
 
 	<transaction>
 		<classname>dinamica.GenericTransaction</classname>
