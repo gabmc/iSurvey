@@ -1,5 +1,0 @@
-Hola ${fld:nombre_participante} $fld:apellido_participante},
-
-Para responder sus encuestas dirigirse a http://localhost:8090/limesurvey/index.php/${fld:id_instrumento}/${fld:token_participante}
-
-------------------------

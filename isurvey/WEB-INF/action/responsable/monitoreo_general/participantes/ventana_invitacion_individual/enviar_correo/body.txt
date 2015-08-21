@@ -1,0 +1,1 @@
+${fld:cuerpo_mail_recordatorio}

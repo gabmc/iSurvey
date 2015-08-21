@@ -48,6 +48,9 @@
 		<tr>
             <th colspan="2"><span id="formTitle"> Filtro de B&uacute;squeda </span></th>
 	</tr>
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
 		<tr>
 			<td align="center">Identificador</td>
 			<td align="center"><input onkeyup="actualizalista()" id="identificador" placeholder="12332553" type="text"></td>
@@ -81,10 +84,17 @@
 			<td align="center">Estatus</td>
 			<td align="center"><input id="estatus" readonly type="text"></td>
 		</tr>
+		<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+	<td colspan="2" align="center"><input type="button" value="Limpiar" onclick="clean()"></td>
+	</tr>
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
 </table>
 </form>
-<input type="button" value="Limpiar" onclick="clean()">
-<br>
 <br>
 	<!--panel de respuesta AJAX para el grid paginado-->
 	<div id="response" style="display: none; width: 100%" align="center"></div>

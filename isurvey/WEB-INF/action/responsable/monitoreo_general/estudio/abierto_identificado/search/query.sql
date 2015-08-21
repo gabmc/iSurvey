@@ -1,6 +1,7 @@
 select participante.id_participante, participante.nombre_participante, participante.apellido_participante, 
 participante.email_participante, participante.telefono, participante.empresa, participante.sector_empresa, 
-participante.area, participante.cargo, participante.sexo, porcentaje_completado as completado, token_participante, id_instrumento
+participante.area, participante.cargo, participante.sexo, porcentaje_completado as completado, 
+token_participante, id_instrumento, '${fld:id_estudio}' as id_estudio
 from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_instrumento
 where participante.id_participante in 
 	(select id_participante 
@@ -32,7 +33,8 @@ union
 
 select participante.id_participante, participante.nombre_participante, participante.apellido_participante, 
 participante.email_participante, participante.telefono, participante.empresa, participante.sector_empresa, 
-participante.area, participante.cargo, participante.sexo, porcentaje_completado as completado, token_participante, id_instrumento
+participante.area, participante.cargo, participante.sexo, porcentaje_completado as completado, 
+token_participante, id_instrumento, '${fld:id_estudio}' as id_estudio
 from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_instrumento
 where id_estudio_identificado = ${fld:id_estudio}
 and participante.id_participante in

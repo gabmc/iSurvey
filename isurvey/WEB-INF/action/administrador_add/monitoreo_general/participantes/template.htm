@@ -1,0 +1,235 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+<title>Monitoreo General</title>
+</head>
+<body>
+<!--banner-->
+<div class="banner">
+	<div style="float: left;">Estatus de ${fld:nombre_estudio}</div>
+</div>
+<!--data grid-->
+<div align="center">
+<table class="grid" width="400px">
+
+<tbody>
+	<tr>
+		<td align="center">
+			Sin Iniciar
+		</td>
+		<td align="center">
+			<a href="#" onclick="setEstatus('Sin Iniciar')">${fld:sin_iniciar}</a>
+		</td>
+		<td align="center">
+			Incompletas
+		</td>
+		<td align="center">
+			<a href="#" onclick="setEstatus('Incompleta')">${fld:incompletas}</a>
+		</td>
+		<td align="center">
+			Completas
+		</td>
+		<td align="center">
+			<a href="#" onclick="setEstatus('Completa')">${fld:completas}</a>
+		</td>
+		<td align="center">Todas</td>
+		<td align="center">
+		<a href="#" onclick="cleanEstatus()">${fld:total}</td></a>
+	</tr>
+</tbody>
+</table>
+<br>
+<form id="form">
+<table class="formgrid" width="400px">
+		<tr>
+            <th colspan="2"><span id="formTitle"> Filtro de B&uacute;squeda </span></th>
+	</tr>
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+		<tr>
+			<td align="center">Identificador</td>
+			<td align="center"><input onkeyup="actualizalista()" id="identificador" placeholder="12332553" type="text"></td>
+		</tr>
+		<tr>
+			<td align="center">Nombre</td>
+			<td align="center"><input onkeyup="actualizalista()" id="nombre" placeholder="Carlos" type="text"></td>
+		</tr>
+		<tr>
+			<td align="center">Apellido</td>
+			<td align="center"><input onkeyup="actualizalista()" id="apellido" placeholder="P&eacute;rez" type="text"></td>
+		</tr>
+		<tr>
+			<td align="center">e-mail</td>
+			<td align="center"><input onkeyup="actualizalista()" id="email" placeholder="carlos.perez@gmail.com" type="text"></td>
+		</tr>
+		<tr>
+			<td align="center">&Aacute;rea</td>
+			<td align="center"><input onkeyup="actualizalista()" id="area" placeholder="Recursos Humanos" type="text"></td>
+		</tr>
+		<tr>
+			<td align="center">Cargo</td>
+			<td align="center"><input onkeyup="actualizalista()" id="cargo" placeholder="Gerente" type="text"></td>
+		</tr>
+		<tr>
+			<td align="center">Sexo</td>
+			<td align="center"><input onclick="actualizalista()" id="sexom" name="sexo" type="radio" value="M"><label>Masculino</label>
+                    <input onclick="actualizalista()" id="sexof" name="sexo" type="radio" value="F"><label>Femenino</label><input id="sexo" type="text" hidden></td>
+		</tr>
+		<tr>
+			<td align="center">Estatus</td>
+			<td align="center"><input id="estatus" readonly type="text"></td>
+		</tr>
+		<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input type="button" value="Limpiar" onclick="clean()"></td>
+	</tr>
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+</table>
+</form>
+<br>
+<div align="center">
+<input type="button" value="Enviar Invitaci&oacute;n Masiva" onclick="ventanaInvitacionMasiva('${fld:id_estudio}')">
+<input type="button" value="Enviar Recordatorio Masivo" onclick="ventanaRecordatorioMasivo('${fld:id_estudio}')">
+</div>
+<br>
+	<!--panel de respuesta AJAX para el grid paginado-->
+	<div id="response" style="display: none; width: 100%" align="center"></div>
+
+
+</div>
+</body>
+<script type="text/javascript">
+
+	var flag = true;
+
+	onload = function()
+	{ 
+		document.getElementById("identificador").onkeypress = keypressInteger;
+		search(); //mostrar registros en vista paginada
+	}
+	            //mostrar imagen y esconder su indicador de progreso de carga
+//            function displayChart(chartID)
+//            {
+//                document.getElementById(chartID + "_wait").style.display='none';
+//                document.getElementById(chartID).style.display='';
+//            }
+
+	function search()
+	{
+		var url = "${def:actionroot}/search?id=${fld:id}";
+		
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?id=${fld:id}&currentpage=" + currentPage;
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+		//traer la pagina N del grid
+	function viewPage()
+	{
+		var url = "${def:actionroot}/view";
+		gotoPage(url);
+	}
+
+	function clean(){
+		clearForm("form");
+		flag = false;
+		search();
+	}
+
+	function cleanEstatus(){
+		document.getElementById("estatus").value = "";
+		flag = true;
+		actualizalista();
+	}
+
+	function setEstatus(estatus){
+		document.getElementById("estatus").value = estatus;
+		flag = false;
+		actualizalista();
+	}
+
+	function actualizalista()
+            {
+
+                var id = document.getElementById("identificador").value;
+                var nombre = document.getElementById("nombre").value;
+                var apellido = document.getElementById("apellido").value;
+                var email = document.getElementById("email").value;
+                var area = document.getElementById("area").value;
+                var cargo = document.getElementById("cargo").value;
+                if(document.getElementById('sexom').checked) {
+				  var sexo = document.getElementById('sexom').value;
+				}else if(document.getElementById('sexof').checked) {
+				  var sexo = document.getElementById('sexof').value;
+				} else{
+					var sexo = document.getElementById('sexo').value;
+				}
+                var estatus = document.getElementById("estatus").value;
+                var url;
+                if (flag)
+                	url = "${def:actionroot}/search?id=${fld:id}&identificador="+id+"&nombre="+nombre+"&email="+email+"&apellido="+apellido+"&area="+area+"&cargo="+cargo+"&sexo="+sexo;
+                else
+                	url = "${def:actionroot}/search2?id=${fld:id}&identificador="+id+"&nombre="+nombre+"&email="+email+"&apellido="+apellido+"&area="+area+"&cargo="+cargo+"&sexo="+sexo+"&estatus="+estatus;
+                ajaxCall(httpMethod="GET",
+                uri= url,
+                  divResponse="response",
+                divProgress="status",
+                formName=null,
+                afterResponseFn=null,
+                onErrorFn=null);
+            }
+
+    //invoca la generacion de un PDF en un popup
+	function openPDF()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/pdf?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	//invoca la generacion de un Excel en un popup
+	function openExcel()
+	{
+		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
+		var w = window.open(url, null, features);
+	}
+
+	function ventanaInvitacion(idEstudio, idParticipante) {
+		var action = "ventana_invitacion/form?id_participante="+idParticipante+"&id_estudio="+idEstudio;
+		openDialog('ventana',action, 470, 560);
+	}
+
+	function ventanaInvitacionMasiva(idEstudio) {
+		var action = "ventana_invitacion_masiva/form?id_estudio="+idEstudio;
+		openDialog('ventana2',action, 470, 560);
+	}
+
+	function ventanaRecordatorioMasivo(idEstudio) {
+		var action = "ventana_recordatorio_masivo/form?id_estudio="+idEstudio;
+		openDialog('ventana2',action, 470, 560);
+	}
+
+	function ventanaRecordatorio(idEstudio, idParticipante) {
+		var action = "ventana_recordatorio/form?id_participante="+idParticipante+"&id_estudio="+idEstudio;
+		openDialog('ventana',action, 470, 560);
+	}
+</script>
+</html>

@@ -1,0 +1,102 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+<script type="text/javascript" charset="utf-8" src="${def:context}/js/jquery.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="${def:context}/js/ZeroClipboard.js"></script>
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner" style="height: 20px; margin-bottom: 0px; font-weight: normal">
+	<div style="float: left">Ficha de Participante</div>
+	<div style="float: right">
+		<img src="${def:context}/images/cancel_square.png" width="14" height="14" class="button" onclick="parent.closeDialog()" title="Cerrar">
+	</div>
+</div>
+<br>
+<!--data grid-->
+<table class="grid" width="350px" height="150px" align="center">
+<tr>
+	<td width="40%" align="center">
+		Identificador
+	</td>
+	<td width="60%" align="center">
+		${fld:id_participante}
+	</td>
+</tr>
+<tr>
+	<td width="40%" align="center">
+		Nombre
+	</td>
+	<td width="60%" align="center">
+		${fld:nombre_participante}
+	</td>
+</tr>
+<tr>
+	<td width="40%" align="center">
+		Apellido
+	</td>
+	<td width="60%" align="center">
+		${fld:apellido_participante}
+	</td>
+</tr>
+</table>
+<div align="center">
+<h4>Opci&oacute;n 1: copiar enlace</h4>
+<textarea name="link" id="link" cols="40" rows="3">${fld:link}</textarea>
+<!--<input id="link" type="text" value="${fld:link}" size="30">-->
+<a href="#"><img id="copy-button" src="${def:context}/images/copy.png" width="26" height="26" data-clipboard-text="${fld:link}" alt="clear" onclick="link.select();" title="Copiar Link al Portapapeles"></a>
+<h4>Opci&oacute;n 2: env&iacute;o de enlace por e-mail</h4>
+</div>
+
+<div id="mail_sample">
+	<p>Asunto: ${fld:subject}</p>
+	${fld:body}
+</div>
+<div align="center">
+<a href="#"><img src="${def:context}/images/mail.png" alt="mail" width="26" height="26" title="Enviar enlace al correo registrado" onclick="envio();"></a>
+</div>
+
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+        function envio()
+        {
+            //llamada Ajax...
+            return ajaxCall(	httpMethod="POST",
+            uri="${def:actionroot}/enviar_correo?id_participante=${fld:id_participante}&id_estudio=${fld:id_estudio}",
+            divResponse=null,
+            divProgress="status",
+            formName=null,
+            afterResponseFn=null,
+            onErrorFn=null);
+
+            return false;
+        }
+
+		// Specify where the Flash movie can be found if not in root folder for web site
+ZeroClipboard.config( { moviePath: 'js/ZeroClipboard.swf' } );
+
+var client = new ZeroClipboard( $("#copy-button") );
+
+client.on( 'load', function(client) {
+
+  // callback triggered on successful copying
+  client.on( 'complete', function(client, args) {
+    console.log("Text copied to clipboard: \n" + args.text );
+  });
+});
+
+// In case of error - such as Flash not being available
+client.on( 'wrongflash noflash', function() {
+  ZeroClipboard.destroy();
+} );
+
+</script>

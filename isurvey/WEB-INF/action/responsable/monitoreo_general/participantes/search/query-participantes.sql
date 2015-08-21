@@ -6,7 +6,8 @@ select participante.id_participante,
        participante.telefono,
        participante.area,
        participante.cargo,
-       participante.sexo,  
+       participante.sexo, 
+       estudio.id_estudio, 
        case (select count(estatus) from ajvieira_isurvey_app.int_participante_instrumento 
     				where id_participante = ipi.id_participante and id_instrumento in (select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id}
     				and estatus = 'Completa')

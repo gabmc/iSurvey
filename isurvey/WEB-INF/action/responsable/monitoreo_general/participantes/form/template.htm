@@ -48,6 +48,9 @@
 		<tr>
             <th colspan="2"><span id="formTitle"> Filtro de B&uacute;squeda </span></th>
 	</tr>
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
 		<tr>
 			<td align="center">Identificador</td>
 			<td align="center"><input onkeyup="actualizalista()" id="identificador" placeholder="12332553" type="text"></td>
@@ -81,10 +84,22 @@
 			<td align="center">Estatus</td>
 			<td align="center"><input id="estatus" readonly type="text"></td>
 		</tr>
+		<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input type="button" value="Limpiar" onclick="clean()"></td>
+	</tr>
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
 </table>
 </form>
-<input type="button" value="Limpiar" onclick="clean()">
 <br>
+<div align="center">
+<input type="button" value="Enviar Invitaci&oacute;n Masiva" onclick="ventanaInvitacionMasiva('${fld:id}')">
+<input type="button" value="Enviar Recordatorio Masivo" onclick="ventanaRecordatorioMasivo('${fld:id}')">
+</div>
 <br>
 	<!--panel de respuesta AJAX para el grid paginado-->
 	<div id="response" style="display: none; width: 100%" align="center"></div>
@@ -195,6 +210,26 @@
 		var features = "height=500,width=800,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
 		var url = "${def:context}${def:actionroot}/excel?random=" + Math.random();
 		var w = window.open(url, null, features);
+	}
+
+		function ventanaInvitacionIndividual(idEstudio, idParticipante) {
+		var action = "ventana_invitacion_individual/form?id_participante="+idParticipante+"&id_estudio="+idEstudio;
+		openDialog('ventana',action, 470, 560);
+	}
+
+	function ventanaInvitacionMasiva(idEstudio) {
+		var action = "ventana_invitacion_masiva/form?id_estudio="+idEstudio;
+		openDialog('ventana2',action, 470, 560);
+	}
+
+	function ventanaRecordatorioMasivo(idEstudio) {
+		var action = "ventana_recordatorio_masivo/form?id_estudio="+idEstudio;
+		openDialog('ventana2',action, 470, 560);
+	}
+
+	function ventanaRecordatorioIndividual(idEstudio, idParticipante) {
+		var action = "ventana_recordatorio_individual/form?id_participante="+idParticipante+"&id_estudio="+idEstudio;
+		openDialog('ventana',action, 470, 560);
 	}
 </script>
 </html>

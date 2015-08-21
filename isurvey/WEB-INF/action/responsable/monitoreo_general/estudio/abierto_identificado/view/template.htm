@@ -32,7 +32,7 @@
 		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Cargo</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query.sql')" title="Haga CLICK para ordenar por esta columna">Sexo</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('completado','query.sql')" title="Haga CLICK para ordenar por esta columna">% Completo</a></th>
-		<th width="20%">Instrumento</th>
+		<th width="20%">Acciones</th>
 	</tr>
 
 	<!--data-->
@@ -49,7 +49,7 @@
 		<td align="center">${fld:cargo}</td>
 		<td align="center">${fld:sexo}</td>
 		<td align="center">${fld:completado}%</td>
-		<td align="center"><a target="_blank" title="Haz CLICK aqu&iacute; para ver la encuesta de este participante" href="http://localhost:8090/limesurvey/index.php/${fld:id_instrumento}/token/${fld:token_participante}"><img src="${def:context}/images/clipboard.png" alt="instrumento" width="18" height="18"></a></td>
+		<td align="center"><a target="_blank" title="Ver Instrumento" href="http://localhost:8090/limesurvey/index.php/${fld:id_instrumento}/token/${fld:token_participante}"><img src="${def:context}/images/clipboard.png" alt="instrumento" width="18" height="18"></a><a title="Enviar Recordatorio" href="#" onclick="ventanaRecordatorioIndividual(${fld:id_estudio},${fld:id_participante})"><img width="18" height="18" src="${def:context}/images/bell.png" alt="recordatorio"></a></td>
 	</tr>
 	</rows>
 

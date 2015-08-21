@@ -23,6 +23,10 @@
 <div id="form" align="center">
 <form id="form1" name="form1" onsubmit="return save()" action="${def:context}${def:actionroot}/insertImagen" method="POST" enctype="multipart/form-data" target="uploadFrame">
 
+<!--panel de respuesta AJAX para el grid paginado-->
+<div id="response" style="display: none; width: 100%" align="center"></div>
+<br>
+
 <table class="formgrid" width="850px">
 
 	<!--ancho de la columna de etiquetas-->
@@ -43,7 +47,7 @@
 	<tr>
 		<td class="formlabel required">Nombre</td>
 		<td>
-			<input id="nombre_estudio" name="nombre_estudio" type="text" size="44" maxlength="30">
+			<input id="nombre_estudio" name="nombre_estudio" type="text" style="width: 80%;" maxlength="30">
 		</td>
 	</tr>
 	<tr>
@@ -74,21 +78,29 @@
 				title="Borrar valor seleccionado" />
 		</td>
 	</tr>
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
 	<tr>
-		<!--<td class="formlabel required">T&iacute;tulo e-mail</td>-->
 		<td colspan="2" align="center">T&iacute;tulo e-mail Invitaci&oacute;n<br><input type="text" name="titulo_email" id="titulo_email" size="60"><br></td>
 	</tr>
-	<tr>
-		<!--<td class="formlabel required">Cuerpo e-mail</td>-->
-		<td colspan="2" align="center">Cuerpo e-mail Invitaci&oacute;n <br> Etiquetas que se pueden usar: {{banner}}, {{nombre_estudio}}, {{nombre_participante}}, {{apellido_participante}}, {{enlace}}<textarea name="cuerpo_email" id="cuerpo_email" cols="40" rows="8"></textarea><textarea name="cuerpo_email2" id="cuerpo_email2" cols="30" rows="10" hidden></textarea><br></td>
+	<tr height="10px">
+		<td colspan="2"></td>
 	</tr>
 	<tr>
-		<!--<td class="formlabel required">T&iacute;tulo e-mail</td>-->
+		<td colspan="2" align="center">Cuerpo e-mail Invitaci&oacute;n <br> Etiquetas que se pueden usar: {{banner}}, {{nombre_estudio}}, {{nombre_participante}}, {{apellido_participante}}, {{enlace}}<br> <br><textarea name="cuerpo_email" id="cuerpo_email" cols="40" rows="8"></textarea><textarea name="cuerpo_email2" id="cuerpo_email2" cols="30" rows="10" hidden></textarea></td>
+	</tr>
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
+	<tr>
 		<td colspan="2" align="center">T&iacute;tulo e-mail Recordatorio<br><input type="text" name="titulo_email_recordatorio" id="titulo_email_recordatorio" size="60"><br></td>
 	</tr>
+	<tr height="10px">
+		<td colspan="2"></td>
+	</tr>
 	<tr>
-		<!--<td class="formlabel required">Cuerpo e-mail</td>-->
-		<td colspan="2" align="center">Cuerpo e-mail Recordatorio <br> Etiquetas que se pueden usar: {{banner}}, {{nombre_estudio}}, {{nombre_participante}}, {{apellido_participante}}, {{enlace}}<textarea name="cuerpo_email_recordatorio" id="cuerpo_email_recordatorio" cols="40" rows="8"></textarea><textarea name="cuerpo_email_recordatorio2" id="cuerpo_email_recordatorio2" cols="30" rows="10" hidden></textarea></td>
+		<td colspan="2" align="center">Cuerpo e-mail Recordatorio <br> Etiquetas que se pueden usar: {{banner}}, {{nombre_estudio}}, {{nombre_participante}}, {{apellido_participante}}, {{enlace}}<br><br><textarea name="cuerpo_email_recordatorio" id="cuerpo_email_recordatorio" cols="40" rows="8"></textarea><textarea name="cuerpo_email_recordatorio2" id="cuerpo_email_recordatorio2" cols="30" rows="10" hidden></textarea></td>
 	</tr>
 	
 	<!--separador-->
@@ -120,17 +132,6 @@
 <input type="hidden" name="id_empresa2" id="id_empresa2">
 </form>
 </div>
-
-<br>
-
-<!-- Filtro de busqueda -->
-
-<!--panel de respuesta AJAX para el grid paginado-->
-<div id="response" style="display: none; width: 100%" align="center"></div>
-<br>
-<br>
-<br>
-
 
 <iframe name="uploadFrame" style="display:none" width="300" height="300">
 </iframe>

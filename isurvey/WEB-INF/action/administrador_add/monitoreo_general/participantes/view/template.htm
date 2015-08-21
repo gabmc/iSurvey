@@ -28,7 +28,7 @@
 		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query-participantes.sql')" title="Haga CLICK para ordenar por esta columna">Cargo</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('email_participante','query-participantes.sql')" title="Haga CLICK para ordenar por esta columna">Sexo</a></th>
 		<th width="20%"><a href="javascript:onclick=sortBy('completado','query-participantes.sql')" title="Haga CLICK para ordenar por esta columna">Instrumentos Completados</a></th>
-		<th width="20%">Estudio</th>
+		<th width="20%">Acciones</th>
 	</tr>
 
 	<!--data-->
@@ -42,7 +42,10 @@
 		<td align="center">${fld:cargo}</td>
 		<td align="center">${fld:sexo}</td>
 		<td align="center">${fld:completado}/${fld:instrumentos}</td>
-		<td align="center"><a target="_blank" title="Haz CLICK aqu&iacute; para ver los instrumentos de este participante" href="http://localhost/isurvey/action/estudio/cerrado2/form?id=12&token=${fld:token}"><img src="${def:context}/images/clipboard.png" width="18" height="18"alt="encuesta"></a></td>
+		<td align="center"><a target="_blank" title="Ver Instrumentos" href="http://localhost/isurvey/action/estudio/cerrado2/form?id=12&token=${fld:token}"><img src="${def:context}/images/clipboard.png" width="18" height="18"alt="encuesta"></a>
+		<a title="Enviar Invitaci&oacute;n" href="#" onclick="ventanaInvitacionIndividual(${fld:id_estudio},${fld:id_participante})"><img width="18" height="18" src="${def:context}/images/mail.png" alt="invitacion"></a>
+		<a title="Enviar Recordatorio" href="#" onclick="ventanaRecordatorioIndividual(${fld:id_estudio},${fld:id_participante})"><img width="18" height="18" src="${def:context}/images/bell.png" alt="recordatorio"></a></td>
+
 	</tr>
 	</rows>
 

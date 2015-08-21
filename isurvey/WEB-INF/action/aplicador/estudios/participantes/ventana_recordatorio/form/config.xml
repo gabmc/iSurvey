@@ -10,7 +10,7 @@
 	<set-request-attribute id="progress" value="file:/WEB-INF/action/progress/progress.htm"/>
 
 	<transaction>
-		<classname>aplicador.VentanaRecordatorio</classname>
+		<classname>aplicador.VentanaRecordatorioIndividual</classname>
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>

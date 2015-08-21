@@ -1,0 +1,109 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+<script type="text/javascript" charset="utf-8" src="${def:context}/js/jquery.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="${def:context}/js/ZeroClipboard.js"></script>
+</head>
+
+<body>
+
+<!--banner-->
+<div class="banner" style="height: 20px; margin-bottom: 0px; font-weight: normal">
+	<div style="float: left">Enviar Invitaci&oacute;n Masiva</div>
+	<div style="float: right">
+		<img src="${def:context}/images/cancel_square.png" width="14" height="14" class="button" onclick="parent.closeDialog()" title="Cerrar">
+	</div>
+</div>
+<div id="mail_sample" >
+	<p>Asunto: ${fld:subject}</p>
+	${fld:body}
+</div>
+<div align="center">
+
+<br>
+<!--data grid-->
+
+<h4>Opci&oacute;n 1: a todas las personas</h4>
+<input type="button" value="Enviar" onclick="enviarRecordatorio('T','${fld:id_estudio}')">
+<h4>Opci&oacute;n 2: a personas con estatus "Sin Iniciar" e "Incompleto"</h4>
+<input type="button" value="Enviar" onclick="enviarRecordatorio('SII','${fld:id_estudio}')">
+<h4>Opci&oacute;n 3: a personas con estatus "Incompleto"</h4>
+<input type="button" value="Enviar" onclick="enviarRecordatorio('I','${fld:id_estudio}')">
+<h4>Opci&oacute;n 4: a personas con estatus "Sin Iniciar"</h4>
+<input type="button" value="Enviar" onclick="enviarRecordatorio('SI','${fld:id_estudio}')">
+<br><br>
+<div id="response" style="display: none; width: 100%" align="center"></div>
+</div>
+</body>
+
+<!--codigo de soporte del template-->
+<script type="text/javascript">
+
+function search(idEstudio)
+	{
+		var url = "${def:actionroot}/search";
+		
+		//determina si refresca y se para en la pagina actual o en la pagina 1
+		if (currentPage > 0)
+			url = "${def:actionroot}/search?currentpage=" + currentPage;
+
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+function enviarRecordatorio(aQuien, idEstudio)
+		{
+			if (aQuien == "SII") {
+				var url = "${def:actionroot}/enviar_correo?id_estudio="+idEstudio+"&flag=0";
+					return ajaxCall(	httpMethod="POST",
+					uri=url,
+					divResponse=null,
+					divProgress="status",
+					formName=null,
+					afterResponseFn=null,
+					onErrorFn=null);
+			}
+			if (aQuien == "I") {
+				var url = "${def:actionroot}/enviar_correo?id_estudio="+idEstudio+"&flag=1";
+					return ajaxCall(	httpMethod="POST",
+					uri=url,
+					divResponse=null,
+					divProgress="status",
+					formName=null,
+					afterResponseFn=null,
+					onErrorFn=null);
+			}
+			if (aQuien == "SI"){
+				var url = "${def:actionroot}/enviar_correo?id_estudio="+idEstudio+"&flag=2";
+					return ajaxCall(	httpMethod="POST",
+					uri=url,
+					divResponse=null,
+					divProgress="status",
+					formName=null,
+					afterResponseFn=null,
+					onErrorFn=null);
+			}
+			if (aQuien == "T"){
+				var url = "${def:actionroot}/enviar_correo?id_estudio="+idEstudio+"&flag=3";
+					return ajaxCall(	httpMethod="POST",
+					uri=url,
+					divResponse=null,
+					divProgress="status",
+					formName=null,
+					afterResponseFn=null,
+					onErrorFn=null);
+			}
+			return false;
+		}
+
+</script>

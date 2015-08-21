@@ -3,7 +3,7 @@
 	<parameter id="id_participante" type="integer" required="true" label="ID Participante"/>
 	<parameter id="email" type="varchar" required="true" label="email Participante"/>
 	<parameter id="id_empresa" type="integer" required="true" label="ID Empresa"/>
-	<parameter id="id_instrumento" type="integer" required="true" label="ID Estudio"/>
+	<parameter id="id_instrumento" type="integer" required="true" label="ID Instrumento"/>
 		<custom-validator
 		classname='dinamica.validators.NoRecordsFound'
 		on-error-label='No se encuentra un participante registrado con el e-mail e Identificador indicados'

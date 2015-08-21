@@ -8,7 +8,7 @@
 	<log>false</log>
 
 	<transaction>
-		<classname>aplicador.Email</classname>
+		<classname>aplicador.EmailRecordatorioIndividual</classname>
 		<validator>true</validator>
 		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>
