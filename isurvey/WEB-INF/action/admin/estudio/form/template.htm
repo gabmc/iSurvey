@@ -3,6 +3,8 @@
 <head>
 
 <link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
 <!--biblioteca generica JS/Dinamica-->
 <script type="text/javascript" src="${def:context}/action/script">
@@ -140,8 +142,16 @@
 <!--codigo de soporte del template-->
 <script type="text/javascript">
 
-	CKEDITOR.replace( 'cuerpo_email' );
-	CKEDITOR.replace( 'cuerpo_email_recordatorio' );
+	CKEDITOR.replace( 'cuerpo_email', {
+	    width: '90%',
+	    height: '200',
+	    removeButtons : 'About,Iframe,BidiLtr,BidiRtl,Language,HiddenField,ImageButton,Button,Select,Textarea,TextField,Radio,Checkbox,Form,Scayt,Flash,Superscript,Subscript,RemoveFormat,CreateDiv'
+	} );
+	CKEDITOR.replace( 'cuerpo_email_recordatorio', {
+	    width: '90%',
+	    height: '200',
+	    removeButtons : 'About,Iframe,BidiLtr,BidiRtl,Language,HiddenField,ImageButton,Button,Select,Textarea,TextField,Radio,Checkbox,Form,Scayt,Flash,Superscript,Subscript,RemoveFormat,CreateDiv'
+	} );
 
 	timer = setInterval(updateText,100);
 

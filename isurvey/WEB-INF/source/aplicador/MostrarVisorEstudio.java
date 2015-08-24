@@ -22,11 +22,11 @@ public class MostrarVisorEstudio extends GenericTransaction {
     public int service(Recordset inputParams) throws Throwable{
         this.getDb().beginTrans();
     	String red = "<img src=\"${def:context}/images/reddot.png\" " +
-		"title=\"Sin Iniciar\" class=\"tool\" width=\"24\" height=\"24\">";
+		"title=\"Sin Iniciar\" class=\"tool\" width=\"28\" height=\"24\">";
     	String green = "<img src=\"${def:context}/images/greendot.png\" " +
-		"title=\"Completa\" class=\"tool\" width=\"24\" height=\"24\">";
+		"title=\"Completa\" class=\"tool\" width=\"28\" height=\"24\">";
     	String yellow = "<img src=\"${def:context}/images/yellowdot.png\" " +
-		"title=\"Incompleta\" class=\"tool\" width=\"24\" height=\"24\">";
+		"title=\"Incompleta\" class=\"tool\" width=\"28\" height=\"24\">";
         Enumeration names = this.getRequest().getParameterNames();
         Map parametros = this.getRequest().getParameterMap();
         String token = ((String[]) parametros.get("token"))[0];

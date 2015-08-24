@@ -1,0 +1,124 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<title>iSurvey</title>
+	
+	<script language="javascript" src="${def:context}/action/script">
+	</script>
+	
+</head>
+
+<body>
+
+<!--common header-->
+${inc:${def:actionroot}/header}
+<!--end of common header-->
+
+<div id="wrapper" align="center">
+
+		<img src="${def:context}/images/logos_empresas/${fld:logo}" width="188" height="188" alt="logo" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
+<img src="${def:context}/images/banners_estudios/${fld:banner}" width="700" height="188" alt="banner" style="float: center; width=30%; margin-right: 1% margin-bottom: 0.5em;">
+<p style="clear: both;">
+<br>
+		<!--START FORM-->
+		<form name="form1" onsubmit="return insert()" method="POST">
+		
+		<table class="formgrid" width="50%">
+		
+			<!--layout-->
+			<col width="40%"> <!--labels-->
+			<col width="60%">
+
+
+			<!--section header-->
+			<tr>
+				<th colspan="2">
+					Recuperar Identificador				
+				</th>
+			</tr>
+
+		
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--fields-->
+	<tr>
+		<td class="formlabel required">E-mail</td>
+		<td><input id="email_participante" name="email_participante" type="text" size="30" maxlength="80"></td>
+	</tr>
+				
+							
+			<!--separator row-->
+			<tr height="10px">
+				<td colspan="2"></td>
+			</tr>
+		
+			<!--buttons-->
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="Recuperar">
+					<input type="button" value="Cancelar" onclick="pagPpal();">			
+				</td>
+			</tr>
+		</table>
+						
+		</form>
+						<!--<div id="footer" align="center">
+				<img src="${def:context}/images/foot.jpg" alt="footer" valign="bottom">
+			</div>-->
+			</div>
+
+		<script language="javascript">
+			onload = function()
+	{
+		document.form1.id_participante.onkeypress = keypressInteger;
+		document.form1.telefono.onkeypress = keypressInteger;
+
+	} 
+		document.form1.elements[0].focus();
+
+			//grabar registro nuevo en BD
+	function insert()
+	{
+			clearErrorMessages();
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/recuperar_identificador/enviar_correo", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=null);	    	
+	}
+
+	function revisarSelect(){
+		if (document.getElementById("sector1").value == "otro") {
+			document.getElementById("sector_otro").hidden = false;
+			document.getElementById("sector2").value = "";
+			document.form1.elements[11].focus();
+		} else{
+			document.getElementById("sector_otro").hidden = true;
+			document.getElementById("sector2").value = document.getElementById("sector1").value;
+			if (document.getElementById("sector1").value == "seleccione opcion")
+				document.getElementById("sector2").value = "";
+		};
+	}
+
+	function pagPpal(){
+		window.location = "http://localhost/isurvey/action/estudio/abierto/identificado/form?id=${fld:id_instrumento}";
+	}
+
+		</script>
+		<!--END FORM-->
+
+
+
+</body>
+</html>

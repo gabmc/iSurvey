@@ -3,6 +3,8 @@
 <head>
 
 <link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
 <!--biblioteca generica JS/Dinamica-->
 <script type="text/javascript" src="${def:context}/action/script">
@@ -89,7 +91,15 @@
 			</div>
 						<div style="width:300px">
 			
-				<table align="center" width="95%" class="formgrid" id="tabla2" hidden>
+				<!--<table align="center" width="95%" class="formgrid" id="tabla2" hidden>
+
+					<tr>
+						<td align="center" valign="top" style="padding-right:3px">
+							<b>&iquest;No recuerdas tu identificador?</b><br>
+							Haz click <a href="registro?id=${fld:id}">AQUI</a> 
+							para recuperarlo.
+						</td>
+					</tr>
 					
 					<tr>
 						<td align="center" valign="top" style="padding-right:3px">
@@ -99,6 +109,15 @@
 						</td>
 					</tr>
 					
+				</table>-->
+
+				<table align="center" width="95%"  id="tabla2" hidden>
+					<col width="50%">
+					<col width="50%">
+					<tr>
+						<td align="center"><a href="recuperar_identificador?id=${fld:id}">Recuperar Identificador</a></td>
+						<td align="center"><a href="registro?id=${fld:id}">Registrarse</a></td>
+					</tr>
 				</table>
 </div>
 				<h2 id="mensaje" hidden>Disculpe las molestias, el Estudio se encuentra deshabilitado en este momento</h2>

@@ -56,6 +56,7 @@
 		function displayLogin()
 		{
 			document.getElementById("form_login").style.display="";
+			document.getElementById("forgot_pass").style.display="";
 			document.getElementById("form_forgotpass").style.display="none";
 			if (document.getElementById("response")!=null)
 				document.getElementById("response").style.display="none";	
@@ -66,6 +67,7 @@
 		function displayForgotPass()
 		{
 			document.getElementById("form_login").style.display="none";
+			document.getElementById("forgot_pass").style.display="none";
 			document.getElementById("form_forgotpass").style.display="";
 			if (document.getElementById("form")!=null)
 				document.getElementById("form").style.display="";
@@ -140,8 +142,7 @@
 			<div style="width:300px">
 			
 			<form name="form1" onsubmit="return login()">
-	
-			<table class="formgrid" width="95%" align="center">
+			<table class="formgrid" width="95%" align="center" id="form_login">
 			
 				<!--column layout-->
 				<col width="40%">
@@ -215,7 +216,7 @@
 	
 			<div style="width:300px">
 			
-				<table align="center" width="95%" class="formgrid">
+				<table align="center" width="95%" class="formgrid" id="forgot_pass">
 					
 					<tr>
 						<td valign="top" width="60px">
@@ -234,7 +235,7 @@
 	
 	</div>
 
-</div>
+
 
 <!--response-->
 <div id="form_forgotpass" style="display: none;">
@@ -249,7 +250,7 @@
 		
 		<p style="width:400px" align="justify">
 			Le será enviada por email una nueva contraseña, a la dirección
-			que indicó cuando se registró. Por favor ingrese los datos
+			registrada. Por favor ingrese los datos
 			que se le solicitan para confirmar su identidad.
 		</p>
 		
@@ -330,7 +331,7 @@
 					</td>
 					<td>
 						<input id="captcha" name="captcha" type="text" value="" maxlength="6" style="width:150px"><br>
-						Favor tipear los caracteres que aparecen en la imagen de arriba.
+						Favor escribir los caracteres que aparecen en la imagen de arriba.
 					</td>
 				</tr>
 				
@@ -375,9 +376,10 @@
 
 <!--marca especial para que el codigo Ajax pueda reconocer un redirect a login-->
 <span style="display:none">_ajax_VE8374yz_</span>
-<div id="footer" align="center">
+<!--<div id="footer" align="center">
 				<img src="http://localhost/isurvey/images/foot.jpg" valign="bottom">
-			</div>
+			</div>-->
+</div>
 </body>
 
 </html>
