@@ -20,14 +20,14 @@
 <p style="clear: both;">
 
 		<div id="login">
-			<div style="width:300px">
-			<form name="form1" action="log_in" method="POST">
+			<div style="width:350px">
+			<form name="form1" onsubmit="return log()">
 	
 			<table class="formgrid" width="95%" align="center" id="tabla" hidden>
 			
 				<!--column layout-->
-				<col width="40%">
-				<col width="60%">
+				<col width="35%">
+				<col width="65%">
 			
 				<!--section header-->
 				<tr>
@@ -144,5 +144,16 @@
 	} 
 		document.form1.elements[0].focus();
 
+		function log()
+	{
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/log_in", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=null);	    	
+	}
 		</script>
 </html>

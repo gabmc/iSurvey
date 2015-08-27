@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<validator onerror='/action/error/validation/ajax'>
+	<parameter id='estudio' type='varchar' required='false' label='Estudio' maxlen='30'/>
+	<parameter id='instrumento' type='varchar' required='false' label='Instrumento' maxlen='50'/>
+	<parameter id='participante' type='varchar' required='false' label='Nombre Participante' maxlen='50'/>
+	<parameter id='tipo' type='varchar' required='false' label='Tipo opinion' maxlen='50'/>
+	<parameter id='fecha' type='varchar' required='false' label='Fecha de registro' maxlen='50'/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="estudio"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="instrumento"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="participante"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="tipo"
+		rule="contains"
+		ifnull="%"
+		/>
+
+	<custom-validator
+		classname="dinamica.validators.SQLPatternTransformer"
+		parameter="fecha"
+		rule="contains"
+		ifnull="%"
+		/>
+
+</validator>
+
