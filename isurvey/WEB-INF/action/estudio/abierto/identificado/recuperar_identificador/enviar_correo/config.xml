@@ -8,18 +8,19 @@
 	<log>false</log>
 
 	<transaction>
-		<classname>estudio.EmailInvitacionIndividual</classname>
+		<classname>dinamica.GenericTransaction</classname>
 		<validator>true</validator>
 		<transaction>false</transaction>
 		<jdbc-log>false</jdbc-log>
+		<recordset id="participante.sql" source="sql" scope="transaction" />
     </transaction>
 
 	
         <mail enabled="true">
-		<subject recordset="output">${fld:subject}</subject>
-		<mail-to recordset="output" colname="email_participante"></mail-to>
-		<body html="true" recordset="output">body.txt</body>
-         </mail>
+		<subject recordset="participante.sql">${fld:subject}</subject>
+		<mail-to recordset="participante.sql" colname="email_participante"></mail-to>
+		<body html="true" recordset="participante.sql">body.txt</body>
+        </mail>
 
 	<output>
 		<classname>dinamica.GenericOutput</classname>
@@ -27,6 +28,7 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/javascript; charset=iso-8859-1</content-type>
 		<expiration>0</expiration>
+		<print mode="form" recordset="_request" />
 	</output>
 
 </config>

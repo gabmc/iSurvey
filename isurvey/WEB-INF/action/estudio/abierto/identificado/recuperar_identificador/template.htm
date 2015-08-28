@@ -3,8 +3,8 @@
 <head>
 
 	<link rel="stylesheet" type="text/css" href="${def:context}/default.css" />
-<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<title>iSurvey</title>
 	
 	<script language="javascript" src="${def:context}/action/script">
@@ -52,6 +52,16 @@ ${inc:${def:actionroot}/header}
 		<td class="formlabel required">E-mail</td>
 		<td><input id="email_participante" name="email_participante" type="text" size="30" maxlength="80"></td>
 	</tr>
+
+	<tr>
+		<td class="formlabel required">Nombre</td>
+		<td><input id="nombre_participante" name="nombre_participante" type="text" size="30" maxlength="80"></td>
+	</tr>
+
+	<tr>
+		<td class="formlabel required">Apellido</td>
+		<td><input id="apellido_participante" name="apellido_participante" type="text" size="30" maxlength="80"></td>
+	</tr>
 				
 							
 			<!--separator row-->
@@ -69,9 +79,9 @@ ${inc:${def:actionroot}/header}
 		</table>
 						
 		</form>
-						<!--<div id="footer" align="center">
+						<div id="footer" align="center">
 				<img src="${def:context}/images/foot.jpg" alt="footer" valign="bottom">
-			</div>-->
+			</div>
 			</div>
 
 		<script language="javascript">
@@ -86,11 +96,11 @@ ${inc:${def:actionroot}/header}
 			//grabar registro nuevo en BD
 	function insert()
 	{
-			clearErrorMessages();
+			var url = "${def:actionroot}/recuperar_identificador/enviar_correo?id_instrumento=${fld:id_instrumento}";
 	
 			//llamada Ajax...
 			return ajaxCall(httpMethod="POST", 
-							uri="${def:actionroot}/recuperar_identificador/enviar_correo", 
+							uri=url, 
 							divResponse=null, 
 							divProgress="status", 
 							formName="form1", 

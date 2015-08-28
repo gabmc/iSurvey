@@ -1,6 +1,16 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <validator onerror="/action/error/validation/ajax">
 
-       <parameter id="email_participante" type="varchar" required="true" label="ID Participante" />
+       <parameter id="email_participante" type="varchar" required="true" label="ID Participante"  regexp="^([\w-]+\.)*?[\w-]+@[\w-]+\.([\w-]+\.)*?[\w]+$"
+regexp-error-label="Formato incorrecto, use xxxx@xxxxxx.xxx"/>
+       <parameter id="id_instrumento" type="integer" required="true" label="ID Instrumento" />
+       <parameter id="nombre_participante" type="varchar" required="true" label="nombre participante" />
+       <parameter id="apellido_participante" type="varchar" required="true" label="Apellido Participante" />
+
+       <custom-validator
+		classname='dinamica.validators.NoRecordsFound'
+		on-error-label='No se encuentra un participante registrado con el e-mail, nombre y apellido indicados'
+		sql='validate.sql'
+		id='apellido_participante' />
 
 </validator>

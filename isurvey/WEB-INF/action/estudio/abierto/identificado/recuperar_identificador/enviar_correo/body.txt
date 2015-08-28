@@ -1,1 +1,3 @@
-${fld:cuerpo_mail_recordatorio}
+<p>Sistema de recuperación de identificadores de iSurvey.</p>
+
+<p>Para ingresar al sistema su correo es: <b>${fld:email_participante}</b> y su identificador es: <b>${fld:id_participante}</b></p>

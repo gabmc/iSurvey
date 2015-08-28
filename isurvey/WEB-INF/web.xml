@@ -235,7 +235,7 @@
 	<context-param>
 		<description>Indica si se notifica por email cuando se disparan alertas</description>
 		<param-name>jmx-mail-recipient</param-name>
-		<param-value>martin.cordova@gmail.com</param-value>
+		<param-value>info@addsolutions.com.ve</param-value>
 	</context-param>		
 
 	<context-param>
@@ -500,7 +500,7 @@
 	
 	<!--session timeout-->
 	<session-config>
-		<session-timeout>45</session-timeout>
+		<session-timeout>5</session-timeout>
 	</session-config>
 
 	<!--welcome page-->
@@ -531,11 +531,9 @@
 	</error-page>
 
 	<!--not found-->
-	<!--
 	<error-page>
 		<error-code>404</error-code>
-		<location>/error_404.htm</location>
+		<location>/action/error/404</location>
 	</error-page>
-	-->
 
 </web-app>
