@@ -142,6 +142,7 @@
 	{
 		addNew(); //prepara formulario para ingresar nuevo registro 
 		search(); //mostrar registros en vista paginada
+		document.form1.telefono.onkeypress = keypressInteger;
 	} 
 	
 
@@ -155,7 +156,7 @@
 		if (document.form1.id.value=="")
 		{
            	document.forms.form1.action= "${def:context}${def:actionroot}/insert";	
-			//return insert();	           			
+			return insert();	           			
 		}
 		else
 		{

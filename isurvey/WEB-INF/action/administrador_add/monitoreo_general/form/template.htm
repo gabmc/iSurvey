@@ -44,6 +44,9 @@
 <script type="text/javascript">
 
 function go(){
+	if (document.getElementById('id_empresa_search').value == "")
+		alert("Debe seleccionar una empresa");
+	else{
 	var id = document.getElementById('id_empresa_search').value;
 	//window.location="${def:context}${def:actionroot}/pre_search?id_empresa=" + id;
 	var url ="${def:actionroot}/pre_search?id_empresa=" + id;
@@ -56,9 +59,9 @@ function go(){
 						afterResponseFn=null, 
 						onErrorFn=null);
 
-		sleep(500);
+		sleep(800);
 		search();
-
+	}
 }
 
 	function sleep(milliseconds) {
