@@ -160,7 +160,7 @@
 			}
 			else{
            	document.forms.form1.action= "${def:context}${def:actionroot}/insert";	
-			return insert();	
+			//return insert();	
 			}           			
 		}
 		else
@@ -314,7 +314,7 @@
 	//eliminar un registro
 	function deleteRecord(id)
 	{
-		if (window.confirm("¿Está seguro que desea ELIMINAR este registro?")==false)
+		if (window.confirm("\u00bfEst\u00e1 seguro que desea ELIMINAR este registro?")==false)
 		{
 			return false;
 		}

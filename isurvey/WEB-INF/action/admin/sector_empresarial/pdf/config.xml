@@ -19,12 +19,12 @@
 		<classname>dinamica.PDFGenericReport</classname>
 	</output>
 
-	<pdf-title>Administración de los Sectores Empresariales</pdf-title>
+	<pdf-title>Sectores Empresariales</pdf-title>
 	<pdf-logo url='/images/logo-dinamica.png' scale='100' />
 
 	<pdf-report pageSize="letter" rotate="false">
-		<table recordset='query-sectorempresarial.sql' width='100' spacingBefore='40'>
-			<col name='nombre_sector' title='Nombre' width='100' align='left' />
+		<table recordset='query-sectorempresarial.sql' width='50' spacingBefore='40'>
+			<col name='nombre_sector' title='Nombre' width='50' align='center' />
 		</table>
 
 	</pdf-report>

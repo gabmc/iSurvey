@@ -12,7 +12,6 @@
 		<validator>true</validator>
 		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>
-		<!--<recordset id="query.sql" source="sql" scope="transaction" />-->
 	</transaction>
 
 	<output>
@@ -21,7 +20,6 @@
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/html</content-type>
 		<expiration>0</expiration>
-		<!--<print mode="table" recordset="query.sql" tag="rows" alternate-colors="true"/>-->
 	</output>
 
 </config>

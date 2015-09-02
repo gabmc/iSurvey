@@ -5,7 +5,7 @@
 	<parameter id='id_empresa' type='integer' required='false' label='Empresa' maxlen='10'/>
 	<parameter id='id' type='integer' required='true' label='ID' maxlen='10'/>
 	<parameter id='tipo' type='varchar' required='false' label='Tipo' maxlen='30'/>
-			<parameter id="file" type="varchar" required="true" label="Archivo temporal" maxlen="500"/>
+	<parameter id="file" type="varchar" required="true" label="Archivo temporal" maxlen="500"/>
 	<parameter id="file.filename" type="varchar" required="true" label="Archivo" maxlen="400"/>
 	<parameter id='cuerpo_email2' type='varchar' required='false' label='Cuerpo Email' maxlen='500'/>
 <parameter id='cuerpo_email_recordatorio2' type='varchar' required='false' label='Cuerpo Email Recordatorio' maxlen='500'/>

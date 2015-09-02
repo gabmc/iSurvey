@@ -19,7 +19,7 @@
 		<classname>dinamica.GenericExcelOutput</classname>
 	</output>
 	
-	<excel recordset='query-sectorempresarial.sql' sheetname='Administración de los Sectores Empresariales' filename='sector_empresarial.xls'>
+	<excel recordset='query-sectorempresarial.sql' sheetname='Sectores Empresariales' filename='sector_empresarial.xls'>
 		<col id='nombre_sector' label='Nombre' />
 	</excel>
 

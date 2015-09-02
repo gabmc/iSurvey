@@ -20,17 +20,17 @@ import tokens_participantes.TokenGenerator;
  */
 public class MonitoreoGeneral extends GenericTransaction {
     public int service(Recordset inputParams) throws Throwable{
-    	String nombre_estudio = "";
-    	String numero_encuestas = "";
-    	String numero_participantes = "";
-    	String completado = "";
-    	String porcentaje_completado = "";
-    	String incompleto = "";
-    	String porcentaje_incompleto = "";
-    	String sin_iniciar = "";
-    	String porcentaje_sin_iniciar = "";
-    	String participantes = "";
-    	String linkInstrumentos = "";
+    	String nombre_estudio = "--";
+    	String numero_encuestas = "--";
+    	String numero_participantes = "--";
+    	String completado = "--";
+    	String porcentaje_completado = "--";
+    	String incompleto = "--";
+    	String porcentaje_incompleto = "--";
+    	String sin_iniciar = "--";
+    	String porcentaje_sin_iniciar = "--";
+    	String participantes = "--";
+    	String linkInstrumentos = "--";
         super.service(inputParams);
         this.getDb().beginTrans();
         String userlogin = this.getUserName();
@@ -82,52 +82,48 @@ public class MonitoreoGeneral extends GenericTransaction {
         	output.setValue("numero_encuestas", numero_encuestas);
         	output2.setValue("numero_encuestas", numero_encuestas);
         	nombre_estudio = estudios.getString("nombre_estudio");
-        	if (estudios.getString("tipo").equals("Cerrado")){
-	        	//nombre_estudio = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
-	        	//	+ estudios.getString("id_estudio") + "\">" + estudios.getString("nombre_estudio") + "</a>";
-	        	numero_participantes = getNumeroParticipantesCerrado(estudios.getString("id_estudio"));
-	        	completado = getCompletadosCerrado(estudios.getString("id_estudio"));
-	        	porcentaje_completado = getPorcentajeCompletadosCerrado(estudios.getString("id_estudio"));
-	        	incompleto = getIncompletoCerrado(estudios.getString("id_estudio"));
-	        	porcentaje_incompleto = getPorcentajeIncompletoCerrado(estudios.getString("id_estudio"));
-	        	sin_iniciar = getSinIniciarCerrado(estudios.getString("id_estudio"));
-	        	porcentaje_sin_iniciar = getPorcentajeSinIniciarCerrado(estudios.getString("id_estudio"));
-	        	linkInstrumentos = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
-	        		+ estudios.getString("id_estudio") + 
-	        		"\"><img title=\"Ver detalle de Instrumentos\" src=\"${def:context}/images/clipboard2.png\" width=\"18\" height=\"18\"/></a>";
-	        	participantes = "<a href=\"${def:context}${def:actionroot}/participantes/form?id=" 
-	        		+ estudios.getString("id_estudio") + "\"><img title=\"Ver detalle de Participantes\" src=\"${def:context}/images/multiple_users.png\" " +
-	        				"alt=\"Click para ver detalle de Instrumentos del Estudio\" width=\"18\" height=\"18\"></a>";
-	        	
-        	}
-        	if (estudios.getString("tipo").equals("Abierto-Identificado")){
-        	//	nombre_estudio = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
-	        //		+ estudios.getString("id_estudio") + "\">" + estudios.getString("nombre_estudio") + "</a>";
-        		numero_participantes = getNumeroParticipantesIdentificado(estudios.getString("id_estudio"));
-        		completado = getCompletadosIdentificado(estudios.getString("id_estudio"));
-        		porcentaje_completado = getPorcentajeCompletadoIdentificado(estudios.getString("id_estudio"));
-        		incompleto = getIncompletoIdentificado(estudios.getString("id_estudio"));
-        		porcentaje_incompleto = getPorcentajeIncompletoIdentificado(estudios.getString("id_estudio"));
-        		sin_iniciar = getSinIniciarIdentificado(estudios.getString("id_estudio"));
-        		porcentaje_sin_iniciar = getPorcentajeSinIniciarIdentificado(estudios.getString("id_estudio"));
-	        	participantes = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
-	        		+ estudios.getString("id_estudio") 
-	        		+ "\"><img title=\"Ver detalle de Participantes\" src=\"${def:context}/images/multiple_users.png\" width=\"18\" height=\"18\"/></a>";
-	        	linkInstrumentos = "";
-        		
-        	}
-        	if (estudios.getString("tipo").equals("Abierto-Anonimo")){
-        	//	nombre_estudio = estudios.getString("nombre_estudio");
-        		numero_participantes = getNumeroParticipantesAnonimo(estudios.getString("id_estudio"));
-        		completado = getCompletadosAnonimo(estudios.getString("id_estudio"));
-        		porcentaje_completado = getPorcentajeCompletadoAnonimo(estudios.getString("id_estudio"));
-        		incompleto = getIncompletoAnonimo(estudios.getString("id_estudio"));
-        		porcentaje_incompleto = getPorcentajeIncompletoAnonimo(estudios.getString("id_estudio"));
-        		sin_iniciar = "--";
-        		porcentaje_sin_iniciar = "--";
-	        	participantes = "";
-	        	linkInstrumentos = "--";
-        		
+        	if (getNumeroInstrumentosInt(estudios.getString("id_estudio")) > 0){
+	        	if (estudios.getString("tipo").equals("Cerrado")){
+		        	numero_participantes = getNumeroParticipantesCerrado(estudios.getString("id_estudio"));
+		        	completado = getCompletadosCerrado(estudios.getString("id_estudio"));
+		        	porcentaje_completado = getPorcentajeCompletadosCerrado(estudios.getString("id_estudio"));
+		        	incompleto = getIncompletoCerrado(estudios.getString("id_estudio"));
+		        	porcentaje_incompleto = getPorcentajeIncompletoCerrado(estudios.getString("id_estudio"));
+		        	sin_iniciar = getSinIniciarCerrado(estudios.getString("id_estudio"));
+		        	porcentaje_sin_iniciar = getPorcentajeSinIniciarCerrado(estudios.getString("id_estudio"));
+		        	linkInstrumentos = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
+		        		+ estudios.getString("id_estudio") + 
+		        		"\"><img title=\"Ver detalle de Instrumentos\" src=\"${def:context}/images/clipboard2.png\" width=\"18\" height=\"18\"/></a>";
+		        	participantes = "<a href=\"${def:context}${def:actionroot}/participantes/form?id=" 
+		        		+ estudios.getString("id_estudio") + "\"><img title=\"Ver detalle de Participantes\" src=\"${def:context}/images/multiple_users.png\" " +
+		        				"alt=\"Click para ver detalle de Instrumentos del Estudio\" width=\"18\" height=\"18\"></a>";
+		        	
+	        	}
+	        	if (estudios.getString("tipo").equals("Abierto-Identificado")){
+	        		numero_participantes = getNumeroParticipantesIdentificado(estudios.getString("id_estudio"));
+	        		completado = getCompletadosIdentificado(estudios.getString("id_estudio"));
+	        		porcentaje_completado = getPorcentajeCompletadoIdentificado(estudios.getString("id_estudio"));
+	        		incompleto = getIncompletoIdentificado(estudios.getString("id_estudio"));
+	        		porcentaje_incompleto = getPorcentajeIncompletoIdentificado(estudios.getString("id_estudio"));
+	        		sin_iniciar = getSinIniciarIdentificado(estudios.getString("id_estudio"));
+	        		porcentaje_sin_iniciar = getPorcentajeSinIniciarIdentificado(estudios.getString("id_estudio"));
+		        	participantes = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
+		        		+ estudios.getString("id_estudio") 
+		        		+ "\"><img title=\"Ver detalle de Participantes\" src=\"${def:context}/images/multiple_users.png\" width=\"18\" height=\"18\"/></a>";
+		        	linkInstrumentos = "";
+	        		
+	        	}
+	        	if (estudios.getString("tipo").equals("Abierto-Anonimo")){
+	        		numero_participantes = getNumeroParticipantesAnonimo(estudios.getString("id_estudio"));
+	        		completado = getCompletadosAnonimo(estudios.getString("id_estudio"));
+	        		porcentaje_completado = getPorcentajeCompletadoAnonimo(estudios.getString("id_estudio"));
+	        		incompleto = getIncompletoAnonimo(estudios.getString("id_estudio"));
+	        		porcentaje_incompleto = getPorcentajeIncompletoAnonimo(estudios.getString("id_estudio"));
+	        		sin_iniciar = "--";
+	        		porcentaje_sin_iniciar = "--";
+		        	participantes = "";
+		        	linkInstrumentos = "--";	
+	        	}
         	}
         	output.setValue("nombre_estudio", nombre_estudio);
         	output.setValue("numero_participantes", numero_participantes);
@@ -549,5 +545,13 @@ public class MonitoreoGeneral extends GenericTransaction {
 	    		setEstatus(tg.generarToken(participante.getString("id_participante"), instrumentos.getString("id_instrumento")), estatus, String.valueOf(porcentaje));
 	    	}
     	}
+    }
+    
+    int getNumeroInstrumentosInt (String idEstudio) throws Throwable{
+    	String sql = "select count(id_instrumento) as count from ajvieira_isurvey_app.instrumento " +
+    			"where id_estudio = " + idEstudio;
+    	Recordset rs = this.getDb().get(sql);
+    	rs.first();
+    	return rs.getInt("count");
     }
 }

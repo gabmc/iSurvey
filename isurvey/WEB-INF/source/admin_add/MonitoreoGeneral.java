@@ -20,17 +20,17 @@ import tokens_participantes.TokenGenerator;
  */
 public class MonitoreoGeneral extends GenericTransaction {
     public int service(Recordset inputParams) throws Throwable{
-    	String nombre_estudio = "";
-    	String numero_encuestas = "";
-    	String numero_participantes = "";
-    	String completado = "";
-    	String porcentaje_completado = "";
-    	String incompleto = "";
-    	String porcentaje_incompleto = "";
-    	String sin_iniciar = "";
-    	String porcentaje_sin_iniciar = "";
-    	String participantes = "";
-    	String linkInstrumentos = "";
+    	String nombre_estudio = "--";
+    	String numero_encuestas = "--";
+    	String numero_participantes = "--";
+    	String completado = "--";
+    	String porcentaje_completado = "--";
+    	String incompleto = "--";
+    	String porcentaje_incompleto = "--";
+    	String sin_iniciar = "--";
+    	String porcentaje_sin_iniciar = "--";
+    	String participantes = "--";
+    	String linkInstrumentos = "--";
     	Map parametros = this.getRequest().getParameterMap();
     	String idEmpresa = ((String[]) parametros.get("id_empresa"))[0];
         super.service(inputParams);
@@ -82,52 +82,53 @@ public class MonitoreoGeneral extends GenericTransaction {
         	output.setValue("numero_encuestas", numero_encuestas);
         	output2.setValue("numero_encuestas", numero_encuestas);
         	nombre_estudio = estudios.getString("nombre_estudio");
-        	if (estudios.getString("tipo").equals("Cerrado")){
-	        	//nombre_estudio = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
-	        	//	+ estudios.getString("id_estudio") + "\">" + estudios.getString("nombre_estudio") + "</a>";
-	        	numero_participantes = getNumeroParticipantesCerrado(estudios.getString("id_estudio"));
-	        	completado = getCompletadosCerrado(estudios.getString("id_estudio"));
-	        	porcentaje_completado = getPorcentajeCompletadosCerrado(estudios.getString("id_estudio"));
-	        	incompleto = getIncompletoCerrado(estudios.getString("id_estudio"));
-	        	porcentaje_incompleto = getPorcentajeIncompletoCerrado(estudios.getString("id_estudio"));
-	        	sin_iniciar = getSinIniciarCerrado(estudios.getString("id_estudio"));
-	        	porcentaje_sin_iniciar = getPorcentajeSinIniciarCerrado(estudios.getString("id_estudio"));
-	        	linkInstrumentos = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
-	        		+ estudios.getString("id_estudio") + 
-	        		"\"><img title=\"Ver detalle de Instrumentos\" src=\"${def:context}/images/clipboard2.png\" width=\"18\" height=\"18\"/></a>";
-	        	participantes = "<a href=\"${def:context}${def:actionroot}/participantes/form?id=" 
-	        		+ estudios.getString("id_estudio") + "\"><img title=\"Ver detalle de Participantes\" src=\"${def:context}/images/multiple_users.png\" " +
-	        				"alt=\"Click para ver detalle de Instrumentos del Estudio\" width=\"18\" height=\"18\"></a>";
-	        	
-        	}
-        	if (estudios.getString("tipo").equals("Abierto-Identificado")){
-        	//	nombre_estudio = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
-	        //		+ estudios.getString("id_estudio") + "\">" + estudios.getString("nombre_estudio") + "</a>";
-        		numero_participantes = getNumeroParticipantesIdentificado(estudios.getString("id_estudio"));
-        		completado = getCompletadosIdentificado(estudios.getString("id_estudio"));
-        		porcentaje_completado = getPorcentajeCompletadoIdentificado(estudios.getString("id_estudio"));
-        		incompleto = getIncompletoIdentificado(estudios.getString("id_estudio"));
-        		porcentaje_incompleto = getPorcentajeIncompletoIdentificado(estudios.getString("id_estudio"));
-        		sin_iniciar = getSinIniciarIdentificado(estudios.getString("id_estudio"));
-        		porcentaje_sin_iniciar = getPorcentajeSinIniciarIdentificado(estudios.getString("id_estudio"));
-	        	participantes = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
-	        		+ estudios.getString("id_estudio") 
-	        		+ "\"><img title=\"Ver detalle de Participantes\" src=\"${def:context}/images/multiple_users.png\" width=\"18\" height=\"18\"/></a>";
-	        	linkInstrumentos = "";
-        		
-        	}
-        	if (estudios.getString("tipo").equals("Abierto-Anonimo")){
-        	//	nombre_estudio = estudios.getString("nombre_estudio");
-        		numero_participantes = getNumeroParticipantesAnonimo(estudios.getString("id_estudio"));
-        		completado = getCompletadosAnonimo(estudios.getString("id_estudio"));
-        		porcentaje_completado = getPorcentajeCompletadoAnonimo(estudios.getString("id_estudio"));
-        		incompleto = getIncompletoAnonimo(estudios.getString("id_estudio"));
-        		porcentaje_incompleto = getPorcentajeIncompletoAnonimo(estudios.getString("id_estudio"));
-        		sin_iniciar = "--";
-        		porcentaje_sin_iniciar = "--";
-	        	participantes = "";
-	        	linkInstrumentos = "--";
-        		
+        	if (getNumeroInstrumentosInt(estudios.getString("id_estudio")) > 0){
+	        	if (estudios.getString("tipo").equals("Cerrado")){
+		        	//nombre_estudio = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
+		        	//	+ estudios.getString("id_estudio") + "\">" + estudios.getString("nombre_estudio") + "</a>";
+		        	numero_participantes = getNumeroParticipantesCerrado(estudios.getString("id_estudio"));
+		        	completado = getCompletadosCerrado(estudios.getString("id_estudio"));
+		        	porcentaje_completado = getPorcentajeCompletadosCerrado(estudios.getString("id_estudio"));
+		        	incompleto = getIncompletoCerrado(estudios.getString("id_estudio"));
+		        	porcentaje_incompleto = getPorcentajeIncompletoCerrado(estudios.getString("id_estudio"));
+		        	sin_iniciar = getSinIniciarCerrado(estudios.getString("id_estudio"));
+		        	porcentaje_sin_iniciar = getPorcentajeSinIniciarCerrado(estudios.getString("id_estudio"));
+		        	linkInstrumentos = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
+		        		+ estudios.getString("id_estudio") + 
+		        		"\"><img title=\"Ver detalle de Instrumentos\" src=\"${def:context}/images/clipboard2.png\" width=\"18\" height=\"18\"/></a>";
+		        	participantes = "<a href=\"${def:context}${def:actionroot}/participantes/form?id=" 
+		        		+ estudios.getString("id_estudio") + "\"><img title=\"Ver detalle de Participantes\" src=\"${def:context}/images/multiple_users.png\" " +
+		        				"alt=\"Click para ver detalle de Instrumentos del Estudio\" width=\"18\" height=\"18\"></a>";
+		        	
+	        	}
+	        	if (estudios.getString("tipo").equals("Abierto-Identificado")){
+	        	//	nombre_estudio = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
+		        //		+ estudios.getString("id_estudio") + "\">" + estudios.getString("nombre_estudio") + "</a>";
+	        		numero_participantes = getNumeroParticipantesIdentificado(estudios.getString("id_estudio"));
+	        		completado = getCompletadosIdentificado(estudios.getString("id_estudio"));
+	        		porcentaje_completado = getPorcentajeCompletadoIdentificado(estudios.getString("id_estudio"));
+	        		incompleto = getIncompletoIdentificado(estudios.getString("id_estudio"));
+	        		porcentaje_incompleto = getPorcentajeIncompletoIdentificado(estudios.getString("id_estudio"));
+	        		sin_iniciar = getSinIniciarIdentificado(estudios.getString("id_estudio"));
+	        		porcentaje_sin_iniciar = getPorcentajeSinIniciarIdentificado(estudios.getString("id_estudio"));
+		        	participantes = "<a href=\"${def:context}${def:actionroot}/estudio/form?id=" 
+		        		+ estudios.getString("id_estudio") 
+		        		+ "\"><img title=\"Ver detalle de Participantes\" src=\"${def:context}/images/multiple_users.png\" width=\"18\" height=\"18\"/></a>";
+		        	linkInstrumentos = "";
+	        		
+	        	}
+	        	if (estudios.getString("tipo").equals("Abierto-Anonimo")){
+	        	//	nombre_estudio = estudios.getString("nombre_estudio");
+	        		numero_participantes = getNumeroParticipantesAnonimo(estudios.getString("id_estudio"));
+	        		completado = getCompletadosAnonimo(estudios.getString("id_estudio"));
+	        		porcentaje_completado = getPorcentajeCompletadoAnonimo(estudios.getString("id_estudio"));
+	        		incompleto = getIncompletoAnonimo(estudios.getString("id_estudio"));
+	        		porcentaje_incompleto = getPorcentajeIncompletoAnonimo(estudios.getString("id_estudio"));
+	        		sin_iniciar = "--";
+	        		porcentaje_sin_iniciar = "--";
+		        	participantes = "";
+		        	linkInstrumentos = "--";	
+	        	}
         	}
         	output.setValue("nombre_estudio", nombre_estudio);
         	output.setValue("numero_participantes", numero_participantes);
@@ -157,50 +158,70 @@ public class MonitoreoGeneral extends GenericTransaction {
     }
     
     String getPorcentajeIncompletoAnonimo (String idEstudio) throws Throwable{
-    	String idInstrumento = getIdInstrumento(idEstudio);
-    	String sql = "select concat(round((select ((select (select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+")" +
-    			" - (select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+" " +
-    			"where submitdate)) * 100) / " +
-    			"((select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+")))),'%') as porcentaje_incompleto";
-    	Recordset rs = this.getDb().get(sql);
-    	rs.first();
-    	return rs.getString("porcentaje_incompleto");
+    	if (getNumeroInstrumentosInt(idEstudio) != 0){
+	    	String idInstrumento = getIdInstrumento(idEstudio);
+	    	String sql = "select concat(round((select ((select (select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+")" +
+	    			" - (select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+" " +
+	    			"where submitdate)) * 100) / " +
+	    			"((select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+")))),'%') as porcentaje_incompleto";
+	    	Recordset rs = this.getDb().get(sql);
+	    	rs.first();
+	    	return rs.getString("porcentaje_incompleto");
+    	}
+    	else
+    		return "0";
     }
     
     String getIncompletoAnonimo (String idEstudio) throws Throwable{
-    	String idInstrumento = getIdInstrumento(idEstudio);
-    	String sql = "select (select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+") - " +
-    			"(select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+" " +
-    			"where submitdate) as incompleto";
-    	Recordset rs = this.getDb().get(sql);
-    	rs.first();
-    	return rs.getString("incompleto");
+    	if (getNumeroInstrumentosInt(idEstudio) != 0){
+	    	String idInstrumento = getIdInstrumento(idEstudio);
+	    	String sql = "select (select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+") - " +
+	    			"(select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+" " +
+	    			"where submitdate) as incompleto";
+	    	Recordset rs = this.getDb().get(sql);
+	    	rs.first();
+	    	return rs.getString("incompleto");
+    	}
+    	else
+    		return "0";
     }
     
     String getPorcentajeCompletadoAnonimo (String idEstudio) throws Throwable{
-    	String idInstrumento = getIdInstrumento(idEstudio);
-    	String sql = "select concat(round((select ((select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+" " +
-    			"where submitdate) * 100) / (select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+"))),'%') as porcentaje_completado";
-    	Recordset rs = this.getDb().get(sql);
-    	rs.first();
-    	return rs.getString("porcentaje_completado");
+    	if (getNumeroInstrumentosInt(idEstudio) != 0){
+	    	String idInstrumento = getIdInstrumento(idEstudio);
+	    	String sql = "select concat(round((select ((select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+" " +
+	    			"where submitdate) * 100) / (select count(*) from ajvieira_isurvey_lime.survey_"+idInstrumento+"))),'%') as porcentaje_completado";
+	    	Recordset rs = this.getDb().get(sql);
+	    	rs.first();
+	    	return rs.getString("porcentaje_completado");
+    	}
+    	else
+    		return "0";
     }
     
     String getCompletadosAnonimo (String idEstudio) throws Throwable{
-    	String idInstrumento = getIdInstrumento(idEstudio);
-    	String sql = "select count(*) as completado from ajvieira_isurvey_lime.survey_"+idInstrumento+" " +
-    			"where submitdate";
-    	Recordset rs = this.getDb().get(sql);
-    	rs.first();
-    	return rs.getString("completado");
+    	if (getNumeroInstrumentosInt(idEstudio) != 0){
+	    	String idInstrumento = getIdInstrumento(idEstudio);
+	    	String sql = "select count(*) as completado from ajvieira_isurvey_lime.survey_"+idInstrumento+" " +
+	    			"where submitdate";
+	    	Recordset rs = this.getDb().get(sql);
+	    	rs.first();
+	    	return rs.getString("completado");
+    	}
+    	else
+    		return "0";
     }
     
     String getNumeroParticipantesAnonimo (String idEstudio) throws Throwable{
-    	String idInstrumento = getIdInstrumento(idEstudio);
-    	String sql = "select count(*) as numero_participantes from ajvieira_isurvey_lime.survey_" + idInstrumento;
-    	Recordset rs = this.getDb().get(sql);
-    	rs.first();
-    	return rs.getString("numero_participantes");
+    	if (getNumeroInstrumentosInt(idEstudio) != 0){
+	    	String idInstrumento = getIdInstrumento(idEstudio);
+	    	String sql = "select count(*) as numero_participantes from ajvieira_isurvey_lime.survey_" + idInstrumento;
+	    	Recordset rs = this.getDb().get(sql);
+	    	rs.first();
+	    	return rs.getString("numero_participantes");
+    	}
+    	else
+    		return "0";
     }
     
     String getIdInstrumento (String idEstudio) throws Throwable{
@@ -211,7 +232,16 @@ public class MonitoreoGeneral extends GenericTransaction {
     	return rs.getString("id_instrumento");
     }
     
+    int getNumeroInstrumentosInt (String idEstudio) throws Throwable{
+    	String sql = "select count(id_instrumento) as count from ajvieira_isurvey_app.instrumento " +
+    			"where id_estudio = " + idEstudio;
+    	Recordset rs = this.getDb().get(sql);
+    	rs.first();
+    	return rs.getInt("count");
+    }
+    
     String getPorcentajeSinIniciarIdentificado (String idEstudio) throws Throwable{
+    	if (getNumeroInstrumentosInt(idEstudio) != 0){
     	String sql = "select concat(round((select (("+getSinIniciarIdentificado(idEstudio)+")*100)/(select count(int_participante_instrumento.token_participante) + " +
     			"(select count(participante.id_estudio_identificado) " +
     			"from ajvieira_isurvey_app.participante " +
@@ -230,19 +260,26 @@ public class MonitoreoGeneral extends GenericTransaction {
     	Recordset rs = this.getDb().get(sql);
     	rs.first();
     	return rs.getString("porcentaje_sin_iniciar");
+    	}
+    	else
+    		return "0%";
     }
     
     String getSinIniciarIdentificado (String idEstudio) throws Throwable{
-    	String sql = "select count(participante.id_estudio_identificado) + 0 as sin_iniciar " +
-    			"from ajvieira_isurvey_app.participante " +
-    			"where id_participante not in " +
-    			"(select id_participante from ajvieira_isurvey_app.int_participante_instrumento " +
-    			"where (estatus = 'Completa' or estatus = 'Incompleta') " +
-    			"and id_instrumento in " +
-    			"(select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = "+idEstudio+"))";
-    	Recordset rs = this.getDb().get(sql);
-    	rs.first();
-    	return rs.getString("sin_iniciar");
+    	if (getNumeroInstrumentosInt(idEstudio) != 0){
+	    	String sql = "select count(participante.id_estudio_identificado) + 0 as sin_iniciar " +
+	    			"from ajvieira_isurvey_app.participante " +
+	    			"where id_participante not in " +
+	    			"(select id_participante from ajvieira_isurvey_app.int_participante_instrumento " +
+	    			"where (estatus = 'Completa' or estatus = 'Incompleta') " +
+	    			"and id_instrumento in " +
+	    			"(select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = "+idEstudio+"))";
+	    	Recordset rs = this.getDb().get(sql);
+	    	rs.first();
+	    	return rs.getString("sin_iniciar");
+		}
+    	else
+    		return "0";
     }
     
     String getPorcentajeIncompletoIdentificado (String idEstudio) throws Throwable{
@@ -314,24 +351,28 @@ public class MonitoreoGeneral extends GenericTransaction {
     }
     
     String getNumeroParticipantesIdentificado (String idEstudio) throws Throwable{
-    	String sql = "select count(int_participante_instrumento.token_participante) + " +
-    			"(select count(participante.id_estudio_identificado) " +
-    			"from ajvieira_isurvey_app.participante " +
-    			"where id_participante not in " +
-    			"(select id_participante " +
-    			"from ajvieira_isurvey_app.int_participante_instrumento " +
-    			"where (estatus = 'Completa' or estatus = 'Incompleta') " +
-    			"and id_instrumento in " +
-    			"(select id_instrumento from ajvieira_isurvey_app.instrumento " +
-    			"where id_estudio = "+idEstudio+"))) as numero_participantes " +
-    			"from ajvieira_isurvey_app.int_participante_instrumento " +
-    			"where (estatus = 'Completa' or estatus = 'Incompleta') " +
-    			"and int_participante_instrumento.id_instrumento in " +
-    			"(select id_instrumento from ajvieira_isurvey_app.instrumento " +
-    			"where id_estudio = "+idEstudio+")";
-    	Recordset rs = this.getDb().get(sql);
-    	rs.first();
-    	return rs.getString("numero_participantes");
+    	if (getNumeroInstrumentosInt(idEstudio) != 0){
+	    	String sql = "select count(int_participante_instrumento.token_participante) + " +
+	    			"(select count(participante.id_estudio_identificado) " +
+	    			"from ajvieira_isurvey_app.participante " +
+	    			"where id_participante not in " +
+	    			"(select id_participante " +
+	    			"from ajvieira_isurvey_app.int_participante_instrumento " +
+	    			"where (estatus = 'Completa' or estatus = 'Incompleta') " +
+	    			"and id_instrumento in " +
+	    			"(select id_instrumento from ajvieira_isurvey_app.instrumento " +
+	    			"where id_estudio = "+idEstudio+"))) as numero_participantes " +
+	    			"from ajvieira_isurvey_app.int_participante_instrumento " +
+	    			"where (estatus = 'Completa' or estatus = 'Incompleta') " +
+	    			"and int_participante_instrumento.id_instrumento in " +
+	    			"(select id_instrumento from ajvieira_isurvey_app.instrumento " +
+	    			"where id_estudio = "+idEstudio+")";
+	    	Recordset rs = this.getDb().get(sql);
+	    	rs.first();
+	    	return rs.getString("numero_participantes");
+    	}
+    	else
+    		return "0";
     }
     
     String getNumeroEncuestas (String idEstudio) throws Throwable{

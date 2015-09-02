@@ -17,6 +17,6 @@ VALUES
 	replace( ${fld:file}, '/images/banners_estudios/', ''),
 	${fld:titulo_email},
 	${fld:cuerpo_email},
-	${fld:titulo_mail_recordatorio},
-	${fld:cuerpo_mail_recordatorio}
+	${fld:titulo_email_recordatorio},
+	${fld:cuerpo_email_recordatorio}
 )
