@@ -6,7 +6,7 @@
 	<parameter id='telefono' type='varchar' required='true' label='Teléfono' maxlen='30'/>
 	<parameter id='tipo' type='varchar' required='true' label='Tipo' maxlen='30'/>
 	<parameter id='rif' type='varchar' required='true' label='RIF' maxlen='30' regexp="((^J|^G)-\d{8}-\d{1})|((^V|^E)-\d{5,8})"
-    regexp-error-label="El RIF no tiene el formato correcto. Si desea incluir un Nro. de RIF, use algo similar a: J-123456789-0 o G-123456789-0"/>
+    regexp-error-label="El RIF no tiene el formato correcto. Si desea incluir un Nro. de RIF, use algo similar a: J-12345678-9 o G-12345678-9"/>
 
 	<parameter id="file" type="varchar" required="false" label="Archivo temporal" maxlen="500"/>
 	<parameter id="file.filename" type="varchar" required="false" label="Archivo" maxlen="400"/>

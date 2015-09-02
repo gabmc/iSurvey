@@ -188,8 +188,13 @@
 		//determina si es un insert o un update
 		if (document.form1.id.value=="")
 		{
+			if(document.form1.file.value != ""){
            	document.forms.form1.action= "${def:context}${def:actionroot}/insert";	
-			//return insert();	           			
+			//return insert();
+			}
+			else{
+				document.forms.form1.action= "${def:context}${def:actionroot}/insertSinImagen";
+			}	           			
 		}
 		else
 		{
@@ -296,6 +301,22 @@
 			//llamada Ajax...
 			return ajaxCall(httpMethod="POST", 
 							uri="${def:actionroot}/insert", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="form1", 
+							afterResponseFn=null, 
+							onErrorFn=retryAddnewOrEdit);	    	
+	}
+
+		//grabar registro nuevo en BD
+	function insertSinImagen()
+	{
+			clearErrorMessages();
+			document.getElementById("grabar").disabled=true;
+	
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="${def:actionroot}/insertSinImagen", 
 							divResponse=null, 
 							divProgress="status", 
 							formName="form1", 

@@ -1,14 +1,12 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <validator onerror='/action/error/validation/ajax'>
-	<parameter id='id_sector_empresarial_name' type='varchar' required='false' label='Sector Empresarial'/>
+	<parameter id='id_sector_empresarial_name' type='varchar' required='true' label='Sector Empresarial'/>
 	<parameter id='id_sector_empresarial' type='integer' required='false' label='Sector Empresarial' maxlen='10'/>
 	<parameter id='nombre_empresa' type='varchar' required='true' label='Nombre' maxlen='30'/>
-	<parameter id='telefono' type='varchar' required='true' label='Teléfono' maxlen='30'/>
+	<parameter id='telefono' type='varchar' required='true' label='TelÃ©fono' maxlen='30'/>
 	<parameter id='tipo' type='varchar' required='true' label='Tipo' maxlen='30'/>
 	<parameter id='rif' type='varchar' required='true' label='RIF' maxlen='30' regexp="((^J|^G)-\d{8}-\d{1})|((^V|^E)-\d{5,8})"
     regexp-error-label="El RIF no tiene el formato correcto. Si desea incluir un Nro. de RIF, use algo similar a: J-12345678-9 o G-12345678-9"/>
-
-	<parameter id='id' type='varchar' required='true' label='ID Empresa' maxlen='30'/>
 
 	<parameter id="file" type="varchar" required="false" label="Archivo temporal" maxlen="500"/>
 	<parameter id="file.filename" type="varchar" required="false" label="Archivo" maxlen="400"/>
