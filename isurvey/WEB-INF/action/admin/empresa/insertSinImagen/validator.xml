@@ -10,4 +10,7 @@
 
 	<parameter id="file" type="varchar" required="false" label="Archivo temporal" maxlen="500"/>
 	<parameter id="file.filename" type="varchar" required="false" label="Archivo" maxlen="400"/>
+	<custom-validator classname="dinamica.validators.DuplicatedKeyValidator"
+on-error-label="El RIF ya se encuentra registrado"
+sql="validate.sql" id="rif" />
 </validator>

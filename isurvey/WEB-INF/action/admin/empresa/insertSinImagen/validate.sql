@@ -1,0 +1,1 @@
+select * from ajvieira_isurvey_app.empresa where rif = ${fld:rif}
