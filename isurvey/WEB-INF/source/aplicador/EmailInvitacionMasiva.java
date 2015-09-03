@@ -85,7 +85,7 @@ public class EmailInvitacionMasiva extends GenericTransaction {
     	String query = "select banner from ajvieira_isurvey_app.estudio where id_estudio = " + idEstudio;
     	Recordset rs = this.getDb().get(query);
     	rs.first();
-    	return "<img src=\"${def:context}/images/banners_estudios/" + rs.getString("banner") + "\" width=\"700\" " +
+    	return "<img src=\"http://www.compensa.com.ve/isurvey/images/banners_estudios/" + rs.getString("banner") + "\" width=\"700\" " +
     			"height=\"188\" alt=\"logo\" style=\"float:center; width=30%; margin-right: 1% margin-bottom: 0.5em;\">";
     }
     
