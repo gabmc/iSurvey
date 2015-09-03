@@ -4,4 +4,4 @@ select email_participante, nombre_participante, apellido_participante,
 	(select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id_estudio}) limit 1) as token_participante
 from ajvieira_isurvey_app.participante as part
 where part.id_participante = ${fld:id_participante}
-and part.id_empresa = (select id_empresa from ajvieira_isurvey_security.s_user where userlogin = '${def:user}')
+and part.id_empresa = (select id_empresa from ajvieira_isurvey_app.estudio where id_estudio = ${fld:id_estudio})
