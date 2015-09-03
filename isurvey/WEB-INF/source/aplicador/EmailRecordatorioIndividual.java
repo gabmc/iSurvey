@@ -82,7 +82,7 @@ public class EmailRecordatorioIndividual extends GenericTransaction {
 
     String getEnlace(String token, String idEstudio){
     	return "<a href=\"http://www.compensa.com.ve/isurvey/action/estudio/cerrado2/form?id=" + idEstudio + "" +
-    			"&token=" + token + "title=\"Enlace Estudio\">aqu&iacute;</a>";
+    			"&token=" + token + "\">aqu&iacute;</a>";
     }
   
 }
