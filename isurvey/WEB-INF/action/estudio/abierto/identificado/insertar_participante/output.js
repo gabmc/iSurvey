@@ -1,1 +1,1 @@
-window.location = "http://localhost:8090/limesurvey/index.php/${fld:id_encuesta}/token/${fld:token}";
+window.location = "http://www.compensa.com.ve/isurvey_lime/index.php/${fld:id_encuesta}/token/${fld:token}";
