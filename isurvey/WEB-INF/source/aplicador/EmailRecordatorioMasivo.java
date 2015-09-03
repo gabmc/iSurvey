@@ -42,7 +42,7 @@ public class EmailRecordatorioMasivo extends GenericTransaction {
     		String body = tituloYcuerpo.getString("cuerpo_mail_recordatorio");
     		body = StringUtil.replace(body, "{{banner}}", getDireccionBanner(idEstudio));
         	body = StringUtil.replace(body, "{{nombre_estudio}}", getNombreEstudio(idEstudio));
-    		body = StringUtil.replace(body, "{{enlace}}", participantes.getString("token_participante"));
+    		body = StringUtil.replace(body, "{{enlace}}", getEnlace(participantes.getString("token_participante"),idEstudio));
     		body = StringUtil.replace(body, "{{nombre_participante}}", participantes.getString("nombre_participante"));
     		body = StringUtil.replace(body, "{{apellido_participante}}", participantes.getString("apellido_participante"));
     		output.addNew();
@@ -91,5 +91,8 @@ public class EmailRecordatorioMasivo extends GenericTransaction {
     	return rs.getString("nombre_estudio");
     }
 
-  
+    String getEnlace(String token, String idEstudio){
+    	return "<a href=\"http://www.compensa.com.ve/isurvey/action/estudio/cerrado2/form?id=" + idEstudio + "" +
+    			"&token=" + token + "title=\"Enlace Estudio\">aqu&iacute;</a>";
+    }
 }

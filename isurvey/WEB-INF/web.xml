@@ -174,7 +174,7 @@
 	<context-param>
 		<description>Nombre del remitente por defecto</description>
 		<param-name>mail-from-displayname</param-name>
-		<param-value>Dinamica Framework</param-value>
+		<param-value>iSurvey</param-value>
 	</context-param>
 	
 	<context-param>
