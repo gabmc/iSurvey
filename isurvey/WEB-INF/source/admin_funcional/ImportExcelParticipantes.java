@@ -78,6 +78,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
         rs.append("telefono", java.sql.Types.VARCHAR);
         rs.append("empresa", java.sql.Types.VARCHAR);
         rs.append("sector_empresa", java.sql.Types.VARCHAR);
+        rs.append("area", java.sql.Types.VARCHAR);
         rs.append("cargo", java.sql.Types.VARCHAR);
         rs.append("supervisor", java.sql.Types.VARCHAR);
         rs.append("fecha_nacimiento", java.sql.Types.DATE);
@@ -90,7 +91,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
         int columnas = sheet.getColumns();
 
         //numero de columnas del archivo es igual a 10?
-        if (columnas == 14)
+        if (columnas == 15)
         {
             //mientras exista registros
             for(int i = 1; i<numOfRows;i++)
@@ -115,6 +116,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                     Cell columna12 = sheet.getCell(11,i);
                     Cell columna13 = sheet.getCell(12,i);
                     Cell columna14 = sheet.getCell(13,i);
+                    Cell columna15 = sheet.getCell(14,i);
 
                     //la celda esta vacia?
                     if (columna1.getContents() == null || columna1.getContents().equals(""))
@@ -184,35 +186,35 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                     else{
                     	rs.setValue("sector_empresa", columna7.getContents());
                     }
-                    
-                            rs.setValue("cargo", columna8.getContents());
-                            rs.setValue("supervisor", columna9.getContents());
+                    		rs.setValue("area", columna8.getContents());
+                            rs.setValue("cargo", columna9.getContents());
+                            rs.setValue("supervisor", columna10.getContents());
 
-                            if (!columna10.getContents().equals(""))
+                            if (!columna11.getContents().equals(""))
                             {
-                                Date dcolum2 = ValidatorUtil.testDate(columna10.getContents(), "dd-MM-yy");
+                                Date dcolum2 = ValidatorUtil.testDate(columna11.getContents(), "dd-MM-yy");
                                 if (dcolum2!=null)
                                     rs.setValue("fecha_nacimiento", dcolum2);
                                 else{
                                     columna = "Fecha de Nacimiento";
-                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato DÃ­a-Mes-AÃ±o y use como separador el guiÃ³n (-)");
+                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato Día-Mes-Año y use como separador el guión (-)");
                                 }
                             }
 
-                            if (!columna11.getContents().equals(""))
+                            if (!columna12.getContents().equals(""))
                             {
-                                Date dcolum3 = ValidatorUtil.testDate(columna11.getContents(), "dd-MM-yy");
+                                Date dcolum3 = ValidatorUtil.testDate(columna12.getContents(), "dd-MM-yy");
                                 if (dcolum3!=null)
                                     rs.setValue("fecha_ingreso", dcolum3);
                                 else{
                                     columna = "Fecha de Ingreso";
-                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato DÃ­a-Mes-AÃ±o y use como separador el guiÃ³n (-)");
+                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato Día-Mes-Año y use como separador el guión (-)");
                                 }
                             }
-                            if (columna12.getContents().equals("F") || columna12.getContents().equals("M"))
-                                rs.setValue("sexo", columna12.getContents());
-                            rs.setValue("tipo_nomina", columna13.getContents());
-                            rs.setValue("funcion", columna14.getContents());
+                            if (columna13.getContents().equals("F") || columna13.getContents().equals("M"))
+                                rs.setValue("sexo", columna13.getContents());
+                            rs.setValue("tipo_nomina", columna14.getContents());
+                            rs.setValue("funcion", columna15.getContents());
 
             }
             catch (Throwable a)
@@ -266,6 +268,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                 "telefono",
                 "empresa",
                 "sector_empresa",
+                "area",
                 "cargo",
                 "supervisor",
                 "fecha_nacimiento",
