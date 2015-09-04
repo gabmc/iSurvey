@@ -10,5 +10,6 @@ CKEDITOR.instances['cuerpo_email_recordatorio'].setData('${fld:cuerpo_mail_recor
 document.getElementById("formTitle").innerHTML = "Editar registro";
 document.getElementById("grabar").disabled=false;
 document.getElementById("tipo").disabled=true;
+document.form1.estatus.value='${fld:estatus@js}';
 setFocusOnForm("form1");
 

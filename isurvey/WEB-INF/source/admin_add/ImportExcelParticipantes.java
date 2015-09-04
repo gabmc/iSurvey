@@ -135,7 +135,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                             Integer dcolum1 = ValidatorUtil.testInteger(columna1.getContents());
                             if (dcolum1!=null)
                             {
-                                    findParticipante(dcolum1);
+                                    findParticipante(dcolum1, idEmpresa);
                                     rs.setValue("id_participante", dcolum1);
                             }
                             else
@@ -333,14 +333,20 @@ public class ImportExcelParticipantes extends GenericTableManager  {
      * @return ID del participante
      * @throws Throwable
      */
-    Integer findParticipante (Integer participante) throws Throwable
+    Integer findParticipante (Integer participante, String idEmpresa) throws Throwable
     {
-            Recordset rs = getRecordset("participante.sql");
-
-            if (rs.findRecord("id_participante", participante) == -1)
-                    return participante;
-            else
-                    throw new Throwable("El Identificador del Participante [" + participante + "] ya est√° registrado.");
+    		int flag = 0;
+    		String sql = "select id_participante from ajvieira_isurvey_app.participante where " +
+    				"id_empresa = " + idEmpresa;
+    		Recordset rs = this.getDb().get(sql);
+            //Recordset rs = getRecordset("participante.sql");
+            rs.top();
+            	if (rs.findRecord("id_participante", participante) == -1)
+            		return participante;
+            	else{
+            		columna = "Identificador";
+                    throw new Throwable("El Identificador del Participante [" + participante + "] ya est· registrado.");
+            }
     }
     
     Recordset getInstrumentos (String idLista) throws Throwable{
