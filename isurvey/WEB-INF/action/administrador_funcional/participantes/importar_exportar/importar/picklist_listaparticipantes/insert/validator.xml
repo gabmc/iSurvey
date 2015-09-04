@@ -3,10 +3,6 @@
 
 	<parameter id="newname" type="varchar" required="true" label="Nombre" maxlen="15" />
 
-	<!--<custom-validator classname="dinamica.validators.DuplicatedKeyValidator"
-		on-error-label="Este item ya está registrado en la base de datos."
-		sql="nodups.sql" id="newname" />-->
-
 </validator>
 
 

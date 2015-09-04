@@ -1,0 +1,1 @@
+select LAST_INSERT_ID() + 1 as id

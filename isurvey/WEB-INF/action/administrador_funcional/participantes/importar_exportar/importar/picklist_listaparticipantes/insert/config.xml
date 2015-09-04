@@ -13,7 +13,7 @@
 		<validator>true</validator>
 		<transaction>true</transaction>
 		<jdbc-log>false</jdbc-log>
-		<!--<recordset id="nextval.sql" source="sql" scope="transaction" />-->
+		<!--<recordset id="id.sql" source="sql" scope="transaction" />-->
 	</transaction>
 
 	<query>insert.sql</query>
@@ -25,7 +25,7 @@
 		<content-type>text/javascript</content-type>
 		<expiration>0</expiration>
 		<print mode="form" recordset="_request" />
-		<!--<print mode="form" recordset="nextval.sql" />-->
+		<!--<print mode="form" recordset="id.sql" />-->
 	</output>
 
 </config>
