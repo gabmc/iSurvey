@@ -459,6 +459,10 @@ body {
   	transform: translateY(10%);
 }
 
+.texto {
+	margin: 10 10 10 10;
+}
+
 	/* END IE6 hack */ 
 
 /* END MENU */

@@ -17,6 +17,7 @@
 <div class="banner">
 	<div style="float: left;">Registrar Aplicador</div>
 </div>
+<p class="texto">A continuaci&oacute;n se encuentra un cuadro con un filtro para buscar entre los aplicadores ya registrados en el sistema:</p>
 <!--FORM-->
 <form name="form1" action="${def:context}${def:actionroot}/search" method="POST">
 
@@ -102,7 +103,6 @@
 		<td align="center" colspan="2">
 			<input type="submit" value="Buscar">
 			<input type="button" value="Limpiar Filtro" onclick="clearForm('form1')">
-			<input type="button" value="Registrar" onclick="onAddNew()">
 		</td>
 	</tr>
 
@@ -112,6 +112,8 @@
 	</tr>
 
 </table>
+
+<p class="texto">Si desea registrar un nuevo aplicador haga click aqu&iacute;:<input type="button" value="Registrar" onclick="onAddNew()"></p>
 
 </form>
 </body>
