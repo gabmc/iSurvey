@@ -77,21 +77,21 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">e-mail</td>
+		<td class="formlabel required">e-mail</td>
 		<td>
-			<input id="email_participante" name="email_participante" type="text" size="30" maxlength="30">
+			<input id="email_participante" name="email_participante" type="text" size="30" maxlength="80">
 		</td>
 	</tr>
 	<tr>
 		<td class="formlabel">Tel&eacute;fono</td>
 		<td>
-			<input id="telefono" name="telefono" type="text" size="30" maxlength="30">
+			<input id="telefono" name="telefono" type="text" size="30" maxlength="20">
 		</td>
 	</tr>
 	<tr>
 		<td class="formlabel">Empresa</td>
 		<td>
-			<input id="empresa" name="empresa" type="text" size="30" maxlength="30">
+			<input id="empresa" name="empresa" type="text" size="30" maxlength="100">
 		</td>
 	</tr>
 	<tr>
@@ -117,21 +117,21 @@
 		<td><input type="text" id="sector2" name="sector2" size="30" maxlength="60"></td>
 	</tr>
 	<tr>
-		<td class="formlabel">&Aacute;rea</td>
+		<td class="formlabel required">&Aacute;rea</td>
 		<td>
-			<input id="area" name="area" type="text" size="30" maxlength="30">
+			<input id="area" name="area" type="text" size="30" maxlength="50">
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel">Cargo</td>
+		<td class="formlabel required">Cargo</td>
 		<td>
-			<input id="cargo" name="cargo" type="text" size="30" maxlength="30">
+			<input id="cargo" name="cargo" type="text" size="30" maxlength="100">
 		</td>
 	</tr>
 	<tr>
 		<td class="formlabel">Supervisor</td>
 		<td>
-			<input id="supervisor" name="supervisor" type="text" size="30" maxlength="30">
+			<input id="supervisor" name="supervisor" type="text" size="30" maxlength="100">
 		</td>
 	</tr>
 	<tr>
@@ -159,13 +159,16 @@
 	<tr>
             <td class="formlabel">Tipo de N&oacute;mina</td>
 		<td>
-			<input id="tipo_nomina" name="tipo_nomina" type="text" size="30" maxlength="30">
+			<select name="tipo_nomina" id="tipo_nomina">
+				<option value="Diaria">Diaria</option>
+				<option value="Mensual">Mensual</option>
+			</select>
 		</td>
 	</tr>
 	<tr>
             <td class="formlabel">Funci&oacute;n</td>
 		<td>
-			<input id="funcion" name="funcion" type="text" size="30" maxlength="30">
+			<input id="funcion" name="funcion" type="text" size="30" maxlength="200">
 		</td>
 	</tr>
 

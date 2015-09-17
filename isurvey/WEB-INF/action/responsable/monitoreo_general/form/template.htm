@@ -15,6 +15,7 @@
 	<div style="float: left;">Lista de Estudios en Curso</div>
 </div>
 <p class="texto">En este apartado se pueden observar ciertos indicadores de	todos los estudios que se est&aacute;n llevando a cabo:</p>
+<br>
 <!--data grid-->
 <div align="center">	
 <!--panel de respuesta AJAX-->
@@ -28,7 +29,10 @@
 	//inicializa cuando se carga la pagina
 	onload = function()
 	{
-		search(); //mostrar registros en vista paginada
+		if ('${req:flag}' == '1') 
+			search_notfound();
+		if ('${req:flag}' == '0')
+			search();
 	} 
 
 	function search()
@@ -38,6 +42,20 @@
 		if (currentPage > 0)
 			url = "${def:actionroot}/search?currentpage=" + currentPage;
 		
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+	function search_notfound()
+	{
+		var url = "${def:actionroot}/search_notfound";
+		//determina si refresca y se para en la pagina actual o en la pagina 1
 		//llamada Ajax...
 		ajaxCall(httpMethod="GET", 
 						uri= url, 

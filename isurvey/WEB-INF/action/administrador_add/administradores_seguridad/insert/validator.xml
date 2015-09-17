@@ -19,7 +19,7 @@
 
 	<custom-validator 	
 	classname="dinamica.validators.MatchEqualValidator" 
-	on-error-label="La contraseña no es igual a su confirmación."
+	on-error-label="La contrasena no es igual a su confirmacion."
 	value1="passwd" value2="confirm" />
 
 	<custom-validator 	

@@ -33,6 +33,8 @@
 		<td><input type="button" value="Buscar" class="button" onclick="go()"></td>
 		</tr>
 </table>
+<br>
+<input type="text" id="flag" hidden/>
 
 <br>
 <!--panel de respuesta AJAX-->
@@ -59,8 +61,11 @@ function go(){
 						afterResponseFn=null, 
 						onErrorFn=null);
 
-		sleep(800);
-		search();
+		sleep(500);
+		if (document.getElementById('flag').value == '1') 
+			search_notfound();
+		if (document.getElementById('flag').value == '0')
+			search();
 	}
 }
 
@@ -84,6 +89,20 @@ function go(){
 		//determina si refresca y se para en la pagina actual o en la pagina 1
 		if (currentPage > 0)
 			url = "${def:actionroot}/search?currentpage=" + currentPage;
+		//llamada Ajax...
+		ajaxCall(httpMethod="GET", 
+						uri= url, 
+						divResponse="response", 
+						divProgress="status", 
+						formName=null, 
+						afterResponseFn=null, 
+						onErrorFn=null);
+	}
+
+		function search_notfound()
+	{
+		var url = "${def:actionroot}/search_notfound";
+		//determina si refresca y se para en la pagina actual o en la pagina 1
 		//llamada Ajax...
 		ajaxCall(httpMethod="GET", 
 						uri= url, 

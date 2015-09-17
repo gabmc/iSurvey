@@ -150,8 +150,14 @@ public class MonitoreoGeneral extends GenericTransaction {
         	output2.setValue("sin_iniciar", sin_iniciar);
         	output2.setValue("porcentaje_sin_iniciar", porcentaje_sin_iniciar);
         }
-        this.getSession().setAttribute("estudios.sql", output);
-        this.getSession().setAttribute("query2.sql", output2);
+        if (output.getRecordCount() > 0){
+        	getRequest().setAttribute("flag", "0");
+	        this.getSession().setAttribute("estudios.sql", output);
+	        this.getSession().setAttribute("query2.sql", output2);
+        }
+        else{
+        	getRequest().setAttribute("flag", "1");
+        }
         //publish("estudios", output);
         this.getDb().commit();
         return 0;
