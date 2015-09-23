@@ -2,7 +2,7 @@
 <validator onerror='/action/error/validation/ajax'>
 	<parameter id='nombre_participante' type='varchar' required='false' label='Nombre' maxlen='30'/>
 	<parameter id='apellido_participante' type='varchar' required='false' label='Apellido' maxlen='30'/>
-	<parameter id='email_participante' type='varchar' required='false' label='e-mail' maxlen='30'/>
+	<parameter id='email_participante' type='varchar' required='false' label='e-mail' maxlen='80'/>
 	<parameter id='empresa' type='varchar' required='false' label='Empresa' maxlen='30'/>
 	<parameter id='cargo' type='varchar' required='false' label='Cargo' maxlen='30'/>
 	<parameter id='supervisor' type='varchar' required='false' label='Supervisor' maxlen='30'/>

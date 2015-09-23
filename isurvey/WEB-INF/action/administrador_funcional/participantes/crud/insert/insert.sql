@@ -26,8 +26,11 @@ SELECT
 	${fld:apellido_participante},
 	${fld:email_participante},
 	${fld:telefono},
-	${fld:empresa},
-	${fld:sector2},
+	(select nombre_empresa from ajvieira_isurvey_app.empresa where id_empresa = 
+		(select id_empresa from ajvieira_isurvey_security.s_user where userlogin='${def:user}')),
+	(select nombre_sector from ajvieira_isurvey_app.sector_empresarial where id_sector_empresarial = 
+		(select id_sector_empresarial from ajvieira_isurvey_app.empresa where id_empresa = 
+			(select id_empresa from ajvieira_isurvey_security.s_user where userlogin = '${def:user}'))),
 	${fld:area},
 	${fld:cargo},
 	${fld:supervisor},

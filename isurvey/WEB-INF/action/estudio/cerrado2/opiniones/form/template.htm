@@ -6,6 +6,10 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 
+<!--biblioteca generica JS/Dinamica-->
+<script type="text/javascript" src="${def:context}/action/script">
+</script>
+
 <title>iSurvey</title>
 
 </head>
@@ -19,7 +23,7 @@
 <br>
 <!--formulario addnew/edit-->
 <div id="form" align="center">
-<form name="form1" action="insert" method="post">
+<form name="form1" onsubmit="insert()">
 
 <table class="formgrid" width="450px">
 
@@ -47,6 +51,7 @@
 			<input type="radio" name="tipo" value="Comentario">Comentario<br>
 <input type="radio" name="tipo" value="Sugerencia">Sugerencia<br>
 <input type="radio" name="tipo" value="Soporte">Solicitud de Soporte<br>
+<input type="text" hidden id="tipo">
 		</td>
 	</tr>
 	<tr>
@@ -95,7 +100,7 @@
 							divProgress="status", 
 							formName="form1", 
 							afterResponseFn=null, 
-							onErrorFn=retryAddnewOrEdit);	    	
+							onErrorFn=null);	    	
 	}
 </script>
 </html>

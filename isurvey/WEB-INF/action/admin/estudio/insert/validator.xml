@@ -4,9 +4,9 @@
 	<parameter id='id_empresa_name' type='varchar' required='true' label='Empresa'/>
 	<parameter id='id_empresa' type='integer' required='false' label='Empresa' maxlen='10'/>
 	<parameter id='tipo' type='varchar' required='false' label='Nombre' maxlen='30'/>
-	<parameter id='titulo_email' type='varchar' required='true' label='Titulo Email' maxlen='30'/>
+	<parameter id='titulo_email' type='varchar' required='true' label='Titulo Email' maxlen='100'/>
 	<parameter id='cuerpo_email' type='varchar' required='true' label='Cuerpo Email' maxlen='500'/>
-	<parameter id='titulo_email_recordatorio' type='varchar' required='true' label='Titulo Email Recordatorio' maxlen='30'/>
+	<parameter id='titulo_email_recordatorio' type='varchar' required='true' label='Titulo Email Recordatorio' maxlen='100'/>
 	<parameter id='cuerpo_email_recordatorio' type='varchar' required='true' label='Cuerpo Email Recordatorio' maxlen='500'/>
 		<parameter id="file" type="varchar" required="false" label="Archivo temporal" maxlen="500"/>
 	<parameter id="file.filename" type="varchar" required="false" label="Archivo" maxlen="400"/>

@@ -2,5 +2,5 @@
 <validator onerror='/action/error/validation/ajax'>
 	<parameter id='id' type='integer' required='true' label='idinstrumento' maxlen='10'/>
 	<parameter id='tipo' type='varchar' required='true' label='Tipo de opinion (comentario, sugerencia o solicitud de soporte)' maxlen='15'/>
-	<parameter id='texto' type='varchar' required='true' label='tex' maxlen='65535'/>
+	<parameter id='texto' type='varchar' required='true' label='texto' maxlen='65535'/>
 </validator>

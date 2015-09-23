@@ -36,7 +36,7 @@
 
 	<!--titulo-->
 	<tr>
-		<th colspan="2"><span id="formTitle"> Añadir registro </span></th>
+		<th colspan="2"><span id="formTitle"> A�adir registro </span></th>
 	</tr>
 
 	<!--separador-->
@@ -46,27 +46,47 @@
 
 	<!--campos-->
 		<tr>
-		<td class="formlabel required">Identificador</td>
+		<td class="formlabel required">Identificador*</td>
 		<td>
 			<input id="id_participante" name="id_participante" type="text" size="10" maxlength="10">
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel required">Nombre</td>
+		<td class="formlabel required">Nombre*</td>
 		<td>
-			<input id="nombre_participante" name="nombre_participante" type="text" size="30" maxlength="30">
+			<input id="nombre_participante" name="nombre_participante" type="text" size="30" maxlength="30"> 
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel required">Apellido</td>
+		<td class="formlabel required">Apellido*</td>
 		<td>
 			<input id="apellido_participante" name="apellido_participante" type="text" size="30" maxlength="30">
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel required">e-mail</td>
+		<td class="formlabel required">e-mail*</td>
 		<td>
 			<input id="email_participante" name="email_participante" type="text" size="30" maxlength="80">
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Sexo*</td>
+		<td>
+                    <input id="sexom" name="sexo" type="radio" value="M"><label>Masculino</label>
+                    <input id="sexof" name="sexo" type="radio" value="F"><label>Femenino</label>
+                    <input type="text" hidden id="sexo">
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel required">&Aacute;rea*</td>
+		<td>
+			<input id="area" name="area" type="text" size="30" maxlength="50">
+		</td>
+	</tr>
+	<tr>
+		<td class="formlabel required">Cargo*</td>
+		<td>
+			<input id="cargo" name="cargo" type="text" size="30" maxlength="100">
 		</td>
 	</tr>
 	<tr>
@@ -75,15 +95,15 @@
 			<input id="telefono" name="telefono" type="text" size="30" maxlength="20">
 		</td>
 	</tr>
-	<tr>
-		<td class="formlabel required">Empresa</td>
+<!--	<tr>
+		<td class="formlabel">Empresa</td>
 		<td>
 			<input id="empresa" name="empresa" type="text" size="30" maxlength="100">
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel required">Sector de la Empresa</td>
-		<td align="left"><select name="sector1" id="sector1" onchange="revisarSelect()">
+		<td class="formlabel">Sector de la Empresa</td>
+		<td><select name="sector1" id="sector1" onchange="revisarSelect()">
 			<option value="seleccione opcion">[Seleccione una opci&oacute;n]</option>
 			<option value="Banca y seguros">Banca y seguros</option>
 			<option value="Comercio y retail">Comercio y retail</option>
@@ -98,23 +118,12 @@
 			<option value="Tecnologia y telecomunicaciones">Tecnolog&iacute;a y telecomunicaciones</option>
 			<option value="otro">Otro</option>
 		</select></td>
-	</tr>
+	</tr>	
 	<tr id="sector_otro" hidden>
 	<td class="formlabel">&iquest;Cu&aacute;l?</td>
 		<td><input type="text" id="sector2" name="sector2" size="30" maxlength="60"></td>
-	</tr>
-	<tr>
-		<td class="formlabel required">&Aacute;rea</td>
-		<td>
-			<input id="area" name="area" type="text" size="30" maxlength="50">
-		</td>
-	</tr>
-	<tr>
-		<td class="formlabel required">Cargo</td>
-		<td>
-			<input id="cargo" name="cargo" type="text" size="30" maxlength="100">
-		</td>
-	</tr>
+	</tr>-->
+
 	<tr>
 		<td class="formlabel">Supervisor</td>
 		<td>
@@ -135,14 +144,7 @@
 			<img class="tool2" src="${def:context}/images/calendar.png" height="18" width="18" title="Desplegar calendario.." onclick="calendarOpen('fecha_ingreso')"> DD-MM-AAAA
 		</td>
 	</tr>
-	<tr>
-		<td class="formlabel required">Sexo</td>
-		<td>
-                    <input id="sexom" name="sexo" type="radio" value="M"><label>Masculino</label>
-                    <input id="sexof" name="sexo" type="radio" value="F"><label>Femenino</label>
-                    <input type="text" hidden id="sexo">
-		</td>
-	</tr>
+
 	<tr>
             <td class="formlabel">Tipo de N&oacute;mina</td>
 		<td>
@@ -158,7 +160,6 @@
 			<input id="funcion" name="funcion" type="text" size="30" maxlength="200">
 		</td>
 	</tr>
-
 
 	<!--separador-->
 	<tr height="10px">
@@ -179,7 +180,6 @@
 	</tr>
 
 </table>
-
 <input type="hidden" name="id" value="">
 
 </form>

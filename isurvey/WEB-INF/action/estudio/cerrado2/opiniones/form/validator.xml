@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
-<validator id="asd">
+<validator onerror='/action/error/validation/ajax'>
 	<parameter id="id" type="integer" required="true" label="id del instrumento"/>
-	<parameter id="token" type="varchar" required="true" label="token participante
-		"/>
+	<parameter id="token" type="varchar" required="true" label="token participante"/>
 </validator>
