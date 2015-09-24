@@ -75,15 +75,14 @@ public class ImportExcelParticipantes extends GenericTableManager  {
         rs.append("nombre_participante", java.sql.Types.VARCHAR);
         rs.append("apellido_participante", java.sql.Types.VARCHAR);
         rs.append("email_participante", java.sql.Types.VARCHAR);
-        rs.append("telefono", java.sql.Types.VARCHAR);
+        rs.append("sexo", java.sql.Types.VARCHAR);
         rs.append("empresa", java.sql.Types.VARCHAR);
-        rs.append("sector_empresa", java.sql.Types.VARCHAR);
         rs.append("area", java.sql.Types.VARCHAR);
         rs.append("cargo", java.sql.Types.VARCHAR);
+        rs.append("telefono", java.sql.Types.VARCHAR);
         rs.append("supervisor", java.sql.Types.VARCHAR);
         rs.append("fecha_nacimiento", java.sql.Types.DATE);
-        rs.append("fecha_ingreso", java.sql.Types.DATE);
-        rs.append("sexo", java.sql.Types.VARCHAR);
+        rs.append("fecha_ingreso", java.sql.Types.DATE);     
         rs.append("tipo_nomina", java.sql.Types.VARCHAR);
         rs.append("funcion", java.sql.Types.VARCHAR);
 
@@ -91,7 +90,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
         int columnas = sheet.getColumns();
 
         //numero de columnas del archivo es igual a 10?
-        if (columnas == 15)
+        if (columnas == 14)
         {
             //mientras exista registros
             for(int i = 1; i<numOfRows;i++)
@@ -116,7 +115,6 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                     Cell columna12 = sheet.getCell(11,i);
                     Cell columna13 = sheet.getCell(12,i);
                     Cell columna14 = sheet.getCell(13,i);
-                    Cell columna15 = sheet.getCell(14,i);
 
                     //la celda esta vacia?
                     if (columna1.getContents() == null || columna1.getContents().equals(""))
@@ -163,12 +161,11 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                     	rs.setValue("email_participante", columna4.getContents());
                     }
                     
-                    if (columna5.getContents() == null || columna5.getContents().equals("")){
-                    	columna = "Telefono";
-                    	throw new Throwable ("La celda no puede estar vacia.");
-                    }
+                    if (columna5.getContents().equals("F") || columna5.getContents().equals("M"))
+                        rs.setValue("sexo", columna5.getContents());
                     else{
-                    	rs.setValue("telefono", columna5.getContents());
+                    	columna = "Sexo";
+                    	throw new Throwable ("Se debe escribir F o M y no se puede dejar vac&iacute;o");
                     }
                     
                     if (columna6.getContents() == null || columna6.getContents().equals("")){
@@ -180,15 +177,30 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                     }
                     
                     if (columna7.getContents() == null || columna7.getContents().equals("")){
-                    	columna = "Sector Empresa";
+                    	columna = "Area";
                     	throw new Throwable ("La celda no puede estar vacia.");
                     }
                     else{
-                    	rs.setValue("sector_empresa", columna7.getContents());
+                    	rs.setValue("area", columna7.getContents());
                     }
-                    		rs.setValue("area", columna8.getContents());
-                            rs.setValue("cargo", columna9.getContents());
-                            rs.setValue("supervisor", columna10.getContents());
+                    
+                    if (columna8.getContents() == null || columna8.getContents().equals("")){
+                    	columna = "Cargo";
+                    	throw new Throwable ("La celda no puede estar vacia.");
+                    }
+                    else{
+                    	rs.setValue("cargo", columna8.getContents());
+                    }
+                            
+                    if (columna9.getContents() == null || columna9.getContents().equals("")){
+                        columna = "Telefono";
+                        throw new Throwable ("La celda no puede estar vacia.");
+                    }
+                    else{
+                        rs.setValue("telefono", columna9.getContents());
+                    }
+                    
+                    rs.setValue("supervisor", columna10.getContents());
 
                             if (!columna11.getContents().equals(""))
                             {
@@ -197,7 +209,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                                     rs.setValue("fecha_nacimiento", dcolum2);
                                 else{
                                     columna = "Fecha de Nacimiento";
-                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato Día-Mes-Año y use como separador el guión (-)");
+                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato Dia-Mes-Ano y use como separador el guion (-)");
                                 }
                             }
 
@@ -208,13 +220,17 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                                     rs.setValue("fecha_ingreso", dcolum3);
                                 else{
                                     columna = "Fecha de Ingreso";
-                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato Día-Mes-Año y use como separador el guión (-)");
+                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato DÃ­a-Mes-AÃ±o y use como separador el guiÃ³n (-)");
                                 }
                             }
-                            if (columna13.getContents().equals("F") || columna13.getContents().equals("M"))
-                                rs.setValue("sexo", columna13.getContents());
-                            rs.setValue("tipo_nomina", columna14.getContents());
-                            rs.setValue("funcion", columna15.getContents());
+                            
+                            if (columna13.getContents().equals("Mensual") || columna13.getContents().equals("Diaria"))
+                            	rs.setValue("tipo_nomina", columna13.getContents());
+                            else{
+                            	columna = "Tipo Nomina";
+                            	throw new Throwable ("Se debe escribir Diaria o Mensual");
+                            } 	
+                            rs.setValue("funcion", columna14.getContents());
 
             }
             catch (Throwable a)
@@ -265,15 +281,14 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                 "nombre_participante",
                 "apellido_participante",
                 "email_participante",
-                "telefono",
+                "sexo",
                 "empresa",
-                "sector_empresa",
                 "area",
                 "cargo",
+                "telefono",
                 "supervisor",
                 "fecha_nacimiento",
                 "fecha_ingreso",
-                "sexo",
                 "tipo_nomina",
                 "funcion"
         };

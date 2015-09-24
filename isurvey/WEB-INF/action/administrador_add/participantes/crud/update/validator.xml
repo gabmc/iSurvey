@@ -4,8 +4,10 @@
 	<parameter id='apellido_participante' type='varchar' required='false' label='Apellido' maxlen='30'/>
 	<parameter id='email_participante' type='varchar' required='false' label='e-mail' maxlen='80'/>
 	<parameter id='empresa' type='varchar' required='false' label='Empresa' maxlen='30'/>
-	<parameter id='cargo' type='varchar' required='false' label='Cargo' maxlen='30'/>
-	<parameter id='supervisor' type='varchar' required='false' label='Supervisor' maxlen='30'/>
+	<parameter id='area' type='varchar' required='false' label='area' maxlen='50'/>
+	<parameter id='cargo' type='varchar' required='false' label='Cargo' maxlen='100'/>
+	<parameter id='telefono' type='varchar' required='false' label='telefono' maxlen='20'/>
+	<parameter id='supervisor' type='varchar' required='false' label='Supervisor' maxlen='100'/>
 	<parameter id='fecha_nacimiento' type='date' required='false' label='Fecha de Nacimiento' maxlen='13'/>
 	<parameter id='fecha_ingreso' type='date' required='false' label='Fecha de Ingreso' maxlen='13'/>
 	<parameter id='sexo' type='varchar' required='false' label='Sexo' maxlen='20'/>

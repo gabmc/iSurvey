@@ -44,7 +44,7 @@
 
 	<!--control picklist de seleccion simple-->
    	<tr>
-		<td class="formlabel">Sector Empresarial</td>
+		<td class="formlabel required">Sector Empresarial*</td>
 		<td>
 			<!--almacena el ID del item seleccionado--> 
 			<input type="hidden" name="id_sector_empresarial" id="id_sector_empresarial" /> 
@@ -57,25 +57,29 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel required">Nombre</td>
+		<td class="formlabel required">Nombre*</td>
 		<td>
 			<input id="nombre_empresa" name="nombre_empresa" type="text" size="30" maxlength="30" placeholder="Empresa Empresarial C.A">
 		</td>
 	</tr>
 	<tr>
-            <td class="formlabel required">Tel&eacute;fono</td>
+            <td class="formlabel required">Tel&eacute;fono*</td>
 		<td>
 			<input id="telefono" name="telefono" type="text" size="30" maxlength="30" placeholder="5555555" >
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel required">Tipo</td>
+		<td class="formlabel required">Tipo*</td>
 		<td>
-			<input id="tipo" name="tipo" type="text" size="30" maxlength="30" placeholder="Tipo A">
+			<select name="tipo" id="tipo">
+				<option value="Tipo A">Tipo A</option>
+				<option value="Tipo A">Tipo B</option>
+				<option value="Tipo A">Tipo C</option>
+			</select>
 		</td>
 	</tr>
 	<tr>
-		<td class="formlabel required">RIF</td>
+		<td class="formlabel required">RIF*</td>
 		<td>
 			<input id="rif" name="rif" type="text" size="30" maxlength="30" placeholder="J-12345678-9">
 		</td>

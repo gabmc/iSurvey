@@ -4,15 +4,14 @@ insert into ajvieira_isurvey_app.participante
         nombre_participante,
         apellido_participante,
         email_participante,
-        telefono,
+        sexo,
         empresa,
-        sector_empresa,
         area,
         cargo,
+        telefono,
         supervisor,
         fecha_nacimiento,
         fecha_ingreso,
-        sexo,
         tipo_nomina,
         funcion,
         id_empresa,
@@ -22,7 +21,6 @@ insert into ajvieira_isurvey_app.participante
 )
 values
 (
-        ?,
         ?,
         ?,
         ?,

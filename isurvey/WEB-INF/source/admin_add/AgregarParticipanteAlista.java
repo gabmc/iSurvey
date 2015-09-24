@@ -118,7 +118,7 @@ public class AgregarParticipanteAlista extends GenericTransaction {
     
     Recordset getParticipante (String id, String idEmpresa) throws Throwable{
     	String query = "select * from ajvieira_isurvey_app.participante " +
-    			"where id_empresa = " + idEmpresa +
+    			"where id_empresa = " + idEmpresa + " " +
     			"and id_participante = " + id + " ";
     	return this.getDb().get(query);
     }

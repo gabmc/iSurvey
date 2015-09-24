@@ -5,7 +5,7 @@
 	<tr>
 		<th colspan="16">
 			<!--t�tulo del grid--> 
-			<span style="float: left;">Contenido de la tabla </span>
+			<span style="float: left;">Participantes </span>
 			<!--panel de control de navegacion--> 
 			<span style="float: right;">${req:controls}</span> 
 			<!--indicador de progreso-->
@@ -26,14 +26,14 @@
 		<th width="10%"><a href="javascript:onclick=sortBy('nombre_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('apellido_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Apellido</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('email_participante','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">e-mail</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('telefono','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Tel&eacute;fono</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('sexo','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Sexo</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('empresa','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Empresa</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('sector_empresa','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Sector Empresa</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('area','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">&Aacute;rea</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('cargo','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Cargo</a></th>
+		<th width="10%"><a href="javascript:onclick=sortBy('telefono','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Tel&eacute;fono</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('supervisor','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Supervisor</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('fecha_nacimiento','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Fecha de Nacimiento</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('fecha_ingreso','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Fecha de Ingreso</a></th>
-		<th width="10%"><a href="javascript:onclick=sortBy('sexo','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Sexo</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('tipo_nomina','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Tipo de N&oacute;mina</a></th>
 		<th width="10%"><a href="javascript:onclick=sortBy('funcion','query-participante.sql')" title="Haga CLICK para ordenar por esta columna">Funci&oacute;n</a></th>
 
@@ -48,17 +48,16 @@
         <td align="left">${fld:nombre_participante}</td>
 		<td align="left">${fld:apellido_participante}</td>
 		<td align="left">${fld:email_participante}</td>
-		<td align="left">${fld:telefono}</td>
+		<td align="center">${fld:sexo}</td>
 		<td align="left">${fld:empresa}</td>
-		<td align="left">${fld:sector_empresa}</td>
+		<td align="left">${fld:area}</td>
 		<td align="left">${fld:cargo}</td>
+		<td align="left">${fld:telefono}</td>
 		<td align="left">${fld:supervisor}</td>
 		<td align="center">${fld:fecha_nacimiento@dd-MM-yyyy}</td>
 		<td align="center">${fld:fecha_ingreso@dd-MM-yyyy}</td>
-		<td align="center">${fld:sexo}</td>
 		<td align="left">${fld:tipo_nomina}</td>
 		<td align="left">${fld:funcion}</td>
-
 	</tr>
 	</rows>
 

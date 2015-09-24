@@ -11,7 +11,8 @@ UPDATE ajvieira_isurvey_app.participante SET
 	sexo=${fld:sexo},
 	tipo_nomina=${fld:tipo_nomina},
 	funcion=${fld:funcion},
-	id_participante=${fld:id_participante}
+	id_participante=${fld:id_participante},
+	telefono=${fld:telefono}
 
 WHERE
 	id_participante=${fld:id}
