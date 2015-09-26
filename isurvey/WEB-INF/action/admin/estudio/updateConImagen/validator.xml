@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <validator onerror='/action/error/validation/ajax'>
-	<parameter id='nombre_estudio' type='varchar' required='false' label='Nombre' maxlen='30'/>
+	<parameter id='nombre_estudio' type='varchar' required='false' label='Nombre' maxlen='100'/>
 	<parameter id='id_empresa_name' type='varchar' required='false' label='Empresa'/>
 	<parameter id='id_empresa' type='integer' required='false' label='Empresa' maxlen='10'/>
 	<parameter id='id' type='integer' required='true' label='ID' maxlen='10'/>

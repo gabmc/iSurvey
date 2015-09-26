@@ -77,7 +77,7 @@ public class VentanaRecordatorioIndividual extends GenericTransaction {
     }
     
     String getEnlace (String idEstudio, String token){
-    	String output = "<a href=\"http://localhost/isurvey/action/estudio/cerrado2/form?id=" + idEstudio;
+    	String output = "<a href=\"http://www.compensa.com.ve/isurvey/action/estudio/cerrado2/form?id=" + idEstudio;
     	output = output + "&token=" + token + "\">aqu&iacute;</a>";
     	return output;
     }

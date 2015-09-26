@@ -15,7 +15,7 @@
     </transaction>
 
 	
-        <mail enabled="true">
+        <mail enabled="false">
 		<subject recordset="output">${fld:subject}</subject>
 		<mail-to recordset="output" colname="email_participante"></mail-to>
 		<body html="true" recordset="output">body.txt</body>

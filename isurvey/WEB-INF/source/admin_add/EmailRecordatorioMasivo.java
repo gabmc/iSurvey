@@ -13,6 +13,8 @@ import dinamica.StringUtil;
 import java.util.Map;
 import java.util.Enumeration;
 
+import utils.EnviarCorreo;
+
 /**
  *
  * @author addSolutions
@@ -25,6 +27,10 @@ public class EmailRecordatorioMasivo extends GenericTransaction {
     	String idEstudio = ((String[]) parametros.get("id_estudio"))[0];
     	String flag = ((String[]) parametros.get("flag"))[0];
     	Recordset output = getOutput(getParticipantes(idEstudio, flag), idEstudio);
+    	EnviarCorreo ev = new EnviarCorreo();
+    	output.top();
+    	while (output.next())
+    		ev.enviar(output.getString("email_participante"), output.getString("subject"), output.getString("body"));
     	this.publish("output", output);
         return 0;
     }
