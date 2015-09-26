@@ -60,26 +60,17 @@ public class EmailInvitacionMasiva extends GenericTransaction {
     }
     
     Recordset getParticipantes(String idEstudio, String flag) throws Throwable{
-    	if (flag.equals("0")){
-	    	String query = StringUtil.replace(getResource("participantes_sin_iniciar_incompleta.sql"), "${fld:id_estudio}", idEstudio);
-	    	query = StringUtil.replace(query, "${fld:id_empresa}", getIdEmpresa(idEstudio));
-	    	return this.getDb().get(query);
-    	}
-    	else if (flag.equals("1")){
-    		String query = StringUtil.replace(getResource("participantes_incompleta.sql"), "${fld:id_estudio}", idEstudio);
-    		query = StringUtil.replace(query, "${fld:id_empresa}", getIdEmpresa(idEstudio));
-    		return this.getDb().get(query);
-    	}
-    	else if (flag.equals("2")){
-    		String query = StringUtil.replace(getResource("participantes_sin_iniciar.sql"), "${fld:id_estudio}", idEstudio);
-    		query = StringUtil.replace(query, "${fld:id_empresa}", getIdEmpresa(idEstudio));
-    		return this.getDb().get(query);
-    	}
-    	else{
-    		String query = StringUtil.replace(getResource("participantes_todos.sql"), "${fld:id_estudio}", idEstudio);
-    		query = StringUtil.replace(query, "${fld:id_empresa}", getIdEmpresa(idEstudio));
-    		return this.getDb().get(query);
-    	}
+    	String query = "";
+    	if (flag.equals("0"))
+	    	query = StringUtil.replace(getResource("participantes_sin_iniciar_incompleta.sql"), "${fld:id_estudio}", idEstudio);	
+    	if (flag.equals("1"))
+    		query = StringUtil.replace(getResource("participantes_incompleta.sql"), "${fld:id_estudio}", idEstudio);
+    	if (flag.equals("2"))
+    		query = StringUtil.replace(getResource("participantes_sin_iniciar.sql"), "${fld:id_estudio}", idEstudio);
+    	if (flag.equals("3"))
+    		query = StringUtil.replace(getResource("participantes_todos.sql"), "${fld:id_estudio}", idEstudio);
+    	query = StringUtil.replace(query, "${fld:id_empresa}", getIdEmpresa(idEstudio));
+    	return this.getDb().get(query);
     }
     
     Recordset getTituloYcuerpo(String idEstudio) throws Throwable{

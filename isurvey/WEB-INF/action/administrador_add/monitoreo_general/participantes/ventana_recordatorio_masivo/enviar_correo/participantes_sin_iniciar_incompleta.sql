@@ -1,4 +1,4 @@
-select email_participante, nombre_participante, apellido_participante, 
+select distinct email_participante, nombre_participante, apellido_participante, 
 (select token_participante from ajvieira_isurvey_app.int_participante_instrumento 
 	where id_participante = part.id_participante and id_instrumento in 
 	(select id_instrumento from ajvieira_isurvey_app.instrumento where id_estudio = ${fld:id_estudio}) limit 1) as token_participante

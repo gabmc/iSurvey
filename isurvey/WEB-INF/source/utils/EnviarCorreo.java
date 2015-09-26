@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -13,6 +14,7 @@ public class EnviarCorreo
 
       // Sender's email ID needs to be mentioned
       String from = "info@addsolutions.com.ve";
+      String nombreFrom = "iSurvey";
 
       // Assuming you are sending email from localhost
       String host = "localhost";
@@ -30,10 +32,8 @@ public class EnviarCorreo
          // Create a default MimeMessage object.
          MimeMessage message = new MimeMessage(session);
 
-         message.setSender(new InternetAddress("iSurvey"));
-         
          // Set From: header field of the header.
-         message.setFrom(new InternetAddress(from));
+         message.setFrom(new InternetAddress(from, nombreFrom));
 
          // Set To: header field of the header.
          message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
@@ -43,11 +43,14 @@ public class EnviarCorreo
 
          // Now set the actual message
          message.setContent(text, "text/html");
-         
+
          // Send message
          Transport.send(message);
       }catch (MessagingException mex) {
          mex.printStackTrace();
-      }
+      } catch (UnsupportedEncodingException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
    }
 }
