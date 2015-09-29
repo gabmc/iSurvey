@@ -5,9 +5,10 @@
 	<parameter id='id_empresa' type='integer' required='false' label='Empresa' maxlen='10'/>
 	<parameter id='id' type='integer' required='true' label='ID' maxlen='10'/>
 	<parameter id='tipo' type='varchar' required='false' label='Tipo' maxlen='30'/>
-	<parameter id='titulo_email' type='varchar' required='false' label='Titulo Email' maxlen='20'/>
+	<parameter id='titulo_email' type='varchar' required='false' label='Titulo Email' maxlen='100'/>
 	<parameter id='cuerpo_email2' type='varchar' required='false' label='Cuerpo Email' maxlen='5000'/>
-	<parameter id='titulo_email_recordatorio' type='varchar' required='false' label='Titulo Email Recordatorio' maxlen='20'/>
+	<parameter id='titulo_email_recordatorio' type='varchar' required='false' label='Titulo Email Recordatorio' maxlen='100'/>
 	<parameter id='cuerpo_email_recordatorio2' type='varchar' required='false' label='Cuerpo Email Recordatorio' maxlen='5000'/>
+	<parameter id="estatus" type="varchar" required="false" label="Estatus del estudio" maxlen="100" />
 </validator>
 

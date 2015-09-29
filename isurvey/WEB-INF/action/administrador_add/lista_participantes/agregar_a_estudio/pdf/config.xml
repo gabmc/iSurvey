@@ -24,8 +24,8 @@
 
 	<pdf-report pageSize="letter" rotate="false">
 		<table recordset='query-listaparticipantes.sql' width='100' spacingBefore='40'>
-			<col name='nombre_lista_participantes' title='Nombre' width='50' align='left' />
-			<col name='tipo' title='Tipo' width='50' align='left' />
+			<col name='nombre_lista_participantes' title='Lista de Participantes' width='50' align='left' />
+			<col name='estudio' title='Estudio' width='50' align='left' />
 		</table>
 
 	</pdf-report>

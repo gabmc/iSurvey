@@ -1,0 +1,1 @@
+delete from ajvieira_isurvey_app.participante where id_empresa = ${fld:id}

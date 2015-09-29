@@ -19,8 +19,9 @@
 		<classname>dinamica.GenericExcelOutput</classname>
 	</output>
 	
-	<excel recordset='query-listaparticipantes.sql' sheetname='Administrar Listas de Participantes' filename='pan.xls'>
-		<col id='nombre_lista_participantes' label='Nombre' />
+	<excel recordset='query-listaparticipantes.sql' sheetname='Listas de Participantes - Estudios' filename='listas_participantes_por_estudio.xls'>
+		<col id='nombre_lista_participantes' label='Lista de Participantes' />
+		<col id='estudio' label='Estudio' />
 		<col id='tipo' label='Tipo' />
 	</excel>
 

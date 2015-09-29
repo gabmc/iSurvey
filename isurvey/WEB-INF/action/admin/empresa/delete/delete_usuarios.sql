@@ -1,0 +1,1 @@
+delete from ajvieira_isurvey_security.s_user where id_empresa = ${fld:id}

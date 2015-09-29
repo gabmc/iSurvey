@@ -19,13 +19,12 @@
 		<classname>dinamica.PDFGenericReport</classname>
 	</output>
 
-	<pdf-title>Administrar Listas de Participantes</pdf-title>
+	<pdf-title>Indice Listas de Participantes</pdf-title>
 	<pdf-logo url='/images/logo-dinamica.png' scale='100' />
 
 	<pdf-report pageSize="letter" rotate="false">
 		<table recordset='query-listaparticipantes.sql' width='100' spacingBefore='40'>
 			<col name='nombre_lista_participantes' title='Nombre' width='50' align='left' />
-			<col name='tipo' title='Tipo' width='50' align='left' />
 		</table>
 
 	</pdf-report>
