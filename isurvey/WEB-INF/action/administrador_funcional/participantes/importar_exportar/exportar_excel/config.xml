@@ -25,7 +25,7 @@
 		<col id='apellido_participante' label='Apellido' />
 		<col id='email_participante' label='e-mail' />
 		<col id='sexo' label='Sexo' />
-		<col id='empresa' label='Empresa' />
+		<!--<col id='empresa' label='Empresa' />-->
 		<col id='area' label='Area' />
 		<col id='cargo' label='Cargo' />
 		<col id='telefono' label='Telefono' />		

@@ -6,7 +6,8 @@ INSERT INTO ajvieira_isurvey_app.estudio
 	titulo_email,
 	cuerpo_email,
 	titulo_mail_recordatorio,
-	cuerpo_mail_recordatorio
+	cuerpo_mail_recordatorio,
+	estatus
 )
 VALUES
 (
@@ -16,5 +17,6 @@ VALUES
 	${fld:titulo_email},
 	${fld:cuerpo_email},
 	${fld:titulo_email_recordatorio},
-	${fld:cuerpo_email_recordatorio}
+	${fld:cuerpo_email_recordatorio},
+	${fld:estatus}
 )

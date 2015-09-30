@@ -6,6 +6,7 @@ import java.util.Enumeration;
 
 import jxl.*;
 import dinamica.*;
+
 import java.util.Map;
 
 import tokens_participantes.TokenGenerator;
@@ -81,6 +82,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
         rs.append("apellido_participante", java.sql.Types.VARCHAR);
         rs.append("email_participante", java.sql.Types.VARCHAR);
         rs.append("sexo", java.sql.Types.VARCHAR);
+        rs.append("sector_empresarial", java.sql.Types.VARCHAR);
         rs.append("empresa", java.sql.Types.VARCHAR);
         rs.append("area", java.sql.Types.VARCHAR);
         rs.append("cargo", java.sql.Types.VARCHAR);
@@ -95,7 +97,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
         int columnas = sheet.getColumns();
 
         //numero de columnas del archivo es igual a 10?
-        if (columnas == 14)
+        if (columnas == 13)
         {
             //mientras exista registros
             for(int i = 1; i<numOfRows;i++)
@@ -119,7 +121,6 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                     Cell columna11 = sheet.getCell(10,i);
                     Cell columna12 = sheet.getCell(11,i);
                     Cell columna13 = sheet.getCell(12,i);
-                    Cell columna14 = sheet.getCell(13,i);
 
                     //la celda esta vacia?
                     if (columna1.getContents() == null || columna1.getContents().equals(""))
@@ -173,43 +174,43 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                     	throw new Throwable ("Se debe escribir F o M y no se puede dejar vac&iacute;o");
                     }
                     
-                    if (columna6.getContents() == null || columna6.getContents().equals("")){
-                    	columna = "Empresa";
-                    	throw new Throwable ("La celda no puede estar vacia.");
-                    }
-                    else{
-                    	rs.setValue("empresa", columna6.getContents());
-                    }
+                    rs.setValue("sector_empresarial", getSectorEmpresarial(idEmpresa));
+                    rs.setValue("empresa", getNombreEmpresa(idEmpresa));
                     
-                    if (columna7.getContents() == null || columna7.getContents().equals("")){
+                    if (columna6.getContents() == null || columna6.getContents().equals("")){
                     	columna = "Area";
                     	throw new Throwable ("La celda no puede estar vacia.");
                     }
                     else{
-                    	rs.setValue("area", columna7.getContents());
+                    	rs.setValue("area", columna6.getContents());
                     }
                     
-                    if (columna8.getContents() == null || columna8.getContents().equals("")){
+                    if (columna7.getContents() == null || columna7.getContents().equals("")){
                     	columna = "Cargo";
                     	throw new Throwable ("La celda no puede estar vacia.");
                     }
                     else{
-                    	rs.setValue("cargo", columna8.getContents());
+                    	rs.setValue("cargo", columna7.getContents());
                     }
                             
-                    if (columna9.getContents() == null || columna9.getContents().equals("")){
-                        columna = "Telefono";
-                        throw new Throwable ("La celda no puede estar vacia.");
+                    if (columna8.getContents() == null || columna8.getContents().equals("")){	
                     }
                     else{
-                        rs.setValue("telefono", columna9.getContents());
+	                    Integer dcolum1 = ValidatorUtil.testInteger(columna8.getContents());
+	                    if (dcolum1!=null){
+	                    	rs.setValue("telefono", columna8.getContents());
+	                    }
+	                    else{
+	                            columna = "Telefono";
+	                            throw new Throwable ("El dato ingresado no representa un numero.");
+	                    }
                     }
                     
-                    rs.setValue("supervisor", columna10.getContents());
+                    rs.setValue("supervisor", columna9.getContents());
 
-                            if (!columna11.getContents().equals(""))
+                            if (!columna10.getContents().equals(""))
                             {
-                                Date dcolum2 = ValidatorUtil.testDate(columna11.getContents(), "dd-MM-yy");
+                                Date dcolum2 = ValidatorUtil.testDate(columna10.getContents(), "dd-MM-yy");
                                 if (dcolum2!=null)
                                     rs.setValue("fecha_nacimiento", dcolum2);
                                 else{
@@ -218,24 +219,24 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                                 }
                             }
 
-                            if (!columna12.getContents().equals(""))
+                            if (!columna11.getContents().equals(""))
                             {
-                                Date dcolum3 = ValidatorUtil.testDate(columna12.getContents(), "dd-MM-yy");
+                                Date dcolum3 = ValidatorUtil.testDate(columna11.getContents(), "dd-MM-yy");
                                 if (dcolum3!=null)
                                     rs.setValue("fecha_ingreso", dcolum3);
                                 else{
                                     columna = "Fecha de Ingreso";
-                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato Día-Mes-Año y use como separador el guión (-)");
+                                    throw new Throwable ("La fecha no fue ingresada correctamente. Escriba una fecha en formato Dia-Mes-Ano y use como separador el guion (-)");
                                 }
                             }
                             
-                            if (columna13.getContents().equals("Mensual") || columna13.getContents().equals("Diaria"))
-                            	rs.setValue("tipo_nomina", columna13.getContents());
+                            if (columna12.getContents().equals("Mensual") || columna12.getContents().equals("Diaria"))
+                            	rs.setValue("tipo_nomina", columna12.getContents());
                             else{
                             	columna = "Tipo Nomina";
                             	throw new Throwable ("Se debe escribir Diaria o Mensual");
                             } 	
-                            rs.setValue("funcion", columna14.getContents());
+                            rs.setValue("funcion", columna13.getContents());
             }
             catch (Throwable a)
             {
@@ -286,6 +287,7 @@ public class ImportExcelParticipantes extends GenericTableManager  {
                 "apellido_participante",
                 "email_participante",
                 "sexo",
+                "sector_empresarial",
                 "empresa",
                 "area",
                 "cargo",
@@ -385,6 +387,24 @@ public class ImportExcelParticipantes extends GenericTableManager  {
             }
         }
         return false;
+    }
+        
+    String getNombreEmpresa(String idEmpresa) throws Throwable{
+    	String sql = "select nombre_empresa from ajvieira_isurvey_app.empresa " +
+    			"where id_empresa = " + idEmpresa;
+    	Recordset rs = this.getDb().get(sql);
+    	rs.first();
+    	return rs.getString("nombre_empresa");
+    }
+    
+    String getSectorEmpresarial(String idEmpresa) throws Throwable{
+    	String sql = "select nombre_sector " +
+    			"from ajvieira_isurvey_app.sector_empresarial, ajvieira_isurvey_app.empresa " +
+    			"where empresa.id_sector_empresarial = sector_empresarial.id_sector_empresarial " +
+    			"and empresa.id_empresa = " + idEmpresa;
+    	Recordset rs = this.getDb().get(sql);
+    	rs.first();
+    	return rs.getString("nombre_sector");
     }
 
 }

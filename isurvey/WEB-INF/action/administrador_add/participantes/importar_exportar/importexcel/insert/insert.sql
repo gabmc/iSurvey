@@ -5,6 +5,7 @@ insert into ajvieira_isurvey_app.participante
         apellido_participante,
         email_participante,
         sexo,
+        sector_empresa,
         empresa,
         area,
         cargo,
@@ -21,6 +22,7 @@ insert into ajvieira_isurvey_app.participante
 )
 values
 (
+        ?,
         ?,
         ?,
         ?,

@@ -8,6 +8,7 @@
 	<parameter id="pwd_policy" type="integer" required="true" label="Política de Contraseña" />
 	<parameter id="force_newpass" type="integer" required="false" label="Obligar nueva contraseña" />
 	<parameter id="locale" type="varchar" required="false" label="Idioma" />
+	<parameter id="id_empresa" type="varchar" required="false" label="ID Empresa" />
 
 	<custom-validator 	
 	classname="dinamica.validators.ArrayNotEmptyValidator" 

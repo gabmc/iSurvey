@@ -10,4 +10,5 @@
 	<parameter id="file.filename" type="varchar" required="false" label="Archivo" maxlen="400"/>
 	<parameter id='titulo_email_recordatorio' type='varchar' required='true' label='Titulo Email Recordatorio' maxlen='100'/>
 	<parameter id='cuerpo_email_recordatorio' type='varchar' required='true' label='Cuerpo Email Recordatorio' maxlen='5000'/>
+	<parameter id='estatus' type='varchar' required='true' label='Estatus'/>
 </validator>
