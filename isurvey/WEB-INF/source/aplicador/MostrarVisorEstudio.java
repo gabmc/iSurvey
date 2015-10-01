@@ -69,7 +69,7 @@ public class MostrarVisorEstudio extends GenericTransaction {
 	        	if (info.getValue("estatus").equals("Completa")){
 	        		visor.setValue("estatus", green);
 	        	}
-	        	visor.setValue("nombre_y_apellido", getNombreApellidoParticipante(token));
+	        	visor.setValue("nombre_y_apellido", getNombreApellidoParticipante(token, getIdEmpresa(idEstudio)));
         	}
         this.publish("visor", visor);
         this.getSession().setAttribute("visor", visor);
@@ -240,11 +240,20 @@ public class MostrarVisorEstudio extends GenericTransaction {
     	}
     }
     
-    String getNombreApellidoParticipante (String token) throws Throwable{
+    String getIdEmpresa (String idEstudio) throws Throwable{
+    	String sql = "select id_empresa from ajvieira_isurvey_app.estudio" +
+    			" where estudio.id_estudio = " + idEstudio;
+    	Recordset rs = this.getDb().get(sql);
+    	rs.first();
+    	return rs.getString("id_empresa");
+    }
+    
+    String getNombreApellidoParticipante (String token, String idEmpresa) throws Throwable{
     	String sql = "select case sexo when 'F' then concat('Bienvenida ',nombre_participante,' ',apellido_participante) " +
     			"else concat ('Bienvenido ',nombre_participante,' ',apellido_participante) end as datos " +
     			"from ajvieira_isurvey_app.participante, ajvieira_isurvey_app.int_participante_instrumento " +
     			"where participante.id_participante = int_participante_instrumento.id_participante " +
+    			"and participante.id_empresa = " + idEmpresa + " " + 
     			"and int_participante_instrumento.token_participante = '" + token + "'";
     	Recordset rs = this.getDb().get(sql);
     	rs.first();

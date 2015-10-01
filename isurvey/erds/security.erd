@@ -81,8 +81,8 @@
       </backgroundColor>
       <sql></sql>
       <constraint>
-        <x>960</x>
-        <y>661</y>
+        <x>742</x>
+        <y>579</y>
         <width>-1</width>
         <height>-1</height>
       </constraint>
@@ -187,8 +187,8 @@
             </backgroundColor>
             <sql></sql>
             <constraint>
-              <x>1257</x>
-              <y>325</y>
+              <x>1327</x>
+              <y>351</y>
               <width>-1</width>
               <height>-1</height>
             </constraint>
@@ -380,8 +380,8 @@
                         </backgroundColor>
                         <sql></sql>
                         <constraint>
-                          <x>947</x>
-                          <y>325</y>
+                          <x>991</x>
+                          <y>321</y>
                           <width>-1</width>
                           <height>-1</height>
                         </constraint>
@@ -734,8 +734,8 @@
                                     </backgroundColor>
                                     <sql></sql>
                                     <constraint>
-                                      <x>1575</x>
-                                      <y>325</y>
+                                      <x>1813</x>
+                                      <y>485</y>
                                       <width>-1</width>
                                       <height>-1</height>
                                     </constraint>
@@ -1166,8 +1166,8 @@
                                                 </backgroundColor>
                                                 <sql></sql>
                                                 <constraint>
-                                                  <x>2465</x>
-                                                  <y>325</y>
+                                                  <x>2451</x>
+                                                  <y>285</y>
                                                   <width>-1</width>
                                                   <height>-1</height>
                                                 </constraint>
@@ -1742,8 +1742,8 @@
       </backgroundColor>
       <sql></sql>
       <constraint>
-        <x>40</x>
-        <y>40</y>
+        <x>2124</x>
+        <y>392</y>
         <width>-1</width>
         <height>-1</height>
       </constraint>
@@ -1859,8 +1859,8 @@
       </backgroundColor>
       <sql></sql>
       <constraint>
-        <x>360</x>
-        <y>40</y>
+        <x>1524</x>
+        <y>588</y>
         <width>-1</width>
         <height>-1</height>
       </constraint>
