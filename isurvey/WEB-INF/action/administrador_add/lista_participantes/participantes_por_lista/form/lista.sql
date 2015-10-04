@@ -1,0 +1,4 @@
+select nombre_lista_participantes, id_lista_participantes
+from ajvieira_isurvey_app.lista_participantes
+where 
+lista_participantes.id_lista_participantes = ${fld:id_lista}
