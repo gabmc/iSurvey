@@ -542,7 +542,8 @@ public class MonitoreoGeneral extends GenericTransaction {
 			    		}
 		    		}
 	    		}
-	    		
+	    		System.out.println("respondidas: " + preguntasRespondidas);
+	    		System.out.println("obligatorias: " + preguntasObligatorias);
 	    		if (porcentaje != 0 && porcentaje != 100 && preguntasObligatorias != 0)
 	    			porcentaje = (preguntasRespondidas*100)/preguntasObligatorias;
 

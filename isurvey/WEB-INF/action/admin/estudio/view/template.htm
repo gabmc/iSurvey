@@ -3,7 +3,7 @@
 
 	<!--toolbar-->
 	<tr>
-		<th colspan="5">
+		<th colspan="6">
 			<!--t�tulo del grid--> 
 			<span style="float: left;">Listado de Estudios </span>
 			<!--panel de control de navegacion--> 
@@ -22,9 +22,10 @@
 	<!--encabezados-->
 	<tr>
 		<th colspan="2"></th>
-		<th width="33%"><a href="javascript:onclick=sortBy('nombre_estudio','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
-		<th width="33%"><a href="javascript:onclick=sortBy('nombre_empresa_pl0','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Empresa</a></th>
-		<th width="33%"><a href="javascript:onclick=sortBy('tipo','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Tipo</a></th>
+		<th width="30%"><a href="javascript:onclick=sortBy('nombre_estudio','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Nombre</a></th>
+		<th width="30%"><a href="javascript:onclick=sortBy('nombre_empresa_pl0','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Empresa</a></th>
+		<th width="30%"><a href="javascript:onclick=sortBy('tipo','query-estudio.sql')" title="Haga CLICK para ordenar por esta columna">Tipo</a></th>
+		<th width="10%">Enlace</th>
 	</tr>
 
 	<!--data-->
@@ -35,6 +36,7 @@
 		<td align="center">${fld:nombre_estudio}</td>
 		<td align="center">${fld:nombre_empresa_pl0}</td>
 		<td align="center">${fld:tipo}</td>
+		<td align="center">${fld:instrumento}</td>
 	</tr>
 	</rows>
 

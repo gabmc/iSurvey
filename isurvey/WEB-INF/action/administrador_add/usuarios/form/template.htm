@@ -16,7 +16,7 @@
 </div>
 <div align="center">
 <!--FORM-->
-<form name="form1" action="${def:context}${def:actionroot}/search" method="POST">
+<form name="form1" id="form1" action="${def:context}${def:actionroot}/search" method="POST">
 
 <table class="formgrid" width="70%">
 
@@ -111,7 +111,7 @@
 	
 	<tr>
 		<td align="center" colspan="2">
-			<input type="submit" value="Buscar">
+			<input type="button" value="Buscar" onclick="buxscar();">
 			<input type="button" value="Limpiar Filtro" onclick="clearForm('form1')">
 			<input type="button" value="Registrar" onclick="onAddNew()">
 		</td>
@@ -149,6 +149,13 @@
 		var url = "${def:context}/action/picklist/empresa/form";
 		pickOpen ('id_empresa_name','id_empresa',url,'450','335');	
 	}	
+
+	function buxscar(){
+		if (document.getElementById('id_empresa').value == "") {
+			document.form1.action = '${def:context}${def:actionroot}/search_sin_empresa';
+		}
+		document.getElementById("form1").submit();
+	}
 	
 </script>
 <!--END FORM-->

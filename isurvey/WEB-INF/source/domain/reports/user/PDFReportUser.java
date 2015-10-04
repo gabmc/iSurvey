@@ -186,9 +186,9 @@ public class PDFReportUser extends AbstractPDFOutput
 		rs.top();
 
 		//definir estructura de la tabla
-		PdfPTable datatable = new PdfPTable(6);
+		PdfPTable datatable = new PdfPTable(5);
 		datatable.getDefaultCell().setPadding(3);
-		int headerwidths[] = {15,10,10,20,8,50};
+		int headerwidths[] = {15,10,10,20,8};
 		datatable.setWidths(headerwidths);
 		datatable.setWidthPercentage(100);
 		datatable.setHeaderRows(1);
@@ -218,12 +218,7 @@ public class PDFReportUser extends AbstractPDFOutput
 		c.setHorizontalAlignment(Element.ALIGN_CENTER);
 		datatable.addCell(c);
 		
-		c = new PdfPCell( new Phrase("Tipo", tblHeaderFont) );
-		c.setGrayFill(0.95f);
-		c.setHorizontalAlignment(Element.ALIGN_CENTER);
-		datatable.addCell(c);
-		
-		c = new PdfPCell( new Phrase("Roles", tblHeaderFont) );
+		c = new PdfPCell( new Phrase("Rol", tblHeaderFont) );
 		c.setGrayFill(0.95f);
 		c.setHorizontalAlignment(Element.ALIGN_CENTER);
 		datatable.addCell(c);
@@ -251,11 +246,6 @@ public class PDFReportUser extends AbstractPDFOutput
 			c = new PdfPCell( new Phrase( v, tblBodyFont ) );
 			c.setHorizontalAlignment(Element.ALIGN_LEFT);
 			datatable.addCell(c);
-			
-			v = rs.getString("tipo");
-			c = new PdfPCell( new Phrase( v, tblBodyFont ) );
-			c.setHorizontalAlignment(Element.ALIGN_LEFT);
-			datatable.addCell(c);
 
 			Recordset rs2 = x.getRoles(rs);
 			
@@ -263,7 +253,7 @@ public class PDFReportUser extends AbstractPDFOutput
 			
 			while (rs2.next())
 			{
-				role = role + rs2.getString("description") + "/" + rs2.getString("rolename") + "\n";	
+				role = role /*+ rs2.getString("description") + "/" */ + rs2.getString("rolename") + "\n";	
 			}
 			c = new PdfPCell( new Phrase(role, tblBodyFont ));
 			c.setHorizontalAlignment(Element.ALIGN_LEFT);
