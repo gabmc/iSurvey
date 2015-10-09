@@ -75,7 +75,7 @@ public class EliminarLista extends GenericTransaction {
     }
     
     Recordset getParticipantes (String idLista) throws Throwable{
-    	String query = "select participante.* from ajvieira_isurvey_app.participante, " +
+    	String query = "select participante.id_participante, participante.id_empresa from ajvieira_isurvey_app.participante, " +
     			"ajvieira_isurvey_app.int_participante_lista_participantes, " +
     			"ajvieira_isurvey_app.lista_participantes " +
     			"where " +
