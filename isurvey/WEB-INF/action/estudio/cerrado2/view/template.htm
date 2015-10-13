@@ -17,9 +17,9 @@
 	</tr>
 		<rows>
 		<tr ${fld:_rowStyle}>
-		<td align="center"><a href="http://www.compensa.com.ve/isurvey_lime/index.php/${fld:id_instrumento}/token/${fld:token}" target="_blank">${fld:instrumento}</td>
+		<td align="center"><a href="http://www.compensa.com.ve/isurvey_lime/index.php/${fld:id_instrumento}/token/${fld:token}" target="_blank" title="Haga clic para responder el instrumento">${fld:instrumento}</td>
 		<td align="center">${fld:estatus}</td>
-		<td align="center"><a href="#" onclick="ventanaDialogo('${fld:id_instrumento}','${fld:token}')"><img src="${def:context}/images/questionmark.png" title="Escribir Sugerencias acerca de este Instrumento" class="tool" width="24" height="24"></a></td>
+		<td align="center"><a href="#" onclick="ventanaDialogo('${fld:id_instrumento}','${fld:token}')"><img src="${def:context}/images/edit.png" title="Escribir Sugerencias acerca de este Instrumento" class="tool" width="22" height="22"></a></td>
 		</tr>
 		</rows>
 </table>

@@ -191,6 +191,18 @@
 	margin-bottom: 15px
 }
 
+.bannerGris {
+	background-color: lightgray;
+	font-family: "Trebuchet MS", Verdana, Arial;
+	font-weight: bold;
+	font-size: 15pt;
+	padding: 3px;
+	border: 1px #eeeeee solid;
+	color: #808080;
+	height: 25px; 
+	margin-bottom: 15px
+}
+
 .bannerGrande {
 	background-color: #AFC6F4;
 	font-family: "Trebuchet MS", Verdana, Arial;
