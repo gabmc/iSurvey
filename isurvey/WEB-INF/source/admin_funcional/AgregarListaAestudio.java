@@ -104,6 +104,7 @@ public class AgregarListaAestudio extends GenericTransaction {
     			"where " +
     			"lista_participantes.id_lista_participantes = int_participante_lista_participantes.id_lista_participantes " +
     			"and int_participante_lista_participantes.id_participante = participante.id_participante " +
+    			"and participante.id_empresa = lista_participantes.id_empresa " +
     			"and lista_participantes.id_lista_participantes = " + idLista;
     	Recordset instrumentos = this.getDb().get(query);
     	return instrumentos;
