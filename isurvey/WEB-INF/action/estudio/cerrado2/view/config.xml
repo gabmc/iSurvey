@@ -22,7 +22,7 @@
 		<template>template.htm</template>
 		<set-http-headers>true</set-http-headers>
 		<content-type>text/plain; charset=iso-8859-1</content-type>
-		<print mode="table" recordset="visor" tag="rows" alternate-colors="true" />
+		<print mode="table" recordset="visor" tag="rows" alternate-colors="false" />
 	</output>
 
 </config>

@@ -22,8 +22,10 @@
 		<div id="login">
 			<div style="width:350px">
 			<form name="form1" onsubmit="return log()">
+
+			<p align="left">Bienvenido(a) al sistema iSurvey que ser&aacute; su herramienta tecnol&oacute;gica para registrarse y completar el estudio</p>
 	
-			<table class="formgrid" width="95%" align="center" id="tabla" hidden>
+			<table class="formgrid" width="100%" align="center" id="tabla" hidden>
 			
 				<!--column layout-->
 				<col width="35%">
@@ -47,7 +49,7 @@
 						e-mail:
 					</td>
 					<td>
-						<input name="email" id="email" type="text" size="20">
+						<input name="email" id="email" type="text" size="25">
 					</td>
 				</tr>
 				<tr>
@@ -55,7 +57,7 @@
 						Identificador:
 					</td>
 					<td>
-						<input name="id_participante" id="id_participante" type="text" size="20">
+						<input name="id_participante" id="id_participante" type="text" size="25">
 						<input type="hidden" name="id_instrumento" id="id_instrumento" value="${fld:id}">
 						<input type="hidden" name="id_empresa" id="id_empresa" value="${fld:id_empresa}">
 					</td>
@@ -90,26 +92,6 @@
 			</form>
 			</div>
 						<div style="width:300px">
-			
-				<!--<table align="center" width="95%" class="formgrid" id="tabla2" hidden>
-
-					<tr>
-						<td align="center" valign="top" style="padding-right:3px">
-							<b>&iquest;No recuerdas tu identificador?</b><br>
-							Haz click <a href="registro?id=${fld:id}">AQUI</a> 
-							para recuperarlo.
-						</td>
-					</tr>
-					
-					<tr>
-						<td align="center" valign="top" style="padding-right:3px">
-						<b>&iquest;No tienes cuenta de acceso?</b><br>
-						Haz click <a href="registro?id=${fld:id}">AQUI</a> 
-						para crear una cuenta.
-						</td>
-					</tr>
-					
-				</table>-->
 
 				<table align="center" width="95%"  id="tabla2" hidden>
 					<col width="50%">
@@ -123,7 +105,13 @@
 				<h2 id="mensaje" hidden>Disculpe las molestias, el Estudio se encuentra deshabilitado en este momento</h2>
 			
 			</div>
-				<div id="footer" align="center">
+<div id="footer" align="center">
+	<div style="width: 700px; margin-top: 10px; margin-bottom: 10px;">
+		<div align="right">
+			<img src="${def:context}/images/question58.png" width="30" height="30" alt="ayuda" class="tool" onclick="ayuda();">
+		</div>
+	</div>
+
 				<img src="${def:context}/images/foot.jpg" valign="bottom">
 			</div>
 	</div>
@@ -155,5 +143,9 @@
 							afterResponseFn=null, 
 							onErrorFn=null);	    	
 	}
+
+	function ayuda(){
+		alert("Para cualquier apoyo, comun\xEDquese por los tel\xE9fonos: +58(212)232.61.16 / 3854 / 8454 o v\xEDa email: info@pgagroup.co");
+	}	
 		</script>
 </html>

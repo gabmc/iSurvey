@@ -23,7 +23,7 @@
 <br>
 <!--formulario addnew/edit-->
 <div id="form" align="center">
-<form name="form1" onsubmit="insert()">
+<form name="form1" onsubmit="return insert();">
 
 <table class="formgrid" width="450px">
 
@@ -91,8 +91,9 @@
  
 	function insert()
 	{
+		clearErrorMessages();
 			document.getElementById("grabar").disabled=true;
-	
+			var url =  "${def:actionroot}/insert";
 			//llamada Ajax...
 			return ajaxCall(httpMethod="POST", 
 							uri="${def:actionroot}/insert", 
@@ -100,7 +101,17 @@
 							divProgress="status", 
 							formName="form1", 
 							afterResponseFn=null, 
-							onErrorFn=null);	    	
+							onErrorFn=retryAddnewOrEdit);	    	
+	}
+
+	//restaurar el formulario en caso de error
+	function retryAddnewOrEdit() {
+		document.getElementById("grabar").disabled=false;
+		setFocusOnForm("form1");		
+	}
+
+	function err(){
+		alert("ERROR!");
 	}
 </script>
 </html>

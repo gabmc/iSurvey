@@ -243,10 +243,10 @@
 }
 #overlay_text{
     position: absolute;
-    bottom: 40%;
+    bottom: 36%;
     right: 5%;
-	font-size: 20px;
-	font-family: Verdana;
+	font-size: 25px;
+	font-family: "Trebuchet MS", Verdana, Arial;
 	font-weight: bold;
 	color: grey;
 }
@@ -261,26 +261,26 @@ form {
 }
 
 body {
-	font-family: Verdana;
+	font-family: "Trebuchet MS", Verdana, Arial;
 	font-size: 9pt;
 	background-color: white;
 	margin: 0px;
 }
 
 h1 {
-	font-family: Verdana;
+	font-family: "Trebuchet MS", Verdana, Arial;
 	font-size: 16pt;
 	font-weight: bold;
 }
 
 h2 {
-	font-family: Verdana;
+	font-family: "Trebuchet MS", Verdana, Arial;
 	font-size: 12pt;
 	font-weight: bold;
 }
 
 h3 {
-	font-family: Verdana;
+	font-family: "Trebuchet MS", Verdana, Arial;
 	font-size: 10pt;
 	font-weight: bold;
 }
@@ -292,7 +292,7 @@ p {
 
 /* hyperlinks */
 a {
-	font-family: Arial;
+	font-family: "Trebuchet MS", Verdana, Arial;
 	font-size: 9pt;
 	text-decoration: none;
 	font-weight: bold;
@@ -448,8 +448,20 @@ body {
 	padding:10px;
 }
 #content {
-	padding-bottom:63px; /* Height of the footer element */
+	padding-bottom:123px; /* Height of the footer element */
 }
+#footer {
+	background: white;
+	width:100%;
+	height:123px;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+
+/*#content {
+	padding-bottom:63px; /* Height of the footer element */
+/*}
 #footer {
 	background: white;
 	width:100%;
@@ -457,7 +469,7 @@ body {
 	position:absolute;
 	bottom:0;
 	left:0;
-}
+}*/
 
 #login {
 	position: relative;

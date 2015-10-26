@@ -13,7 +13,7 @@ public class EnviarCorreo
       // Recipient's email ID needs to be mentioned.
 
       // Sender's email ID needs to be mentioned
-      String from = "info@addsolutions.com.ve";
+      String from = "info@pgagroup.co";
       String nombreFrom = "iSurvey";
 
       // Assuming you are sending email from localhost

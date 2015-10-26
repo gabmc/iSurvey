@@ -1,1 +1,2 @@
-alert ('El registro fue añadido en la base de datos');
+			alert("Se ha registrado su solicitud");
+			parent.closeDialog();

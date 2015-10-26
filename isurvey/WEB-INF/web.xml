@@ -168,7 +168,7 @@
 	<context-param>
 		<description>Dirección email del remitente por defecto</description>
 		<param-name>mail-from</param-name>
-		<param-value>info@addsolutions.com.ve</param-value>
+		<param-value>info@pgagroup.co</param-value>
 	</context-param>
 	
 	<context-param>
