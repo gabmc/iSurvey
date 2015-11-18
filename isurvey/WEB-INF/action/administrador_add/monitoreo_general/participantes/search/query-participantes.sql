@@ -62,7 +62,7 @@ end as estatus1,
     id_instrumento in (select id_instrumento from ajvieira_isurvey_app.instrumento 
         where id_estudio = ${fld:id}) limit 1) as token,
 
-            (select concat('http://localhost/isurvey/action/estudio/cerrado2/form?id=${fld:id}&token=',token_participante)
+            (select concat('http://www.compensa.com.ve/isurvey/action/estudio/cerrado2/form?id=${fld:id}&token=',token_participante)
             from ajvieira_isurvey_app.int_participante_instrumento 
     where id_participante = ipi.id_participante and 
     id_instrumento in (select id_instrumento from ajvieira_isurvey_app.instrumento 
